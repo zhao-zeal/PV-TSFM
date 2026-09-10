@@ -3,3 +3,5 @@ __pycache__/
 .pytest_cache/
 .coverage
 outputs/
+reports/evidence/source_documents/
+reports/evidence/source_code/

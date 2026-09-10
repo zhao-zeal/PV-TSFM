@@ -1,6 +1,6 @@
 {
   "protocol_id": "pv-tsfm-v1-20260909",
-  "status": "pending_canonical_physical_location_mapping",
+  "status": "partially_resolved_pending_time_semantics_and_stategrid_location_mapping",
   "rules": {
     "bind_mmsp_s_l_and_frequency_derivatives": true,
     "bind_all_ai_pvod_weather_versions": true,
@@ -8,10 +8,14 @@
     "high_correlation_alone_proves_identity": false
   },
   "unresolved": [
-    "MMSP 88 site IDs have 88 exact coordinate pairs but independent physical-location groups are unverified",
-    "MMSP nearby coordinate candidates require provider metadata rather than automatic merging",
+    "MMSP paper supports 88 distinct geographically dispersed plants, but released coordinates are anonymized and cannot support distance or region/climate claims",
     "StateGrid sites 4 and 5 share byte-identical ERA5 files and downstream rounded coordinates but power-site co-location is unverified",
-    "Only one local AI-PVOD file per observed station is present; weather-version power-file identity cannot be enumerated",
+    "AI-PVOD full_dataset S-2 is station01 while paper S-2 and AI-weather forecast directory identify station04; proposed formal binding uses AIweatherdata station tables 0/4/7/8",
     "KDASC aggregate and constituent relationships are absent from the local archive"
+  ],
+  "resolved": [
+    "PVOD station01 and station04 are different physical plants and must never be aliases",
+    "AIweatherdata forecast directories and station tables bind the intended PVOD IDs 0/4/7/8",
+    "MMSP target is already capacity-normalized and must not be normalized by capacity again"
   ]
 }

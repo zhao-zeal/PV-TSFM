@@ -1,17 +1,26 @@
 {
   "protocol_id": "pv-tsfm-v1-20260909",
-  "status": "blocked_before_role_assignment",
+  "status": "mmsp_group_roles_precomputed_but_time_boundaries_blocked",
   "hash_salt": "pv-tsfm-v1-20260909",
   "hash_input": "salt + | + canonical_physical_location_group_id",
   "blocked_tasks": {
     "mmsp_site_out": [
-      "canonical physical-location group IDs are unresolved",
-      "therefore the 88-independent-group condition cannot be asserted"
+      "paper supports one plant per published site ID; the frozen hash roles are precomputed in manifests/mmsp_group_roles.precomputed.csv",
+      "timezone and released hourly interval/reduction semantics still block time boundaries and origins"
     ],
     "stategrid_to_pvod": [
-      "eight independent StateGrid physical-location groups are unresolved",
-      "PVOD-China station04 is absent and station01 cannot be silently remapped"
+      "physical independence of the eight StateGrid IDs is unresolved; only an exploratory site-ID track is defined",
+      "PVOD station04 is available in AIweatherdata.zip and station01 is explicitly excluded from formal S-2",
+      "source/target interval semantics, StateGrid timezone, and original-to-processed QC semantics still block time boundaries and origins"
     ]
   },
-  "group_roles": []
+  "mmsp_group_roles": {
+    "status": "precomputed_not_admitted",
+    "path": "manifests/mmsp_group_roles.precomputed.csv",
+    "source_data_sha256": "034e82e1bd9e8c7bf65adc54fa5b769687b2f9c588cbe68476ebf5dba5737c7b",
+    "artifact_sha256": "cccf073cd1a1949cf3a464ad0dcefd0d57cb3c995fd035fbc49cd481e0a788aa",
+    "counts": {"train": 64, "validation": 12, "test": 12},
+    "reason_not_admitted": "time semantics still prevent chronological boundary and origin construction"
+  },
+  "stategrid_formal_group_roles": []
 }

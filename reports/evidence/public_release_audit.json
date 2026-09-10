@@ -1,0 +1,462 @@
+{
+  "scope": "official release identity and lineage; no prediction errors read",
+  "ai_pvod": {
+    "archive": {
+      "path": "/home/zhaopp/workspace/PV-TSFM/reports/evidence/source_documents/AIweatherdata.zip",
+      "size_bytes": 55712966,
+      "sha256": "e12938e84da9f5df5e7c0345647d74c257af729816b708a89854324c5f76ce89"
+    },
+    "station_data": {
+      "0": {
+        "member": "AIweatherdata/station_data/0.csv",
+        "member_size_bytes": 4868995,
+        "member_sha256": "3da0755b120b3ae3561591d5bffb583191ce31d90ed63e0715cb6ffe20ddb923",
+        "shape": [
+          28960,
+          21
+        ],
+        "locations": [
+          "station00"
+        ],
+        "coordinates": [
+          {
+            "Longitude": 114.95139,
+            "Latitude": 38.04778
+          }
+        ],
+        "timestamp_start": "2018-08-16 00:00:00",
+        "timestamp_end": "2019-06-13 15:45:00",
+        "time_start": "2018-08-16 08:00:00",
+        "time_end": "2019-06-13 23:45:00",
+        "time_minus_timestamp_hours": [
+          8.0
+        ],
+        "timestamp_duplicates": 0,
+        "timestamp_delta_counts": {
+          "0 days 00:15:00": 28959
+        },
+        "missing_cells": 0,
+        "power_min": 0.0,
+        "power_max": 5.523046
+      },
+      "1": {
+        "member": "AIweatherdata/station_data/1.csv",
+        "member_size_bytes": 6268866,
+        "member_sha256": "a6d24acf27933d8ec82433764578349a26ad89379d6286bb6d08f7d6caaa72b0",
+        "shape": [
+          33408,
+          21
+        ],
+        "locations": [
+          "station01"
+        ],
+        "coordinates": [
+          {
+            "Longitude": 117.45722,
+            "Latitude": 38.18306
+          }
+        ],
+        "timestamp_start": "2018-06-30 16:00:00",
+        "timestamp_end": "2019-06-13 15:45:00",
+        "time_start": "2018-07-01 00:00:00",
+        "time_end": "2019-06-13 23:45:00",
+        "time_minus_timestamp_hours": [
+          8.0
+        ],
+        "timestamp_duplicates": 0,
+        "timestamp_delta_counts": {
+          "0 days 00:15:00": 33407
+        },
+        "missing_cells": 0,
+        "power_min": 0.0,
+        "power_max": 19.997459
+      },
+      "2": {
+        "member": "AIweatherdata/station_data/2.csv",
+        "member_size_bytes": 5154567,
+        "member_sha256": "adf28cdcd93f01bdba1c41cd2ecb845d421b1d37e98f98aa2ac5f9504df4d8ba",
+        "shape": [
+          31008,
+          21
+        ],
+        "locations": [
+          "station02"
+        ],
+        "coordinates": [
+          {
+            "Longitude": 114.19887,
+            "Latitude": 38.05728
+          }
+        ],
+        "timestamp_start": "2018-07-22 16:00:00",
+        "timestamp_end": "2019-06-10 15:45:00",
+        "time_start": "2018-07-23 00:00:00",
+        "time_end": "2019-06-10 23:45:00",
+        "time_minus_timestamp_hours": [
+          8.0
+        ],
+        "timestamp_duplicates": 0,
+        "timestamp_delta_counts": {
+          "0 days 00:15:00": 31007
+        },
+        "missing_cells": 0,
+        "power_min": 0.0,
+        "power_max": 16.048201
+      },
+      "4": {
+        "member": "AIweatherdata/station_data/4.csv",
+        "member_size_bytes": 5956934,
+        "member_sha256": "c82278f640825f4b8d28bad294d5a4cf1b6b547a730a5c5951cb65e694e4edfe",
+        "shape": [
+          33376,
+          21
+        ],
+        "locations": [
+          "station04"
+        ],
+        "coordinates": [
+          {
+            "Longitude": 114.86767,
+            "Latitude": 39.5155
+          }
+        ],
+        "timestamp_start": "2018-07-01 00:00:00",
+        "timestamp_end": "2019-06-13 15:45:00",
+        "time_start": "2018-07-01 08:00:00",
+        "time_end": "2019-06-13 23:45:00",
+        "time_minus_timestamp_hours": [
+          8.0
+        ],
+        "timestamp_duplicates": 0,
+        "timestamp_delta_counts": {
+          "0 days 00:15:00": 33375
+        },
+        "missing_cells": 0,
+        "power_min": 0.0,
+        "power_max": 26.768
+      },
+      "7": {
+        "member": "AIweatherdata/station_data/7.csv",
+        "member_size_bytes": 5565244,
+        "member_sha256": "df35443374735096ab04dbb1fd27d30242cebed3c90d3e3c704e90a3d4f0a23b",
+        "shape": [
+          33376,
+          21
+        ],
+        "locations": [
+          "station07"
+        ],
+        "coordinates": [
+          {
+            "Longitude": 113.64187,
+            "Latitude": 36.64403
+          }
+        ],
+        "timestamp_start": "2018-07-01 00:00:00",
+        "timestamp_end": "2019-06-13 15:45:00",
+        "time_start": "2018-07-01 08:00:00",
+        "time_end": "2019-06-13 23:45:00",
+        "time_minus_timestamp_hours": [
+          8.0
+        ],
+        "timestamp_duplicates": 0,
+        "timestamp_delta_counts": {
+          "0 days 00:15:00": 33375
+        },
+        "missing_cells": 0,
+        "power_min": 0.0,
+        "power_max": 17.280581
+      },
+      "8": {
+        "member": "AIweatherdata/station_data/8.csv",
+        "member_size_bytes": 5560362,
+        "member_sha256": "6cfdf5eea663bd16896b1d517b7a9836d23dccff67795188774bf03df84bcb63",
+        "shape": [
+          33376,
+          21
+        ],
+        "locations": [
+          "station08"
+        ],
+        "coordinates": [
+          {
+            "Longitude": 113.89999,
+            "Latitude": 36.70761
+          }
+        ],
+        "timestamp_start": "2018-07-01 00:00:00",
+        "timestamp_end": "2019-06-13 15:45:00",
+        "time_start": "2018-07-01 08:00:00",
+        "time_end": "2019-06-13 23:45:00",
+        "time_minus_timestamp_hours": [
+          8.0
+        ],
+        "timestamp_duplicates": 0,
+        "timestamp_delta_counts": {
+          "0 days 00:15:00": 33375
+        },
+        "missing_cells": 0,
+        "power_min": 0.0,
+        "power_max": 17.86602
+      }
+    },
+    "forecast_directories": [
+      "0",
+      "4",
+      "7",
+      "8"
+    ],
+    "full_dataset_comparisons": {
+      "S-1": {
+        "station_id": "0",
+        "full_member": "All_dataset/S-1.csv",
+        "full_rows": 28992,
+        "ai_weather_station_rows": 28960,
+        "timestamp_overlap_rows": 28960,
+        "power_exact_equal_on_overlap": true,
+        "full_locations": [
+          "station00"
+        ]
+      },
+      "S-2": {
+        "station_id": "1",
+        "full_member": "All_dataset/S-2.csv",
+        "full_rows": 33408,
+        "ai_weather_station_rows": 33408,
+        "timestamp_overlap_rows": 33408,
+        "power_exact_equal_on_overlap": true,
+        "full_locations": [
+          "station01"
+        ]
+      },
+      "S-3": {
+        "station_id": "7",
+        "full_member": "All_dataset/S-3.csv",
+        "full_rows": 33408,
+        "ai_weather_station_rows": 33376,
+        "timestamp_overlap_rows": 33376,
+        "power_exact_equal_on_overlap": true,
+        "full_locations": [
+          "station07"
+        ]
+      },
+      "S-4": {
+        "station_id": "8",
+        "full_member": "All_dataset/S-4.csv",
+        "full_rows": 33408,
+        "ai_weather_station_rows": 33376,
+        "timestamp_overlap_rows": 33376,
+        "power_exact_equal_on_overlap": true,
+        "full_locations": [
+          "station08"
+        ]
+      }
+    }
+  },
+  "stategrid": {
+    "official_processed_archive": {
+      "path": "/home/zhaopp/workspace/PV-TSFM/reports/evidence/source_documents/stategrid_data_processed_v4.rar",
+      "size_bytes": 74468298,
+      "sha256": "b16f2238a3fab5ec4e327afcb0574479dd31117c77738387807790414ef3e0f4"
+    },
+    "sites": {
+      "1": {
+        "official_member": "Solar station site 1 (Nominal capacity-50MW).xlsx",
+        "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_1_Nominal_capacity-50MW.csv",
+        "official_shape": [
+          70176,
+          7
+        ],
+        "local_shape": [
+          70176,
+          7
+        ],
+        "time_labels_exact": true,
+        "common_columns_exact": {
+          "Total solar irradiance (W/m2)": true,
+          "Direct normal irradiance (W/m2)": true,
+          "Global horizontal irradiance (W/m2)": true,
+          "Air temperature  (°C) ": true,
+          "Atmosphere (hpa)": true,
+          "Power (MW)": true
+        },
+        "official_target_missing": 0,
+        "local_target_missing": 0,
+        "target_different_rows": 0
+      },
+      "2": {
+        "official_member": "Solar station site 2 (Nominal capacity-130MW).xlsx",
+        "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_2_Nominal_capacity-130MW.csv",
+        "official_shape": [
+          70176,
+          7
+        ],
+        "local_shape": [
+          70176,
+          7
+        ],
+        "time_labels_exact": true,
+        "common_columns_exact": {
+          "Total solar irradiance (W/m2)": true,
+          "Direct normal irradiance (W/m2)": true,
+          "Global horizontal irradiance (W/m2)": true,
+          "Air temperature  (°C) ": true,
+          "Atmosphere (hpa)": true,
+          "Power (MW)": true
+        },
+        "official_target_missing": 0,
+        "local_target_missing": 0,
+        "target_different_rows": 0
+      },
+      "3": {
+        "official_member": "Solar station site 3 (Nominal capacity-30MW).xlsx",
+        "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_3_Nominal_capacity-30MW.csv",
+        "official_shape": [
+          20352,
+          7
+        ],
+        "local_shape": [
+          20352,
+          7
+        ],
+        "time_labels_exact": true,
+        "common_columns_exact": {
+          "Total solar irradiance (W/m2)": true,
+          "Direct normal irradiance (W/m2)": true,
+          "Global horizontal irradiance (W/m2)": true,
+          "Atmosphere (hpa)": true,
+          "Relative humidity (%)": true,
+          "Power (MW)": true
+        },
+        "official_target_missing": 0,
+        "local_target_missing": 0,
+        "target_different_rows": 0
+      },
+      "4": {
+        "official_member": "Solar station site 4 (Nominal capacity-130MW).xlsx",
+        "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_4_Nominal_capacity-130MW.csv",
+        "official_shape": [
+          70176,
+          8
+        ],
+        "local_shape": [
+          70176,
+          8
+        ],
+        "time_labels_exact": true,
+        "common_columns_exact": {
+          "Total solar irradiance (W/m2)": true,
+          "Direct normal irradiance (W/m2)": true,
+          "Global horizontal irradiance (W/m2)": true,
+          "Air temperature  (°C) ": true,
+          "Atmosphere (hpa)": true,
+          "Relative humidity (%)": true,
+          "Power (MW)": false
+        },
+        "official_target_missing": 6,
+        "local_target_missing": 0,
+        "target_different_rows": 6
+      },
+      "5": {
+        "official_member": "Solar station site 5 (Nominal capacity-110MW).xlsx",
+        "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_5_Nominal_capacity-110MW.csv",
+        "official_shape": [
+          70176,
+          8
+        ],
+        "local_shape": [
+          70176,
+          8
+        ],
+        "time_labels_exact": true,
+        "common_columns_exact": {
+          "Total solar irradiance (W/m2)": true,
+          "Direct normal irradiance (W/m2)": true,
+          "Global horizontal irradiance (W/m2)": true,
+          "Air temperature  (°C) ": true,
+          "Atmosphere (hpa)": true,
+          "Relative humidity (%)": true,
+          "Power (MW)": true
+        },
+        "official_target_missing": 0,
+        "local_target_missing": 0,
+        "target_different_rows": 0
+      },
+      "6": {
+        "official_member": "Solar station site 6 (Nominal capacity-35MW).xlsx",
+        "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_6_Nominal_capacity-35MW.csv",
+        "official_shape": [
+          70176,
+          8
+        ],
+        "local_shape": [
+          70176,
+          8
+        ],
+        "time_labels_exact": true,
+        "common_columns_exact": {
+          "Total solar irradiance (W/m2)": true,
+          "Direct normal irradiance (W/m2)": true,
+          "Global horizontal irradiance (W/m2)": true,
+          "Air temperature  (°C) ": true,
+          "Atmosphere (hpa)": true,
+          "Relative humidity (%)": true,
+          "Power (MW)": true
+        },
+        "official_target_missing": 0,
+        "local_target_missing": 0,
+        "target_different_rows": 0
+      },
+      "7": {
+        "official_member": "Solar station site 7 (Nominal capacity-30MW).xlsx",
+        "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_7_Nominal_capacity-30MW.csv",
+        "official_shape": [
+          70176,
+          8
+        ],
+        "local_shape": [
+          70176,
+          8
+        ],
+        "time_labels_exact": true,
+        "common_columns_exact": {
+          "Total solar irradiance (W/m2)": true,
+          "Direct normal irradiance (W/m2)": true,
+          "Global horizontal irradiance (W/m2)": true,
+          "Air temperature  (°C) ": true,
+          "Atmosphere (hpa)": true,
+          "Relative humidity (%)": true,
+          "Power (MW)": true
+        },
+        "official_target_missing": 0,
+        "local_target_missing": 0,
+        "target_different_rows": 0
+      },
+      "8": {
+        "official_member": "Solar station site 8 (Nominal capacity-30MW).xlsx",
+        "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_8_Nominal_capacity-30MW.csv",
+        "official_shape": [
+          69408,
+          8
+        ],
+        "local_shape": [
+          69408,
+          8
+        ],
+        "time_labels_exact": true,
+        "common_columns_exact": {
+          "Total solar irradiance (W/m2)": true,
+          "Direct normal irradiance (W/m2)": true,
+          "Global horizontal irradiance (W/m2)": true,
+          "Air temperature  (°C) ": true,
+          "Atmosphere (hpa)": true,
+          "Relative humidity (%)": true,
+          "Power (MW)": true
+        },
+        "official_target_missing": 0,
+        "local_target_missing": 0,
+        "target_different_rows": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "protocol_id": "pv-tsfm-v1-20260909",
+  "track_id": "exploratory-stategrid-site-id-to-pvod-v1",
+  "status": "defined_not_runnable",
+  "claim_scope": "exploratory only; not formal confirmation and not evidence of location-independent transfer",
+  "selection_used_prediction_errors": false,
+  "source": {
+    "bundle_id": "StateGrid",
+    "grouping_basis": "publisher site IDs only; physical-location independence is unverified",
+    "train_site_ids": ["1", "2", "3", "4", "5", "6"],
+    "validation_site_ids": ["7", "8"],
+    "role_order_basis": "pre-existing protocol order, not target error"
+  },
+  "target": {
+    "bundle_id": "AI_PVOD",
+    "release": "huggingface:yujiaA/AI-PVOD@8e2919884afd7e79c89d30be895a103d8f6ab218",
+    "archive": "AIweatherdata.zip",
+    "station_ids": ["0", "4", "7", "8"],
+    "members": [
+      "AIweatherdata/station_data/0.csv",
+      "AIweatherdata/station_data/4.csv",
+      "AIweatherdata/station_data/7.csv",
+      "AIweatherdata/station_data/8.csv"
+    ],
+    "excluded_from_this_track": {
+      "member": "full_dataset.zip::All_dataset/S-2.csv",
+      "reason": "it is station01, a different physical plant from intended station04"
+    }
+  },
+  "calculation_blockers": [
+    "StateGrid source timezone is not authoritatively documented",
+    "StateGrid original-to-processed transformation and QC semantics are not documented",
+    "StateGrid and PVOD timestamp interval-label/measurement semantics are not documented sufficiently for the frozen right-labelled hourly-average target"
+  ]
+}
