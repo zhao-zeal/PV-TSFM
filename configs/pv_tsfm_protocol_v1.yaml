@@ -27,7 +27,7 @@ locks:
   lineage_manifest_sha256: null
   split_manifest_sha256: null
   origin_manifest_sha256: null
-  model_lock_sha256: null
+  model_lock_sha256: 82e6816101f83ac12d9ae1c6e4fc5869a3403b4bf644a3baa19a428d50eb5661
   environment_lock_sha256: null
   replay_manifest_sha256: null
   retention_task_manifest_sha256: null
@@ -216,7 +216,7 @@ splits:
 models:
   chronos2:
     model_id: amazon/chronos-2
-    weight_revision: null
+    weight_revision: 29ec3766d36d6f73f0696f85560a422f50e8498c
     source_commit: null
     loss: original_chronos2_quantile_loss_with_original_mask_normalization_reduction
     expected_base_parameters_approx: 120000000
