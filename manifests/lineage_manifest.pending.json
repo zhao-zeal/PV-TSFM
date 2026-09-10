@@ -1,0 +1,17 @@
+{
+  "protocol_id": "pv-tsfm-v1-20260909",
+  "status": "pending_canonical_physical_location_mapping",
+  "rules": {
+    "bind_mmsp_s_l_and_frequency_derivatives": true,
+    "bind_all_ai_pvod_weather_versions": true,
+    "bind_dkasc_aggregate_and_constituents": true,
+    "high_correlation_alone_proves_identity": false
+  },
+  "unresolved": [
+    "MMSP 88 site IDs have 88 exact coordinate pairs but independent physical-location groups are unverified",
+    "MMSP nearby coordinate candidates require provider metadata rather than automatic merging",
+    "StateGrid sites 4 and 5 share byte-identical ERA5 files and downstream rounded coordinates but power-site co-location is unverified",
+    "Only one local AI-PVOD file per observed station is present; weather-version power-file identity cannot be enumerated",
+    "KDASC aggregate and constituent relationships are absent from the local archive"
+  ]
+}

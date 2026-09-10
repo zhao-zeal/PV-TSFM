@@ -1,0 +1,17 @@
+{
+  "protocol_id": "pv-tsfm-v1-20260909",
+  "status": "blocked_before_role_assignment",
+  "hash_salt": "pv-tsfm-v1-20260909",
+  "hash_input": "salt + | + canonical_physical_location_group_id",
+  "blocked_tasks": {
+    "mmsp_site_out": [
+      "canonical physical-location group IDs are unresolved",
+      "therefore the 88-independent-group condition cannot be asserted"
+    ],
+    "stategrid_to_pvod": [
+      "eight independent StateGrid physical-location groups are unresolved",
+      "PVOD-China station04 is absent and station01 cannot be silently remapped"
+    ]
+  },
+  "group_roles": []
+}

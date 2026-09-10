@@ -1,0 +1,64 @@
+{
+  "protocol_id": "pv-tsfm-v1-20260909",
+  "status": "pending_admission_metadata",
+  "audit_inventory": "reports/data_audit_inventory.json",
+  "records": [
+    {
+      "bundle_id": "MMSP",
+      "dataset_release_id": null,
+      "original_source_id": "MMSP",
+      "local_path": "/home/zhaopp/workspace/FusionSF/data/MMSP/data/solar_power/solar_power.csv",
+      "target_column": "power",
+      "target_kind": null,
+      "unit": null,
+      "interval_semantics": null,
+      "timezone": null,
+      "license_scope": null,
+      "admission": "pending"
+    },
+    {
+      "bundle_id": "StateGrid",
+      "dataset_release_id": "figshare-17304221-local-copy-unverified-release",
+      "original_source_id": "StateGrid_PV",
+      "local_path_glob": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_*.csv",
+      "target_column": "Power (MW)",
+      "target_kind": "power",
+      "unit": "MW",
+      "interval_semantics": null,
+      "timezone": null,
+      "project_code_timezone_declaration": "Asia/Shanghai",
+      "license_scope": null,
+      "admission": "pending"
+    },
+    {
+      "bundle_id": "AI_PVOD",
+      "dataset_release_id": "AI-PVOD-local-zip-unverified-release",
+      "original_source_id": "PVOD_China",
+      "local_path": "/home/zhaopp/workspace/PV-power/full_dataset.zip",
+      "members": ["All_dataset/S-1.csv", "All_dataset/S-2.csv", "All_dataset/S-3.csv", "All_dataset/S-4.csv"],
+      "observed_location_ids": ["station00", "station01", "station07", "station08"],
+      "required_location_ids": ["station00", "station04", "station07", "station08"],
+      "target_column": "power",
+      "target_kind": null,
+      "unit": null,
+      "interval_semantics": null,
+      "timezone": null,
+      "license_scope": "MIT label observed on publisher repository; upstream data scope pending",
+      "admission": "pending_incomplete_external_mvp"
+    },
+    {
+      "bundle_id": "AI_PVOD",
+      "dataset_release_id": "AI-PVOD-local-zip-unverified-release",
+      "original_source_id": "DKASC",
+      "local_path": "/home/zhaopp/workspace/PV-power/full_dataset.zip::All_dataset/KDASC.csv",
+      "observed_source_spelling": "KDASC",
+      "target_column": "Active_Power",
+      "target_kind": null,
+      "unit": null,
+      "interval_semantics": null,
+      "timezone": null,
+      "license_scope": null,
+      "admission": "pending"
+    }
+  ]
+}
