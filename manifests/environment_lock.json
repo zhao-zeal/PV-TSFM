@@ -1,0 +1,34 @@
+{
+  "python": "3.11.15",
+  "environment_python": "/home/zhaopp/miniconda3/envs/torch/bin/python",
+  "packages": {
+    "torch": "2.11.0+cu128",
+    "torch_cuda": "12.8",
+    "chronos-forecasting": "2.2.2",
+    "peft": "0.17.1",
+    "transformers": "4.57.6",
+    "accelerate": "1.13.0",
+    "numpy": "2.2.4",
+    "pandas": "2.2.3",
+    "safetensors": "0.7.0",
+    "pytest": "8.4.2"
+  },
+  "gpu_driver": "580.173.02",
+  "allowed_gpus": [
+    {
+      "physical_id": 0,
+      "uuid": "GPU-64450474-9d07-3444-61ba-c0001d490346",
+      "model": "NVIDIA RTX 5880 Ada Generation",
+      "memory_mib": 49140
+    },
+    {
+      "physical_id": 1,
+      "uuid": "GPU-5e894e6e-95a3-2fee-5d79-cf5cce5827a4",
+      "model": "NVIDIA RTX 5880 Ada Generation",
+      "memory_mib": 49140
+    }
+  ],
+  "maximum_concurrent_gpus": 2,
+  "default_visibility": "CUDA_VISIBLE_DEVICES=0,1",
+  "single_run_default_gpu_count": 1
+}

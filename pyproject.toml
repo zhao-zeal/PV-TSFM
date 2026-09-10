@@ -9,6 +9,16 @@ description = "Auditable power-only PV transfer forecasting experiments"
 requires-python = ">=3.10"
 dependencies = ["numpy", "pandas", "pyyaml"]
 
+[project.optional-dependencies]
+training = [
+  "torch>=2.2,<3",
+  "chronos-forecasting==2.2.2",
+  "peft==0.17.1",
+  "transformers>=4.41,<5",
+  "accelerate>=0.34,<2",
+]
+test = ["pytest>=8,<9"]
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
