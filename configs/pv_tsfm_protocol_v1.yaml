@@ -1,0 +1,473 @@
+# Research specification, not a runnable trainer configuration.
+# null fields must be resolved from evidence before the dependent real-data run.
+protocol:
+  id: pv-tsfm-v1-20260909
+  evidence_cutoff: '2026-09-09'
+  status: design_frozen_pending_data_and_runtime_lock
+  primary_method: E4_shared_lora_cpt
+  input_scope: historical_single_site_pv_power_only
+  hardware: single_gpu_at_least_48gb_or_multiple_gpus
+  retrospective_transfer: true
+  operational_historical_deployment_claim: false
+  require_amendment_before_test_scores_for_design_changes: true
+
+locks:
+  data_manifest_sha256: null
+  lineage_manifest_sha256: null
+  split_manifest_sha256: null
+  origin_manifest_sha256: null
+  model_lock_sha256: null
+  environment_lock_sha256: null
+  replay_manifest_sha256: null
+  retention_task_manifest_sha256: null
+  final_lockbox_manifest_sha256: null
+
+data:
+  table_columns:
+    - dataset_release_id
+    - original_source_id
+    - bundle_id
+    - physical_site_id
+    - physical_location_id
+    - aggregation_members
+    - target_kind
+    - unit
+    - interval_semantics
+    - timezone
+    - start
+    - end
+    - capacity_basis
+    - license_url
+    - license_scope
+    - sha256
+    - base_model_exposure_status
+  power_only_feature_allowlist: [past_target, past_observed_mask]
+  forbid_model_inputs:
+    - weather
+    - nwp
+    - images
+    - latitude_longitude
+    - station_id_embedding
+    - calendar_features
+    - neighbor_series
+    - future_target_statistics
+  bundles:
+    MMSP:
+      original_sources: [MMSP]
+      expected_nominal_systems: 88
+      native_minutes: 60
+      local_data_path: null
+      data_use_basis: pending_file_level_check
+      aliases_bound: [MMSP_L, MMSP_S, all_frequency_derivatives]
+      true_coordinates_verified: false
+    StateGrid:
+      original_sources: [StateGrid_PV]
+      expected_nominal_systems: 8
+      native_minutes: 15
+      local_data_path: null
+      public_license_observed: CC0
+      original_url: https://doi.org/10.6084/m9.figshare.17304221.v4
+      include_wind: false
+    AI_PVOD:
+      original_sources: [PVOD_China, DKASC]
+      expected_processed_systems: 5
+      pv_china_original_ids: ['0', '4', '7', '8']
+      native_minutes: 15
+      local_data_path: null
+      card_license_observed: MIT
+      upstream_use_basis: pending_file_level_check
+      original_url: https://huggingface.co/datasets/yujiaA/AI-PVOD/tree/main
+      bind_all_weather_versions: true
+      bind_dkasc_aggregate_and_constituents: true
+    GEFCom_Solar:
+      original_sources: [GEFCom2014_Solar]
+      expected_nominal_systems: 3
+      native_minutes: 60
+      local_data_path: null
+      data_use_basis: pending_original_package_check
+      task_1_to_15_merge_key: [zone_id, timestamp]
+      duplicate_value_conflict: fail
+  extension_candidates:
+    Ausgrid: {role: new_external_lockbox_candidate, target: gross_generation_interval_energy, native_minutes: 30}
+    PVDAQ: {role: new_external_lockbox_candidate, target: verify_per_system_ac_dc_or_energy}
+    SKIPPD: {role: single_location_high_frequency_stress_test, input_version: raw_power_csv}
+  excluded_from_main_power_pool:
+    Folsom: irradiance_not_measured_pv_power
+    SRRL_BMS: required_measured_pv_power_product_not_verified
+    SIRTA: required_public_continuous_pv_power_product_not_verified
+    R2Energy: download_license_and_lineage_not_verified
+    NREL_solar_power: simulated_and_known_base_exposure_diagnostic_only
+  exposure_status_enum: [confirmed_seen, no_overlap_in_audited_sources, unknown]
+  unknown_exposure_policy: allow_adaptation_unseen_claim_only
+  deduplication:
+    bind_same_location_in_all_splits: true
+    methods: [metadata_mapping, file_hash, aggregation_lineage, curve_match_with_shift_scale_and_resampling]
+    high_correlation_alone_proves_identity: false
+    quality_audit_outputs_to_training: [duplicate_group_id, quality_flags]
+    target_error_based_exclusion: false
+
+preprocessing:
+  internal_time: UTC
+  timestamp_label: right
+  interval: '(t-delta,t]'
+  unknown_timezone_or_interval: fail_dependent_dataset
+  primary_target: hourly_average_power
+  average_power_aggregation: duration_weighted_mean
+  interval_energy_aggregation: sum_energy_divide_total_hours
+  cumulative_energy: verify_reset_then_difference_then_aggregate
+  bin_required_coverage: 1.0
+  hourly_to_subhourly_upsampling: forbidden
+  complete_context_required_main: true
+  complete_target_required_main: true
+  impute_test_target: false
+  exclude_by_prediction_error_or_sunny_day: false
+  quality_rules: provider_qc_only_with_logged_semantics
+  missingness_audit: [site, season, source, day_night_if_valid]
+  model_scaling: original_model_causal_context_scaling
+  learned_global_scaler_fit_scope: source_train_only
+  capacity_as_model_feature: false
+  existing_per_unit_target: preserve_no_second_capacity_normalization
+
+task:
+  context_hours: 336
+  train_horizon_hours: 24
+  inference_horizon_hours: 24
+  primary_frequency_minutes: 60
+  origin_stride_hours: 1
+  prefix_horizons_hours: [1, 4, 24]
+  report_terminal_errors: true
+  targets_all_inside_assigned_label_partition: true
+  past_context_may_cross_partition_boundary: true
+  rolling_observed_history_update: true
+  inference_weight_updates: false
+  within_origin_teacher_forcing: false
+  cross_learning: false
+  group_id_policy: one_unique_group_per_single_site_window
+  extension_frequency_tasks:
+    - {minutes: 30, context_steps: 672, horizon_steps: [2, 8, 48]}
+    - {minutes: 15, context_steps: 1344, horizon_steps: [4, 16, 96]}
+
+splits:
+  hash: sha256
+  hash_salt: pv-tsfm-v1-20260909
+  hash_input: 'salt + "|" + canonical_physical_location_group_id'
+  source_train_label_fraction: 0.8
+  validation_and_test_label_fraction: 0.2
+  boundary_definition: floor_0p8_of_full_regular_time_grid_before_missingness_filter
+  mvp:
+    mmsp_site_out:
+      expected_group_counts: {train: 64, validation: 12, test: 12}
+      fallback_fractions: {train: 0.72, validation: 0.14, test: 0.14}
+      rounding: floor_train_and_validation_remainder_test
+      group_integrity_over_exact_counts: true
+      claim: developmental_unseen_site
+    stategrid_to_pvod:
+      source_bundle: StateGrid
+      source_counts: {train: 6, validation: 2}
+      target_source: PVOD_China
+      target_ids: ['0', '4', '7', '8']
+      include_mmsp: false
+      invalid_source_count: record_amendment_before_error_evaluation
+      failed_target_admission: incomplete_external_mvp
+  lodo:
+    outer_test_bundles: [MMSP, StateGrid, AI_PVOD, GEFCom_Solar]
+    train_bundles: all_admitted_non_test_bundles
+    bind_ai_pvod_constituent_sources: true
+    inner_validation: leave_one_remaining_bundle_out
+    inner_train_labels: first_80_percent
+    inner_validation_labels: last_20_percent
+    final_refit_labels: first_80_percent_of_all_outer_allowed_sources
+    outer_test_labels: last_20_percent
+    reset_original_base_every_inner_and_outer_run: true
+    designs_locked_before_any_outer_error: true
+  grouped_site_cv:
+    n_folds: 5
+    unit: physical_location_group
+    report_as_loso: false
+  strict_loso:
+    optional: true
+    leave_out: one_physical_location_group
+    repeat_all_admitted_groups: true
+  region_climate:
+    require_verified_coordinates_or_provider_climate_label: true
+    infer_climate_from_power_curve: false
+    exclude_matching_group_across_all_sources: true
+    geographic_buffer_km_sensitivity: 50
+    climate_map_revision: null
+    missing_metadata_policy: report_not_evaluable
+  final_lockbox:
+    candidates: [Ausgrid, PVDAQ]
+    chosen_groups: null
+    no_errors_seen_during_development: true
+    include_in_outer_training: false
+    unseal: once_after_final_protocol_and_model_freeze
+
+models:
+  chronos2:
+    model_id: amazon/chronos-2
+    weight_revision: null
+    source_commit: null
+    loss: original_chronos2_quantile_loss_with_original_mask_normalization_reduction
+    expected_base_parameters_approx: 120000000
+    quantile_grid: read_from_locked_model_config
+  lora:
+    rank: 8
+    alpha: 16
+    dropout: 0.0
+    bias: none
+    target_module_suffixes:
+      - self_attention.q
+      - self_attention.k
+      - self_attention.v
+      - self_attention.o
+      - output_patch_embedding.output_layer
+    train_original_weights: false
+    expected_trainable_parameters_approx: 1200000
+    runtime_enumeration_required: true
+    missing_peft_or_no_matching_modules: fail_never_fallback_to_full
+  head_only:
+    train_module_prefix: output_patch_embedding
+    freeze_all_other_parameters: true
+  full:
+    train_all_parameters: true
+    same_original_loss_and_window_stream_as_lora: true
+  timesfm25:
+    model_id: google/timesfm-2.5-200m-pytorch
+    weight_revision: null
+    source_commit: null
+    point_output: quantile_0p5_verify_api_axis
+    frequency_indicator: none
+    covariates: false
+  timesfm30:
+    model_id: google/timesfm-3.0-pytorch
+    weight_revision: null
+    license_scope: noncommercial_nonproduction_verify_before_use
+    stage: full_paper
+    covariates: false
+  dlinear:
+    source_only_global: true
+    individual: false
+    context_steps: 336
+    prediction_steps: 24
+    moving_average_kernel: 25
+    loss: MAE
+    scaling: reversible_per_window_context_zscore
+  patchtst:
+    source_only_global: true
+    context_steps: 336
+    prediction_steps: 24
+    channel_independent: true
+    layers: 3
+    d_model: 128
+    heads: 8
+    d_ff: 256
+    patch_length: 16
+    stride: 8
+    dropout: 0.1
+    loss: MAE
+    scaling: reversible_per_window_context_zscore
+  sampling_probability_models:
+    inference_samples: 100
+    stage: optional_full_paper
+
+training:
+  seeds_mvp: [11, 22, 33]
+  seeds_full: [11, 22, 33, 44, 55]
+  seeds_hpo: [11, 22]
+  sample_hierarchy: [uniform_original_source, uniform_location, uniform_system, uniform_eligible_window]
+  same_seed_window_manifest_across_E4_E5_E6: true
+  optimizer: AdamW
+  adam_betas: [0.9, 0.999]
+  adam_epsilon: 0.00000001
+  weight_decay: 0.01
+  gradient_clip_norm: 1.0
+  effective_batch_windows: 128
+  initial_microbatch: 32
+  use_gradient_accumulation: true
+  precision: bf16_if_supported_else_logged_fp32
+  warmup_fraction: 0.05
+  schedule: linear_decay
+  schedule_length_policy: fixed_stage_maximum_even_when_refit_stops_at_earlier_selected_checkpoint
+  actual_window_matched_E4_E5_E6_checkpoints: [1000]
+  single_factor_ablations_inherit_parent_lr_and_steps: true
+  validation_interval_steps: 250
+  profile_steps: 100
+  mvp:
+    training_steps: 1000
+    selectable_checkpoints: [500, 1000]
+    fixed_lr: {lora: 0.00001, full: 0.000001, head_only: 0.00001, dlinear: 0.0001, patchtst: 0.0001}
+    selection: average_source_validation_score_over_3_seeds_one_common_step
+  full:
+    max_training_steps: 2000
+    selectable_checkpoints: [500, 1000, 2000]
+    lr_grid:
+      lora: [0.00001, 0.00003, 0.0001]
+      full: [0.000001, 0.000003, 0.00001]
+      head_only: [0.00001, 0.00003, 0.0001]
+      dlinear: [0.0001, 0.0003, 0.001]
+      patchtst: [0.0001, 0.0003, 0.001]
+    selection: inner_bundle_location_system_macro_log_MAE_ratio_to_base_then_mean_hpo_seeds
+    one_config_per_outer_fold_and_method: true
+    tie_relative_error_tolerance: 0.001
+    tie_order: [fewer_steps, smaller_lr]
+    train_refits_from_original_base: true
+    scratch_convergence_track: required_separate_budget_and_report
+    scratch_convergence:
+      max_steps: 10000
+      min_steps: 2000
+      validation_every: 250
+      patience_evaluations: 8
+      relative_improvement_threshold: 0.001
+      lr_grid: same_as_budget_matched_track
+      select: best_source_validation_checkpoint
+  zero_step_fallback_counts_as_adaptation_success: false
+
+experiments:
+  E0: {methods: [last_value, daily_seasonal_persistence, past_7_days_same_time_mean], trained: false}
+  E1: {model: chronos2, updates: none}
+  E2a: {model: timesfm25, updates: none}
+  E2b: {model: timesfm30, updates: none, stage: full_paper}
+  E3: {models: [dlinear, patchtst], training_scope: source_only_global}
+  E4: {model: chronos2, updates: lora, main: true}
+  E5: {parent: E4, change: update_set_and_preregistered_corresponding_lr, updates: full}
+  E6: {parent: E5, change: train_only_output_patch_embedding}
+  E7: {parent: E4, change: rank, ranks: [4, 16], alpha_over_rank: 2}
+  E8: {parent: E4, change: sampling, alternative: uniform_location_then_system_then_window}
+  E9: {parent: E4, change: source_diversity, site_counts: [8, 16, 32, 64], subset_repeats: 3, fixed_windows: true, fixed_date_span: true}
+  E10: {parent: E4, change: audited_replay, replay_fraction: 0.2, primary_match: pv_window_exposure, total_window_multiplier: 1.25, auxiliary_match: compute}
+  E11: {parent: E4, change: training_label_horizon, train_hours: 4, test_hours: 24}
+  E12: {parent: E4, change: frequency_distribution, control_minutes: [60], treatment_minutes: [15, 30, 60], match: physical_context_and_sites_and_window_count}
+  E13: {parent: E5, change: random_initialization, auxiliary_track: larger_converged_budget}
+  E14: {method: paper_based_MixFT_reimplementation_on_Chronos2, K_grid: [2, 4], official_replication_claim: false}
+  E15: {models: [dlinear, patchtst, chronos2_full], training_scope: target_site, split: [0.6, 0.2, 0.2], separate_table: true}
+
+evaluation:
+  prediction_rows: [run_id, fold_id, seed, model_id, original_source_id, physical_location_id, physical_site_id, frequency_minutes, origin_utc, target_utc, lead, y_true, q, forecast_raw, forecast_post, target_mask]
+  point_quantile: 0.5
+  primary_postprocess: nonnegative_only
+  capacity_upper_clip: false
+  night_zeroing: false
+  raw_predictions_and_metrics_required: true
+  primary_endpoint: 24_hour_path_MAE_log_ratio_skill_to_E1
+  primary_aggregation: equal_bundle_then_equal_location_then_equal_system_then_mean_seed_log_ratio
+  skill_formula: '100 * (1 - exp(mean_log_ratio))'
+  primary_comparison: E4_vs_E1_at_24h
+  zero_reference_MAE: undefined_ratio_keep_absolute_error_and_count
+  small_positive_reference_MAE: no_epsilon_no_gain_truncation_report_sensitivity
+  shared_origin_target_mask_required: true
+  metrics:
+    - MAE_original_unit_per_site
+    - RMSE_original_unit_per_site
+    - nMAE_capacity_separate_AC_DC_and_existing_per_unit
+    - nRMSE_capacity_separate_AC_DC_and_existing_per_unit
+    - nMAE_context_q95
+    - nRMSE_context_q95
+    - rolling_context_seasonal_MASE
+    - sMAPE_auxiliary
+    - pinball_and_weighted_quantile_score
+    - approximate_CRPS_only_with_explicit_grid_and_tail_rule
+    - coverage_and_interval_score
+  mase_denominator: mean_absolute_daily_seasonal_difference_in_past_14_days_per_origin
+  zero_normalization_denominator: undefined_report_count_no_epsilon
+  smape_both_zero: 0
+  interval_coverages: [0.8, 0.9]
+  daylight_if_valid: verified_coordinates_solar_altitude_above_zero_score_only
+  otherwise_active_generation: above_0p01_capacity_or_above_zero_if_capacity_missing
+  active_generation_is_daylight: false
+  required_breakdowns: [all_sites, all_bundles, seeds, horizon, raw_post, day_night_if_valid, active_generation, negative_transfer_tail, missingness_attrition]
+  failed_run_policy: fix_or_mark_comparison_incomplete_never_drop_sites
+
+statistics:
+  bootstrap_replicates: 10000
+  bootstrap_seed: 20260909
+  ci: paired_hierarchical_percentile
+  primary_ci_level: 0.95
+  source_bundles: fixed_equal_weight
+  seed_resampling: whole_global_run_vector
+  location_resampling: within_each_fixed_bundle
+  time_resampling: synchronized_contiguous_origin_blocks_within_common_calendar_clusters
+  primary_block_days: 7
+  sensitivity_block_days: [1, 14]
+  preserve_all_leads_per_origin: true
+  auxiliary_ci: fixed_seed_mean_with_location_time_resampling
+  secondary_pvalue: centered_paired_bootstrap_approximation_plus_one
+  secondary_holm_family: [E4_vs_E5, E4_vs_E3_patchtst, E4_vs_E3_dlinear, E4_vs_E2a, E4_vs_E2b]
+  per_site_tests: exploratory_BH_only
+  global_new_dataset_population_inference: false
+
+retention:
+  dataset_id: Salesforce/GiftEval
+  dataset_revision: null
+  benchmark_commit: null
+  diagnostic_dev: [m4_hourly, ett1, restaurant]
+  final_test: [electricity, LOOP_SEATTLE, hierarchical_sales, jena_weather, bitbrains_fast_storage]
+  task_selection: official_short_horizon_native_frequency_only_pin_exact_task_ids
+  actual_task_ids: null
+  origins: locked_official_origins
+  max_context_steps: 2048
+  input: univariate_target_history_only
+  adapter_enabled: true
+  score_point: raw_median_no_pv_clipping
+  aggregate: equal_original_source_macro_log_MAE_ratio_to_base
+  initial_PV_hpo_uses_retention: false
+  mvp_uses: diagnostic_dev_only
+  full_paper_uses: final_test_after_model_freeze
+  replay_must_exclude_dev_test_underlying_series_and_derivatives: true
+  no_overlap_by_directory_name_only: false
+  unseen_base_claim: only_if_separately_verified
+
+decision_rules:
+  mvp:
+    both_task_mean_gain_positive: true
+    external_median_site_gain_positive: true
+    minimum_positive_seeds_per_task: 2
+    total_seeds_per_task: 3
+    formal_success_claim_allowed: false
+  h1_full:
+    minimum_primary_gain_percent: 3
+    primary_ci_lower_above_zero: true
+    minimum_bundle_equal_weight_win_rate: 0.6
+    minimum_positive_bundles_if_four: 3
+    minimum_positive_bundles_if_three: 2
+    fewer_than_three_bundles: no_broad_cross_dataset_claim
+    maximum_single_bundle_degradation_percent: 5
+    minimum_positive_seeds: 4
+    total_seeds: 5
+    gain_positive_after_removing_best_gain_site: true
+    max_weighted_fraction_sites_degrading_over_10_percent: 0.2
+    median_daylight_gain_positive_if_valid: true
+  h2:
+    lora_to_full_error_ratio_one_sided_95_ci_upper_below: 1.01
+    lora_minus_full_retention_degradation_ci_upper_below: 0
+  general_retention:
+    degradation_one_sided_95_ci_upper_below_percent: 2
+    disabled_adapter_is_not_retention_evidence: true
+  strong_paper:
+    require_comparison_to: [source_global_patchtst, stronger_timesfm_version]
+    benefit: reproducible_accuracy_or_measured_data_compute_efficiency
+  prohibited_rescue: [test_site_deletion, posthoc_primary_horizon_change, seed_selection, hidden_dataset_replacement]
+
+mvp_plan:
+  M1: [E0, E1, E2a]
+  M2: [E3_dlinear, E3_patchtst]
+  M3: [E4]
+  M4: [E5]
+  M5: [E6, retention_dev_for_E4_E5_E6]
+  expected_training_runs_two_tasks_three_seeds: 30
+  if_compute_limited_preserve: [external_E4_three_seeds, external_E5_three_seeds, M1]
+  estimated_gpu_hours: null
+  estimates_require_measured_100_step_profile: true
+
+required_outputs:
+  - data_admission_and_lineage_report
+  - immutable_data_model_environment_split_locks
+  - trainable_parameter_names_and_counts
+  - paired_training_window_manifests
+  - validation_selection_trace
+  - runtime_memory_and_compute_profile
+  - raw_quantile_predictions
+  - per_site_per_seed_metrics
+  - dataset_horizon_and_negative_transfer_tables
+  - paired_confidence_intervals_and_sensitivity
+  - mvp_go_no_go_with_all_failed_criteria
+  - protocol_amendment_log
