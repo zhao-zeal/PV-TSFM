@@ -34,13 +34,15 @@ result.
    label, and the published 10-minute-to-hourly reduction remain undocumented.
 2. StateGrid is MW at 15-minute granularity, but source timezone and interval
    label/measurement semantics and the official original-to-processed transformation
-   remain unverified. The local site-4 CSV also fills six targets that are missing in
-   the official v4 processed workbook.
+   remain unverified. Official processed power differs from original on
+   30/703/0/241/47/123/122/0 overlapping rows for sites 1--8; site 3 is shortened
+   from 52,608 to 20,352 rows; and site 5 has 46 nonnumeric original target markers.
+   The local site-4 CSV additionally fills six targets missing in official v4.
 3. PVOD power is now confirmed as MW and its original `Timestamp` as UTC. Its
    instantaneous/interval and label semantics remain undocumented.
-4. PVOD station01 and station04 are confirmed different physical plants. The official
-   AI-weather package supplies station04 and matched 0/4/7/8 forecast directories;
-   the pre-error member correction is proposed in `protocol_amendment_log.md`.
+4. PVOD station01 and station04 are confirmed different physical plants. The refined
+   pre-error correction binds official ScienceDB V4 station00/04/07/08; its archive
+   is byte-identical across V3--V5. Formal adoption remains pending.
 
 These remaining fields control hourly aggregation, chronological boundaries and
 eligible origins. Substituting assumptions would change the frozen experiment rather
@@ -53,6 +55,9 @@ than merely complete an implementation detail.
 - MMSP coordinates are anonymized, preventing formal region/climate and geographic
   buffer analyses; the paper nevertheless supports one published ID per plant.
 - MMSP file-level use/redistribution scope remains ambiguous.
+- AIweather is not a lossless PVOD V4 target copy: it fills absent timestamps for
+  stations 0/7/8 and changes one overlapping station00 value without released
+  processing code. It is therefore lineage evidence only, not the formal target.
 - DKASC member-array lineage, GEFCom evidence, lockbox evidence, and base-model
   exposure remain unresolved. They limit LODO/full-paper claims, not the two MVP
   calculations.
@@ -63,8 +68,8 @@ than merely complete an implementation detail.
   interval-label semantics, or a recorded protocol amendment that changes the target.
 - StateGrid source evidence for timezone and interval-label/measurement semantics.
   This must also justify the original-versus-processed product and its QC operations.
-- PVOD interval-label/measurement semantics and formal adoption of the already
-  recorded 0/4/7/8 member correction.
+- PVOD interval-label/measurement semantics and formal adoption of the recorded
+  ScienceDB V4 0/4/7/8 member correction.
 
 After these are available, the next legal action is to replace the pending manifests
 with admitted data, split and origin manifests, then run E0/E1 over every locked

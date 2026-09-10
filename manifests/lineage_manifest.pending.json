@@ -10,12 +10,14 @@
   "unresolved": [
     "MMSP paper supports 88 distinct geographically dispersed plants, but released coordinates are anonymized and cannot support distance or region/climate claims",
     "StateGrid sites 4 and 5 share byte-identical ERA5 files and downstream rounded coordinates but power-site co-location is unverified",
-    "AI-PVOD full_dataset S-2 is station01 while paper S-2 and AI-weather forecast directory identify station04; proposed formal binding uses AIweatherdata station tables 0/4/7/8",
+    "AI-PVOD full_dataset S-2 is station01 while paper S-2 identifies station04",
+    "AIweather station04 is an exact trimmed PVOD V4 overlap, but stations 0/7/8 add timestamps and station00 changes one target; the transformation is unavailable, so this derived release is lineage evidence only",
     "KDASC aggregate and constituent relationships are absent from the local archive"
   ],
   "resolved": [
     "PVOD station01 and station04 are different physical plants and must never be aliases",
-    "AIweatherdata forecast directories and station tables bind the intended PVOD IDs 0/4/7/8",
+    "ScienceDB V3, V4, and V5 publish byte-identical archives, and V4 metadata independently confirms station01/station04 identities",
+    "The proposed formal PVOD target binds ScienceDB V4 station00/04/07/08 rather than an opaque derived release",
     "MMSP target is already capacity-normalized and must not be normalized by capacity again"
   ]
 }

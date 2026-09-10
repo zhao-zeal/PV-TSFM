@@ -251,18 +251,130 @@
           "station08"
         ]
       }
+    },
+    "official_pvod_v4": {
+      "path": "/home/zhaopp/workspace/PV-TSFM/reports/evidence/source_documents/PVODdatasets_v1.0_V4.zip",
+      "size_bytes": 7983824,
+      "sha256": "0f726b42235bf99a2c118a3cb7544722150489b01af3a2853a7c9778b538883e",
+      "science_db_md5": "5cb8ebfb4cdc99973deacf1bea8bacc3",
+      "science_db_dataset_id": "f8f3d7af144f441795c5781497e56b62",
+      "science_db_doi": "10.57760/sciencedb.01094",
+      "science_db_detail_url": "https://www.scidb.cn/en/detail?dataSetId=f8f3d7af144f441795c5781497e56b62",
+      "science_db_version_api": "https://www.scidb.cn/api/sdb-dataset-version-service/versionList?dataSetType=personal&dataSetId=f8f3d7af144f441795c5781497e56b62",
+      "science_db_file_id_v4": "6197068d00eb5848da3afc08",
+      "science_db_version_files": {
+        "V1": {
+          "name": "PVODdatasets.zip",
+          "size_bytes": 7851116,
+          "md5": "66d8b201aafd8cfc93927f3de778ca1d"
+        },
+        "V2": {
+          "name": "PVODdatasets_v1.0.zip",
+          "size_bytes": 7984123,
+          "md5": "7b7655edcf3fbb5e9263a4deb7c13003"
+        },
+        "V3": {
+          "name": "PVODdatasets_v1.0.zip",
+          "size_bytes": 7983824,
+          "md5": "5cb8ebfb4cdc99973deacf1bea8bacc3"
+        },
+        "V4": {
+          "name": "PVODdatasets_v1.0.zip",
+          "size_bytes": 7983824,
+          "md5": "5cb8ebfb4cdc99973deacf1bea8bacc3"
+        },
+        "V5": {
+          "name": "PVODdatasets_v1.0.zip",
+          "size_bytes": 7983824,
+          "md5": "5cb8ebfb4cdc99973deacf1bea8bacc3"
+        }
+      },
+      "byte_identical_science_db_versions": [
+        "V3",
+        "V4",
+        "V5"
+      ],
+      "science_db_license": "CC BY 4.0",
+      "ai_weather_comparisons": {
+        "0": {
+          "official_member": "station00.csv",
+          "official_rows": 28896,
+          "ai_weather_rows": 28960,
+          "timestamp_overlap_rows": 28864,
+          "official_only_timestamps": 32,
+          "ai_weather_only_timestamps": 97,
+          "power_exact_different_on_overlap": 1430,
+          "power_numeric_different_on_overlap": 1,
+          "numeric_mismatch_examples": [
+            {
+              "date_time": "2019-01-01 01:15:00",
+              "power_official": 0.7154295,
+              "power_ai_weather": 0.639844
+            }
+          ]
+        },
+        "4": {
+          "official_member": "station04.csv",
+          "official_rows": 33408,
+          "ai_weather_rows": 33376,
+          "timestamp_overlap_rows": 33376,
+          "official_only_timestamps": 32,
+          "ai_weather_only_timestamps": 0,
+          "power_exact_different_on_overlap": 0,
+          "power_numeric_different_on_overlap": 0,
+          "numeric_mismatch_examples": []
+        },
+        "7": {
+          "official_member": "station07.csv",
+          "official_rows": 32928,
+          "ai_weather_rows": 33376,
+          "timestamp_overlap_rows": 32896,
+          "official_only_timestamps": 32,
+          "ai_weather_only_timestamps": 480,
+          "power_exact_different_on_overlap": 1601,
+          "power_numeric_different_on_overlap": 0,
+          "numeric_mismatch_examples": []
+        },
+        "8": {
+          "official_member": "station08.csv",
+          "official_rows": 33120,
+          "ai_weather_rows": 33376,
+          "timestamp_overlap_rows": 33088,
+          "official_only_timestamps": 32,
+          "ai_weather_only_timestamps": 288,
+          "power_exact_different_on_overlap": 1851,
+          "power_numeric_different_on_overlap": 0,
+          "numeric_mismatch_examples": []
+        }
+      }
     }
   },
   "stategrid": {
     "official_processed_archive": {
       "path": "/home/zhaopp/workspace/PV-TSFM/reports/evidence/source_documents/stategrid_data_processed_v4.rar",
       "size_bytes": 74468298,
-      "sha256": "b16f2238a3fab5ec4e327afcb0574479dd31117c77738387807790414ef3e0f4"
+      "sha256": "b16f2238a3fab5ec4e327afcb0574479dd31117c77738387807790414ef3e0f4",
+      "figshare_md5": "3d4eeb038abbef53cbddaff517aac37d",
+      "figshare_version_api": "https://api.figshare.com/v2/articles/17304221/versions/4",
+      "figshare_file_id": 35215009
+    },
+    "official_original_archive": {
+      "path": "/home/zhaopp/workspace/PV-TSFM/reports/evidence/source_documents/stategrid_data_original_v4.rar",
+      "size_bytes": 77966660,
+      "sha256": "8b6c22ed7731ba9bc8f0961ad3bd13ad28a707692930c5fa4845f30695c1f4ea",
+      "figshare_md5": "ee0fa9776d51bc9796dc4d19236b9b17",
+      "figshare_version_api": "https://api.figshare.com/v2/articles/17304221/versions/4",
+      "figshare_file_id": 35215012
     },
     "sites": {
       "1": {
+        "original_member": "Solar station site 1 (Nominal capacity-50MW).xlsx",
         "official_member": "Solar station site 1 (Nominal capacity-50MW).xlsx",
         "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_1_Nominal_capacity-50MW.csv",
+        "original_shape": [
+          70176,
+          8
+        ],
         "official_shape": [
           70176,
           7
@@ -271,6 +383,31 @@
           70176,
           7
         ],
+        "original_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "processed_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Power (MW)"
+        ],
+        "original_processed_timestamp_overlap": 70176,
+        "processed_timestamp_subset_of_original": true,
+        "original_processed_target_exact_on_overlap": false,
+        "original_processed_target_different_on_overlap": 30,
+        "original_nonnumeric_target_cells": 0,
+        "original_nonnumeric_target_tokens": [],
         "time_labels_exact": true,
         "common_columns_exact": {
           "Total solar irradiance (W/m2)": true,
@@ -285,8 +422,13 @@
         "target_different_rows": 0
       },
       "2": {
+        "original_member": "Solar station site 2 (Nominal capacity-130MW).xlsx",
         "official_member": "Solar station site 2 (Nominal capacity-130MW).xlsx",
         "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_2_Nominal_capacity-130MW.csv",
+        "original_shape": [
+          70176,
+          8
+        ],
         "official_shape": [
           70176,
           7
@@ -295,6 +437,31 @@
           70176,
           7
         ],
+        "original_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horicontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "processed_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Power (MW)"
+        ],
+        "original_processed_timestamp_overlap": 70176,
+        "processed_timestamp_subset_of_original": true,
+        "original_processed_target_exact_on_overlap": false,
+        "original_processed_target_different_on_overlap": 703,
+        "original_nonnumeric_target_cells": 0,
+        "original_nonnumeric_target_tokens": [],
         "time_labels_exact": true,
         "common_columns_exact": {
           "Total solar irradiance (W/m2)": true,
@@ -309,8 +476,13 @@
         "target_different_rows": 0
       },
       "3": {
+        "original_member": "Solar station site 3 (Nominal capacity-30MW).xlsx",
         "official_member": "Solar station site 3 (Nominal capacity-30MW).xlsx",
         "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_3_Nominal_capacity-30MW.csv",
+        "original_shape": [
+          52608,
+          8
+        ],
         "official_shape": [
           20352,
           7
@@ -319,6 +491,31 @@
           20352,
           7
         ],
+        "original_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "processed_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "original_processed_timestamp_overlap": 20352,
+        "processed_timestamp_subset_of_original": true,
+        "original_processed_target_exact_on_overlap": true,
+        "original_processed_target_different_on_overlap": 0,
+        "original_nonnumeric_target_cells": 0,
+        "original_nonnumeric_target_tokens": [],
         "time_labels_exact": true,
         "common_columns_exact": {
           "Total solar irradiance (W/m2)": true,
@@ -333,8 +530,13 @@
         "target_different_rows": 0
       },
       "4": {
+        "original_member": "Solar station site 4 (Nominal capacity-130MW).xlsx",
         "official_member": "Solar station site 4 (Nominal capacity-130MW).xlsx",
         "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_4_Nominal_capacity-130MW.csv",
+        "original_shape": [
+          70176,
+          8
+        ],
         "official_shape": [
           70176,
           8
@@ -343,6 +545,32 @@
           70176,
           8
         ],
+        "original_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "processed_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "original_processed_timestamp_overlap": 70176,
+        "processed_timestamp_subset_of_original": true,
+        "original_processed_target_exact_on_overlap": false,
+        "original_processed_target_different_on_overlap": 241,
+        "original_nonnumeric_target_cells": 0,
+        "original_nonnumeric_target_tokens": [],
         "time_labels_exact": true,
         "common_columns_exact": {
           "Total solar irradiance (W/m2)": true,
@@ -358,8 +586,13 @@
         "target_different_rows": 6
       },
       "5": {
+        "original_member": "Solar station site 5 (Nominal capacity-110MW).xlsx",
         "official_member": "Solar station site 5 (Nominal capacity-110MW).xlsx",
         "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_5_Nominal_capacity-110MW.csv",
+        "original_shape": [
+          70176,
+          8
+        ],
         "official_shape": [
           70176,
           8
@@ -367,6 +600,34 @@
         "local_shape": [
           70176,
           8
+        ],
+        "original_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "processed_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "original_processed_timestamp_overlap": 70176,
+        "processed_timestamp_subset_of_original": true,
+        "original_processed_target_exact_on_overlap": false,
+        "original_processed_target_different_on_overlap": 47,
+        "original_nonnumeric_target_cells": 46,
+        "original_nonnumeric_target_tokens": [
+          "--"
         ],
         "time_labels_exact": true,
         "common_columns_exact": {
@@ -383,8 +644,13 @@
         "target_different_rows": 0
       },
       "6": {
+        "original_member": "Solar station site 6 (Nominal capacity-35MW).xlsx",
         "official_member": "Solar station site 6 (Nominal capacity-35MW).xlsx",
         "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_6_Nominal_capacity-35MW.csv",
+        "original_shape": [
+          70176,
+          8
+        ],
         "official_shape": [
           70176,
           8
@@ -393,6 +659,32 @@
           70176,
           8
         ],
+        "original_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "processed_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "original_processed_timestamp_overlap": 70176,
+        "processed_timestamp_subset_of_original": true,
+        "original_processed_target_exact_on_overlap": false,
+        "original_processed_target_different_on_overlap": 123,
+        "original_nonnumeric_target_cells": 0,
+        "original_nonnumeric_target_tokens": [],
         "time_labels_exact": true,
         "common_columns_exact": {
           "Total solar irradiance (W/m2)": true,
@@ -408,8 +700,13 @@
         "target_different_rows": 0
       },
       "7": {
+        "original_member": "Solar station site 7 (Nominal capacity-30MW).xlsx",
         "official_member": "Solar station site 7 (Nominal capacity-30MW).xlsx",
         "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_7_Nominal_capacity-30MW.csv",
+        "original_shape": [
+          70176,
+          8
+        ],
         "official_shape": [
           70176,
           8
@@ -418,6 +715,32 @@
           70176,
           8
         ],
+        "original_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "processed_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "original_processed_timestamp_overlap": 70176,
+        "processed_timestamp_subset_of_original": true,
+        "original_processed_target_exact_on_overlap": false,
+        "original_processed_target_different_on_overlap": 122,
+        "original_nonnumeric_target_cells": 0,
+        "original_nonnumeric_target_tokens": [],
         "time_labels_exact": true,
         "common_columns_exact": {
           "Total solar irradiance (W/m2)": true,
@@ -433,8 +756,13 @@
         "target_different_rows": 0
       },
       "8": {
+        "original_member": "Solar station site 8 (Nominal capacity-30MW).xlsx",
         "official_member": "Solar station site 8 (Nominal capacity-30MW).xlsx",
         "local_path": "/home/zhaopp/workspace/solar-energy/dataset/csg_solar/Solar_station_site_8_Nominal_capacity-30MW.csv",
+        "original_shape": [
+          69408,
+          8
+        ],
         "official_shape": [
           69408,
           8
@@ -443,6 +771,32 @@
           69408,
           8
         ],
+        "original_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "processed_columns": [
+          "Time(year-month-day h:m:s)",
+          "Total solar irradiance (W/m2)",
+          "Direct normal irradiance (W/m2)",
+          "Global horizontal irradiance (W/m2)",
+          "Air temperature  (°C) ",
+          "Atmosphere (hpa)",
+          "Relative humidity (%)",
+          "Power (MW)"
+        ],
+        "original_processed_timestamp_overlap": 69408,
+        "processed_timestamp_subset_of_original": true,
+        "original_processed_target_exact_on_overlap": true,
+        "original_processed_target_different_on_overlap": 0,
+        "original_nonnumeric_target_cells": 0,
+        "original_nonnumeric_target_tokens": [],
         "time_labels_exact": true,
         "common_columns_exact": {
           "Total solar irradiance (W/m2)": true,

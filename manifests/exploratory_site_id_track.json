@@ -13,14 +13,15 @@
   },
   "target": {
     "bundle_id": "AI_PVOD",
-    "release": "huggingface:yujiaA/AI-PVOD@8e2919884afd7e79c89d30be895a103d8f6ab218",
-    "archive": "AIweatherdata.zip",
+    "release": "ScienceDB:f8f3d7af144f441795c5781497e56b62:V4",
+    "archive": "PVODdatasets_v1.0.zip",
+    "archive_md5": "5cb8ebfb4cdc99973deacf1bea8bacc3",
     "station_ids": ["0", "4", "7", "8"],
     "members": [
-      "AIweatherdata/station_data/0.csv",
-      "AIweatherdata/station_data/4.csv",
-      "AIweatherdata/station_data/7.csv",
-      "AIweatherdata/station_data/8.csv"
+      "station00.csv",
+      "station04.csv",
+      "station07.csv",
+      "station08.csv"
     ],
     "excluded_from_this_track": {
       "member": "full_dataset.zip::All_dataset/S-2.csv",

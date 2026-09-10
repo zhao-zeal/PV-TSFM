@@ -28,3 +28,25 @@
   effective batch 128, steps, and metrics do not change. No prediction error was used.
 - Optional station01 use: a future, separately named exploratory robustness target
   only; never an alias for station04 and never used for selection.
+
+## 2026-09-10 — superseding PVOD release binding (pre-error evidence follow-up)
+
+- Status: proposed before any PV-TSFM target prediction error; supersedes only the
+  release binding in the preceding proposal and remains non-runnable until interval
+  semantics are resolved.
+- New evidence: ScienceDB V3--V5 publish byte-identical official archives. V4 contains
+  station00/04/07/08 directly and independently confirms that station01 and station04
+  are different plants. The AIweather derivative exactly trims station04, but adds
+  97/480/288 timestamps for stations 0/7/8 and changes one overlapping station00
+  power value without published transformation code.
+- Superseding change: bind the formal power-only target to ScienceDB V4
+  `PVODdatasets_v1.0.zip::{station00.csv,station04.csv,station07.csv,station08.csv}` (MD5
+  `5cb8ebfb4cdc99973deacf1bea8bacc3`). Retain AIweather only as weather/lineage
+  evidence, not as the formal target series. Continue excluding
+  `full_dataset.zip::All_dataset/S-2.csv` because it is station01.
+- Rationale: the frozen model's allowed input is historical single-site PV power, so
+  the official V4 power tables supply the required target without importing opaque
+  gap filling. This decision uses release evidence only; no prediction error was
+  inspected.
+- Invariants: physical target IDs, source roles, horizon, origins rule, model,
+  optimizer, seeds, GPU policy, effective batch 128, steps, and metrics do not change.
