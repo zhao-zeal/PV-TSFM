@@ -33,6 +33,10 @@ class TrainingConfig:
             raise ValueError("training_steps must be 100 profiling steps or 1000 formal steps")
         if self.schedule_steps != 1000:
             raise ValueError("scheduler length remains 1000 even for profiling/selected refits")
+        if not isinstance(self.microbatch, int) or self.microbatch < 1 or self.microbatch > 32:
+            raise ValueError("microbatch must be a positive integer no larger than the initial value 32")
+        if not isinstance(self.gradient_accumulation, int) or self.gradient_accumulation < 1:
+            raise ValueError("gradient_accumulation must be a positive integer")
         if self.microbatch * self.gradient_accumulation != self.effective_batch:
             raise ValueError("microbatch * gradient accumulation must equal effective batch 128")
         if self.effective_batch != 128:

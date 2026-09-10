@@ -13,6 +13,12 @@ def test_frozen_training_configuration():
     assert TrainingConfig("E5_full_cpt", 22).learning_rate == 1e-6
     with pytest.raises(ValueError):
         TrainingConfig("E4_shared_lora_cpt", 11, effective_batch=256)
+    reduced = TrainingConfig("E5_full_cpt", 11, microbatch=8, gradient_accumulation=16)
+    assert reduced.effective_batch == 128
+    with pytest.raises(ValueError, match="no larger than"):
+        TrainingConfig("E5_full_cpt", 11, microbatch=64, gradient_accumulation=2)
+    with pytest.raises(ValueError, match="must equal"):
+        TrainingConfig("E5_full_cpt", 11, microbatch=8, gradient_accumulation=8)
 
 
 def test_e4_e5_same_seed_sampling_manifest_is_identical():
