@@ -50,3 +50,28 @@
   inspected.
 - Invariants: physical target IDs, source roles, horizon, origins rule, model,
   optimizer, seeds, GPU policy, effective batch 128, steps, and metrics do not change.
+
+## 2026-09-10 — MMSP published-series exploratory execution
+
+- Authority: explicit user instruction. This amendment adds an exploratory track and
+  does not modify or admit MMSP under the original formal protocol.
+- Track: `mmsp-published-series-exploratory-v1`, configured in
+  `configs/mmsp_published_series_exploratory.yaml`.
+- Data interpretation: use the released capacity-normalized `power` values exactly as
+  published, preserve raw ordered timestamp labels and row indices, retain timezone
+  and interval semantics as `unknown`, and perform no UTC localization or aggregation.
+  Results describe a nominal-hourly published sequence and do not validate true hourly
+  average power.
+- Split/task: retain the frozen 64/12/12 group roles and the per-series
+  `floor(0.8*N)` label boundary; use 336 past records to forecast 24 future records and
+  report 1/4/24-step prefixes.
+- Leakage controls: test sites never train or tune; validation sites never train;
+  future targets are never filled; every method uses the same complete origin keys;
+  unknown metadata is excluded from model input.
+- Expected origin invariant: with 12,840 complete records per test site, each of 12
+  test sites has 2,545 eligible held-out origins, for 30,540 total. Any mismatch must
+  stop evaluation and be diagnosed.
+- Training locks: E4/E5 use seeds 11/22/33, frozen learning rates and 1,000-step
+  budgets, effective batch 128, and only physical GPUs 0/1 with at most two concurrent.
+- Scope: this track neither substitutes for StateGrid-to-PVOD nor completes the formal
+  two-task MVP.

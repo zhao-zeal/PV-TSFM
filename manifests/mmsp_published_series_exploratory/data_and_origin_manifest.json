@@ -1,0 +1,70 @@
+{
+  "track_id": "mmsp-published-series-exploratory-v1",
+  "status": "runnable_exploratory",
+  "formal_protocol_preserved": true,
+  "source": {
+    "path": "/home/zhaopp/workspace/FusionSF/data/MMSP/data/solar_power/solar_power.csv",
+    "sha256": "034e82e1bd9e8c7bf65adc54fa5b769687b2f9c588cbe68476ebf5dba5737c7b",
+    "rows": 1129920,
+    "sites": 88,
+    "rows_per_site": [
+      12840
+    ],
+    "target": "power",
+    "target_kind": "published_capacity_normalized_power",
+    "unit": "dimensionless_per_unit",
+    "timezone": "unknown",
+    "interval_semantics": "unknown",
+    "time_basis": "raw_ordered_timestamp_and_row_index",
+    "aggregation": "none"
+  },
+  "task": {
+    "nominal_frequency": "hourly",
+    "context_records": 336,
+    "horizon_records": 24,
+    "report_prefix_steps": [
+      1,
+      4,
+      24
+    ],
+    "boundary": "floor(0.8 * 12840) = row index 10272",
+    "future_label_imputation": false,
+    "metadata_model_inputs": []
+  },
+  "group_counts": {
+    "test": 12,
+    "train": 64,
+    "validation": 12
+  },
+  "eligible_origin_counts": {
+    "test": 30540,
+    "train": 634432,
+    "validation": 30540
+  },
+  "expected_test_origins_per_site": 2545,
+  "expected_test_origins_total": 30540,
+  "artifacts": {
+    "split": {
+      "path": "/home/zhaopp/workspace/PV-TSFM/manifests/mmsp_published_series_exploratory/split_manifest.csv",
+      "sha256": "295a9f8d3933d15c9b910124208671fcba5ca23e62854ab70058cc74c6fcfd4e"
+    },
+    "train": {
+      "path": "/home/zhaopp/workspace/PV-TSFM/manifests/mmsp_published_series_exploratory/origins/train_origins.csv.gz",
+      "sha256": "4038a08b5ba61339b7a3ca1ce75127470c714c4333876280b290beff28659981"
+    },
+    "validation": {
+      "path": "/home/zhaopp/workspace/PV-TSFM/manifests/mmsp_published_series_exploratory/origins/validation_origins.csv.gz",
+      "sha256": "fdfb1603b3371a2137b36e32c2ae990f60247827cd743c1154dc8afc218ea3a2"
+    },
+    "test": {
+      "path": "/home/zhaopp/workspace/PV-TSFM/manifests/mmsp_published_series_exploratory/origins/test_origins.csv.gz",
+      "sha256": "3c39b2a5a7e06c32a6105191c472e58eda7eed672f5ce2e6ad240441da4d4d7a"
+    },
+    "site_summary": {
+      "path": "/home/zhaopp/workspace/PV-TSFM/manifests/mmsp_published_series_exploratory/site_origin_counts.csv",
+      "sha256": "817cad3e0884e314fde1c46da8cb2f4fed851b4ad5a1918b3b99f4525d9a0371"
+    }
+  },
+  "claim_limit": "nominal-hourly published sequence; not verified real hourly-average power",
+  "does_not_replace": "StateGrid-to-PVOD or formal two-task MVP"
+}

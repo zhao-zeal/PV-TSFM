@@ -1,15 +1,21 @@
 # PV-TSFM MVP execution status
 
-Date: 2026-09-10 (Asia/Shanghai)
+Date: 2026-09-11 (Asia/Shanghai)
 
 Protocol: `pv-tsfm-v1-20260909`
 
 ## Current result
 
-The scientific question has **not yet been evaluated**. No source or target test
-score has been produced, and no 100-step or 1000-step GPU training run has been
-started. This is an intentional protocol stop rather than a negative experimental
-result.
+The formal two-task scientific question has **not yet been evaluated**. No formal
+source or target test score has been produced, and no formal-protocol 100-step or
+1000-step GPU training run has been started. This is an intentional protocol stop
+rather than a negative experimental result.
+
+Separately, the explicitly amended `mmsp-published-series-exploratory-v1` track has
+now completed E0/E1 and all E4/E5 seed 11/22/33 training runs. It uses raw published
+sequence indices without asserting timezone or interval semantics and therefore does
+not change the formal status above. See
+`reports/mmsp_published_series_exploratory_20260911.md`.
 
 ## Phase status
 

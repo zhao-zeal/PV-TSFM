@@ -1,0 +1,39 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+`torch_dtype` is deprecated! Use `dtype` instead!
+completed site 13: 2545 shared origins
+completed site 31: 2545 shared origins
+completed site 32: 2545 shared origins
+completed site 36: 2545 shared origins
+completed site 48: 2545 shared origins
+completed site 51: 2545 shared origins
+completed site 68: 2545 shared origins
+completed site 75: 2545 shared origins
+completed site 78: 2545 shared origins
+completed site 80: 2545 shared origins
+completed site 84: 2545 shared origins
+completed site 85: 2545 shared origins
+                       method  horizon_steps forecast_kind  macro_site_mae  macro_site_rmse  micro_mae  micro_rmse  sites  origins  points
+E0_daily_seasonal_persistence              1          post        0.072621         0.153869   0.072621    0.155361     12    30540   30540
+E0_daily_seasonal_persistence              1           raw        0.072443         0.153876   0.072443    0.155368     12    30540   30540
+E0_daily_seasonal_persistence              4          post        0.072621         0.153869   0.072621    0.155361     12    30540  122160
+E0_daily_seasonal_persistence              4           raw        0.072443         0.153876   0.072443    0.155368     12    30540  122160
+E0_daily_seasonal_persistence             24          post        0.072477         0.153715   0.072477    0.155197     12    30540  732960
+E0_daily_seasonal_persistence             24           raw        0.072299         0.153722   0.072299    0.155205     12    30540  732960
+                E0_last_value              1          post        0.062433         0.106936   0.062433    0.107609     12    30540   30540
+                E0_last_value              1           raw        0.062281         0.106941   0.062281    0.107614     12    30540   30540
+                E0_last_value              4          post        0.127598         0.211279   0.127598    0.211494     12    30540  122160
+                E0_last_value              4           raw        0.127500         0.211314   0.127500    0.211530     12    30540  122160
+                E0_last_value             24          post        0.239937         0.344201   0.239937    0.344559     12    30540  732960
+                E0_last_value             24           raw        0.239962         0.344309   0.239962    0.344666     12    30540  732960
+E0_past_7_days_same_hour_mean              1          post        0.065464         0.128380   0.065464    0.129565     12    30540   30540
+E0_past_7_days_same_hour_mean              1           raw        0.065279         0.128379   0.065279    0.129563     12    30540   30540
+E0_past_7_days_same_hour_mean              4          post        0.065464         0.128380   0.065464    0.129565     12    30540  122160
+E0_past_7_days_same_hour_mean              4           raw        0.065279         0.128379   0.065279    0.129563     12    30540  122160
+E0_past_7_days_same_hour_mean             24          post        0.065451         0.128339   0.065451    0.129519     12    30540  732960
+E0_past_7_days_same_hour_mean             24           raw        0.065265         0.128338   0.065265    0.129518     12    30540  732960
+         E1_original_chronos2              1          post        0.033989         0.072359   0.033989    0.074078     12    30540   30540
+         E1_original_chronos2              1           raw        0.033972         0.072359   0.033972    0.074078     12    30540   30540
+         E1_original_chronos2              4          post        0.044988         0.094849   0.044988    0.096956     12    30540  122160
+         E1_original_chronos2              4           raw        0.044971         0.094849   0.044971    0.096955     12    30540  122160
+         E1_original_chronos2             24          post        0.059181         0.123685   0.059181    0.125293     12    30540  732960
+         E1_original_chronos2             24           raw        0.059168         0.123685   0.059168    0.125294     12    30540  732960

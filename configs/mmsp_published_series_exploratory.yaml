@@ -1,0 +1,43 @@
+track:
+  id: mmsp-published-series-exploratory-v1
+  status: exploratory_amendment
+  preserves_formal_protocol: true
+  claim_scope: published capacity-normalized nominal-hourly sequence only
+  excluded_claims:
+    - verified_real_hourly_average_power
+    - verified_timezone
+    - verified_interval_semantics
+    - cross_dataset_validation
+data:
+  path: /home/zhaopp/workspace/FusionSF/data/MMSP/data/solar_power/solar_power.csv
+  target: power
+  unit: capacity_normalized_per_unit
+  timezone: unknown
+  interval_semantics: unknown
+  timestamp_handling: preserve_raw_ordered_labels_and_use_row_index
+  reaggregate: false
+  impute_future_labels: false
+split:
+  group_roles: manifests/mmsp_group_roles.precomputed.csv
+  counts: {train: 64, validation: 12, test: 12}
+  label_boundary: floor_0p8_of_each_published_series
+task:
+  context_records: 336
+  horizon_records: 24
+  reported_prefix_steps: [1, 4, 24]
+  nominal_frequency: hourly
+  all_methods_share_complete_origins: true
+  target_sites_used_for_training_or_tuning: false
+inputs:
+  allowed: [past_target, past_observed_mask]
+  metadata_to_model: false
+training:
+  methods: [E4_shared_lora_cpt, E5_full_cpt]
+  seeds: [11, 22, 33]
+  profile_steps: 100
+  formal_steps: 1000
+  effective_batch: 128
+  initial_microbatch: 32
+  learning_rates: {E4_shared_lora_cpt: 0.00001, E5_full_cpt: 0.000001}
+  physical_gpu_ids: [0, 1]
+  max_concurrent_gpus: 2

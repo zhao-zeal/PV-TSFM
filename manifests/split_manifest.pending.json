@@ -22,5 +22,15 @@
     "counts": {"train": 64, "validation": 12, "test": 12},
     "reason_not_admitted": "time semantics still prevent chronological boundary and origin construction"
   },
-  "stategrid_formal_group_roles": []
+  "stategrid_formal_group_roles": [],
+  "mmsp_published_series_exploratory": {
+    "status": "runnable_and_executed_separate_from_formal_protocol",
+    "amendment": "protocol_amendment_log.md",
+    "manifest": "manifests/mmsp_published_series_exploratory/data_and_origin_manifest.json",
+    "counts": {"train": 64, "validation": 12, "test": 12},
+    "time_basis": "raw_ordered_timestamp_and_row_index",
+    "timezone": "unknown",
+    "interval_semantics": "unknown",
+    "claim_scope": "nominal-hourly published sequence only"
+  }
 }
