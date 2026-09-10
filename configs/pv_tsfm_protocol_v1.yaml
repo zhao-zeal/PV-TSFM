@@ -7,6 +7,17 @@ protocol:
   primary_method: E4_shared_lora_cpt
   input_scope: historical_single_site_pv_power_only
   hardware: single_gpu_at_least_48gb_or_multiple_gpus
+  gpu_runtime_policy:
+    max_concurrent_gpus: 2
+    allowed_physical_gpu_ids: [0, 1]
+    visibility_default: 'CUDA_VISIBLE_DEVICES=0,1'
+    preferred_parallelism: independent_seed_fold_or_method_runs
+    single_run_default_gpus: 1
+    two_gpu_single_run_condition: full_cpt_single_gpu_oom_at_protocol_legal_microbatch
+    two_gpu_single_run_exclusive: true
+    gpu_count_must_not_change: [effective_batch, training_steps, window_exposure, learning_rate, warmup, experiment_budget]
+    profile_order: [lora_single_gpu, full_cpt_single_gpu, full_cpt_two_gpu_only_if_required]
+    required_run_metadata: [CUDA_VISIBLE_DEVICES, physical_gpu_ids, gpu_models, gpu_count, peak_vram_per_gpu, microbatch, gradient_accumulation, effective_batch]
   retrospective_transfer: true
   operational_historical_deployment_claim: false
   require_amendment_before_test_scores_for_design_changes: true

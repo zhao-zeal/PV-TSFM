@@ -73,6 +73,18 @@ DLinear/PatchTST 在 source-only global 模式训练，每窗口采用只依赖�
 
 ## 5 训练预算、选择与首周执行
 
+### GPU 使用上限（2026-09-10 用户补充）
+
+本项目任何时刻最多使用两张 GPU，并通过 `CUDA_VISIBLE_DEVICES` 只暴露指定设备。默认
+GPU 0 和 GPU 1 分别运行独立 seed/fold/method；单个 Chronos-2 LoRA 或 full CPT 先用
+单卡。只有 full CPT 在冻结协议允许的 microbatch 下单卡显存不足时，才能让该 run 独占
+两卡，此时不得并发其他 GPU run。GPU 数不得改变 effective batch、steps、窗口暴露量、
+学习率、warmup 或实验预算。profiling 先分别测试 LoRA 单卡和 full CPT 单卡。
+
+每个 run 必须记录 `CUDA_VISIBLE_DEVICES`、物理 GPU ID、型号、run 使用 GPU 数、每卡
+peak VRAM、microbatch、gradient accumulation 和 effective batch。禁止程序自动访问第三张
+及以上 GPU；多卡首选用途始终是独立实验并行，而不是扩展单次训练预算。
+
 采样顺序为原始源均匀→物理地点均匀→系统均匀→窗口均匀。微批从 32 开始，有效 batch 固定 128，不够显存就累积梯度。多 GPU 优先运行独立 seed/折，不能使多卡方法获得更多未披露窗口。
 
 AdamW、weight decay=0.01、clip=1、5% warmup 后线性下降。MVP 调度总长度固定 1,000 步；正式 HPO 与 refit 的调度总长度固定 2,000 步。**选中 500/1,000 步检查点后重训，也保留原调度长度和 warmup，不按较短停止步重新压缩曲线。** 这样 refit 的更新序列才与选择时一致。
