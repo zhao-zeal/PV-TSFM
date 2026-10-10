@@ -1,0 +1,129 @@
+{
+  "status": "passed",
+  "device": "cpu",
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "optimizer_updates": 0,
+  "checks": [
+    {
+      "model": "Chronos2",
+      "protocol": "in_domain",
+      "nwp_mode": "none",
+      "indices": [
+        0,
+        2544,
+        2545,
+        25449
+      ],
+      "prediction_max_difference": 1.7881393432617188e-07,
+      "frozen": true
+    },
+    {
+      "model": "Chronos2",
+      "protocol": "in_domain",
+      "nwp_mode": "history",
+      "indices": [
+        0,
+        2544,
+        2545,
+        25449
+      ],
+      "prediction_max_difference": 4.470348358154297e-08,
+      "frozen": true
+    },
+    {
+      "model": "Chronos2",
+      "protocol": "in_domain",
+      "nwp_mode": "future",
+      "indices": [
+        0,
+        2544,
+        2545,
+        25449
+      ],
+      "prediction_max_difference": 5.960464477539063e-08,
+      "frozen": true
+    },
+    {
+      "model": "Chronos2",
+      "protocol": "in_domain",
+      "nwp_mode": "history_future",
+      "indices": [
+        0,
+        2544,
+        2545,
+        25449
+      ],
+      "prediction_max_difference": 8.940696716308594e-08,
+      "frozen": true
+    },
+    {
+      "model": "Chronos2",
+      "protocol": "zeroshot_v1",
+      "nwp_mode": "none",
+      "indices": [
+        0,
+        2544,
+        2545,
+        25449
+      ],
+      "prediction_max_difference": 1.7881393432617188e-07,
+      "frozen": true
+    },
+    {
+      "model": "Chronos2",
+      "protocol": "zeroshot_v1",
+      "nwp_mode": "history",
+      "indices": [
+        0,
+        2544,
+        2545,
+        25449
+      ],
+      "prediction_max_difference": 5.960464477539063e-08,
+      "frozen": true
+    },
+    {
+      "model": "Chronos2",
+      "protocol": "zeroshot_v1",
+      "nwp_mode": "future",
+      "indices": [
+        0,
+        2544,
+        2545,
+        25449
+      ],
+      "prediction_max_difference": 5.960464477539063e-08,
+      "frozen": true
+    },
+    {
+      "model": "Chronos2",
+      "protocol": "zeroshot_v1",
+      "nwp_mode": "history_future",
+      "indices": [
+        0,
+        2544,
+        2545,
+        25449
+      ],
+      "prediction_max_difference": 5.960464477539063e-08,
+      "frozen": true
+    },
+    {
+      "model": "TimesFM3",
+      "protocol": "zeroshot_v1",
+      "indices": [
+        0,
+        2544,
+        2545,
+        25449
+      ],
+      "prediction_max_difference": 3.2782554626464844e-07,
+      "frozen": true
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "wheel": "/home/zhaopp/workspace/PV-TSFM/reports/pv_tsfm-0.2.0-py3-none-any.whl",
+  "modules_imported": 10,
+  "python_modules": 44,
+  "loaded_from_wheel": true,
+  "basicts_dependency": false,
+  "no_stale_snapshot_modules": true
+}

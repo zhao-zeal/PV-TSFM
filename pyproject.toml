@@ -4,11 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pv-tsfm"
-version = "0.1.0"
-description = "Lightweight photovoltaic forecasting experiments on BasicTS"
+version = "0.2.0"
+description = "TSLib-style photovoltaic forecasting with a unified MMSP data interface"
 requires-python = ">=3.11"
 dependencies = [
-    "BasicTS==1.1.0",
     "torch>=2.3",
     "numpy>=1.24",
     "pandas>=2.0",
@@ -23,11 +22,16 @@ chronos = ["chronos-forecasting==2.2.2"]
 timesfm = ["timesfm==3.0.2"]
 
 [project.scripts]
-pvtsfm = "pvtsfm.cli:main"
+pvtsfm = "run:main"
+
+[tool.setuptools]
+py-modules = ["run"]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]
+include = ["data_provider*", "exp*", "models*", "layers*", "utils*"]
 
 [tool.setuptools.package-data]
-"pvtsfm.models.crossunet" = ["LICENSE", "NOTICE"]
-"pvtsfm.models.timexer" = ["NOTICE.official"]
+"layers" = ["LICENSE.BasicTS"]
+"layers.crossunet" = ["LICENSE", "NOTICE"]
+"layers.timexer" = ["NOTICE.official"]

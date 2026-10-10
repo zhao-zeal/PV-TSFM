@@ -1,0 +1,6 @@
+Cross-Unet model code adapted from ZjuMachine/PV-power.
+https://github.com/ZjuMachine/PV-power
+The upstream repository distributes these model files under Apache License 2.0.
+Changes: package-local imports, removed unused plotting imports, integer equality,
+equivalent causal mask construction, photovoltaic interface and configuration.
+PV-TSFM's TSLib model adapter is maintained separately in models/CrossUnet.py.

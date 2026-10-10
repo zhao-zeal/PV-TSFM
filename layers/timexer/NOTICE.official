@@ -1,0 +1,6 @@
+TimeXerPV uses the model and required attention/embedding classes from:
+https://github.com/thuml/TimeXer
+Source revision: 76011909357972bd55a27adba2e1be994d81b327
+Changes: package-local imports, selection of required dependency classes,
+and a photovoltaic input adapter for single-target forecasting.
+PV-TSFM's TSLib model adapter is maintained separately in models/TimeXer.py.

@@ -1,0 +1,456 @@
+{
+  "status": "passed",
+  "reference_branch": "basicts-snapshot-20261010",
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "gpu": 0,
+  "optimizer_updates": 0,
+  "covariate_keys": [
+    "correlation_history",
+    "forecast_end_timestamp",
+    "forecast_start_timestamp",
+    "forecast_timestamps",
+    "fusion_time",
+    "future_nwp",
+    "historical_nwp",
+    "input_end_timestamp",
+    "input_start_timestamp",
+    "satellite",
+    "satellite_coords",
+    "site_coords",
+    "site_id",
+    "split_id"
+  ],
+  "checks": [
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "power",
+      "flag": "train",
+      "windows": 76570,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "power",
+      "flag": "val",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "power",
+      "flag": "test",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "power_nwp",
+      "flag": "train",
+      "windows": 76570,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "power_nwp",
+      "flag": "val",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "power_nwp",
+      "flag": "test",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "satellite",
+      "flag": "train",
+      "windows": 76570,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "satellite",
+      "flag": "val",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "satellite",
+      "flag": "test",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "all",
+      "flag": "train",
+      "windows": 76570,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "all",
+      "flag": "val",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "in_domain",
+      "modalities": "all",
+      "flag": "test",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "MMSPCrossUnetDataset_input_mapping",
+      "protocol": "in_domain",
+      "max_difference": 0
+    },
+    {
+      "name": "MMSPTimeXerDataset_input_mapping",
+      "protocol": "in_domain",
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "power",
+      "flag": "train",
+      "windows": 76570,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "power",
+      "flag": "val",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "power",
+      "flag": "test",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "power_nwp",
+      "flag": "train",
+      "windows": 76570,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "power_nwp",
+      "flag": "val",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "power_nwp",
+      "flag": "test",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "satellite",
+      "flag": "train",
+      "windows": 76570,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "satellite",
+      "flag": "val",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "satellite",
+      "flag": "test",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "all",
+      "flag": "train",
+      "windows": 76570,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "all",
+      "flag": "val",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "data",
+      "protocol": "zeroshot_v1",
+      "modalities": "all",
+      "flag": "test",
+      "windows": 25450,
+      "samples": 5,
+      "max_difference": 0
+    },
+    {
+      "name": "MMSPCrossUnetDataset_input_mapping",
+      "protocol": "zeroshot_v1",
+      "max_difference": 0
+    },
+    {
+      "name": "MMSPTimeXerDataset_input_mapping",
+      "protocol": "zeroshot_v1",
+      "max_difference": 0
+    },
+    {
+      "name": "model_forward_gradient",
+      "model": "DLinear",
+      "variant": "default",
+      "prediction_max_difference": 0,
+      "gradient_max_difference": 0,
+      "future_label_leakage": false,
+      "optimizer": "AdamW",
+      "scheduler": "ReduceLROnPlateau"
+    },
+    {
+      "name": "model_forward_gradient",
+      "model": "PatchTST",
+      "variant": "default",
+      "prediction_max_difference": 0,
+      "gradient_max_difference": 0,
+      "future_label_leakage": false,
+      "optimizer": "AdamW",
+      "scheduler": "ReduceLROnPlateau"
+    },
+    {
+      "name": "model_forward_gradient",
+      "model": "CrossUnet",
+      "variant": "default",
+      "prediction_max_difference": 0,
+      "gradient_max_difference": 0,
+      "future_label_leakage": false,
+      "optimizer": "Adam",
+      "scheduler": "CrossUnetType3LR"
+    },
+    {
+      "name": "model_forward_gradient",
+      "model": "TimeXer",
+      "variant": "default",
+      "prediction_max_difference": 0,
+      "gradient_max_difference": 0,
+      "future_label_leakage": false,
+      "optimizer": "Adam",
+      "scheduler": "ReduceLROnPlateau"
+    },
+    {
+      "name": "model_forward_gradient",
+      "model": "FusionSF",
+      "variant": "experiment2",
+      "prediction_max_difference": 0,
+      "gradient_max_difference": 0,
+      "future_label_leakage": false,
+      "optimizer": "AdamW",
+      "scheduler": "CosineWarmupScheduler"
+    },
+    {
+      "name": "model_forward_gradient",
+      "model": "FusionSF",
+      "variant": "experiment3",
+      "prediction_max_difference": 0,
+      "gradient_max_difference": 0,
+      "future_label_leakage": false,
+      "optimizer": "AdamW",
+      "scheduler": "CosineWarmupScheduler"
+    },
+    {
+      "name": "model_forward_gradient",
+      "model": "FusionSF",
+      "variant": "script3",
+      "prediction_max_difference": 0,
+      "gradient_max_difference": 0,
+      "future_label_leakage": false,
+      "optimizer": "AdamW",
+      "scheduler": "CosineWarmupScheduler"
+    },
+    {
+      "name": "complete_test",
+      "model": "DLinear",
+      "windows": 25450,
+      "prediction_max_difference": 0.0,
+      "delta_mae": 0.0,
+      "delta_rmse": 0.0,
+      "relative_mae_percent": 0.0,
+      "relative_rmse_percent": 0.0,
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.07754141851075573,
+        "rmse": 0.12392542570963284,
+        "r2": 0.7481661455534558,
+        "model": "DLinear",
+        "seed": 42,
+        "data_protocol": "in_domain",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "result_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/tslib_acceptance_DLinear_20261010"
+    },
+    {
+      "name": "complete_test",
+      "model": "PatchTST",
+      "windows": 25450,
+      "prediction_max_difference": 1.430511474609375e-06,
+      "delta_mae": -5.634163968704087e-11,
+      "delta_rmse": 1.3817512412028776e-10,
+      "relative_mae_percent": -8.819165485925271e-08,
+      "relative_rmse_percent": 1.1953692698880976e-07,
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.06388545461276272,
+        "rmse": 0.11559199969930051,
+        "r2": 0.780896745977629,
+        "model": "PatchTST",
+        "seed": 42,
+        "data_protocol": "in_domain",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "result_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/tslib_acceptance_PatchTST_20261010"
+    }
+  ]
+}
