@@ -1,0 +1,533 @@
+{
+  "task": "Official baseline code, configuration, and interface acceptance",
+  "dataset": "MMSP",
+  "seq_len": 24,
+  "label_len": 12,
+  "pred_len": 24,
+  "protocols": [
+    "in_domain",
+    "zeroshot_v1"
+  ],
+  "runtime_records": [
+    {
+      "model": "DLinear",
+      "protocol": "in_domain",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 1200,
+      "total_parameters": 1200,
+      "loss": 0.17437216639518738,
+      "gradient_tensors": 4,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        0.005,
+        0.005,
+        0.0025,
+        0.00125
+      ],
+      "status": "passed",
+      "seconds": 1.32
+    },
+    {
+      "model": "PatchTST",
+      "protocol": "in_domain",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 17672,
+      "total_parameters": 17675,
+      "loss": 0.09571556746959686,
+      "gradient_tensors": 53,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        4.000000000000001e-06,
+        0.0001,
+        0.0001,
+        0.0001
+      ],
+      "status": "passed",
+      "seconds": 0.12
+    },
+    {
+      "model": "FusionSF",
+      "protocol": "in_domain",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 11144898,
+      "total_parameters": 11144898,
+      "loss": 0.32575392723083496,
+      "gradient_tensors": 641,
+      "optimizer": "AdamW",
+      "lr_initial_and_next_three": [
+        0.0,
+        0.0003199210496585171,
+        0.000639368553097047,
+        0.0009578697430094784
+      ],
+      "status": "passed",
+      "seconds": 1.89
+    },
+    {
+      "model": "CrossUnet",
+      "protocol": "in_domain",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 14059832,
+      "total_parameters": 14059832,
+      "loss": 1.175069808959961,
+      "gradient_tensors": 213,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        4.000000000000001e-06,
+        0.0001,
+        0.0001,
+        0.0001
+      ],
+      "status": "passed",
+      "seconds": 0.2
+    },
+    {
+      "model": "TimeXer",
+      "protocol": "in_domain",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 5316632,
+      "total_parameters": 5316632,
+      "loss": 0.08189501613378525,
+      "gradient_tensors": 60,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        0.0001,
+        0.0001,
+        5e-05,
+        2.5e-05
+      ],
+      "status": "passed",
+      "seconds": 0.14
+    },
+    {
+      "model": "Chronos2",
+      "protocol": "in_domain",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 0,
+      "total_parameters": 119477664,
+      "status": "passed",
+      "seconds": 1.17
+    },
+    {
+      "model": "ChronosX",
+      "protocol": "in_domain",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 2127616,
+      "total_parameters": 48281856,
+      "loss": 3.0623624324798584,
+      "gradient_tensors": 16,
+      "optimizer": "AdamW",
+      "lr_initial_and_next_three": [
+        0.01,
+        0.009998,
+        0.009996000000000001,
+        0.009994
+      ],
+      "status": "passed",
+      "seconds": 3.07
+    },
+    {
+      "model": "DLinear",
+      "protocol": "zeroshot_v1",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 1200,
+      "total_parameters": 1200,
+      "loss": 0.16026747226715088,
+      "gradient_tensors": 4,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        0.005,
+        0.005,
+        0.0025,
+        0.00125
+      ],
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "model": "PatchTST",
+      "protocol": "zeroshot_v1",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 17672,
+      "total_parameters": 17675,
+      "loss": 0.08901728689670563,
+      "gradient_tensors": 53,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        4.000000000000001e-06,
+        0.0001,
+        0.0001,
+        0.0001
+      ],
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "model": "FusionSF",
+      "protocol": "zeroshot_v1",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 11144898,
+      "total_parameters": 11144898,
+      "loss": 0.31643569469451904,
+      "gradient_tensors": 641,
+      "optimizer": "AdamW",
+      "lr_initial_and_next_three": [
+        0.0,
+        0.0003199210496585171,
+        0.000639368553097047,
+        0.0009578697430094784
+      ],
+      "status": "passed",
+      "seconds": 0.37
+    },
+    {
+      "model": "CrossUnet",
+      "protocol": "zeroshot_v1",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 14059832,
+      "total_parameters": 14059832,
+      "loss": 1.1483482122421265,
+      "gradient_tensors": 213,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        4.000000000000001e-06,
+        0.0001,
+        0.0001,
+        0.0001
+      ],
+      "status": "passed",
+      "seconds": 0.18
+    },
+    {
+      "model": "TimeXer",
+      "protocol": "zeroshot_v1",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 5316632,
+      "total_parameters": 5316632,
+      "loss": 0.0749097615480423,
+      "gradient_tensors": 60,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        0.0001,
+        0.0001,
+        5e-05,
+        2.5e-05
+      ],
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "model": "Chronos2",
+      "protocol": "zeroshot_v1",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 0,
+      "total_parameters": 119477664,
+      "status": "passed",
+      "seconds": 0.19
+    },
+    {
+      "model": "ChronosX",
+      "protocol": "zeroshot_v1",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 2127616,
+      "total_parameters": 48281856,
+      "loss": 3.596829652786255,
+      "gradient_tensors": 16,
+      "optimizer": "AdamW",
+      "lr_initial_and_next_three": [
+        0.01,
+        0.009998,
+        0.009996000000000001,
+        0.009994
+      ],
+      "status": "passed",
+      "seconds": 0.36
+    },
+    {
+      "model": "TimeVLM",
+      "protocol": "in_domain",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 407110,
+      "total_parameters": 151684423,
+      "loss": 0.18423086404800415,
+      "gradient_tensors": 31,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        0.001,
+        0.001,
+        0.0005,
+        0.00025
+      ],
+      "status": "passed",
+      "seconds": 3.73
+    },
+    {
+      "model": "TimeVLM",
+      "protocol": "zeroshot_v1",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 407110,
+      "total_parameters": 151684423,
+      "loss": 0.14407281577587128,
+      "gradient_tensors": 31,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        0.001,
+        0.001,
+        0.0005,
+        0.00025
+      ],
+      "status": "passed",
+      "seconds": 0.69
+    },
+    {
+      "model": "TimeLLM",
+      "protocol": "in_domain",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "llm_model": "GPT2",
+      "llm_layers": 12,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 52664680,
+      "total_parameters": 177104488,
+      "loss": 0.3906587064266205,
+      "gradient_tensors": 13,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        0.0004,
+        0.01,
+        0.005,
+        0.0025
+      ],
+      "status": "passed",
+      "seconds": 3.68
+    },
+    {
+      "model": "TimeLLM",
+      "protocol": "zeroshot_v1",
+      "seq_len": 24,
+      "pred_len": 24,
+      "batch_size": 2,
+      "llm_model": "GPT2",
+      "llm_layers": 12,
+      "output_shape": [
+        2,
+        24,
+        1
+      ],
+      "trainable_parameters": 52664680,
+      "total_parameters": 177104488,
+      "loss": 0.30700939893722534,
+      "gradient_tensors": 13,
+      "optimizer": "Adam",
+      "lr_initial_and_next_three": [
+        0.0004,
+        0.01,
+        0.005,
+        0.0025
+      ],
+      "status": "passed",
+      "seconds": 0.58
+    }
+  ],
+  "completed_runtime_models": 9,
+  "requested_baseline_count": 9,
+  "TimeLLM_status": "passed with official supported GPT2, full 12 layers; default Llama-7B source/config implemented but weights incomplete and runtime unverified",
+  "formal_performance_metrics": null,
+  "absolute_change": null,
+  "relative_change": null,
+  "best_new_configuration": null,
+  "legacy_checkpoint_compatibility": [
+    {
+      "model": "DLinear",
+      "status": "passed",
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_best_val_MAE.pt",
+      "config": "legacy_fusionsf",
+      "output_shape": [
+        2,
+        24,
+        1
+      ]
+    },
+    {
+      "model": "PatchTST",
+      "status": "passed",
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt",
+      "config": "legacy_fusionsf",
+      "output_shape": [
+        2,
+        24,
+        1
+      ]
+    }
+  ],
+  "training_interface": [
+    {
+      "model": "DLinear",
+      "status": "passed",
+      "real_windows": 4,
+      "epoch_budget": 1,
+      "optimizer_step_budget": null,
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/reports/baseline_training_interface_20261010/in_domain/DLinear/checkpoint.pth",
+      "performance_experiment": false
+    },
+    {
+      "model": "ChronosX",
+      "status": "passed",
+      "real_windows": 4,
+      "epoch_budget": null,
+      "optimizer_step_budget": 2,
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/reports/baseline_training_interface_20261010/in_domain/ChronosX/checkpoint.pth",
+      "performance_experiment": false
+    },
+    {
+      "model": "TimeVLM",
+      "status": "passed",
+      "real_windows": 4,
+      "epoch_budget": 1,
+      "optimizer_step_budget": null,
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/reports/baseline_training_interface_20261010/in_domain/TimeVLM/checkpoint.pth",
+      "performance_experiment": false
+    }
+  ],
+  "project_version": "0.3.0",
+  "vq_version": "1.2.0",
+  "cpu_cores": 4,
+  "gpus": [
+    0
+  ],
+  "formal_training_started": false,
+  "pretrained_paths": [
+    "pretrained/chronos-2",
+    "pretrained/chronos-t5-small",
+    "pretrained/clip-vit-base-patch32",
+    "pretrained/gpt2"
+  ],
+  "remaining_item": "Default Time-LLM Llama-7B weights and runtime verification",
+  "FusionSF_legacy_vq_compatibility": {
+    "model": "FusionSF",
+    "old_vq_version": "1.31.0",
+    "project_vq_version": "1.2.0",
+    "old_guide_channels": 15,
+    "real_windows": 2,
+    "max_prediction_difference": 0.0,
+    "checkpoint_load": "passed",
+    "formal_performance_experiment": false
+  }
+}

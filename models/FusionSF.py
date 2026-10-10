@@ -2,6 +2,7 @@
 
 from dataclasses import asdict
 
+import torch
 from torch import nn
 
 from layers.fusionsf.fusionSF_2modal import FusionSF2M
@@ -16,8 +17,10 @@ class Model(nn.Module):
         if configs.seq_len != configs.pred_len:
             raise ValueError('Original FusionSF requires seq_len == pred_len')
         self.three_modal = configs.fusion_modalities == 3
+        self.guide_channels = configs.guide_channels
         architecture = FusionSFConfig(input_len=configs.seq_len, output_len=configs.pred_len,
-                                      mlp_ratio=4 if self.three_modal else 1)
+                                      mlp_ratio=4 if self.three_modal else 1,
+                                      guide_channels=self.guide_channels)
         if configs.preset == 'script':
             if not self.three_modal:
                 raise ValueError('FusionSF script preset requires three modalities')
@@ -39,7 +42,12 @@ class Model(nn.Module):
         values = [cov['satellite'], cov['satellite_coords'], x_enc,
                   cov['site_coords'][..., None, None], cov['fusion_time']]
         if self.three_modal:
-            values.append(cov['future_nwp'])
+            nwp = cov['future_nwp']
+            if self.guide_channels == 17:
+                # The author NWP CSV retains lat/lon as its first two columns.
+                coords = (torch.round(cov['site_coords'] * 10) / 10).unsqueeze(1)
+                nwp = torch.cat([coords.expand(-1, nwp.size(1), -1), nwp], dim=-1)
+            values.append(nwp)
         result = self.backbone(*values, mask=self.training)
         if self.three_modal and self.training:
             prediction, vq_loss = result

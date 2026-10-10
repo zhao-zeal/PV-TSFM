@@ -1,0 +1,54 @@
+{
+  "DLinear": {
+    "repository": "https://github.com/cure-lab/LTSF-Linear",
+    "source_commit": "0c113668a3b88c4c4ee586b8c5ec3e539c4de5a6",
+    "reference_recipe": "scripts/EXP-LongForecasting/Linear/univariate/etth1.sh"
+  },
+  "PatchTST": {
+    "repository": "https://github.com/yuqinie98/PatchTST",
+    "source_commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9",
+    "reference_recipe": "PatchTST_supervised/scripts/PatchTST/etth1.sh"
+  },
+  "FusionSF": {
+    "repository": "https://github.com/MAZiqing/FusionSF",
+    "source_commit": "f979e6faa80e75deea4f80302ceefc47f915d147",
+    "reference_recipe": "scripts/fusionSF.sh + configs/experiment/fusionsf_3modal.yaml"
+  },
+  "CrossUnet": {
+    "repository": "https://github.com/ZjuMachine/PV-power",
+    "source_commit": "bfd6bd5080ee33f2fff0395fd0c394c9ab8fcb2a",
+    "reference_recipe": "use_cross_unet.py"
+  },
+  "TimeXer": {
+    "repository": "https://github.com/thuml/TimeXer",
+    "source_commit": "76011909357972bd55a27adba2e1be994d81b327",
+    "reference_recipe": "scripts/forecast_exogenous/ETTh1/TimeXer.sh"
+  },
+  "ChronosX": {
+    "repository": "https://github.com/amazon-science/chronos-forecasting/tree/chronosx",
+    "source_commit": "2b52bfc500e3ebab1ce846f0a2a60ee5ef2a14a7",
+    "reference_recipe": "src/chronosx/chronosx.py: ChronosXPipeline.train defaults"
+  },
+  "TimeLLM": {
+    "repository": "https://github.com/KimMeen/Time-LLM",
+    "source_commit": "b13e881f86cd0475ce1b72c17110430663334955",
+    "reference_recipe": "scripts/TimeLLM_ETTh1.sh",
+    "supported_backbones": [
+      "LLAMA",
+      "GPT2",
+      "BERT"
+    ],
+    "reference_backbone": "LLAMA (Llama-7B, 32 layers)"
+  },
+  "TimeVLM": {
+    "repository": "https://github.com/moyutian/ICML25-TimeVLM",
+    "source_commit": "b488910ed45f5b99e3a5f1b8eac9ab14dac070a5",
+    "reference_recipe": "scripts/full-shot/TimeVLM_ETTh1.sh",
+    "ported_branch": "CLIP (official full-shot script)"
+  },
+  "Chronos2": {
+    "repository": "https://github.com/amazon-science/chronos-forecasting",
+    "package": "chronos-forecasting==2.2.2",
+    "reference_recipe": "frozen Chronos2Pipeline.predict_quantiles, median 0.5"
+  }
+}

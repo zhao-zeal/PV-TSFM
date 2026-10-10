@@ -12,3 +12,11 @@ einops>=0.6
 vector-quantize-pytorch==1.2.0
 chronos-forecasting==2.2.2
 timesfm==3.0.2
+transformers==4.57.6
+accelerate>=0.34
+sentencepiece>=0.2
+torchvision>=0.18
+pillow
+matplotlib
+pytorch-wavelets==1.3.0
+PyWavelets

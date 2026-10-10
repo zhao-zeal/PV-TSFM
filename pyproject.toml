@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pv-tsfm"
-version = "0.2.0"
+version = "0.3.0"
 description = "TSLib-style photovoltaic forecasting with a unified MMSP data interface"
 requires-python = ">=3.11"
 dependencies = [
@@ -19,6 +19,9 @@ dependencies = [
 
 [project.optional-dependencies]
 chronos = ["chronos-forecasting==2.2.2"]
+chronosx = ["chronos-forecasting==2.2.2", "transformers==4.57.6", "accelerate>=0.34"]
+timellm = ["transformers==4.57.6", "accelerate>=0.34", "sentencepiece>=0.2"]
+timevlm = ["transformers==4.57.6", "torchvision>=0.18", "pillow", "matplotlib", "pytorch-wavelets==1.3.0", "PyWavelets"]
 timesfm = ["timesfm==3.0.2"]
 
 [project.scripts]
@@ -32,6 +35,12 @@ where = ["."]
 include = ["data_provider*", "exp*", "models*", "layers*", "utils*"]
 
 [tool.setuptools.package-data]
+"models" = ["baseline_sources.json"]
 "layers" = ["LICENSE.BasicTS"]
 "layers.crossunet" = ["LICENSE", "NOTICE"]
 "layers.timexer" = ["NOTICE.official"]
+"layers.dlinear_official" = ["LICENSE*", "NOTICE*"]
+"layers.patchtst_official" = ["LICENSE*", "NOTICE*"]
+"layers.chronosx" = ["LICENSE*", "NOTICE*"]
+"layers.timellm" = ["LICENSE*", "NOTICE*"]
+"layers.timevlm" = ["LICENSE*", "NOTICE*"]

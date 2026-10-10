@@ -1,0 +1,104 @@
+    def train(
+        self,
+        output_dir=Path(__file__).parent / "output" / "group0" / "finetune",
+        per_device_train_batch_size=32,
+        learning_rate=0.01,
+        lr_scheduler_type="linear",
+        warmup_ratio=0.0,
+        optim="adamw_torch_fused",
+        log_steps=20,
+        save_steps=100,
+        max_steps=5000,
+        gradient_accumulation_steps=2,
+        dataloader_num_workers=1,
+        tf32=False,
+        torch_compile=0,
+        eval_steps=100,
+        per_device_eval_batch_size=8,
+        eval_accumulation_steps=4,
+        load_best_model_at_end=True,
+        save_total_limit=5,
+        quantized_train_dataset=None,
+        quantized_val_dataset=None,
+        seed=None,
+    ):
+
+        output_dir.mkdir(exist_ok=True, parents=True)
+
+        training_args = TrainingArguments(
+            output_dir=output_dir,
+            per_device_train_batch_size=per_device_train_batch_size,
+            learning_rate=learning_rate,
+            lr_scheduler_type=lr_scheduler_type,
+            warmup_ratio=warmup_ratio,
+            optim=optim,
+            logging_dir=str(output_dir / "logs"),
+            logging_strategy="steps",
+            logging_steps=log_steps,
+            save_strategy="steps",
+            save_steps=save_steps,
+            report_to="tensorboard",
+            max_steps=max_steps,
+            gradient_accumulation_steps=gradient_accumulation_steps,
+            dataloader_num_workers=dataloader_num_workers,
+            tf32=tf32,  # remove this if not using Ampere GPUs (e.g., A100)
+            torch_compile=torch_compile,
+            ddp_find_unused_parameters=False,
+            metric_for_best_model="val_loss",
+            evaluation_strategy="steps",
+            eval_steps=eval_steps,
+            per_device_eval_batch_size=per_device_eval_batch_size,
+            eval_accumulation_steps=eval_accumulation_steps,
+            load_best_model_at_end=load_best_model_at_end,
+            logging_first_step=True,
+            greater_is_better=False,
+            save_total_limit=save_total_limit,
+            # seed=seed,
+        )
+
+        # Create Trainer instance
+        if quantized_val_dataset is None:
+            training_args.eval_strategy = "no"
+
+        trainer = Trainer(
+            model=self.chronosx,
+            args=training_args,
+            train_dataset=quantized_train_dataset,
+            eval_dataset=(
+                {"val": quantized_val_dataset} if quantized_val_dataset else None
+            ),
+            compute_metrics=compute_metrics,
+        )
+
+        # prepare training for finetuning
+        trainer._signature_columns = [
+            "labels",
+            "attention_mask",
+            "input_ids",
+            "past_covariates",
+            "future_covariates",
+            "decoder_input_ids",
+        ]
+
+        log_on_main("Training", logger)
+
+        self.prepare_model_for_finetuning()
+
+        parameter_count = count_parameters(self.chronosx)
+        print(f"parameter_count: {parameter_count}")
+
+        print("Model parameters:")
+        for name, params in self.chronosx.named_parameters():
+            print(name, params.requires_grad)
+
+        trainer.train()
+
+        if quantized_val_dataset:
+            val_loss_finetuned_model = trainer.evaluate(quantized_val_dataset)
+        else:
+            val_loss_finetuned_model = {"eval_loss": np.nan}
+
+        pretrained_model_path = output_dir / "final-checkpoint"
+        self.chronosx.save_pretrained(pretrained_model_path)
+
+        return val_loss_finetuned_model["eval_loss"]

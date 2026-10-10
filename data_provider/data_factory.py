@@ -16,7 +16,7 @@ def data_provider(args, flag):
     train = flag == 'train'
     loader = DataLoader(
         dataset, batch_size=args.batch_size if train else args.eval_batch_size,
-        shuffle=train, drop_last=False, num_workers=args.num_workers,
+        shuffle=train, drop_last=train and args.drop_last, num_workers=args.num_workers,
         pin_memory=args.use_gpu,
     )
     return dataset, loader
