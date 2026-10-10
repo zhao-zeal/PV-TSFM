@@ -27,7 +27,7 @@ layers/                        保留的模型计算层及上游声明
 utils/                         指标、损失、调度器、权重恢复与 GPU 检查
 scripts/run_mmsp.sh             在项目根目录执行 run.py
 datasets/MMSP/data/             实际复制的数据
-pretrained/                    Chronos-2、Chronos-T5、Llama、CLIP 等本地权重
+pretrained/                    Chronos-2、Chronos-T5、CLIP 等本地权重
 checkpoints/{protocol}/         训练权重、配置和 scaler
 outputs/{protocol}/            预测、指标、站点/时间元信息和运行日志
 reports/                       两协议结果表、历史归档及迁移验收
@@ -65,10 +65,13 @@ model(x_enc, x_mark_enc, x_dec, x_mark_dec, covariates=covariates)
 
 实验层将 decoder 的未来功率部分置零，只保留历史 label 段；未来真实功率只用于损失和指标，不交给模型。模型返回 `[B, pred_len, 1]`，或含 prediction 与训练辅助损失的字典。NWP 和卫星归一化沿用已验收的数据逻辑，不另行标准化功率。
 
-## 两套协议
+## 数据协议
 
+- `site1_v1`：仅站点 #1（编号从 0 开始），默认 24→24、站内时间 60%/20%/20%；保留已有实现与历史记录，用户已取消后续 Site1 实验。
 - `in_domain`：站点 0–9 同站点按时间 60%/20%/20% 划分；窗口按完整目标时间归属。
 - `zeroshot_v1`：训练和验证使用站点 10–19，测试使用站点 0–9；时间划分仍为 60%/20%/20%，测试复用训练 scaler。对监督模型表示跨站点泛化协议，并不表示模型从未训练。
+
+正式十站点主协议使用现有 `in_domain` 名称。底层已有的 `paper_main_v1` 是原论文兼容协议，使用全量数据拟合 scaler、分区内完整历史与目标窗口；保留其历史含义，不覆盖为新的正式协议。
 
 默认 24→24、label_len=12。每协议保存 data_protocol.json 与 scalers.npz。不得在模型层改变站点划分、窗口或重新拟合 scaler。未来 NWP 的 CSV 缺少发布时间，在线可用性限制详见历史验收报告。
 
@@ -78,6 +81,7 @@ model(x_enc, x_mark_enc, x_dec, x_mark_dec, covariates=covariates)
 
 ```bash
 python run.py --model DLinear --protocol in_domain --print_config
+python run.py --model FusionSF --protocol in_domain --print_config
 python run.py --model TimeXer --protocol zeroshot_v1 --print_config
 ```
 
@@ -104,27 +108,22 @@ python run.py --is_training 0 --model Chronos2 --protocol zeroshot_v1 \
   --nwp_mode history_future --model_id Chronos2_history_future --use_gpu 0
 ```
 
-`--model_id` 区分独立运行；`--root_path`、`--model_path`、`--llm_path`、`--vlm_path` 可覆盖项目内默认资源。九个 baseline 均有统一入口：DLinear、PatchTST、FusionSF、CrossUnet、Chronos2、ChronosX、TimeXer、TimeLLM、TimeVLM；也支持 Cross-Unet、Chronos-2、Time-LLM、Time-VLM 名称。额外保留已有 TimesFM3；Ours 为待设计方法。Chronos-2 的 NWP 结果不代表 ChronosX。
+`--model_id` 区分独立运行；`--root_path`、`--model_path`、`--vlm_path` 可覆盖项目内默认资源。八个 baseline 均有统一入口：DLinear、PatchTST、FusionSF、CrossUnet、Chronos2、ChronosX、TimeXer、TimeVLM；也支持 Cross-Unet、Chronos-2、Time-VLM 名称。Time-LLM 已按用户要求移除，Llama 本地文件已删除；历史验收记录保留。额外保留已有 TimesFM3；Ours 为待设计方法。Chronos-2 的 NWP 结果不代表 ChronosX。
 
-默认 `--baseline_config official`，采用作者核心代码和指定官方脚本训练设置，详见 [核对报告](reports/baseline_official_audit_20261010.md) 与 `models/official_presets.py`。MMSP 保留 24→24、单功率目标、两套站点/时间/scaler 协议；这些数据适配项不等于作者原数据集的完整实验配置。旧 DLinear/PatchTST 权重需要 `--baseline_config legacy_fusionsf`，历史指标仍属旧配置。FusionSF 支持 `--preset script/experiment`、`--fusion_modalities 2/3`；script 仅支持三模态。FusionSF、Cross-Unet 在 MMSP 接口中要求 seq_len==pred_len。
+默认 `--baseline_config official`，采用作者核心代码和指定官方脚本训练设置，详见 [核对报告](reports/baseline_official_audit_20261010.md) 与 `models/official_presets.py`。MMSP 保留 24→24、单功率目标和统一站点/时间/scaler 协议；这些数据适配项不等于作者原数据集的完整实验配置。旧 DLinear/PatchTST 权重需要 `--baseline_config legacy_fusionsf`，历史指标仍属旧配置。FusionSF 支持 `--preset script/experiment`、`--fusion_modalities 2/3`；script 仅支持三模态。FusionSF、Cross-Unet 在 MMSP 接口中要求 seq_len==pred_len。
 
 FusionSF 的官方三模态 NWP 分支输入为 17 通道（两列经纬度 + 15 个气象变量）；模型适配层从统一 covariates 组合它们，Dataset 仍返回 15 个气象通道。此前 15 通道实现的权重可明确指定 `--guide_channels 15`。
 
-ChronosX 使用 [官方 chronosx 分支](https://github.com/amazon-science/chronos-forecasting/tree/chronosx) 的 Chronos-T5-small + IIB/OIB，冻结骨干，训练 token 交叉熵；默认 5000 optimizer steps、梯度累积 2、每 100 步按验证 CE 保存最优模型。Time-LLM 使用冻结 Llama-7B（32 层）和 bf16；可通过 `--llm_model GPT2/BERT` 选择作者支持的其他骨干并指定本地权重。Time-VLM 使用官方 full-shot CLIP、历史序列生成的图像与文本、检索记忆和门控融合，GPU 训练 fp16，CPU 回退 fp32。其官方记忆库会在前向中更新，评估按数据顺序执行；迁入后记忆库随 checkpoint 保存和恢复。预训练权重全部从本地加载，运行入口不自动下载。
+ChronosX 使用 [官方 chronosx 分支](https://github.com/amazon-science/chronos-forecasting/tree/chronosx) 的 Chronos-T5-small + IIB/OIB，冻结骨干，训练 token 交叉熵；默认 5000 optimizer steps、梯度累积 2、每 100 步按验证 CE 保存最优模型。Time-VLM 使用官方 full-shot CLIP、历史序列生成的图像与文本、检索记忆和门控融合，GPU 训练 fp16，CPU 回退 fp32。其官方记忆库会在前向中更新，评估按数据顺序执行；迁入后记忆库随 checkpoint 保存和恢复。预训练权重全部从本地加载，运行入口不自动下载。
 
 ```bash
 python run.py --model ChronosX --protocol in_domain --print_config
-python run.py --model Time-LLM --protocol in_domain --print_config
 python run.py --model Time-VLM --protocol zeroshot_v1 --print_config
 ```
 
-本次 Time-LLM 的运行验收采用作者支持的 GPT-2 完整12层，权重保存到 `pretrained/gpt2/`；参考脚本的默认 Llama-7B 权重尚未下载完成，正式 Llama 骨干运行待核验。选择本地 GPT-2：
-
-```bash
-python run.py --model Time-LLM --llm_model GPT2 --protocol in_domain --print_config
-```
-
 运行绑定最多 4 个 CPU 核；CPU 模式固定 DataLoader 0 子进程。GPU 入口检查所选卡空闲，只使用一张指定卡。未启用自动实验队列。
+
+修改或运行按阶段逐次审批。当前只做 `in_domain` 与 `zeroshot_v1`，仅 seed 42，不做多种子；顺序为 FusionSF → Cross-Unet → TimeXer，每个模型完成两个协议并验收后，等待下一模型审批。Ours 单独讨论与审批。已完成内容跳过，协议冲突或配置歧义先明确。关键协议、授权、进度与待办见 [实验状态](docs/EXPERIMENT_STATUS.md)，恢复任务前先核对该文档和已有进程，避免重复运行。
 
 ## 保存与 GitHub
 

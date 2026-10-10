@@ -29,17 +29,6 @@
     "source_commit": "2b52bfc500e3ebab1ce846f0a2a60ee5ef2a14a7",
     "reference_recipe": "src/chronosx/chronosx.py: ChronosXPipeline.train defaults"
   },
-  "TimeLLM": {
-    "repository": "https://github.com/KimMeen/Time-LLM",
-    "source_commit": "b13e881f86cd0475ce1b72c17110430663334955",
-    "reference_recipe": "scripts/TimeLLM_ETTh1.sh",
-    "supported_backbones": [
-      "LLAMA",
-      "GPT2",
-      "BERT"
-    ],
-    "reference_backbone": "LLAMA (Llama-7B, 32 layers)"
-  },
   "TimeVLM": {
     "repository": "https://github.com/moyutian/ICML25-TimeVLM",
     "source_commit": "b488910ed45f5b99e3a5f1b8eac9ab14dac070a5",

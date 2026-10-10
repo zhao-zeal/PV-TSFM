@@ -1,4 +1,4 @@
-"""Expose project in_domain, cross-site zeroshot_v1 and original paper_main_v1."""
+"""Expose Site #1, in-domain, cross-site and historical paper MMSP protocols."""
 
 import json
 from functools import lru_cache
@@ -14,7 +14,7 @@ from .mmsp_storage import MMSPDataset
 def canonical_protocol(protocol):
     """Resolve the historical names of the project's same-site protocol."""
     protocol = 'in_domain' if protocol in ('fixed_v1', 'paper_main') else protocol
-    if protocol not in ('in_domain', 'zeroshot_v1', 'paper_main_v1'):
+    if protocol not in ('site1_v1', 'in_domain', 'zeroshot_v1', 'paper_main_v1'):
         raise ValueError(f'Unknown MMSP protocol: {protocol}')
     return protocol
 
@@ -23,7 +23,9 @@ def canonical_protocol(protocol):
 def load_mmsp(data_dir, input_len, output_len, num_sites, num_ignored_sites,
               modality_mode, train_ratio, valid_ratio, test_ratio, protocol):
     protocol = canonical_protocol(protocol)
-    if protocol == 'zeroshot_v1':
+    if protocol == 'site1_v1':
+        num_sites, num_ignored_sites = 2, 1
+    elif protocol == 'zeroshot_v1':
         num_sites, num_ignored_sites = 20, 10
     elif protocol == 'paper_main_v1':
         num_sites, num_ignored_sites = 10, 0

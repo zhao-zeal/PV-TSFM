@@ -48,7 +48,7 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         params = [p for p in self.model.parameters() if p.requires_grad]
         if self.args.optimizer == 'adam':
             # Author OneCycleLR constructors also set beta1 to max_momentum=0.95.
-            beta1 = 0.95 if self.args.lradj in ('type3', 'type1_onecycle_init') else 0.9
+            beta1 = 0.95 if self.args.lradj == 'type3' else 0.9
             return torch.optim.Adam(params, lr=self.args.learning_rate, betas=(beta1, 0.999))
         if self.args.optimizer == 'adamw_chronosx':
             return torch.optim.AdamW(params, lr=self.args.learning_rate, weight_decay=0.,
@@ -61,10 +61,9 @@ class Exp_Long_Term_Forecast(Exp_Basic):
             return CosineWarmupScheduler(optimizer, warmup=5, max_iters=self.args.train_epochs)
         if self.args.lradj == 'type3':
             return CrossUnetType3LR(optimizer)
-        if self.args.lradj in ('type1', 'type1_onecycle_init'):
-            initial = 1 / 25 if self.args.lradj == 'type1_onecycle_init' else 1.
+        if self.args.lradj == 'type1':
             return torch.optim.lr_scheduler.LambdaLR(
-                optimizer, lambda epoch: initial if epoch == 0 else 0.5 ** (epoch - 1))
+                optimizer, lambda epoch: 1. if epoch == 0 else 0.5 ** (epoch - 1))
         if self.args.lradj == 'linear':
             return torch.optim.lr_scheduler.LambdaLR(
                 optimizer, lambda step: max(0., 1. - step / self.args.max_steps))
@@ -112,6 +111,7 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         scaler = torch.amp.GradScaler('cuda', enabled=self.args.effective_precision == 'fp16')
         for epoch in range(1, self.args.train_epochs + 1):
             self.model.train()
+            total_loss, total_samples = 0., 0
             for batch in train_loader:
                 optimizer.zero_grad(set_to_none=True)
                 result, targets, _ = self._forward_batch(batch)
@@ -120,6 +120,8 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                 scaler.scale(loss).backward()
                 scaler.step(optimizer)
                 scaler.update()
+                total_loss += loss.detach() * len(targets)
+                total_samples += len(targets)
             validation = self.vali(val_loader)
             score = validation[self.args.monitor]
             improved, stopped = stopping.update(score)
@@ -127,7 +129,8 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                 scheduler.step(validation['rmse'])
             else:
                 scheduler.step()
-            logging.info('Epoch %d validation=%s lr=%s', epoch, validation, optimizer.param_groups[0]['lr'])
+            logging.info('Epoch %d train_loss=%s validation=%s lr=%s', epoch,
+                         (total_loss / total_samples).item(), validation, optimizer.param_groups[0]['lr'])
             if improved:
                 torch.save({
                     'epoch': epoch, 'model_state_dict': self.model.state_dict(),
@@ -194,7 +197,7 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         metrics = metric(prediction, truth)
         metrics.update(model=self.args.model, seed=self.args.seed, data_protocol=self.args.protocol,
                        baseline_config=self.args.baseline_config,
-                       llm_model=self.args.llm_model if self.args.model == 'TimeLLM' else '',
+                       llm_model='',
                        input_len=self.args.seq_len, output_len=self.args.pred_len,
                        **{key: protocol[key] for key in ('train_sites', 'validation_sites', 'test_sites',
                                                        'split_version', 'scaler_version')})

@@ -1,4 +1,4 @@
-"""One MMSP interface for every model and both project protocols."""
+"""One MMSP interface for every model and all project protocols."""
 
 import json
 from pathlib import Path

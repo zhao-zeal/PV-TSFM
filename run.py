@@ -10,7 +10,7 @@ import random
 
 ROOT = Path(__file__).resolve().parent
 MODEL_ALIASES = {'Chronos-2': 'Chronos2', 'Cross-Unet': 'CrossUnet',
-                 'Time-LLM': 'TimeLLM', 'Time-VLM': 'TimeVLM', 'Dlinear': 'DLinear'}
+                 'Time-VLM': 'TimeVLM', 'Dlinear': 'DLinear'}
 
 
 def build_parser():
@@ -19,13 +19,13 @@ def build_parser():
     parser.add_argument('--is_training', type=int, choices=[0, 1], help='1: train then test; 0: test only')
     parser.add_argument('--model', required=True, choices=[
         'DLinear', 'PatchTST', 'FusionSF', 'CrossUnet', 'Cross-Unet', 'TimeXer',
-        'Chronos2', 'Chronos-2', 'TimesFM3', 'ChronosX', 'TimeLLM', 'Time-LLM',
+        'Chronos2', 'Chronos-2', 'TimesFM3', 'ChronosX',
         'TimeVLM', 'Time-VLM', 'Dlinear', 'Ours'])
     parser.add_argument('--baseline_config', choices=['official', 'legacy_fusionsf'], default='official')
     parser.add_argument('--model_id', help='Explicit run name; choose a new name for a separate run')
     parser.add_argument('--data', default='MMSP', choices=['MMSP'])
     parser.add_argument('--root_path', default=str(ROOT / 'datasets/MMSP/data'))
-    parser.add_argument('--protocol', required=True, choices=['in_domain', 'zeroshot_v1'])
+    parser.add_argument('--protocol', required=True, choices=['site1_v1', 'in_domain', 'zeroshot_v1'])
     parser.add_argument('--modalities', choices=['power', 'power_nwp', 'satellite', 'all'])
     parser.add_argument('--seq_len', type=int, default=24)
     parser.add_argument('--label_len', type=int, default=12)
@@ -61,7 +61,7 @@ def build_parser():
     parser.add_argument('--subtract_last', type=int, default=0, choices=[0, 1])
     parser.add_argument('--decomposition', type=int, default=0, choices=[0, 1])
     parser.add_argument('--kernel_size', type=int, default=25)
-    parser.add_argument('--lradj', choices=['type1', 'type3', 'type1_onecycle_init',
+    parser.add_argument('--lradj', choices=['type1', 'type3',
                                          'fusion_cosine', 'linear', 'plateau'])
     parser.add_argument('--precision', choices=['fp32', 'bf16', 'fp16'])
     parser.add_argument('--max_steps', type=int)
@@ -71,9 +71,6 @@ def build_parser():
     parser.add_argument('--covariate_injection', choices=['IIB', 'OIB', 'IIB+OIB'], default='IIB+OIB')
     parser.add_argument('--injection_hidden_dim', type=int, default=256)
     parser.add_argument('--injection_layers', type=int, default=1)
-    parser.add_argument('--llm_model', choices=['LLAMA', 'GPT2', 'BERT'], default='LLAMA')
-    parser.add_argument('--llm_layers', type=int)
-    parser.add_argument('--llm_path', help='Project-local Llama/GPT-2/BERT directory')
     parser.add_argument('--vlm_path', help='Project-local CLIP directory')
     parser.add_argument('--preset', choices=['script', 'experiment'], default='script')
     parser.add_argument('--fusion_modalities', type=int, choices=[2, 3], default=3)
@@ -115,12 +112,7 @@ def parse_args(argv=None):
         if getattr(args, name, None) is None:
             setattr(args, name, default)
     args.enc_in = args.dec_in = args.c_out = 1
-    args.llm_dim = 4096 if args.llm_model == 'LLAMA' else 768
-    args.llm_layers = args.llm_layers or (32 if args.llm_model == 'LLAMA' else 12)
-    llm_directory = {'LLAMA': 'llama-7b', 'GPT2': 'gpt2', 'BERT': 'bert-base-uncased'}[args.llm_model]
-    args.llm_path = args.llm_path or str(ROOT / 'pretrained' / llm_directory)
     args.vlm_path = args.vlm_path or str(ROOT / 'pretrained/clip-vit-base-patch32')
-    args.prompt_domain = 1
     args.content = 'MMSP hourly photovoltaic power generation at solar power plants.'
     args.vlm_type = 'clip'
     args.image_size, args.periodicity, args.norm_const = 56, 24, 0.4
@@ -148,9 +140,7 @@ def parse_args(argv=None):
         'timesfm-3.0-pytorch' if args.model == 'TimesFM3' else
         'chronos-t5-small' if args.model == 'ChronosX' else 'chronos-2'))
     variant = ''
-    if args.model == 'TimeLLM':
-        variant = f'_{args.llm_model}_layers{args.llm_layers}'
-    elif args.model == 'FusionSF':
+    if args.model == 'FusionSF':
         variant = f'_{args.preset}{args.fusion_modalities}_guide{args.guide_channels}'
     elif args.model == 'ChronosX':
         variant = f'_{args.covariate_injection}'

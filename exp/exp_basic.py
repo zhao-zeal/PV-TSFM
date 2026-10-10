@@ -7,7 +7,7 @@ import torch
 
 MODEL_MODULES = {name: f'models.{name}' for name in (
     'DLinear', 'PatchTST', 'FusionSF', 'CrossUnet', 'TimeXer', 'Chronos2', 'TimesFM3',
-    'ChronosX', 'TimeLLM', 'TimeVLM')}
+    'ChronosX', 'TimeVLM')}
 
 
 class Exp_Basic:
