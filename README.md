@@ -1,145 +1,60 @@
-<div align="center">
-  
-# FusionSF: Fuse Heterogeneous Modalities in a Vector Quantized Framework for Robust Solar Power Forecasting
+# PV-TSFM
 
-[![python](https://img.shields.io/badge/-Python_3.8_%7C_3.9_%7C_3.10-blue?logo=python&logoColor=white)](https://github.com/pre-commit/pre-commit)
-[![pytorch](https://img.shields.io/badge/PyTorch_2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/get-started/locally/)
-[![lightning](https://img.shields.io/badge/-Lightning_2.0+-792ee5?logo=pytorchlightning&logoColor=white)](https://pytorchlightning.ai/)
-[![hydra](https://img.shields.io/badge/Config-Hydra_1.3-89b8cd)](https://hydra.cc/) 
-[![license](https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray)](https://github.com/gitbooo/TSF_context_Eumetsat/blob/neurips_2023/README.md#license)
- 
-</div>
+基于 BasicTS 的独立光伏预测实验项目。BasicTS 提供训练、评估、配置和指标；本项目维护 MMSP 数据协议、模型适配器及实验配置。所需 BasicTS 源码、MMSP 数据和已用预训练权重均保存在项目目录内，后续实验统一在本项目运行。
 
-## Description
+## 安装
 
-This is the official repository to the paper ["FusionSF: Fuse Heterogeneous Modalities in a Vector Quantized Framework for Robust Solar Power Forecasting"](https://arxiv.org/) by **Ziqing Ma**\*, **Wenwei Wang**\*, **Tian Zhou**\*, Chao Chen, Bingqing Peng, Liang Sun and Rong Jin.
-(* equal contribution)
-
-
-
-
-[//]: # (## Citation)
-
-[//]: # (If you use this codebase, or otherwise found our work valuable, please cite CrossViVit)
-
-[//]: # ()
-[//]: # (```)
-
-[//]: # (@article{boussif2023enrich,)
-
-[//]: # (  title   = {What if We Enrich day-ahead Solar Irradiance Time Series Forecasting with Spatio-Temporal Context?},)
-
-[//]: # (  author  = {Oussama Boussif and Ghait Boukachab and Dan Assouline and Stefano Massaroli and Tianle Yuan and Loubna Benabbou and Yoshua Bengio},)
-
-[//]: # (  year    = {2023},)
-
-[//]: # (  journal = {arXiv preprint arXiv: 2306.01112})
-
-[//]: # (})
-
-[//]: # (```)
-
-## Dataset
-You can access the dataset as follows:
-
-Folder: https://drive.google.com/drive/folders/1qGVOw-hAVQlO3n-1d4ZNHvL42L9PkdBK?usp=drive_link
-
-Zip File: https://drive.google.com/file/d/18Y-kwNUkT9t5EBugWxtDoE5HnMfaFG2D/view?usp=drive_link
-
-The dataset is supposed to be organized as follows:
-./data/nwp/nwp.csv
-./data/satellite/satellite.npy
-./data/satellite/satellite_coords.npy
-./data/satellite/satellite_times.npy
-./data/solar_power/solar_power.csv
-
-## Installation
-
-#### Pip
+项目内 `vendor/BasicTS` 保存 BasicTS 1.1.0 的原始框架源码，来源提交记录在 `vendor/BasicTS/UPSTREAM_REVISION`。使用 Python 3.11 或更高版本安装：
 
 ```bash
-# clone project
-git clone https://github.com/MAZiqing/FusionSF.git
-cd FusionSF
-
-# [OPTIONAL] create conda environment
-conda create -n MyEnvName python=3.10
-conda activate MyEnvName
-
-# install requirements
-pip install -r requirements.txt
+cd PV-TSFM
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m pip install --no-deps --no-build-isolation -e vendor/BasicTS -e .
 ```
-## Experiments
-To help the users reproduce our results, we released the sbatch scripts that we used.
- - FusionSF (145M): ``scripts/fusionSF.sh``
 
-[//]: # (## Hyperparameter tuning:)
+BasicTS 的旧版依赖声明包含 setuptools 和 transformers 的固定版本；先安装本项目运行依赖，再使用 `--no-deps` 安装框架，避免覆盖 Chronos 所需版本。已有兼容 PyTorch 环境时也可使用 `--system-site-packages` 创建虚拟环境。Chronos-2 和 TimesFM 3.0 分别对应 `chronos-forecasting==2.2.2` 和 `timesfm==3.0.2`（提供 `timesfm3` 模块）。
 
-[//]: # (We use [orion]&#40;https://github.com/Epistimio/orion&#41; to optimize hyperparameters and it's well suited for launching distributed hyperparameter optimization on clusters. It also integrates nicely with pytorch-lightning as well as hydra through their hydra plugin, so make sure to check their repo if you want more information !)
+## 结构与入口
 
-[//]: # ()
-[//]: # (You can launch the hyperparameter optimization using the following command:)
-
-[//]: # (```)
-
-[//]: # (CUDA_VISIBLE_DEVICES=0 python main.py -m hparams_search=[replace_with_model_to_be_tuned] experiment=[replace_with_model_to_be_tuned] seed=42 resume=True)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (We attached a sbatch script for optimizing CrossViViT's hyperparameters that you can find here: ``sbatch_scripts/crossvivit_tuning.sh``)
-
-[//]: # (## Baselines)
-
-[//]: # ()
-[//]: # (In addition to the main contributions presented in the paper, this repository also includes the implementation of several baseline models. These baselines serve as reference models or starting points for comparison and evaluation.)
-
-[//]: # ()
-[//]: # (The following baseline models are included:)
-
-[//]: # ()
-[//]: # (  -  **DLinear** - Are Transformers Effective for Time Series Forecasting? [[AAAI 2023]]&#40;https://arxiv.org/pdf/2205.13504.pdf&#41;)
-
-[//]: # (  -  **LightTS** - Less Is More: Fast Multivariate Time Series Forecasting with Light Sampling-oriented MLP Structures [[arXiv 2022]]&#40;https://arxiv.org/abs/2207.01186&#41;)
-
-[//]: # (  -  **Informer** - Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting [[AAAI 2021]]&#40;https://arxiv.org/abs/2012.07436&#41; )
-
-[//]: # (  -  **Reformer** - Reformer: The Efficient Transformer [[ICLR 2020]]&#40;https://arxiv.org/abs/2001.04451&#41;)
-
-[//]: # (  -  **Autoformer** - Autoformer: Decomposition Transformers with Auto-Correlation for Long-Term Series Forecasting [[NeurIPS 2021]]&#40;https://arxiv.org/abs/2106.13008&#41;)
-
-[//]: # (  -  **FEDformer** - FEDformer: Frequency Enhanced Decomposed Transformer for Long-term Series Forecasting [[ICML 2022]]&#40;https://arxiv.org/abs/2201.12740&#41; )
-
-[//]: # (  -  **Crossformer** - Crossformer: Transformer Utilizing Cross-Dimension Dependency for Multivariate Time Series Forecasting [[ICLR 2023]]&#40;https://openreview.net/forum?id=vSVLM2j9eie&#41;)
-
-[//]: # (  -  **PatchTST** - A Time Series is Worth 64 Words: Long-term Forecasting with Transformers. [[ICLR 2023]]&#40;https://arxiv.org/abs/2211.14730&#41;)
-
-[//]: # (  -  **FiLM** - FiLM: Frequency improved Legendre Memory Model for Long-term Time Series Forecasting [[NeurIPS 2022]]&#40;https://arxiv.org/abs/2205.08897&#41;)
-  
-## License
-
-CrossViVit is licensed under the MIT License.
-
+```text
+src/pvtsfm/data/mmsp/    数据加载、站点划分和模型输入接口
+src/pvtsfm/models/       FusionSF、DLinear、PatchTST、Cross-Unet、TimeXer、冻结模型适配器
+src/pvtsfm/experiments/  各模型的独立配置与运行入口
+src/pvtsfm/runner.py     BasicTS 扩展：验证后更新 Plateau 调度器、标准 .npy 导出
+run.py                  选择一个明确指定的任务
+vendor/BasicTS/          项目内框架源码及上游许可证
+datasets/MMSP/data/      实际复制的 MMSP 数据，不使用目录链接
+pretrained/             Chronos-2、TimesFM 3.0 本地预训练权重
+checkpoints/            模型权重及历史已完成模型的归档
+outputs/                本项目评估预测及历史结果归档
+reports/                验收报告、分协议结果表、历史实验索引
 ```
-MIT License
 
-Copyright (c) (2023) Ghait Boukachab
+仅查看配置或帮助：
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+```bash
+python run.py --help
+python run.py crossunet --protocol in_domain --print-config
+python run.py timexer --protocol in_domain
+python run.py baseline --model DLinear --protocol in_domain --gpus 0 --print-config
+python run.py fusionsf --protocol in_domain --gpus 0 --print-config
+python run.py zeroshot --help
 ```
+
+TimeXer 目前只准备接口，入口只打印配置，不启动训练。Cross-Unet 保留官方实现和脚本实际生效的模型、优化器、学习率调度配置；MMSP 的 24→24 数据设置由本项目单独指定。FusionSF 保留 `experiment` 与官方 `script` 两种预设。
+
+数据默认读取本项目 `datasets/MMSP/data`；可用 `PVTSFM_MMSP_DIR` 或入口的 `--data-dir` 覆盖。冻结模型默认读取本项目 `pretrained/chronos-2` 和 `pretrained/timesfm-3.0-pytorch`，也可使用 `--model-path`。预测长度为 24；`in_domain` 和 `zeroshot_v1` 协议的结果保存在各自目录。
+
+训练需要明确选择空闲 GPU，单次最多 4 张；入口会检查占用。CPU 零样本评估限制为 4 核、DataLoader 0 个子进程。配置查看不启动实验。数据、预训练权重、`checkpoints/`、`outputs/`、`reports/` 不纳入 Git。转发和本地保存时复制整个项目并保留这些目录，排除 `.venv/`、`.git/` 和 `__pycache__/`，接收方重新安装环境。
+
+## 当前模型范围与验收
+
+DLinear、PatchTST、FusionSF、Cross-Unet、Chronos-2 具有运行入口；TimeXer 当前仅提供配置与输入接口。TimesFM 3.0 保留为已有额外模型。ChronosX 已确认指 [ChronosX: Adapting Pretrained Time Series Models with Exogenous Variables](https://proceedings.mlr.press/v258/arango25a.html)，官方代码位于 [chronos-forecasting 的 chronosx 分支](https://github.com/amazon-science/chronos-forecasting/tree/chronosx)，尚未接入本项目。Ours 为用户尚未确定的自有方法，属于待设计内容，不计为缺失基线。当前七个指定基线中，仍需接入 ChronosX、补齐 TimeXer 训练入口。
+
+本机验收报告位于 `reports/acceptance_20261010.md`；分协议结果位于 `reports/in_domain/results.csv` 和 `reports/zeroshot_v1/results.csv`。历史结果索引位于 `reports/legacy_experiment_index.csv`。工程迁移验收不代表全部模型的正式实验已完成。
+
+## GitHub
+
+`origin`：https://github.com/zhao-zeal/PV-TSFM.git，分支 `main` 跟踪 `origin/main`。沿用远端历史，旧 Hydra/Lightning 工程在本地重构为上述结构；远端更新需另行提交和推送。

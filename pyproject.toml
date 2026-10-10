@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pv-tsfm"
+version = "0.1.0"
+description = "Lightweight photovoltaic forecasting experiments on BasicTS"
+requires-python = ">=3.11"
+dependencies = [
+    "BasicTS==1.1.0",
+    "torch>=2.3",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn",
+    "scipy",
+    "einops>=0.6",
+    "vector-quantize-pytorch==1.2.0",
+]
+
+[project.optional-dependencies]
+chronos = ["chronos-forecasting==2.2.2"]
+timesfm = ["timesfm==3.0.2"]
+
+[project.scripts]
+pvtsfm = "pvtsfm.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"pvtsfm.models.crossunet" = ["LICENSE", "NOTICE"]
+"pvtsfm.models.timexer" = ["NOTICE.official"]
