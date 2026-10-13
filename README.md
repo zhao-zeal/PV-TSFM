@@ -91,7 +91,7 @@ python run.py --is_training 0 --model Chronos2 --protocol zeroshot_v1 \
 
 代码检查、单批次计算、完整训练、正式评估分别记录。论文引用只使用协议/输入明确且经完整测试与验收的结果。历史Metric默认用于参照；用户批准且通过完整证据验收的Chronos-2及DLinear/PatchTST旧版本结果复用已登记，来源分别见reports/Chronos2_two_protocols_seed42_20261011/runs.json和reports/DLinear_PatchTST_migration_seed42_20261011/runs.json，不称为本轮重新推理或训练。DLinear/PatchTST主表采用FusionSF仓库旧实现/旧配置，不是原作者官方版本；其zeroshot按本次明确授权填入历史登记成绩，并标注原产物缺失、未完成当前完整验收，不进入分协议正式测试索引。输入或协议不一致则重新运行后验收。
 
-GitHub保存代码、实验指标、配置、训练日志、验收记录及分析；结果入口为[实验总表](reports/experiment_summary.csv)、[FusionSF输入结果](reports/fusionsf_input_metrics.csv)、[Adapter结果](reports/chronos2_adapter_metrics.csv)和[实验状态](docs/EXPERIMENT_STATUS.md)。数据集、预训练权重、模型权重及预测/特征数组仍保留在本机，未上传；完整重放实验需另外保存datasets/pretrained/checkpoints/outputs并重建环境。记录中的绝对路径指向原实验机器。
+GitHub保存代码、实验指标、必要配置和训练日志、验收记录及分析；结果入口为[实验总表](reports/experiment_summary.csv)、[FusionSF输入结果](reports/fusionsf_input_metrics.csv)、[Adapter结果](reports/chronos2_adapter_metrics.csv)和[实验状态](docs/EXPERIMENT_STATUS.md)。相同配置、协议和日志只保留必要副本；重复副本、缓存清单及旧监控/协调材料不再跟踪，本机文件仍保留。数据集、预训练权重、模型权重及预测/特征数组未上传；完整重放实验需另外保存datasets/pretrained/checkpoints/outputs/reports并重建环境。记录中的绝对路径指向原实验机器，部分依赖仅保存在本机。
 
 GitHub：[zhao-zeal/PV-TSFM](https://github.com/zhao-zeal/PV-TSFM)。旧代码快照分支：`basicts-snapshot-20261010`。
 

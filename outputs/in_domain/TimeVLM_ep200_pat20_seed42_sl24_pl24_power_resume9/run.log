@@ -1,3 +1,0 @@
-2026-10-11 06:28:47,102 Resume from epoch 9: best_validation_mse=0.013577664509545995 lr=3.90625e-06; total_max_epochs=200 patience=20
-2026-10-11 06:33:50,623 Epoch 10 train_loss=0.01813579350709915 validation={'mae': 0.06659789648635328, 'rmse': 0.11651644482232726, 'mse': 0.013576081914034432} lr=1.953125e-06
-2026-10-11 06:44:06,876 Resume from epoch 10: best_validation_mse=0.013576081914034432 lr=1.953125e-06; total_max_epochs=200 patience=20

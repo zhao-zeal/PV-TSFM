@@ -1,8 +1,0 @@
-in_domain {'test_windows': 25450, 'mae': 0.07105578813964124, 'rmse': 0.12220230136553013, 'r2': 0.7551207179578641, 'model': 'TimeVLM', 'seed': 42, 'data_protocol': 'in_domain', 'baseline_config': 'official', 'llm_model': '', 'input_len': 24, 'output_len': 24, 'train_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'validation_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'test_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'split_version': 'chronological_target_split_v1', 'scaler_version': 'train_sites_and_time_only_fit_v1'}
-zeroshot_v1 {'test_windows': 25450, 'mae': 0.06987500472570381, 'rmse': 0.12165875590433801, 'r2': 0.7572942777900238, 'model': 'TimeVLM', 'seed': 42, 'data_protocol': 'zeroshot_v1', 'baseline_config': 'official', 'llm_model': '', 'input_len': 24, 'output_len': 24, 'train_sites': [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 'validation_sites': [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 'test_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'split_version': 'chronological_target_split_v1', 'scaler_version': 'train_sites_and_time_only_fit_v1'}
-/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:261: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
-  @autocast(enabled = False)
-/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:391: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
-  @autocast(enabled = False)
-7 [8, 8]
-3 modal model, vq in ts

@@ -117,7 +117,7 @@ Time-VLM只消费历史功率及衍生图像/固定文本，TimeXer还消费历�
 
 官方MS分支：dim/FF512、2层/8头、factor3、dropout0.1、patch12适配24小时、use_norm=True；实际输入为历史功率+15维历史NWP，不消费未来NWP。MMSP24→24和seed42为统一任务设定。batch/eval32、FP32、Adam lr0.0001/betas0.9/0.999、MSE、官方type1调度、最多10轮、验证MSE选权重、patience3、训练drop_last=False，验证/测试全部窗口。
 
-- 本轮配置、训练日志、运行记录及低频检查：`reports/TimeXer_two_protocols_seed42_20261011/`；唯一状态记录为runs.json，实时进度以training.log/random_check_status.json为准。
+- 本轮配置、训练日志和验收记录：`reports/TimeXer_two_protocols_seed42_20261011/`；唯一状态记录为runs.json。训练及旧检查进程已完成，监控快照仅留本机。
 
 2026-10-11完整产物验收通过：各25,450×24标签与原始CSV一致，完整站点/时间索引、协议及训练集NWP scaler一致；统一全量Metric重算与保存指标/唯一索引相同；两协议均按最低验证MSE选择第4轮权重，第7轮早停。5个跨站样本加载Checkpoint核对保存预测，CPU/GPU最大差2.39e-7；这是权重身份检查，完整结果来自原正式测试，无重训或完整重推理。预测与权重有限、各站非全零，负预测保留原口径。
 

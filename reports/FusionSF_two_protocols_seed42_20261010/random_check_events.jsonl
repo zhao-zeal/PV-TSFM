@@ -1,4 +1,0 @@
-{"time": "2026-10-10T15:08:21+08:00", "run": "PVTSFM_in_domain_guide17", "pid": 2635253, "alive": true, "test_complete": false, "latest_validation": [3, 0.11889694288576749, 0.24004176101958596], "issues": ["suspected_zero_predictions_two_validations; output_check_required"]}
-{"time": "2026-10-10T15:08:21+08:00", "run": "PVTSFM_zeroshot_guide17", "pid": 2642044, "alive": true, "test_complete": false, "latest_validation": [3, 0.11212321337626158, 0.22688874205853116], "issues": ["suspected_zero_predictions_two_validations; output_check_required"]}
-{"time": "2026-10-10T23:07:03+08:00", "run": "PVTSFM_zeroshot_guide17", "pid": 2642044, "alive": false, "test_complete": true, "latest_validation": [29, 0.04184333781777094, 0.1018955409427701], "issues": []}
-{"time": "2026-10-10T23:32:39+08:00", "run": "PVTSFM_in_domain_guide17", "pid": 2635253, "alive": false, "test_complete": true, "latest_validation": [30, 0.04207794462961765, 0.09994288270462272], "issues": []}
