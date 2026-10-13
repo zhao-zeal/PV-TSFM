@@ -1,0 +1,26 @@
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:261: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:391: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+2026-10-10 13:37:51,616 Epoch 1 train_loss=0.2542078495025635 validation={'mae': 0.25598890473139085, 'rmse': 0.3888798504498655, 'mse': 0.15122753808590977} lr=0.0003199210496585171
+2026-10-10 13:39:42,721 Epoch 2 train_loss=0.15333756804466248 validation={'mae': 0.11134913287192007, 'rmse': 0.23242938078803516, 'mse': 0.05402341705350945} lr=0.000639368553097047
+2026-10-10 13:41:33,566 Epoch 3 train_loss=0.14730368554592133 validation={'mae': 0.11134913287192007, 'rmse': 0.23242938078803516, 'mse': 0.05402341705350945} lr=0.0009578697430094784
+2026-10-10 13:43:25,097 Epoch 4 train_loss=0.14644069969654083 validation={'mae': 0.11134913287192007, 'rmse': 0.23242938078803516, 'mse': 0.05402341705350945} lr=0.001274953408841266
+7 [8, 8]
+3 modal model, vq in ts
+3 modal model, vq in ctx
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/run.py", line 204, in <module>
+    main()
+  File "/home/zhaopp/workspace/PV-TSFM/run.py", line 199, in main
+    experiment.train(args.model_id)
+  File "/home/zhaopp/workspace/PV-TSFM/exp/exp_long_term_forecasting.py", line 120, in train
+    scaler.scale(loss).backward()
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/_tensor.py", line 631, in backward
+    torch.autograd.backward(
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/autograd/__init__.py", line 381, in backward
+    _engine_run_backward(
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/autograd/graph.py", line 869, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-10-11T06:30:25.716652+08:00",
+  "resource_allocation": {
+    "GPU0": "TimeVLM both protocols then ChronosX both protocols; CPU9,10",
+    "GPU3": "FusionSF3 inputs x2 protocols; CPU0,7"
+  },
+  "GPU0": {
+    "TimeVLM_epoch_minutes": 5.240842215462019,
+    "ChronosX_epoch_minutes": 6.341658164074437,
+    "ChronosX_full_test_minutes_per_protocol": 14.85407907020611,
+    "expected_finish_range": [
+      "2026-10-11T16:50:39.139864+08:00",
+      "2026-10-12T00:33:57.140775+08:00"
+    ],
+    "range_assumption": "TimeVLM20-40 continued epochs/protocol; ChronosX30-50 epochs/protocol. Not measured convergence or guaranteed stopping.",
+    "if_all_reach_epoch200": "2026-10-14T10:39:11.048673+08:00"
+  },
+  "GPU3": {
+    "no_satellite_epoch_minutes_measured": 8.933083333333334,
+    "satellite_epoch_minutes_from_existing_original_run": 18.39285747126437,
+    "expected_finish_range": [
+      "2026-10-12T18:24:11.483088+08:00",
+      "2026-10-13T18:34:33.141019+08:00"
+    ],
+    "range_assumption": "All six runs30-50 epochs each; historical NWP input cost assumed similar; historical official run stopped29/30; convergence of new inputs unverified.",
+    "if_all_reach_epoch100": "2026-10-16T07:00:27.285846+08:00"
+  },
+  "limitations": [
+    "GPU sharing/CPU and disk variation not modeled",
+    "Early stopping time unknown; ranges are planning estimates, not deadlines",
+    "Single-batch benchmark excludes loading and full-stage acceptance overhead"
+  ],
+  "superseded_by_input_optimization": "/home/zhaopp/workspace/PV-TSFM/reports/TimeVLM_ChronosX_queue_20261011/input_optimization_check.json",
+  "post_optimization_full_epoch_measurement_pending": true
+}

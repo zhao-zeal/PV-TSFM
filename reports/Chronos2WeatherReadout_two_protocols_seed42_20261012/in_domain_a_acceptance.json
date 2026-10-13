@@ -1,0 +1,87 @@
+{
+  "status": "passed_full_training_test_artifact_acceptance",
+  "protocol": "in_domain",
+  "variant": "a",
+  "metrics": {
+    "test_windows": 25450,
+    "mae": 0.04390995594051363,
+    "rmse": 0.09581349841344505,
+    "r2": 0.8494618172155486,
+    "model": "Chronos2WeatherReadout",
+    "seed": 42,
+    "data_protocol": "in_domain",
+    "baseline_config": "weather_conditioned_chronos_readout_variant",
+    "llm_model": "",
+    "input_len": 24,
+    "output_len": 24,
+    "train_sites": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "validation_sites": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "test_sites": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "split_version": "chronological_target_split_v1",
+    "scaler_version": "train_sites_and_time_only_fit_v1"
+  },
+  "completed_epochs": 80,
+  "best_epoch": 70,
+  "trainable_parameters": 29249,
+  "checkpoint_sha256": "1f82141203312304fc0c372b57f825cc387590468c4b6a5265596199bc7c3920",
+  "frozen_state_sha256": "5ef5a8e1ad5afb7fcb67e94a2620c2a21bcf7cebed144786a04f2f72b48ebc9a",
+  "selected_checkpoint_replay_max_abs_difference": 3.5762786865234375e-07,
+  "base_provenance": {
+    "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+    "checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+    "base_version": "b131_linear_v1",
+    "base_best_epoch": 40,
+    "base_experiment_label": "A01",
+    "historical_name": "E11",
+    "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+    "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+  },
+  "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future/analysis.json",
+  "comparison_to_A02": {
+    "mae": {
+      "absolute_change": 1.322984229265578e-06,
+      "improvement_percent": -0.0030130389861664493
+    },
+    "rmse": {
+      "absolute_change": -5.669150430294423e-05,
+      "improvement_percent": 0.059133610094631923
+    },
+    "r2": {
+      "absolute_change": 0.00017819536855190332
+    }
+  },
+  "accepted_at": "2026-10-13T01:23:44.570333+08:00"
+}

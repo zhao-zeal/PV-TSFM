@@ -292,6 +292,7 @@ class FusionSF3M(nn.Module):
         vq_in_ts: bool = False,
         vq_in_ctx: bool = False,
         vq_in_guide: bool = False,
+        use_satellite: bool = True,
         **kwargs,
     ):
         super().__init__()
@@ -321,6 +322,7 @@ class FusionSF3M(nn.Module):
         self.vq_in_ts = vq_in_ts
         self.vq_in_ctx = vq_in_ctx
         self.vq_in_guide = vq_in_guide
+        self.use_satellite = use_satellite
 
         for i in range(2):
             ims = self.image_size[i]
@@ -439,6 +441,12 @@ class FusionSF3M(nn.Module):
             print('3 modal model, vq in guide')
             self.guide_vq = ResidualVQ(dim=dim, num_quantizers=8, codebook_size=1024,
                                        shared_codebook=True, kmeans_init=True)
+        if not use_satellite:
+            # Remove the unused satellite branch from the ablation's parameters and checkpoint.
+            del self.to_patch_embedding, self.enc_pos_emb, self.ctx_encoder, self.mixer, self.ctx_mask_token
+            if vq_in_ctx:
+                del self.ctx_vq
+            self.vq_in_ctx = False
 
     def random_masking(self, x, mask_ratio):
         """
@@ -490,19 +498,20 @@ class FusionSF3M(nn.Module):
         Returns:
 
         """
-        vq_loss = torch.tensor([0.], device=ctx.device, requires_grad=self.training)
-        commit_loss = torch.zeros([1, 8], device=ctx.device)
+        vq_loss = torch.tensor([0.], device=ts.device, requires_grad=self.training)
+        commit_loss = torch.zeros([1, 8], device=ts.device)
 
-        B, T, _, H, W = ctx.shape
+        B, T = ts.shape[:2]
         time_coords = self.time_coords_encoder(time_coords)
 
         # ctx: to patch and to vq
-        ctx = torch.cat([ctx, time_coords], axis=2)
-        ctx = rearrange(ctx, "b t c h w -> (b t) c h w")
-        ctx = self.to_patch_embedding(ctx)  # BT, N, D = 48,64,64
-        if self.vq_in_ctx:
-            ctx, indices, commit_loss_ctx = self.ctx_vq(ctx)
-            commit_loss += commit_loss_ctx
+        if self.use_satellite:
+            ctx = torch.cat([ctx, time_coords], axis=2)
+            ctx = rearrange(ctx, "b t c h w -> (b t) c h w")
+            ctx = self.to_patch_embedding(ctx)
+            if self.vq_in_ctx:
+                ctx, indices, commit_loss_ctx = self.ctx_vq(ctx)
+                commit_loss += commit_loss_ctx
 
         # ts: to vq
         ts = torch.cat([ts, time_coords[..., 0, 0]], axis=-1)
@@ -518,27 +527,23 @@ class FusionSF3M(nn.Module):
             commit_loss += commit_loss_guide
 
         # prepare coordinates
-        ctx_coords = repeat(ctx_coords, "b c h w -> (b t) c h w", t=T)
-        ctx_coords = rearrange(ctx_coords, "b c (h p1) (w p2) -> b c h w (p1 p2)",
-                               p1=self.patch_size[0], p2=self.patch_size[1])
-        ctx_coords = ctx_coords.mean(dim=-1)
-        ts_coords = repeat(ts_coords, "b c h w -> (b t) c h w", t=T)
-        src_enc_pos_emb = self.enc_pos_emb(ctx_coords)
-        tgt_pos_emb = self.enc_pos_emb(ts_coords)
-
-        # vision transformer
-        if self.ctx_masking_ratio > 0 and mask:
-            p = self.ctx_masking_ratio * random.random()
-            ctx, _, ids_restore, ids_keep = self.random_masking(ctx, p)
-            src_enc_pos_emb = tuple(
-                torch.gather(
-                    pos_emb,
-                    dim=1,
-                    index=ids_keep.unsqueeze(-1).repeat(1, 1, pos_emb.shape[-1]),
+        if self.use_satellite:
+            ctx_coords = repeat(ctx_coords, "b c h w -> (b t) c h w", t=T)
+            ctx_coords = rearrange(ctx_coords, "b c (h p1) (w p2) -> b c h w (p1 p2)",
+                                   p1=self.patch_size[0], p2=self.patch_size[1])
+            ctx_coords = ctx_coords.mean(dim=-1)
+            ts_coords = repeat(ts_coords, "b c h w -> (b t) c h w", t=T)
+            src_enc_pos_emb = self.enc_pos_emb(ctx_coords)
+            tgt_pos_emb = self.enc_pos_emb(ts_coords)
+            if self.ctx_masking_ratio > 0 and mask:
+                p = self.ctx_masking_ratio * random.random()
+                ctx, _, ids_restore, ids_keep = self.random_masking(ctx, p)
+                src_enc_pos_emb = tuple(
+                    torch.gather(pos_emb, dim=1,
+                                 index=ids_keep.unsqueeze(-1).repeat(1, 1, pos_emb.shape[-1]))
+                    for pos_emb in src_enc_pos_emb
                 )
-                for pos_emb in src_enc_pos_emb
-            )
-        latent_ctx, self_attention_scores = self.ctx_encoder(ctx, src_enc_pos_emb)
+            latent_ctx, self_attention_scores = self.ctx_encoder(ctx, src_enc_pos_emb)
         
         # temporal transformer
         latent_ts = self.ts_encoder(ts)
@@ -550,9 +555,10 @@ class FusionSF3M(nn.Module):
         latent_ts = latent_ts + latent_guide
 
         # cross attention
-        latent_ts, cross_attention_scores = self.mixer(
-            latent_ctx, latent_ts, src_enc_pos_emb, tgt_pos_emb
-        )
+        if self.use_satellite:
+            latent_ts, cross_attention_scores = self.mixer(
+                latent_ctx, latent_ts, src_enc_pos_emb, tgt_pos_emb
+            )
         latent_ts = latent_ts.squeeze(1)
         latent_ts = self.ts_enctodec(rearrange(latent_ts, "(b t) c -> b t c", b=B))
 

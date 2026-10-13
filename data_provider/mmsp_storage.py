@@ -150,6 +150,11 @@ class MMSPDataset(Dataset):
             )
             self.scaler_state['nwp'] = state
             self.nwp_channels = len(state['feature_names']) + (2 if self.pipeline_version == 'paper_main_v1' else 0)
+            self.data_ec_values = {}
+            for site in self.data_sp:
+                key = tuple(round(float(value), 1) for value in site['lats_lons'])
+                if key not in self.data_ec_values:
+                    self.data_ec_values[key] = self.data_ec_grouped.get_group(key).values
 
     def __len__(self):
         return len(self.data_sp) * len(self.window_records)
@@ -183,7 +188,7 @@ class MMSPDataset(Dataset):
             if self.modality_mode == 'power_nwp':
                 lat, lon = (round(float(value), 1) for value in site['lats_lons'])
                 ec_begin = int((record.input_start - self.ec_start_time).total_seconds() // 3600)
-                values = self.data_ec_grouped.get_group((lat, lon)).values
+                values = self.data_ec_values[(lat, lon)]
                 sample['historical_nwp'] = torch.from_numpy(values[ec_begin:ec_begin + self.seq_len]).float()
                 sample['future_nwp'] = torch.from_numpy(values[ec_begin + self.seq_len:ec_begin + self.seq_len + self.pred_len]).float()
             return sample
@@ -198,6 +203,6 @@ class MMSPDataset(Dataset):
         if self.modality_mode == 'all':
             lat, lon = (round(float(value), 1) for value in site['lats_lons'])
             ec_begin = int((record.input_start - self.ec_start_time).total_seconds() // 3600) + self.seq_len
-            values = self.data_ec_grouped.get_group((lat, lon)).values
+            values = self.data_ec_values[(lat, lon)]
             sample['ec_input'] = torch.from_numpy(values[ec_begin:ec_begin + self.pred_len])
         return sample

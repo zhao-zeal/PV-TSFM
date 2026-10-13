@@ -1,0 +1,5 @@
+﻿models,input,MMSP in_domain MAE,MMSP in_domain RMSE,MMSP in_domain R^2,MMSP zeroshot MAE,MMSP zeroshot RMSE,MMSP zeroshot R^2
+FusionSF,历史功率+历史卫星+未来NWP+坐标/时间编码,0.040876,0.091265,0.863416,0.041598,0.089822,0.867700
+FusionSF (power_future_nwp; readout_repair_v1),历史功率+未来NWP+坐标/时间编码,0.040904,0.091621,0.862347,0.040731,0.085422,0.880344
+FusionSF (power_satellite_history_future_nwp; readout_repair_v1),历史功率+历史卫星+历史/未来NWP+坐标/时间编码,0.040414,0.088262,0.872255,0.041471,0.089704,0.868047
+FusionSF (power_history_future_nwp; readout_repair_v1),历史功率+历史/未来NWP+坐标/时间编码,0.042900,0.096197,0.848253,0.040797,0.089615,0.868309

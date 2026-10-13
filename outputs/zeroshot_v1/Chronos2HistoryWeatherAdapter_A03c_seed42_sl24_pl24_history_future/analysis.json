@@ -1,0 +1,525 @@
+{
+  "overall": {
+    "test_windows": 25450,
+    "mae": 0.04359043873272131,
+    "rmse": 0.0931104824230411,
+    "r2": 0.8578357404758096
+  },
+  "horizons": [
+    {
+      "hour": 1,
+      "mae": 0.030994773066126687,
+      "rmse": 0.0664886617597268
+    },
+    {
+      "hour": 2,
+      "mae": 0.03674282680922039,
+      "rmse": 0.07866560200647923
+    },
+    {
+      "hour": 3,
+      "mae": 0.040037708852179506,
+      "rmse": 0.08608775432569152
+    },
+    {
+      "hour": 4,
+      "mae": 0.04198224354348393,
+      "rmse": 0.09024797530225889
+    },
+    {
+      "hour": 5,
+      "mae": 0.04298185342621301,
+      "rmse": 0.09296235184421035
+    },
+    {
+      "hour": 6,
+      "mae": 0.04417394875994525,
+      "rmse": 0.09634366411630302
+    },
+    {
+      "hour": 7,
+      "mae": 0.04463585132337573,
+      "rmse": 0.09680139530371405
+    },
+    {
+      "hour": 8,
+      "mae": 0.0448643029550203,
+      "rmse": 0.09676324134634902
+    },
+    {
+      "hour": 9,
+      "mae": 0.045183636132764174,
+      "rmse": 0.09643981554485295
+    },
+    {
+      "hour": 10,
+      "mae": 0.04519540631336404,
+      "rmse": 0.09620776266279768
+    },
+    {
+      "hour": 11,
+      "mae": 0.04517742530920075,
+      "rmse": 0.09587791778794649
+    },
+    {
+      "hour": 12,
+      "mae": 0.045033302147957005,
+      "rmse": 0.09548382369603255
+    },
+    {
+      "hour": 13,
+      "mae": 0.044786438871753334,
+      "rmse": 0.09503177742302658
+    },
+    {
+      "hour": 14,
+      "mae": 0.044945123486010395,
+      "rmse": 0.09500683581379468
+    },
+    {
+      "hour": 15,
+      "mae": 0.045379541236771195,
+      "rmse": 0.09519123077089045
+    },
+    {
+      "hour": 16,
+      "mae": 0.04596098839420102,
+      "rmse": 0.09489521914413904
+    },
+    {
+      "hour": 17,
+      "mae": 0.04524142868373866,
+      "rmse": 0.09597277315372509
+    },
+    {
+      "hour": 18,
+      "mae": 0.04466661845899687,
+      "rmse": 0.09523221021435448
+    },
+    {
+      "hour": 19,
+      "mae": 0.044531910454865896,
+      "rmse": 0.09471124920975178
+    },
+    {
+      "hour": 20,
+      "mae": 0.044147979717367704,
+      "rmse": 0.09440675506631928
+    },
+    {
+      "hour": 21,
+      "mae": 0.044350855281305064,
+      "rmse": 0.09415314112159687
+    },
+    {
+      "hour": 22,
+      "mae": 0.04458338903293248,
+      "rmse": 0.09419439566146304
+    },
+    {
+      "hour": 23,
+      "mae": 0.04484727718377346,
+      "rmse": 0.09478974821209343
+    },
+    {
+      "hour": 24,
+      "mae": 0.045725700144744606,
+      "rmse": 0.09680659998878087
+    }
+  ],
+  "worst10percent": {
+    "definition": "ceil(10% windows), ranked by each model window RMSE; ties use original order",
+    "windows": 2545,
+    "metrics": {
+      "test_windows": 2545,
+      "mae": 0.10588813606072743,
+      "rmse": 0.1967380354846131,
+      "r2": 0.1269195966316532
+    }
+  },
+  "weather_change": {
+    "definition": "Mean absolute adjacent-hour differences of 15 train-standardized future NWP channels; training-only tertile boundaries",
+    "train_thresholds": [
+      0.13826343498152235,
+      0.16606313920836302
+    ],
+    "groups": [
+      {
+        "label": "low",
+        "metrics": {
+          "test_windows": 3189,
+          "mae": 0.04101334083580329,
+          "rmse": 0.08771461526519508,
+          "r2": 0.8051595451381137
+        }
+      },
+      {
+        "label": "medium",
+        "metrics": {
+          "test_windows": 9864,
+          "mae": 0.040614745389159816,
+          "rmse": 0.09086625214772646,
+          "r2": 0.8748556955489737
+        }
+      },
+      {
+        "label": "high",
+        "metrics": {
+          "test_windows": 12397,
+          "mae": 0.04662105939370075,
+          "rmse": 0.09617211934661629,
+          "r2": 0.8498157207313066
+        }
+      }
+    ]
+  },
+  "A02_worst10_common_subset": {
+    "test_windows": 2545,
+    "mae": 0.10550899018511015,
+    "rmse": 0.19625512715615925,
+    "r2": 0.13076451896366736
+  },
+  "comparison_to_A02": {
+    "mae": {
+      "absolute_change": -3.10712753371703e-05,
+      "improvement_percent": 0.07122925210849029
+    },
+    "rmse": {
+      "absolute_change": 0.0001688466085026652,
+      "improvement_percent": -0.18166950368680007
+    },
+    "r2": {
+      "absolute_change": -0.0005151340226130507
+    }
+  },
+  "limits": [
+    "seed42 only; no mechanism or stability proof",
+    "A03 has about 9% more trainable parameters than A02; capacity-matched control not run",
+    "overlapping windows; worst-window sets differ by model, also report common A02 subset",
+    "weather intensity is forecast variability, not observed weather uncertainty",
+    "A02 gridwise bidirectional NWP interpolation and assumed issue-time availability retained by explicit user decision"
+  ],
+  "comparison_to_A02_breakdown": {
+    "horizons": [
+      {
+        "hour": 1,
+        "mae": {
+          "absolute_change": -0.000334929659270896,
+          "improvement_percent": 1.0690483156081259
+        },
+        "rmse": {
+          "absolute_change": -0.0005833982214352579,
+          "improvement_percent": 0.8698081162247169
+        }
+      },
+      {
+        "hour": 2,
+        "mae": {
+          "absolute_change": -0.00016734302983899968,
+          "improvement_percent": 0.45337919215400774
+        },
+        "rmse": {
+          "absolute_change": -0.00039994969281632875,
+          "improvement_percent": 0.5058456991958131
+        }
+      },
+      {
+        "hour": 3,
+        "mae": {
+          "absolute_change": -0.0001428832859191112,
+          "improvement_percent": 0.3556027383270728
+        },
+        "rmse": {
+          "absolute_change": -0.00011284132321678908,
+          "improvement_percent": 0.13090550287655486
+        }
+      },
+      {
+        "hour": 4,
+        "mae": {
+          "absolute_change": -4.957037831633537e-05,
+          "improvement_percent": 0.11793537725628622
+        },
+        "rmse": {
+          "absolute_change": 0.00021012438932463406,
+          "improvement_percent": -0.23337339484904226
+        }
+      },
+      {
+        "hour": 5,
+        "mae": {
+          "absolute_change": 4.0359327602157435e-07,
+          "improvement_percent": -0.0009389940953371423
+        },
+        "rmse": {
+          "absolute_change": 0.00036013528661486827,
+          "improvement_percent": -0.38890568714505463
+        }
+      },
+      {
+        "hour": 6,
+        "mae": {
+          "absolute_change": 3.917363938230056e-05,
+          "improvement_percent": -0.08875912310709627
+        },
+        "rmse": {
+          "absolute_change": 0.0005598195057585076,
+          "improvement_percent": -0.5844613024615207
+        }
+      },
+      {
+        "hour": 7,
+        "mae": {
+          "absolute_change": 8.291747883085177e-05,
+          "improvement_percent": -0.18611003064392873
+        },
+        "rmse": {
+          "absolute_change": 0.0006271404703099281,
+          "improvement_percent": -0.6520876833371668
+        }
+      },
+      {
+        "hour": 8,
+        "mae": {
+          "absolute_change": -2.6545556028018114e-05,
+          "improvement_percent": 0.05913355819390415
+        },
+        "rmse": {
+          "absolute_change": 0.000525799893096271,
+          "improvement_percent": -0.5463568909941126
+        }
+      },
+      {
+        "hour": 9,
+        "mae": {
+          "absolute_change": -1.022322498541589e-05,
+          "improvement_percent": 0.022620827543162386
+        },
+        "rmse": {
+          "absolute_change": 0.0004386965101130097,
+          "improvement_percent": -0.45697020464340476
+        }
+      },
+      {
+        "hour": 10,
+        "mae": {
+          "absolute_change": 4.474228757572751e-06,
+          "improvement_percent": -0.009900722448468423
+        },
+        "rmse": {
+          "absolute_change": 0.0004051939263567256,
+          "improvement_percent": -0.422946828776001
+        }
+      },
+      {
+        "hour": 11,
+        "mae": {
+          "absolute_change": 2.832767848325035e-05,
+          "improvement_percent": -0.06274251307290231
+        },
+        "rmse": {
+          "absolute_change": 0.00027645727518424423,
+          "improvement_percent": -0.28917683234278496
+        }
+      },
+      {
+        "hour": 12,
+        "mae": {
+          "absolute_change": 1.224197771387131e-05,
+          "improvement_percent": -0.027191669115696877
+        },
+        "rmse": {
+          "absolute_change": 0.000220433227030567,
+          "improvement_percent": -0.23139343030447188
+        }
+      },
+      {
+        "hour": 13,
+        "mae": {
+          "absolute_change": -9.902155928838419e-06,
+          "improvement_percent": 0.022104832005630373
+        },
+        "rmse": {
+          "absolute_change": 0.0001290249095853152,
+          "improvement_percent": -0.13595486555254668
+        }
+      },
+      {
+        "hour": 14,
+        "mae": {
+          "absolute_change": 1.5338197019890143e-05,
+          "improvement_percent": -0.03413814893891465
+        },
+        "rmse": {
+          "absolute_change": 9.342526633289439e-05,
+          "improvement_percent": -0.0984321033181889
+        }
+      },
+      {
+        "hour": 15,
+        "mae": {
+          "absolute_change": 4.474325922342037e-06,
+          "improvement_percent": -0.009860758841707092
+        },
+        "rmse": {
+          "absolute_change": 0.0001761121992635145,
+          "improvement_percent": -0.1853517649728056
+        }
+      },
+      {
+        "hour": 16,
+        "mae": {
+          "absolute_change": -4.1817174498116894e-05,
+          "improvement_percent": 0.09090135695238945
+        },
+        "rmse": {
+          "absolute_change": 0.0002602992110958824,
+          "improvement_percent": -0.27505619625403743
+        }
+      },
+      {
+        "hour": 17,
+        "mae": {
+          "absolute_change": 2.6972730618204932e-05,
+          "improvement_percent": -0.059655103770729814
+        },
+        "rmse": {
+          "absolute_change": -1.8706722394498665e-05,
+          "improvement_percent": 0.01948789873709662
+        }
+      },
+      {
+        "hour": 18,
+        "mae": {
+          "absolute_change": -1.7314784898130042e-05,
+          "improvement_percent": 0.03874946460872644
+        },
+        "rmse": {
+          "absolute_change": 7.1580072365101666e-06,
+          "improvement_percent": -0.007516937056585949
+        }
+      },
+      {
+        "hour": 19,
+        "mae": {
+          "absolute_change": -4.094471836620095e-05,
+          "improvement_percent": 0.09186021000240972
+        },
+        "rmse": {
+          "absolute_change": 2.663919044744445e-05,
+          "improvement_percent": -0.02813465719720791
+        }
+      },
+      {
+        "hour": 20,
+        "mae": {
+          "absolute_change": -1.1013685148122954e-05,
+          "improvement_percent": 0.024940978721438613
+        },
+        "rmse": {
+          "absolute_change": -3.5722856482622856e-05,
+          "improvement_percent": 0.03782498857328058
+        }
+      },
+      {
+        "hour": 21,
+        "mae": {
+          "absolute_change": -4.411325831957247e-05,
+          "improvement_percent": 0.09936544561395347
+        },
+        "rmse": {
+          "absolute_change": -9.59744255248085e-06,
+          "improvement_percent": 0.010192399561470371
+        }
+      },
+      {
+        "hour": 22,
+        "mae": {
+          "absolute_change": -5.8796527866084025e-05,
+          "improvement_percent": 0.1317062037341531
+        },
+        "rmse": {
+          "absolute_change": 4.5848145186142e-05,
+          "improvement_percent": -0.04869766597112454
+        }
+      },
+      {
+        "hour": 23,
+        "mae": {
+          "absolute_change": -2.0656951254048594e-05,
+          "improvement_percent": 0.046039452567356164
+        },
+        "rmse": {
+          "absolute_change": 0.0001560680135868353,
+          "improvement_percent": -0.16491804319504652
+        }
+      },
+      {
+        "hour": 24,
+        "mae": {
+          "absolute_change": 1.6019932541543047e-05,
+          "improvement_percent": -0.03504713327061567
+        },
+        "rmse": {
+          "absolute_change": 0.00033560924454774377,
+          "improvement_percent": -0.3478861800409217
+        }
+      }
+    ],
+    "weather_change": [
+      {
+        "label": "low",
+        "mae": {
+          "absolute_change": -0.0004209543916774902,
+          "improvement_percent": 1.0159564422814111
+        },
+        "rmse": {
+          "absolute_change": -0.001104248918663342,
+          "improvement_percent": 1.2432594458509452
+        }
+      },
+      {
+        "label": "medium",
+        "mae": {
+          "absolute_change": 2.0892003607130005e-05,
+          "improvement_percent": -0.05146592861904913
+        },
+        "rmse": {
+          "absolute_change": 0.0003497931479170824,
+          "improvement_percent": -0.38644148454572114
+        }
+      },
+      {
+        "label": "high",
+        "mae": {
+          "absolute_change": 2.7876169569070186e-05,
+          "improvement_percent": -0.059828858300955225
+        },
+        "rmse": {
+          "absolute_change": 0.00033411537097599586,
+          "improvement_percent": -0.3486251352448032
+        }
+      }
+    ],
+    "worst10percent_each_model_different_windows": {
+      "mae": {
+        "absolute_change": 0.0008417779204506759,
+        "improvement_percent": -0.8013394613134355
+      },
+      "rmse": {
+        "absolute_change": 0.0020904856344768352,
+        "improvement_percent": -1.0739850751197995
+      }
+    },
+    "A02_worst10_common_subset": {
+      "mae": {
+        "absolute_change": 0.0004626320448333915,
+        "improvement_percent": -0.4404075048614271
+      },
+      "rmse": {
+        "absolute_change": 0.0016075773060229837,
+        "improvement_percent": -0.8258913648081855
+      }
+    }
+  }
+}

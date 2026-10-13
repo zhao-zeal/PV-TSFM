@@ -1,0 +1,9 @@
+﻿models,input,MMSP in_domain MAE,MMSP in_domain RMSE,MMSP in_domain R^2,MMSP zeroshot MAE,MMSP zeroshot RMSE,MMSP zeroshot R^2
+A01 (Chronos-2 + B131 + Linear; E11),历史功率+历史/未来NWP,0.044017,0.095937,0.849073,0.044076,0.094072,0.854885
+Chronos-2 + Adapter (b131_mlp63_v1),历史功率+历史/未来NWP,0.044072,0.096432,0.847512,0.044001,0.094183,0.854542
+A02 (A01 + Weather Adapter),历史功率+历史/未来NWP,0.043909,0.095870,0.849284,0.043622,0.092942,0.858351
+A03-a (History-Aware Weather Adapter),历史功率+历史/未来NWP（显式历史统计）,,,,0.043618,0.093301,0.857255
+A03-b (History-Aware Weather Adapter),历史功率+历史/未来NWP（显式历史相关性）,,,,0.043629,0.092974,0.858251
+A03-c (History-Aware Weather Adapter),历史功率+历史/未来NWP（学习型历史关系）,,,,0.043590,0.093110,0.857836
+A04-a (Weather-Conditioned Chronos Readout),历史功率+历史/未来NWP（天气Query读取预测Token）,0.043910,0.095813,0.849462,0.043794,0.093361,0.857069
+A04-b (Weather-Conditioned Chronos Readout),历史功率+历史/未来NWP（天气Query读取历史上下文及预测Token）,0.043962,0.096162,0.848364,0.043710,0.093440,0.856828

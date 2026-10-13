@@ -1,0 +1,1104 @@
+{
+  "stage": "code_and_paper_review",
+  "status": "review_complete_protocol_limit_accepted",
+  "a03_implemented": false,
+  "a03_training_started": false,
+  "protocol": "zeroshot_v1",
+  "development_seed": 42,
+  "multi_seed_condition": "Requires a separate decision after seed42 evidence; not started",
+  "sources": [
+    {
+      "title": "Cross-Unet original paper, equations 10-13 and 20",
+      "url": "https://www.nature.com/articles/s41467-026-73817-3"
+    },
+    {
+      "title": "Official Cross_Unet.py",
+      "url": "https://raw.githubusercontent.com/ZjuMachine/PV-power/main/models/Cross_Unet.py"
+    },
+    {
+      "title": "Official CrossUentattn.py",
+      "url": "https://raw.githubusercontent.com/ZjuMachine/PV-power/main/layers/CrossUentattn.py"
+    }
+  ],
+  "files_reviewed": {
+    "models/Chronos2Adapter.py": "200a9957fc426417072ea9b91d67652ba8632bcb6732fe37f64e64ec0babf788",
+    "models/Chronos2WeatherAdapter.py": "370f97de529fdf6a282dbe8abadc8289e0e1061db4fd0a91c566e9afb3348267",
+    "layers/chronos2_adapter.py": "f0a6700f1f94ce1576ea178c7a066eec5e89edab13fc12b231519be396d9014d",
+    "layers/chronos2_weather_adapter.py": "75c83afae0526a5d579628365c28970576d8c0962ac568a398eb1eefc19bb924",
+    "exp/exp_chronos2_adapter.py": "4545459decd4d75957ce15a48cb2a5ee0786010a79bd47560a59d0e427291285",
+    "exp/exp_chronos2_weather_adapter.py": "d3b4ff3064f3fc6706788c910cc6e06776d125a36c55ecac82688cfcdf57f991",
+    "scripts/accept_chronos2_weather_adapter.py": "5458750d77dee5a47f47584b1c3ee4e644b2b2540f1d9c67c50d96770fc1d443",
+    "scripts/check_chronos2_weather_adapter.py": "ab55a39b8892ba6903cd6a4af624321ac7d99cd269ee9449e310f5daf98c2448",
+    "run.py": "0eca1f06428c4dfd136f6c5d3a47ee72eaac52e250fee90caf7df1fec63ba88f",
+    "data_provider/mmsp_storage.py": "9462a2305aa83ba45d444c5057122bbb6639397b3ea30ae9b7e3e727f71d8b57",
+    "data_provider/data_loader.py": "cb42842f6f3d91ddc7afbdd4d3970de289c7a583b15c0de6fc7ee23085bb3558",
+    "data_provider/protocols.py": "96a36c39e6a4df2074382cb28359f61eb8595c2a301c9fd1de6a7531f1b8961f",
+    "utils/metrics.py": "3a2a580bbb4afdd65e99fa3d50585203d288ec7e5f67dbc9288130224e6a0623",
+    "layers/crossunet/official_model.py": "c580d3569dc0fa3b414f3873fc059d5c978f820227bf38c564fa774e9c65b127"
+  },
+  "a02": {
+    "in_domain": {
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04390863295628437,
+        "rmse": 0.095870189917748,
+        "r2": 0.8492836218469967
+      },
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2WeatherAdapter_A02_seed42_sl24_pl24_history_future/checkpoint.pth",
+      "checkpoint_sha256": "407fd3263a34e6c57738bc1b7676a12c40d86e1a93365f448f0f669143d38c23",
+      "selected_epoch": 53,
+      "base_checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+      "base_checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+      "b131_parameters": 203652,
+      "linear_parameters": 36888,
+      "trainable_parameters": 29249,
+      "shapes": {
+        "hidden_state_out.0.weight": [
+          768
+        ],
+        "hidden_state_out.0.bias": [
+          768
+        ],
+        "hidden_state_out.1.weight": [
+          32,
+          768
+        ],
+        "hidden_state_out.1.bias": [
+          32
+        ],
+        "cov_out.weight": [
+          32,
+          30
+        ],
+        "cov_out.bias": [
+          32
+        ],
+        "concat_layer.0.weight": [
+          32,
+          64
+        ],
+        "concat_layer.0.bias": [
+          32
+        ],
+        "concat_layer.2.weight": [
+          1,
+          32
+        ],
+        "concat_layer.2.bias": [
+          1
+        ]
+      },
+      "metric_recomputed_exact": true
+    },
+    "zeroshot_v1": {
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04362151000805848,
+        "rmse": 0.09294163581453843,
+        "r2": 0.8583508744984226
+      },
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2WeatherAdapter_A02_seed42_sl24_pl24_history_future/checkpoint.pth",
+      "checkpoint_sha256": "5904156cc5cd8cdac83a7bdd6a173045547ae2944cfe28927fe1767e218a1536",
+      "selected_epoch": 83,
+      "base_checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+      "base_checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+      "b131_parameters": 203652,
+      "linear_parameters": 36888,
+      "trainable_parameters": 29249,
+      "shapes": {
+        "hidden_state_out.0.weight": [
+          768
+        ],
+        "hidden_state_out.0.bias": [
+          768
+        ],
+        "hidden_state_out.1.weight": [
+          32,
+          768
+        ],
+        "hidden_state_out.1.bias": [
+          32
+        ],
+        "cov_out.weight": [
+          32,
+          30
+        ],
+        "cov_out.bias": [
+          32
+        ],
+        "concat_layer.0.weight": [
+          32,
+          64
+        ],
+        "concat_layer.0.bias": [
+          32
+        ],
+        "concat_layer.2.weight": [
+          1,
+          32
+        ],
+        "concat_layer.2.bias": [
+          1
+        ]
+      },
+      "metric_recomputed_exact": true
+    },
+    "flow": {
+      "power": "[B,L,1]; L=24 in accepted protocol; input CSV values, no extra scaling",
+      "historical_nwp": "[B,L,C]; C=15 in Dataset_MMSP scaler feature order",
+      "future_nwp": "[B,H,C]; H=24; same train-fitted scaler",
+      "chronos_context": "[B,16,24] -> [16B,24]; power followed by 15 weather channels",
+      "chronos_future": "[B,16,24] -> [16B,24]; power channel entirely NaN, 15 future covariates",
+      "group_ids": "16 series per sample; groups kept independent across samples",
+      "forecast_features": "Select power rows and final 2 output patches -> [B,2,768]",
+      "loc_scale": "[B,1] each; used for inverse instance normalization",
+      "b131": "LayerNorm(768), Linear(768,131), GELU, Linear(131,768); residual alpha; [B,2,768]",
+      "a01": "Frozen quantile head [B,2,21,16] -> inverse normalization -> median first 24 hours; add Linear(1536,24) over flattened adapted features",
+      "a02_hidden": "LayerNorm(768)+Linear(768,32) -> [B,2,32]; repeat each patch 16 times, truncate to H=24 -> [B,24,32]",
+      "a02_weather": "Concat NaN-to-zero values and NaN indicator -> [B,24,30]; Linear(30,32)",
+      "a02_readout": "Concat projected hidden/weather -> [B,24,64]; ReLU; Linear(64,32), ReLU, Linear(32,1)",
+      "output": "Y_A01 + Delta_Y -> [B,24,1]; residual in original power scale; no final clamp",
+      "freeze": "Whole self.base requires_grad=False and kept in eval; only weather_adapter trainable",
+      "initialization": "A02 residual last Linear zero; first backward upstream gradients zero, nonzero checked after the head updates",
+      "existing_fixed_lengths": "A01 itself fixes 2 output patches, 1536 flatten and 24 output; new relation branch should derive L/H/C from inputs/config and reject incompatible base sizes, not generalize or change A01"
+    },
+    "budget": {
+      "train_epochs": 100,
+      "patience": 10,
+      "batch_size": 512,
+      "eval_batch_size": 1024,
+      "precision": "FP32",
+      "optimizer": "AdamW",
+      "lr": 1.6e-05,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "weight_decay": 0.05,
+      "loss": "L1",
+      "scheduler": null,
+      "selection": "minimum validation MAE including epoch0; full test only after selection"
+    },
+    "existing_freeze_and_native_cache_evidence": "reports/Chronos2WeatherAdapter_two_protocols_seed42_20261012/preflight_gpu.json and runs.json acceptance; previously passed, not repeated"
+  },
+  "splits": {
+    "train": {
+      "windows": 76570,
+      "shapes": {
+        "power": [
+          24,
+          1
+        ],
+        "targets": [
+          24,
+          1
+        ],
+        "history": [
+          24,
+          15
+        ],
+        "future": [
+          24,
+          15
+        ]
+      },
+      "protocol_and_scalers_exact_match_existing_cache": true,
+      "first_middle_last_target_site_time_identity_passed": true,
+      "all_history_end_before_forecast_start": true,
+      "standardized_weather_all_finite": true,
+      "protocol": {
+        "version": "zeroshot_v1",
+        "protocol_origin": "project_fixed_v1",
+        "previous_name": null,
+        "window_pipeline": "fixed_v1",
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1",
+        "nwp_channels": 15,
+        "nwp_interpolation": "per_grid_bidirectional",
+        "sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "input_len": 24,
+        "output_len": 24,
+        "target_time_ranges": {
+          "train": [
+            "2021-01-02 00:00:00",
+            "2021-11-19 00:00:00"
+          ],
+          "validation": [
+            "2021-11-19 00:00:00",
+            "2022-03-06 00:00:00"
+          ],
+          "test": [
+            "2022-03-06 00:00:00",
+            "2022-06-21 00:00:00"
+          ]
+        },
+        "windows": {
+          "train": 76570,
+          "validation": 25450,
+          "test": 25450
+        },
+        "scaler_fit": {
+          "nwp": {
+            "feature_names": [
+              "Clear-sky direct solar radiation at surface",
+              "Direct solar radiation",
+              "Downward UV radiation at the surface",
+              "Surface solar radiation downwards",
+              "Surface net solar radiation",
+              "Surface pressure",
+              "Sunshine duration",
+              "Low cloud cover",
+              "Total cloud cover",
+              "2 metre temperature",
+              "2 metre dewpoint temperature",
+              "Skin temperature",
+              "Total precipitation",
+              "100 metre U wind component",
+              "100 metre V wind component"
+            ],
+            "fit_range": "2021-01-02 00:00:00..2021-11-18 23:00:00",
+            "fit_coordinates": [
+              [
+                15.0,
+                17.4
+              ],
+              [
+                15.1,
+                15.7
+              ],
+              [
+                15.1,
+                17.4
+              ],
+              [
+                15.1,
+                17.7
+              ],
+              [
+                15.2,
+                15.6
+              ],
+              [
+                15.2,
+                16.2
+              ],
+              [
+                15.2,
+                16.8
+              ],
+              [
+                15.2,
+                17.4
+              ]
+            ]
+          }
+        },
+        "data_interface": "tslib_four_sequences_plus_covariates_v1",
+        "label_len": 12,
+        "modalities": "power_nwp",
+        "calendar_features": [
+          "hour",
+          "dayofweek",
+          "day",
+          "dayofyear"
+        ],
+        "future_nwp_availability": "assumed available; issue time absent from CSV"
+      }
+    },
+    "val": {
+      "windows": 25450,
+      "shapes": {
+        "power": [
+          24,
+          1
+        ],
+        "targets": [
+          24,
+          1
+        ],
+        "history": [
+          24,
+          15
+        ],
+        "future": [
+          24,
+          15
+        ]
+      },
+      "protocol_and_scalers_exact_match_existing_cache": true,
+      "first_middle_last_target_site_time_identity_passed": true,
+      "all_history_end_before_forecast_start": true,
+      "standardized_weather_all_finite": true,
+      "protocol": {
+        "version": "zeroshot_v1",
+        "protocol_origin": "project_fixed_v1",
+        "previous_name": null,
+        "window_pipeline": "fixed_v1",
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1",
+        "nwp_channels": 15,
+        "nwp_interpolation": "per_grid_bidirectional",
+        "sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "input_len": 24,
+        "output_len": 24,
+        "target_time_ranges": {
+          "train": [
+            "2021-01-02 00:00:00",
+            "2021-11-19 00:00:00"
+          ],
+          "validation": [
+            "2021-11-19 00:00:00",
+            "2022-03-06 00:00:00"
+          ],
+          "test": [
+            "2022-03-06 00:00:00",
+            "2022-06-21 00:00:00"
+          ]
+        },
+        "windows": {
+          "train": 76570,
+          "validation": 25450,
+          "test": 25450
+        },
+        "scaler_fit": {
+          "nwp": {
+            "feature_names": [
+              "Clear-sky direct solar radiation at surface",
+              "Direct solar radiation",
+              "Downward UV radiation at the surface",
+              "Surface solar radiation downwards",
+              "Surface net solar radiation",
+              "Surface pressure",
+              "Sunshine duration",
+              "Low cloud cover",
+              "Total cloud cover",
+              "2 metre temperature",
+              "2 metre dewpoint temperature",
+              "Skin temperature",
+              "Total precipitation",
+              "100 metre U wind component",
+              "100 metre V wind component"
+            ],
+            "fit_range": "2021-01-02 00:00:00..2021-11-18 23:00:00",
+            "fit_coordinates": [
+              [
+                15.0,
+                17.4
+              ],
+              [
+                15.1,
+                15.7
+              ],
+              [
+                15.1,
+                17.4
+              ],
+              [
+                15.1,
+                17.7
+              ],
+              [
+                15.2,
+                15.6
+              ],
+              [
+                15.2,
+                16.2
+              ],
+              [
+                15.2,
+                16.8
+              ],
+              [
+                15.2,
+                17.4
+              ]
+            ]
+          }
+        },
+        "data_interface": "tslib_four_sequences_plus_covariates_v1",
+        "label_len": 12,
+        "modalities": "power_nwp",
+        "calendar_features": [
+          "hour",
+          "dayofweek",
+          "day",
+          "dayofyear"
+        ],
+        "future_nwp_availability": "assumed available; issue time absent from CSV"
+      }
+    },
+    "test": {
+      "windows": 25450,
+      "shapes": {
+        "power": [
+          24,
+          1
+        ],
+        "targets": [
+          24,
+          1
+        ],
+        "history": [
+          24,
+          15
+        ],
+        "future": [
+          24,
+          15
+        ]
+      },
+      "protocol_and_scalers_exact_match_existing_cache": true,
+      "first_middle_last_target_site_time_identity_passed": true,
+      "all_history_end_before_forecast_start": true,
+      "standardized_weather_all_finite": true,
+      "protocol": {
+        "version": "zeroshot_v1",
+        "protocol_origin": "project_fixed_v1",
+        "previous_name": null,
+        "window_pipeline": "fixed_v1",
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1",
+        "nwp_channels": 15,
+        "nwp_interpolation": "per_grid_bidirectional",
+        "sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "input_len": 24,
+        "output_len": 24,
+        "target_time_ranges": {
+          "train": [
+            "2021-01-02 00:00:00",
+            "2021-11-19 00:00:00"
+          ],
+          "validation": [
+            "2021-11-19 00:00:00",
+            "2022-03-06 00:00:00"
+          ],
+          "test": [
+            "2022-03-06 00:00:00",
+            "2022-06-21 00:00:00"
+          ]
+        },
+        "windows": {
+          "train": 76570,
+          "validation": 25450,
+          "test": 25450
+        },
+        "scaler_fit": {
+          "nwp": {
+            "feature_names": [
+              "Clear-sky direct solar radiation at surface",
+              "Direct solar radiation",
+              "Downward UV radiation at the surface",
+              "Surface solar radiation downwards",
+              "Surface net solar radiation",
+              "Surface pressure",
+              "Sunshine duration",
+              "Low cloud cover",
+              "Total cloud cover",
+              "2 metre temperature",
+              "2 metre dewpoint temperature",
+              "Skin temperature",
+              "Total precipitation",
+              "100 metre U wind component",
+              "100 metre V wind component"
+            ],
+            "fit_range": "2021-01-02 00:00:00..2021-11-18 23:00:00",
+            "fit_coordinates": [
+              [
+                15.0,
+                17.4
+              ],
+              [
+                15.1,
+                15.7
+              ],
+              [
+                15.1,
+                17.4
+              ],
+              [
+                15.1,
+                17.7
+              ],
+              [
+                15.2,
+                15.6
+              ],
+              [
+                15.2,
+                16.2
+              ],
+              [
+                15.2,
+                16.8
+              ],
+              [
+                15.2,
+                17.4
+              ]
+            ]
+          }
+        },
+        "data_interface": "tslib_four_sequences_plus_covariates_v1",
+        "label_len": 12,
+        "modalities": "power_nwp",
+        "calendar_features": [
+          "hour",
+          "dayofweek",
+          "day",
+          "dayofyear"
+        ],
+        "future_nwp_availability": "assumed available; issue time absent from CSV"
+      }
+    }
+  },
+  "nwp": {
+    "feature_names": [
+      "Clear-sky direct solar radiation at surface",
+      "Direct solar radiation",
+      "Downward UV radiation at the surface",
+      "Surface solar radiation downwards",
+      "Surface net solar radiation",
+      "Surface pressure",
+      "Sunshine duration",
+      "Low cloud cover",
+      "Total cloud cover",
+      "2 metre temperature",
+      "2 metre dewpoint temperature",
+      "Skin temperature",
+      "Total precipitation",
+      "100 metre U wind component",
+      "100 metre V wind component"
+    ],
+    "missing_counts": {
+      "Clear-sky direct solar radiation at surface": 0,
+      "Direct solar radiation": 0,
+      "Downward UV radiation at the surface": 0,
+      "Surface solar radiation downwards": 0,
+      "Surface net solar radiation": 0,
+      "Surface pressure": 0,
+      "Sunshine duration": 29,
+      "Low cloud cover": 0,
+      "Total cloud cover": 0,
+      "2 metre temperature": 0,
+      "2 metre dewpoint temperature": 0,
+      "Skin temperature": 0,
+      "Total precipitation": 0,
+      "100 metre U wind component": 0,
+      "100 metre V wind component": 0
+    },
+    "missing_source_rows_for_sites0_to19": 23,
+    "missing_by_site": {
+      "16": 7,
+      "17": 2,
+      "18": 10,
+      "19": 4
+    },
+    "missing_entries": [
+      {
+        "site": "19",
+        "fcst_date": "2021-03-14 10:00:00"
+      },
+      {
+        "site": "19",
+        "fcst_date": "2021-03-14 11:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2021-03-21 10:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2021-03-21 11:00:00"
+      },
+      {
+        "site": "17",
+        "fcst_date": "2021-06-20 09:00:00"
+      },
+      {
+        "site": "17",
+        "fcst_date": "2021-06-20 10:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2021-12-12 11:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2021-12-12 12:00:00"
+      },
+      {
+        "site": "16",
+        "fcst_date": "2022-01-14 12:00:00"
+      },
+      {
+        "site": "16",
+        "fcst_date": "2022-01-14 13:00:00"
+      },
+      {
+        "site": "16",
+        "fcst_date": "2022-01-14 14:00:00"
+      },
+      {
+        "site": "16",
+        "fcst_date": "2022-01-14 15:00:00"
+      },
+      {
+        "site": "16",
+        "fcst_date": "2022-01-14 16:00:00"
+      },
+      {
+        "site": "19",
+        "fcst_date": "2022-03-26 10:00:00"
+      },
+      {
+        "site": "19",
+        "fcst_date": "2022-03-26 11:00:00"
+      },
+      {
+        "site": "16",
+        "fcst_date": "2022-04-16 10:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2022-04-16 10:00:00"
+      },
+      {
+        "site": "16",
+        "fcst_date": "2022-04-16 11:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2022-04-16 11:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2022-05-30 09:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2022-05-30 10:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2022-06-01 09:00:00"
+      },
+      {
+        "site": "18",
+        "fcst_date": "2022-06-01 10:00:00"
+      }
+    ],
+    "interpolation_prefix_comparison": [
+      {
+        "lat": 15.2,
+        "lon": 15.4,
+        "time": "2021-03-03 12:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 15.4,
+        "time": "2021-03-03 13:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 15.6,
+        "time": "2021-06-20 09:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 15.6,
+        "time": "2021-06-20 10:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.2,
+        "time": "2022-01-14 12:00:00",
+        "full_grid_value": 0.9340277777777778,
+        "prefix_only_value": 1.0,
+        "same_value": false
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.2,
+        "time": "2022-01-14 13:00:00",
+        "full_grid_value": 0.8680555555555556,
+        "prefix_only_value": 1.0,
+        "same_value": false
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.2,
+        "time": "2022-01-14 14:00:00",
+        "full_grid_value": 0.8020833333333333,
+        "prefix_only_value": 1.0,
+        "same_value": false
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.2,
+        "time": "2022-01-14 15:00:00",
+        "full_grid_value": 0.7361111111111112,
+        "prefix_only_value": 1.0,
+        "same_value": false
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.2,
+        "time": "2022-01-14 16:00:00",
+        "full_grid_value": 0.6701388888888888,
+        "prefix_only_value": 1.0,
+        "same_value": false
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.2,
+        "time": "2022-04-16 10:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.2,
+        "time": "2022-04-16 11:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2021-03-21 10:00:00",
+        "full_grid_value": 1.0000231481481479,
+        "prefix_only_value": 1.000034722222222,
+        "same_value": false
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2021-03-21 11:00:00",
+        "full_grid_value": 1.000011574074074,
+        "prefix_only_value": 1.000034722222222,
+        "same_value": false
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2021-12-12 11:00:00",
+        "full_grid_value": 1.0000231481481479,
+        "prefix_only_value": 1.000034722222222,
+        "same_value": false
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2021-12-12 12:00:00",
+        "full_grid_value": 1.000011574074074,
+        "prefix_only_value": 1.000034722222222,
+        "same_value": false
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2022-04-16 10:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2022-04-16 11:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2022-05-30 09:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2022-05-30 10:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2022-06-01 09:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 16.8,
+        "time": "2022-06-01 10:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 17.3,
+        "time": "2021-11-29 11:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 17.3,
+        "time": "2021-11-29 12:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 17.4,
+        "time": "2021-03-14 10:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 17.4,
+        "time": "2021-03-14 11:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 17.4,
+        "time": "2022-03-26 10:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 15.2,
+        "lon": 17.4,
+        "time": "2022-03-26 11:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 16.2,
+        "lon": 17.6,
+        "time": "2021-06-12 10:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      },
+      {
+        "lat": 16.2,
+        "lon": 17.6,
+        "time": "2021-06-12 11:00:00",
+        "full_grid_value": 1.0,
+        "prefix_only_value": 1.0,
+        "same_value": true
+      }
+    ],
+    "masks": "NaN means missing at model entry; missing indicator=1; zero standardized NWP does NOT mean missing. Dataset interpolates original NaN away and does not expose an original missingness mask; actual accepted inputs finite, indicator all zero.",
+    "issue_time": "CSV only contains fcst_date; issue/availability time absent",
+    "restriction": "Preserving A02 input/protocol cannot establish strict online issuance-time availability; new branch can only establish historical indices and no future-power access"
+  },
+  "pcorr": {
+    "formula": "r_ij = cov(X_i,X_j)/(std(X_i)*std(X_j)); use power-reference last column excluding self",
+    "official": "corrcoef -> power correlations -> nan/inf to zero -> negative coefficients to zero -> Linear(C,4C,bias=False)-Sigmoid-Linear(4C,C,bias=False) -> repeat into CxC -> Linear(C^2,4C^2,bias=False)-Sigmoid-Linear(4C^2,C^2,bias=False)",
+    "discrepancy": "Local and pinned official nonlinear branch use flattened softmax over C*C entries then reshape; total matrix sums to 1 (not row-wise normalization). Raw negative correlations are clamped before nonlinear projection. Previous claim of returning the pre-softmax output was incorrect.",
+    "input_difference": "Paper uses a prior historical period to approximate future relations; MMSP current wrapper passes current historical NWP + correlation_history power + current power. It does not provide a prior-period NWP block to P-Corr.",
+    "applicability": "Use idea of sample-specific history relationship, not module copy. Short 24-hour windows contain night/constant/low-variance sequences and irradiance daily cycles. Preserve signed correlations, track valid counts/low-variance validity, do not claim causal importance or replication of original P-Corr.",
+    "official_pinned_source": "https://raw.githubusercontent.com/ZjuMachine/PV-power/bfd6bd5080ee33f2fff0395fd0c394c9ab8fcb2a/models/Cross_Unet.py",
+    "actual_usage_evidence": "/home/zhaopp/workspace/PV-TSFM/reports/CrossUnet_two_protocols_seed42_20261010/pcorr_usage_check_20261012.json"
+  },
+  "proposed_a03": {
+    "status": "design_only_not_implemented",
+    "a": "Masked mean, population std and observed fraction for history power/weather; small MLP conditions future weather embedding",
+    "b": "Pairwise-valid signed weather-power Pearson coefficients plus validity/count information; small MLP conditions future weather embedding; no future power",
+    "c": "Small per-hour relation MLP over history power/weather and validity; masked pooling then interaction with future weather embedding; no large Transformer",
+    "independence": "Three separate extensions of A02, no stacking of statistics/correlation/learnable branches",
+    "budget_recommendation": "Reinitialize A02 trainable Weather Adapter from seed42 for each version, train Weather Adapter+new relation under identical max100/patience10 budget; freeze and reuse accepted A01. This avoids giving A03 an extra training stage on top of fitted A02.",
+    "initialization_interpretation": "Match freshly initialized A02 at epoch0 (both equal A01); fitted A02 checkpoint remains evaluation reference. Warm-starting fitted A02 would be a different cumulative training budget and must be declared separately.",
+    "parameter_comparison": "Report new parameters and total trainable parameters per version; no parameter-matched experiment automatically started",
+    "planned_evaluation": "Full MAE/RMSE/global R2, each horizon MAE/RMSE, worst10% window by window RMSE and common A02 worst10% subset; weather-change intensity=mean absolute consecutive forecast-NWP differences in train-standardized units, thresholds from training windows only; report A02 relative MAE/RMSE improvement and absolute R2 change"
+  },
+  "protocol_decision": {
+    "user_instruction": "保持 A02 协议并记录限制，继续 A03",
+    "recorded_at": "2026-10-12T21:46:57.263223+08:00",
+    "strict_online_issuance_availability_claimed": false
+  },
+  "review_corrections": [
+    {
+      "at": "2026-10-12T22:19:51.769332+08:00",
+      "previous_claim": "Nonlinear source branch computes flattened softmax but returns pre-softmax output; paper describes softmax normalization and negative masking after mapping; source masks raw negative correlation before mapping",
+      "correction": "Previous softmax-unused claim was a review error. Local code and official pinned bfd6bd5080ee33f2fff0395fd0c394c9ab8fcb2a both return output_reshaped after flattened softmax. Original local source SHA matches this review, so no model change occurred.",
+      "evidence": "/home/zhaopp/workspace/PV-TSFM/reports/CrossUnet_two_protocols_seed42_20261010/pcorr_usage_check_20261012.json",
+      "A03_code_results_unchanged": true
+    }
+  ]
+}

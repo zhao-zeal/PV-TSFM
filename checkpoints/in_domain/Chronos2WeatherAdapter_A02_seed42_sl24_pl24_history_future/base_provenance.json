@@ -1,0 +1,10 @@
+{
+  "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+  "checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+  "base_version": "b131_linear_v1",
+  "base_best_epoch": 40,
+  "base_experiment_label": "A01",
+  "historical_name": "E11",
+  "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+  "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+}

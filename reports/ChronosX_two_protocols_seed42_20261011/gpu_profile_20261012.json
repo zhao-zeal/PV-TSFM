@@ -1,0 +1,537 @@
+{
+  "diagnostic_only": true,
+  "formal_training_complete": false,
+  "gpu": 0,
+  "cpu_cores": [
+    9,
+    10
+  ],
+  "threads": 2,
+  "num_workers": 0,
+  "measured_at": "2026-10-12T13:34:18.024682+08:00",
+  "trials": [
+    {
+      "batch_size": 32,
+      "precision": "fp32",
+      "accumulation": 2,
+      "effective_batch_size": 64,
+      "seconds": 15.017478005960584,
+      "windows": 11232,
+      "windows_per_second": 747.9285133989815,
+      "mean_gpu_utilization": 29.714285714285715,
+      "peak_gpu_utilization": 34,
+      "peak_allocated_mib": 764.1435546875,
+      "first_loss": 4.017162322998047,
+      "last_loss": 2.7016711235046387,
+      "samples": [
+        {
+          "timestamp": 1791782993.1240258,
+          "gpu_utilization": 0,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791782994.2148342,
+          "gpu_utilization": 33,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791782995.3020065,
+          "gpu_utilization": 32,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791782996.3872852,
+          "gpu_utilization": 32,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791782997.4752483,
+          "gpu_utilization": 29,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791782998.5610156,
+          "gpu_utilization": 32,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791782999.6449983,
+          "gpu_utilization": 33,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791783000.7270389,
+          "gpu_utilization": 29,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791783001.8290424,
+          "gpu_utilization": 32,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791783002.9115057,
+          "gpu_utilization": 31,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791783003.9950006,
+          "gpu_utilization": 32,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791783005.0890028,
+          "gpu_utilization": 33,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791783006.1735985,
+          "gpu_utilization": 34,
+          "memory_mib": 1261
+        },
+        {
+          "timestamp": 1791783007.2590015,
+          "gpu_utilization": 34,
+          "memory_mib": 1261
+        }
+      ]
+    },
+    {
+      "batch_size": 64,
+      "precision": "bf16",
+      "accumulation": 1,
+      "effective_batch_size": 64,
+      "seconds": 15.011229673400521,
+      "windows": 17152,
+      "windows_per_second": 1142.61125658432,
+      "mean_gpu_utilization": 16.928571428571427,
+      "peak_gpu_utilization": 20,
+      "peak_allocated_mib": 1012.20849609375,
+      "first_loss": 3.453425168991089,
+      "last_loss": 2.50754976272583,
+      "samples": [
+        {
+          "timestamp": 1791783008.5432856,
+          "gpu_utilization": 4,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783009.6362062,
+          "gpu_utilization": 17,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783010.7253282,
+          "gpu_utilization": 18,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783011.8120065,
+          "gpu_utilization": 16,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783012.89413,
+          "gpu_utilization": 18,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783014.001041,
+          "gpu_utilization": 16,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783015.0860019,
+          "gpu_utilization": 17,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783016.1730077,
+          "gpu_utilization": 18,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783017.253019,
+          "gpu_utilization": 17,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783018.3421233,
+          "gpu_utilization": 20,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783019.4271524,
+          "gpu_utilization": 17,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783020.516007,
+          "gpu_utilization": 20,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783021.6030047,
+          "gpu_utilization": 20,
+          "memory_mib": 1539
+        },
+        {
+          "timestamp": 1791783022.6950107,
+          "gpu_utilization": 19,
+          "memory_mib": 1539
+        }
+      ]
+    },
+    {
+      "batch_size": 128,
+      "precision": "bf16",
+      "accumulation": 1,
+      "effective_batch_size": 128,
+      "seconds": 15.018837275914848,
+      "windows": 26880,
+      "windows_per_second": 1789.7523960197943,
+      "mean_gpu_utilization": 21.071428571428573,
+      "peak_gpu_utilization": 28,
+      "peak_allocated_mib": 1521.64404296875,
+      "first_loss": 3.9311976432800293,
+      "last_loss": 2.731571674346924,
+      "samples": [
+        {
+          "timestamp": 1791783023.8745928,
+          "gpu_utilization": 20,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783024.972997,
+          "gpu_utilization": 16,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783026.056937,
+          "gpu_utilization": 25,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783027.141464,
+          "gpu_utilization": 28,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783028.2477417,
+          "gpu_utilization": 22,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783029.3330014,
+          "gpu_utilization": 19,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783030.4160125,
+          "gpu_utilization": 19,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783031.4993935,
+          "gpu_utilization": 16,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783032.585593,
+          "gpu_utilization": 19,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783033.668506,
+          "gpu_utilization": 23,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783034.7610993,
+          "gpu_utilization": 28,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783035.849314,
+          "gpu_utilization": 22,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783036.9370017,
+          "gpu_utilization": 16,
+          "memory_mib": 2079
+        },
+        {
+          "timestamp": 1791783038.0220246,
+          "gpu_utilization": 22,
+          "memory_mib": 2079
+        }
+      ]
+    },
+    {
+      "batch_size": 256,
+      "precision": "bf16",
+      "accumulation": 1,
+      "effective_batch_size": 256,
+      "seconds": 15.090223021805286,
+      "windows": 37888,
+      "windows_per_second": 2510.7647478272556,
+      "mean_gpu_utilization": 28.642857142857142,
+      "peak_gpu_utilization": 30,
+      "peak_allocated_mib": 2500.27001953125,
+      "first_loss": 3.4990458488464355,
+      "last_loss": 2.611189126968384,
+      "samples": [
+        {
+          "timestamp": 1791783039.501997,
+          "gpu_utilization": 29,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783040.5942936,
+          "gpu_utilization": 29,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783041.6790059,
+          "gpu_utilization": 28,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783042.765032,
+          "gpu_utilization": 29,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783043.8469648,
+          "gpu_utilization": 30,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783044.9315255,
+          "gpu_utilization": 29,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783046.0190182,
+          "gpu_utilization": 29,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783047.1074705,
+          "gpu_utilization": 28,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783048.1883667,
+          "gpu_utilization": 28,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783049.2740066,
+          "gpu_utilization": 29,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783050.3610086,
+          "gpu_utilization": 29,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783051.454009,
+          "gpu_utilization": 28,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783052.536313,
+          "gpu_utilization": 28,
+          "memory_mib": 2985
+        },
+        {
+          "timestamp": 1791783053.6218793,
+          "gpu_utilization": 28,
+          "memory_mib": 2985
+        }
+      ]
+    },
+    {
+      "batch_size": 512,
+      "precision": "fp32",
+      "accumulation": 1,
+      "effective_batch_size": 512,
+      "seconds": 15.101273348554969,
+      "windows": 36864,
+      "windows_per_second": 2441.1186493440628,
+      "mean_gpu_utilization": 82.5,
+      "peak_gpu_utilization": 100,
+      "peak_allocated_mib": 5841.71728515625,
+      "first_loss": 4.152183532714844,
+      "last_loss": 2.645163059234619,
+      "samples": [
+        {
+          "timestamp": 1791783085.5478933,
+          "gpu_utilization": 100,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783086.630728,
+          "gpu_utilization": 100,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783087.7190797,
+          "gpu_utilization": 100,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783088.8040023,
+          "gpu_utilization": 100,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783089.893454,
+          "gpu_utilization": 100,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783090.9770935,
+          "gpu_utilization": 71,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783092.0660112,
+          "gpu_utilization": 89,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783093.1592388,
+          "gpu_utilization": 100,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783094.2510014,
+          "gpu_utilization": 100,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783095.3331728,
+          "gpu_utilization": 63,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783096.4200468,
+          "gpu_utilization": 65,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783097.5062203,
+          "gpu_utilization": 49,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783098.6049986,
+          "gpu_utilization": 59,
+          "memory_mib": 6437
+        },
+        {
+          "timestamp": 1791783099.6910026,
+          "gpu_utilization": 59,
+          "memory_mib": 6437
+        }
+      ]
+    },
+    {
+      "batch_size": 1024,
+      "precision": "bf16",
+      "accumulation": 1,
+      "effective_batch_size": 1024,
+      "seconds": 15.16460325755179,
+      "windows": 47104,
+      "windows_per_second": 3106.18083440744,
+      "mean_gpu_utilization": 79.64285714285714,
+      "peak_gpu_utilization": 100,
+      "peak_allocated_mib": 8358.38134765625,
+      "first_loss": 3.8232133388519287,
+      "last_loss": 2.675475597381592,
+      "samples": [
+        {
+          "timestamp": 1791783102.3588657,
+          "gpu_utilization": 97,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783103.505608,
+          "gpu_utilization": 92,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783104.589691,
+          "gpu_utilization": 39,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783105.6712291,
+          "gpu_utilization": 100,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783106.7511468,
+          "gpu_utilization": 73,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783107.8400335,
+          "gpu_utilization": 100,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783108.9261088,
+          "gpu_utilization": 59,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783110.008199,
+          "gpu_utilization": 100,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783111.0930023,
+          "gpu_utilization": 83,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783112.1829996,
+          "gpu_utilization": 100,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783113.270405,
+          "gpu_utilization": 80,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783114.3580203,
+          "gpu_utilization": 84,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783115.444998,
+          "gpu_utilization": 21,
+          "memory_mib": 8905
+        },
+        {
+          "timestamp": 1791783116.5341444,
+          "gpu_utilization": 87,
+          "memory_mib": 9307
+        }
+      ]
+    }
+  ],
+  "selection": "batch1024/BF16/accumulation1 by measured throughput; preliminary candidate only",
+  "limitations": [
+    "15-second measurements, not full epoch speed or accuracy results",
+    "Effective batch changes from64 to1024; random masks/dropout and optimization trajectory differ",
+    "No confirmation of overriding the previous99% stop condition yet",
+    "GPU0 now occupied by another user; no idle GPU currently"
+  ]
+}

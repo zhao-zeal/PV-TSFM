@@ -1,0 +1,710 @@
+{
+  "dataset": "MMSP",
+  "seed": 42,
+  "seq_len": 24,
+  "pred_len": 24,
+  "selected_versions": [
+    "b131_linear_v1",
+    "b131_mlp63_v1"
+  ],
+  "selection_basis": "lowest historical seed42 validation MAE among audited pure frozen Chronos-2 adapter candidates; E12=0.03917863858732398, E11=0.03930646954393255; test metrics not used for selection",
+  "user_authorization": "Keep unified PV-TSFM input; retrain both protocols. Old checkpoints only historical references.",
+  "protocol_audit": {
+    "train_validation_test_power_site_time_alignment": {
+      "train": 76570,
+      "validation": 25450,
+      "test": 25450
+    },
+    "all_power_contexts_targets_site_ids_forecast_times_match": true,
+    "old_nwp": "raw physical values, alphabetically sorted variable names",
+    "current_nwp": "train-sites/time StandardScaler, Dataset_MMSP feature order",
+    "checkpoint_reuse_for_formal_results": false,
+    "new_feature_cache_required": true
+  },
+  "migration_forward_checks": [
+    {
+      "version": "b131_linear_v1",
+      "source_checkpoint": "/home/zhaopp/workspace/FusionSF/outputs/pv_linear_residual_readout/20260926_v1/E11_seed42/best_checkpoint.pt",
+      "historical_forward_max_absolute_difference": 4.76837158203125e-07,
+      "sample_indices": [
+        0,
+        1,
+        123,
+        2544,
+        10000,
+        20000,
+        25449
+      ],
+      "verification_scope": "selected historical cached samples only; not a current-protocol full evaluation"
+    },
+    {
+      "version": "b131_mlp63_v1",
+      "source_checkpoint": "/home/zhaopp/workspace/FusionSF/outputs/e12_nonlinear_readout/20260926_v1/seed42/best_checkpoint.pt",
+      "historical_forward_max_absolute_difference": 4.76837158203125e-07,
+      "sample_indices": [
+        0,
+        1,
+        123,
+        2544,
+        10000,
+        20000,
+        25449
+      ],
+      "verification_scope": "selected historical cached samples only; not a current-protocol full evaluation"
+    }
+  ],
+  "runs": [
+    {
+      "protocol": "zeroshot_v1",
+      "gpu": 0,
+      "cpu_cores": "9,10",
+      "launcher_pid": 3350807,
+      "command": [
+        "taskset",
+        "-c",
+        "9,10",
+        "/home/zhaopp/miniconda3/envs/torch/bin/python",
+        "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_adapters.py",
+        "--protocol",
+        "zeroshot_v1",
+        "--gpu",
+        "0"
+      ],
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/zeroshot_v1_launcher.log",
+      "status": "completed_artifact_acceptance_passed",
+      "protocol_run_record": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/zeroshot_v1/runs.json"
+    },
+    {
+      "protocol": "in_domain",
+      "gpu": 3,
+      "cpu_cores": "0,7",
+      "launcher_pid": 3350808,
+      "command": [
+        "taskset",
+        "-c",
+        "0,7",
+        "/home/zhaopp/miniconda3/envs/torch/bin/python",
+        "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_adapters.py",
+        "--protocol",
+        "in_domain",
+        "--gpu",
+        "3"
+      ],
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/in_domain_launcher.log",
+      "status": "completed_artifact_acceptance_passed",
+      "protocol_run_record": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/in_domain/runs.json"
+    }
+  ],
+  "status": "all_four_completed_artifact_acceptance_passed",
+  "new_current_protocol_metrics": null,
+  "version_registry": [
+    {
+      "adapter_version": "b131_linear_v1",
+      "display_name": "Chronos-2 + B131 + Linear Residual v1",
+      "historical_name": "E11",
+      "architecture": "Frozen Chronos-2 -> LayerNorm-Linear(768,131)-GELU-Linear(131,768) residual (alpha) -> frozen native median head; add Linear(1536,24) on adapted tokens after inverse normalization",
+      "cumulative_learned_parameters": 240540,
+      "stage2_trainable_parameters": 36888,
+      "stage1_lr": 0.0016,
+      "stage2_lr": 1.6e-05,
+      "historical_source": "/home/zhaopp/workspace/FusionSF/outputs/pv_linear_residual_readout/20260926_v1/E11_seed42",
+      "experiment_label": "A01"
+    },
+    {
+      "adapter_version": "b131_mlp63_v1",
+      "display_name": "Chronos-2 + B131 + MLP63 Residual v1",
+      "historical_name": "E12",
+      "architecture": "Same frozen B131 stage; add Linear(1536,63)-GELU-Linear(63,24) after inverse normalization",
+      "cumulative_learned_parameters": 302019,
+      "stage2_trainable_parameters": 98367,
+      "stage1_lr": 0.0016,
+      "stage2_lr": 1.6e-05,
+      "historical_source": "/home/zhaopp/workspace/FusionSF/outputs/e12_nonlinear_readout/20260926_v1/seed42"
+    }
+  ],
+  "naming_rule": "adapter_version fixes architecture; input/protocol/seed/24->24 recorded separately. Architecture changes increment vN; tuning alone does not create a new architecture. B131_v1 is a shared stage-1 dependency, not an extra selected baseline. Historical E11/E12 aliases retained.",
+  "training_settings": {
+    "loss": "L1 mean over all B*24 values",
+    "optimizer": "AdamW",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "weight_decay": 0.05,
+    "batch_size": 512,
+    "eval_batch_size": 1024,
+    "max_epochs_per_stage": 100,
+    "patience": 10,
+    "selection": "validation MAE",
+    "scheduler": null,
+    "precision": "FP32",
+    "cache_batch_size": 64,
+    "source_input": "Dataset_MMSP power + train-standardized historical/future 15-variable NWP",
+    "old_checkpoint_used_as_initialization": false,
+    "seeds": [
+      42
+    ]
+  },
+  "implementation_files": [
+    "layers/chronos2_adapter.py",
+    "models/Chronos2Adapter.py",
+    "exp/exp_chronos2_adapter.py",
+    "scripts/run_chronos2_adapters.py",
+    "exp/exp_basic.py",
+    "run.py"
+  ],
+  "historical_metrics": {
+    "b131_linear_v1": {
+      "mae": 0.0439181800058514,
+      "rmse": 0.09502998487782226,
+      "r2": 0.8519137982798339
+    },
+    "b131_mlp63_v1": {
+      "mae": 0.043955313248859464,
+      "rmse": 0.09518490900127535,
+      "r2": 0.8514305649949694
+    }
+  },
+  "comparison_limit": "Historical raw-NWP results have different inputs; no formal absolute/relative improvement claims against current standardized-NWP experiments.",
+  "current_input_native_pipeline_checks": [
+    {
+      "protocol": "in_domain",
+      "sample_indices": [
+        0,
+        2545,
+        25449
+      ],
+      "official_native_pipeline_max_absolute_difference": 5.960464477539063e-08,
+      "verification_scope": "three real standardized-NWP samples, no training or full performance evaluation"
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "sample_indices": [
+        0,
+        2545,
+        25449
+      ],
+      "official_native_pipeline_max_absolute_difference": 5.960464477539063e-08,
+      "verification_scope": "three real standardized-NWP samples, no training or full performance evaluation"
+    }
+  ],
+  "hardware_prelaunch_evidence": {
+    "TimeXer_original_pids": [
+      3313923,
+      3313957
+    ],
+    "TimeXer_pids_absent_before_launch": true,
+    "TimeXer_complete_test_log_times": {
+      "in_domain": "2026-10-11 04:05:32",
+      "zeroshot_v1": "2026-10-11 04:05:01"
+    },
+    "adapter_selected_gpu_memory_before_launch_mib": {
+      "0": 18,
+      "3": 18
+    },
+    "adapter_selected_gpu_utilization_before_launch_percent": {
+      "0": 0,
+      "3": 0
+    },
+    "TimeXer_acceptance_status": "not audited by this adapter task",
+    "TimeXer_processes_interrupted": false
+  },
+  "acceptance": {
+    "status": "passed_full_training_test_artifact_acceptance",
+    "checked_at": "2026-10-11T05:07:18+08:00",
+    "runs": [
+      {
+        "protocol": "in_domain",
+        "adapter_version": "b131_linear_v1",
+        "status": "passed_full_training_test_artifact_acceptance",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04401706616849049,
+          "rmse": 0.09593709343015254,
+          "r2": 0.8490731920255923,
+          "model": "Chronos2Adapter",
+          "seed": 42,
+          "data_protocol": "in_domain",
+          "baseline_config": "migrated_adapter",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "validation_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "base_best_epoch": 9,
+        "readout_training_summary": {
+          "stage": "b131_linear_v1",
+          "completed_epochs": 50,
+          "best_epoch": 40,
+          "best_validation_metrics": {
+            "mae": 0.040173460402256285,
+            "rmse": 0.09406747618084306,
+            "mse": 0.008848690075033475
+          },
+          "stop_reason": "patience",
+          "learning_rate": 1.6e-05,
+          "optimizer": "AdamW",
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "weight_decay": 0.05,
+          "loss": "L1",
+          "scheduler": null,
+          "trainable_parameters": 36888
+        },
+        "checkpoint_sample_prediction_max_absolute_difference": 4.172325134277344e-07,
+        "all_test_labels_indices_match_current_protocol": true,
+        "base_weights_exactly_equal_reused_current_protocol_B131": true,
+        "full_metric_recomputation_max_difference": 0.0,
+        "comparison_to_frozen_Chronos2_history_future_same_protocol": {
+          "mae": {
+            "absolute_change": -0.01689247460077882,
+            "relative_change_percent": -27.733708689036085
+          },
+          "rmse": {
+            "absolute_change": -0.021834097533793076,
+            "relative_change_percent": -18.53942153007296
+          },
+          "r2": {
+            "absolute_change": 0.07651558052042073,
+            "relative_change_percent": 9.904190882456737
+          }
+        },
+        "baseline_source": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2_two_protocols_seed42_20261011/runs.json",
+        "prediction_range": [
+          -0.038922134786844254,
+          1.8095957040786743
+        ],
+        "negative_prediction_fraction": 0.25633431565160447,
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "stage1_checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_B131_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "training_history_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/training_history.csv",
+        "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future",
+        "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/metrics.json",
+        "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/run.log",
+        "features_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2Adapter_features_v1_seed42_sl24_pl24_history_future"
+      },
+      {
+        "protocol": "in_domain",
+        "adapter_version": "b131_mlp63_v1",
+        "status": "passed_full_training_test_artifact_acceptance",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04407164768134658,
+          "rmse": 0.09643186588862329,
+          "r2": 0.8475124404363144,
+          "model": "Chronos2Adapter",
+          "seed": 42,
+          "data_protocol": "in_domain",
+          "baseline_config": "migrated_adapter",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "validation_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "base_best_epoch": 9,
+        "readout_training_summary": {
+          "stage": "b131_mlp63_v1",
+          "completed_epochs": 59,
+          "best_epoch": 49,
+          "best_validation_metrics": {
+            "mae": 0.039953893357322065,
+            "rmse": 0.09413539270368596,
+            "mse": 0.00886147215947717
+          },
+          "stop_reason": "patience",
+          "learning_rate": 1.6e-05,
+          "optimizer": "AdamW",
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "weight_decay": 0.05,
+          "loss": "L1",
+          "scheduler": null,
+          "trainable_parameters": 98367
+        },
+        "checkpoint_sample_prediction_max_absolute_difference": 4.172325134277344e-07,
+        "all_test_labels_indices_match_current_protocol": true,
+        "base_weights_exactly_equal_reused_current_protocol_B131": true,
+        "full_metric_recomputation_max_difference": 0.0,
+        "comparison_to_frozen_Chronos2_history_future_same_protocol": {
+          "mae": {
+            "absolute_change": -0.01683789308792273,
+            "relative_change_percent": -27.644097911862687
+          },
+          "rmse": {
+            "absolute_change": -0.021339325075322324,
+            "relative_change_percent": -18.119308211678973
+          },
+          "r2": {
+            "absolute_change": 0.0749548289311428,
+            "relative_change_percent": 9.702166908317498
+          }
+        },
+        "baseline_source": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2_two_protocols_seed42_20261011/runs.json",
+        "prediction_range": [
+          -0.034105148166418076,
+          1.9056392908096313
+        ],
+        "negative_prediction_fraction": 0.23870661427635886,
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "stage1_checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_B131_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "training_history_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future/training_history.csv",
+        "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future",
+        "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future/metrics.json",
+        "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future/run.log",
+        "features_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2Adapter_features_v1_seed42_sl24_pl24_history_future"
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "adapter_version": "b131_linear_v1",
+        "status": "passed_full_training_test_artifact_acceptance",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04407631110596827,
+          "rmse": 0.09407195268198179,
+          "r2": 0.8548845705174491,
+          "model": "Chronos2Adapter",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "migrated_adapter",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "base_best_epoch": 6,
+        "readout_training_summary": {
+          "stage": "b131_linear_v1",
+          "completed_epochs": 56,
+          "best_epoch": 46,
+          "best_validation_metrics": {
+            "mae": 0.03902923318701651,
+            "rmse": 0.09107973958792531,
+            "mse": 0.00829551896340429
+          },
+          "stop_reason": "patience",
+          "learning_rate": 1.6e-05,
+          "optimizer": "AdamW",
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "weight_decay": 0.05,
+          "loss": "L1",
+          "scheduler": null,
+          "trainable_parameters": 36888
+        },
+        "checkpoint_sample_prediction_max_absolute_difference": 4.172325134277344e-07,
+        "all_test_labels_indices_match_current_protocol": true,
+        "base_weights_exactly_equal_reused_current_protocol_B131": true,
+        "full_metric_recomputation_max_difference": 0.0,
+        "comparison_to_frozen_Chronos2_history_future_same_protocol": {
+          "mae": {
+            "absolute_change": -0.016976033672002358,
+            "relative_change_percent": -27.805703013928763
+          },
+          "rmse": {
+            "absolute_change": -0.02382534691146873,
+            "relative_change_percent": -20.208560326340407
+          },
+          "r2": {
+            "absolute_change": 0.08281430747431429,
+            "relative_change_percent": 10.726265657208394
+          }
+        },
+        "baseline_source": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2_two_protocols_seed42_20261011/runs.json",
+        "prediction_range": [
+          -0.03664519265294075,
+          1.4362552165985107
+        ],
+        "negative_prediction_fraction": 0.24432383759004583,
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "stage1_checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_B131_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "training_history_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/training_history.csv",
+        "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future",
+        "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/metrics.json",
+        "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/run.log",
+        "features_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2Adapter_features_v1_seed42_sl24_pl24_history_future"
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "adapter_version": "b131_mlp63_v1",
+        "status": "passed_full_training_test_artifact_acceptance",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04400053216680704,
+          "rmse": 0.09418294033132274,
+          "r2": 0.8545419493425536,
+          "model": "Chronos2Adapter",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "migrated_adapter",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "base_best_epoch": 6,
+        "readout_training_summary": {
+          "stage": "b131_mlp63_v1",
+          "completed_epochs": 73,
+          "best_epoch": 63,
+          "best_validation_metrics": {
+            "mae": 0.038873812873663434,
+            "rmse": 0.09096337807288206,
+            "mse": 0.00827433615043008
+          },
+          "stop_reason": "patience",
+          "learning_rate": 1.6e-05,
+          "optimizer": "AdamW",
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "weight_decay": 0.05,
+          "loss": "L1",
+          "scheduler": null,
+          "trainable_parameters": 98367
+        },
+        "checkpoint_sample_prediction_max_absolute_difference": 4.172325134277344e-07,
+        "all_test_labels_indices_match_current_protocol": true,
+        "base_weights_exactly_equal_reused_current_protocol_B131": true,
+        "full_metric_recomputation_max_difference": 0.0,
+        "comparison_to_frozen_Chronos2_history_future_same_protocol": {
+          "mae": {
+            "absolute_change": -0.017051812611163585,
+            "relative_change_percent": -27.929824273213416
+          },
+          "rmse": {
+            "absolute_change": -0.023714359262127782,
+            "relative_change_percent": -20.114421062995387
+          },
+          "r2": {
+            "absolute_change": 0.0824716862994187,
+            "relative_change_percent": 10.681888714940841
+          }
+        },
+        "baseline_source": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2_two_protocols_seed42_20261011/runs.json",
+        "prediction_range": [
+          -0.029884878545999527,
+          1.538772463798523
+        ],
+        "negative_prediction_fraction": 0.2315684348395547,
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "stage1_checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_B131_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "training_history_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future/training_history.csv",
+        "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future",
+        "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future/metrics.json",
+        "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2Adapter_b131_mlp63_v1_seed42_sl24_pl24_history_future/run.log",
+        "features_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2Adapter_features_v1_seed42_sl24_pl24_history_future"
+      }
+    ],
+    "feature_cache_checks": [
+      {
+        "protocol": "in_domain",
+        "split": "train",
+        "windows": 76570,
+        "all_targets_sites_timestamps_match_raw_protocol": true,
+        "all_features_loc_scale_finite": true,
+        "scaler_matches_accepted_reference": true
+      },
+      {
+        "protocol": "in_domain",
+        "split": "validation",
+        "windows": 25450,
+        "all_targets_sites_timestamps_match_raw_protocol": true,
+        "all_features_loc_scale_finite": true,
+        "scaler_matches_accepted_reference": true
+      },
+      {
+        "protocol": "in_domain",
+        "split": "test",
+        "windows": 25450,
+        "all_targets_sites_timestamps_match_raw_protocol": true,
+        "all_features_loc_scale_finite": true,
+        "scaler_matches_accepted_reference": true
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "split": "train",
+        "windows": 76570,
+        "all_targets_sites_timestamps_match_raw_protocol": true,
+        "all_features_loc_scale_finite": true,
+        "scaler_matches_accepted_reference": true
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "split": "validation",
+        "windows": 25450,
+        "all_targets_sites_timestamps_match_raw_protocol": true,
+        "all_features_loc_scale_finite": true,
+        "scaler_matches_accepted_reference": true
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "split": "test",
+        "windows": 25450,
+        "all_targets_sites_timestamps_match_raw_protocol": true,
+        "all_features_loc_scale_finite": true,
+        "scaler_matches_accepted_reference": true
+      }
+    ],
+    "all_four_runs_complete": true,
+    "user_acceptance": "pending",
+    "new_experiment_during_acceptance": false,
+    "new_full_inference_during_acceptance": false
+  },
+  "gpu_processes_observed_exited": true,
+  "reindexing_authorization_20261012": "User chose A01 for E11, A02 for the new Weather Adapter; historical identities/artifacts unchanged"
+}

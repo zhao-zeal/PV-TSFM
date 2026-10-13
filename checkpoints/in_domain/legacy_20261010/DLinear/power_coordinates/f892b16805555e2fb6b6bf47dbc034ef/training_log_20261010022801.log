@@ -1,0 +1,134 @@
+2026-10-10 02:28:01,338 - BasicTS-training - INFO - Initializing training.
+2026-10-10 02:28:01,338 - BasicTS-training - INFO - Building train data loader.
+2026-10-10 02:28:03,155 - BasicTS-training - INFO - Set optim: AdamW
+2026-10-10 02:28:03,155 - BasicTS-training - INFO - Set lr_scheduler: ReduceLROnPlateau
+2026-10-10 02:28:03,156 - BasicTS-training - INFO - Building val data loader.
+2026-10-10 02:28:03,156 - BasicTS-training - INFO - Building test data loader.
+2026-10-10 02:28:03,157 - BasicTS-training - INFO - Total parameters: 1200
+2026-10-10 02:28:03,157 - BasicTS-training - INFO - Trainable parameters: 1200
+2026-10-10 02:28:03,157 - BasicTS-training - INFO - Use early stopping with patience 10.
+2026-10-10 02:28:03,159 - BasicTS-training - INFO - Epoch 1 / 50
+2026-10-10 02:28:09,045 - BasicTS-training - INFO - Result <train>: [train/time: 5.89 (s), train/lr: 1.60e-03, train/loss: 0.0183, train/MAE: 0.0849, train/RMSE: 0.1352]
+2026-10-10 02:28:09,047 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:28:10,653 - BasicTS-training - INFO - Result <val>: [val/time: 1.61 (s), val/loss: 0.0135, val/MAE: 0.0766, val/RMSE: 0.1160]
+2026-10-10 02:28:10,658 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_best_val_MAE.pt saved
+2026-10-10 02:28:10,659 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_01.pt saved
+2026-10-10 02:28:10,659 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:17
+2026-10-10 02:28:10,659 - BasicTS-training - INFO - Epoch 2 / 50
+2026-10-10 02:28:17,122 - BasicTS-training - INFO - Result <train>: [train/time: 6.46 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:28:17,123 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:28:18,714 - BasicTS-training - INFO - Result <val>: [val/time: 1.59 (s), val/loss: 0.0134, val/MAE: 0.0762, val/RMSE: 0.1157]
+2026-10-10 02:28:18,717 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_best_val_MAE.pt saved
+2026-10-10 02:28:18,718 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_02.pt saved
+2026-10-10 02:28:18,718 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:31
+2026-10-10 02:28:18,718 - BasicTS-training - INFO - Epoch 3 / 50
+2026-10-10 02:28:24,923 - BasicTS-training - INFO - Result <train>: [train/time: 6.20 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:28:24,924 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:28:26,613 - BasicTS-training - INFO - Result <val>: [val/time: 1.69 (s), val/loss: 0.0133, val/MAE: 0.0751, val/RMSE: 0.1152]
+2026-10-10 02:28:26,616 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_best_val_MAE.pt saved
+2026-10-10 02:28:26,617 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_03.pt saved
+2026-10-10 02:28:26,617 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:34
+2026-10-10 02:28:26,617 - BasicTS-training - INFO - Epoch 4 / 50
+2026-10-10 02:28:32,713 - BasicTS-training - INFO - Result <train>: [train/time: 6.10 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:28:32,714 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:28:34,384 - BasicTS-training - INFO - Result <val>: [val/time: 1.67 (s), val/loss: 0.0134, val/MAE: 0.0756, val/RMSE: 0.1156]
+2026-10-10 02:28:34,387 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_04.pt saved
+2026-10-10 02:28:34,387 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:33
+2026-10-10 02:28:34,387 - BasicTS-training - INFO - Epoch 5 / 50
+2026-10-10 02:28:40,584 - BasicTS-training - INFO - Result <train>: [train/time: 6.20 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:28:40,586 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:28:42,180 - BasicTS-training - INFO - Result <val>: [val/time: 1.59 (s), val/loss: 0.0134, val/MAE: 0.0762, val/RMSE: 0.1157]
+2026-10-10 02:28:42,183 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_05.pt saved
+2026-10-10 02:28:42,183 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:33
+2026-10-10 02:28:42,183 - BasicTS-training - INFO - Epoch 6 / 50
+2026-10-10 02:28:48,260 - BasicTS-training - INFO - Result <train>: [train/time: 6.08 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:28:48,261 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:28:49,754 - BasicTS-training - INFO - Result <val>: [val/time: 1.49 (s), val/loss: 0.0133, val/MAE: 0.0752, val/RMSE: 0.1154]
+2026-10-10 02:28:49,758 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_06.pt saved
+2026-10-10 02:28:49,758 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:31
+2026-10-10 02:28:49,758 - BasicTS-training - INFO - Epoch 7 / 50
+2026-10-10 02:28:56,099 - BasicTS-training - INFO - Result <train>: [train/time: 6.34 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:28:56,100 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:28:57,765 - BasicTS-training - INFO - Result <val>: [val/time: 1.66 (s), val/loss: 0.0133, val/MAE: 0.0758, val/RMSE: 0.1153]
+2026-10-10 02:28:57,767 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_07.pt saved
+2026-10-10 02:28:57,767 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:33
+2026-10-10 02:28:57,767 - BasicTS-training - INFO - Epoch 8 / 50
+2026-10-10 02:29:03,997 - BasicTS-training - INFO - Result <train>: [train/time: 6.23 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:29:03,998 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:29:05,762 - BasicTS-training - INFO - Result <val>: [val/time: 1.76 (s), val/loss: 0.0133, val/MAE: 0.0756, val/RMSE: 0.1153]
+2026-10-10 02:29:05,764 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_08.pt saved
+2026-10-10 02:29:05,764 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:34
+2026-10-10 02:29:05,764 - BasicTS-training - INFO - Epoch 9 / 50
+2026-10-10 02:29:11,619 - BasicTS-training - INFO - Result <train>: [train/time: 5.85 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:29:11,619 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:29:13,291 - BasicTS-training - INFO - Result <val>: [val/time: 1.67 (s), val/loss: 0.0132, val/MAE: 0.0741, val/RMSE: 0.1149]
+2026-10-10 02:29:13,293 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_best_val_MAE.pt saved
+2026-10-10 02:29:13,295 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_09.pt saved
+2026-10-10 02:29:13,295 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:32
+2026-10-10 02:29:13,295 - BasicTS-training - INFO - Epoch 10 / 50
+2026-10-10 02:29:19,655 - BasicTS-training - INFO - Result <train>: [train/time: 6.36 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:29:19,656 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:29:21,216 - BasicTS-training - INFO - Result <val>: [val/time: 1.56 (s), val/loss: 0.0135, val/MAE: 0.0772, val/RMSE: 0.1161]
+2026-10-10 02:29:21,218 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_10.pt saved
+2026-10-10 02:29:21,219 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:33
+2026-10-10 02:29:21,219 - BasicTS-training - INFO - Epoch 11 / 50
+2026-10-10 02:29:27,083 - BasicTS-training - INFO - Result <train>: [train/time: 5.86 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:29:27,085 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:29:28,680 - BasicTS-training - INFO - Result <val>: [val/time: 1.59 (s), val/loss: 0.0134, val/MAE: 0.0759, val/RMSE: 0.1156]
+2026-10-10 02:29:28,682 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_11.pt saved
+2026-10-10 02:29:28,682 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:31
+2026-10-10 02:29:28,682 - BasicTS-training - INFO - Epoch 12 / 50
+2026-10-10 02:29:34,902 - BasicTS-training - INFO - Result <train>: [train/time: 6.22 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:29:34,903 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:29:36,497 - BasicTS-training - INFO - Result <val>: [val/time: 1.59 (s), val/loss: 0.0133, val/MAE: 0.0754, val/RMSE: 0.1155]
+2026-10-10 02:29:36,499 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_12.pt saved
+2026-10-10 02:29:36,499 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:32
+2026-10-10 02:29:36,499 - BasicTS-training - INFO - Epoch 13 / 50
+2026-10-10 02:29:42,818 - BasicTS-training - INFO - Result <train>: [train/time: 6.32 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:29:42,819 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:29:44,314 - BasicTS-training - INFO - Result <val>: [val/time: 1.49 (s), val/loss: 0.0133, val/MAE: 0.0751, val/RMSE: 0.1152]
+2026-10-10 02:29:44,316 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_13.pt saved
+2026-10-10 02:29:44,316 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:32
+2026-10-10 02:29:44,316 - BasicTS-training - INFO - Epoch 14 / 50
+2026-10-10 02:29:50,507 - BasicTS-training - INFO - Result <train>: [train/time: 6.19 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:29:50,508 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:29:52,207 - BasicTS-training - INFO - Result <val>: [val/time: 1.70 (s), val/loss: 0.0133, val/MAE: 0.0759, val/RMSE: 0.1153]
+2026-10-10 02:29:52,209 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_14.pt saved
+2026-10-10 02:29:52,209 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:32
+2026-10-10 02:29:52,209 - BasicTS-training - INFO - Epoch 15 / 50
+2026-10-10 02:29:58,497 - BasicTS-training - INFO - Result <train>: [train/time: 6.29 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:29:58,498 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:30:00,147 - BasicTS-training - INFO - Result <val>: [val/time: 1.65 (s), val/loss: 0.0133, val/MAE: 0.0760, val/RMSE: 0.1155]
+2026-10-10 02:30:00,149 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_15.pt saved
+2026-10-10 02:30:00,149 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:33
+2026-10-10 02:30:00,149 - BasicTS-training - INFO - Epoch 16 / 50
+2026-10-10 02:30:06,473 - BasicTS-training - INFO - Result <train>: [train/time: 6.32 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:30:06,474 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:30:08,088 - BasicTS-training - INFO - Result <val>: [val/time: 1.61 (s), val/loss: 0.0133, val/MAE: 0.0749, val/RMSE: 0.1154]
+2026-10-10 02:30:08,091 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_16.pt saved
+2026-10-10 02:30:08,091 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:33
+2026-10-10 02:30:08,091 - BasicTS-training - INFO - Epoch 17 / 50
+2026-10-10 02:30:14,240 - BasicTS-training - INFO - Result <train>: [train/time: 6.15 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:30:14,241 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:30:15,870 - BasicTS-training - INFO - Result <val>: [val/time: 1.63 (s), val/loss: 0.0134, val/MAE: 0.0767, val/RMSE: 0.1158]
+2026-10-10 02:30:15,873 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_17.pt saved
+2026-10-10 02:30:15,873 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:33
+2026-10-10 02:30:15,873 - BasicTS-training - INFO - Epoch 18 / 50
+2026-10-10 02:30:21,958 - BasicTS-training - INFO - Result <train>: [train/time: 6.08 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:30:21,959 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:30:23,573 - BasicTS-training - INFO - Result <val>: [val/time: 1.61 (s), val/loss: 0.0133, val/MAE: 0.0755, val/RMSE: 0.1155]
+2026-10-10 02:30:23,576 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_18.pt saved
+2026-10-10 02:30:23,576 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 02:34:33
+2026-10-10 02:30:23,576 - BasicTS-training - INFO - Epoch 19 / 50
+2026-10-10 02:30:29,585 - BasicTS-training - INFO - Result <train>: [train/time: 6.01 (s), train/lr: 1.60e-03, train/loss: 0.0171, train/MAE: 0.0817, train/RMSE: 0.1309]
+2026-10-10 02:30:29,586 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:30:31,162 - BasicTS-training - INFO - Early stopping at epoch 19.
+2026-10-10 02:30:31,162 - BasicTS-training - INFO - Result <val>: [val/time: 1.58 (s), val/loss: 0.0133, val/MAE: 0.0748, val/RMSE: 0.1153]
+2026-10-10 02:30:31,165 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_19.pt saved
+2026-10-10 02:30:31,165 - BasicTS-training - INFO - The training finished at 2026-10-10 02:30:31
+2026-10-10 02:30:31,165 - BasicTS-training - INFO - Evaluating the best model on the test set.
+2026-10-10 02:30:31,165 - BasicTS-training - INFO - Loading Checkpoint from 'checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_best_val_MAE.pt'
+2026-10-10 02:30:33,063 - BasicTS-training - INFO - Complete fixed_v1 evaluation metrics: {'test_windows': 25450, 'mae': 0.07754141851075573, 'rmse': 0.12392542570963284, 'r2': 0.7481661455534558}
+2026-10-10 02:30:33,063 - BasicTS-training - INFO - Result <test>: [test/time: 1.79 (s), test/loss: 0.0154, test/MAE: 0.0775, test/RMSE: 0.1239]
+2026-10-10 02:30:33,063 - BasicTS-training - INFO - Test results saved to checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/test_results.
+2026-10-10 02:30:33,063 - BasicTS-training - INFO - Test metrics saved to checkpoints/fixed_v1/reproduction_20261010/DLinear/f892b16805555e2fb6b6bf47dbc034ef/test_metrics.json.

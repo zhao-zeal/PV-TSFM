@@ -1,0 +1,87 @@
+{
+  "status": "passed_full_training_test_artifact_acceptance",
+  "variant": "c",
+  "metrics": {
+    "test_windows": 25450,
+    "mae": 0.04359043873272131,
+    "rmse": 0.0931104824230411,
+    "r2": 0.8578357404758096,
+    "model": "Chronos2HistoryWeatherAdapter",
+    "seed": 42,
+    "data_protocol": "zeroshot_v1",
+    "baseline_config": "history_weather_adapter_variant",
+    "llm_model": "",
+    "input_len": 24,
+    "output_len": 24,
+    "train_sites": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "validation_sites": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "test_sites": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "split_version": "chronological_target_split_v1",
+    "scaler_version": "train_sites_and_time_only_fit_v1"
+  },
+  "completed_epochs": 54,
+  "best_epoch": 44,
+  "trainable_parameters": 31873,
+  "relation_parameters": 2624,
+  "checkpoint_sha256": "fee794c4603035946b9181155db6d12b6b65679d9366c291c50e2e94b84bad5e",
+  "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+  "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+  "base_provenance": {
+    "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+    "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+    "base_version": "b131_linear_v1",
+    "base_best_epoch": 46,
+    "base_experiment_label": "A01",
+    "historical_name": "E11",
+    "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+    "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+  },
+  "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03c_seed42_sl24_pl24_history_future/analysis.json",
+  "comparison_to_A02": {
+    "mae": {
+      "absolute_change": -3.10712753371703e-05,
+      "improvement_percent": 0.07122925210849029
+    },
+    "rmse": {
+      "absolute_change": 0.0001688466085026652,
+      "improvement_percent": -0.18166950368680007
+    },
+    "r2": {
+      "absolute_change": -0.0005151340226130507
+    }
+  },
+  "accepted_at": "2026-10-12T22:06:47.024001+08:00"
+}

@@ -1,0 +1,9 @@
+2026-10-12T21:48:33.378010+08:00 A03-a: training started GPU0
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 476, in <module>
+    main()
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 460, in main
+    execute('accept',opts.gpu,REPORT/f'{variant}_acceptance.log',variant)
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 399, in execute
+    raise RuntimeError(f'{stage} {variant or ""} exited {process.returncode}; see {log}')
+RuntimeError: accept a exited 1; see /home/zhaopp/workspace/PV-TSFM/reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/a_acceptance.log

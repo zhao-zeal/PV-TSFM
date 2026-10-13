@@ -8,9 +8,12 @@ dist/
 /datasets/
 /data/
 /pretrained/
-/checkpoints/
-/outputs/
-/reports/
+/checkpoints/**
+!/checkpoints/**/
+/outputs/**
+!/outputs/**/
+/reports/**/*.lock
+/archives/
 *.pt
 *.pth
 *.ckpt
@@ -18,3 +21,10 @@ dist/
 *.npy
 *.npz
 *.log
+!/reports/**/*.log
+!/checkpoints/**/*.json
+!/checkpoints/**/*.csv
+!/checkpoints/**/*.log
+!/outputs/**/*.json
+!/outputs/**/*.csv
+!/outputs/**/*.log

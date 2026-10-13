@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-10-12T21:06:20.704681+08:00",
+  "stage": "read_only_cpu_sample_checkpoint_diagnosis",
+  "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/FusionSF_power_satellite_history_future_nwp_seed42_sl24_pl24/checkpoint.pth",
+  "checkpoint_epoch": 2,
+  "sample_indices": [
+    0,
+    12,
+    123,
+    7656,
+    7657,
+    30000
+  ],
+  "checks": [
+    {
+      "mode": "eval",
+      "prediction_count": 144,
+      "nonzero_predictions": 0,
+      "pre_relu_min": -5.087174415588379,
+      "pre_relu_max": -3.318641185760498,
+      "readout_l1_supervised_gradient_l1": {
+        "backbone.mlp_heads.0.1.weight": 0.0,
+        "backbone.mlp_heads.0.1.bias": 0.0
+      },
+      "l1": 0.13141173124313354
+    },
+    {
+      "mode": "train",
+      "prediction_count": 144,
+      "nonzero_predictions": 0,
+      "pre_relu_min": -5.0242390632629395,
+      "pre_relu_max": -3.5077624320983887,
+      "readout_l1_supervised_gradient_l1": {
+        "backbone.mlp_heads.0.1.weight": 0.0,
+        "backbone.mlp_heads.0.1.bias": 0.0
+      },
+      "l1": 0.13141173124313354
+    }
+  ],
+  "source_checkpoint_sha256_before": "14ef9362af6b4333a09f69c428c1efe3a6cdfe816b7e9d21f2f228997c9606c8",
+  "source_checkpoint_sha256_after": "14ef9362af6b4333a09f69c428c1efe3a6cdfe816b7e9d21f2f228997c9606c8",
+  "checkpoint_unchanged": true,
+  "optimizer_steps": 0,
+  "formal_test_completed": false,
+  "scope": "Selected checkpoint and six train windows; not full validation/test replay",
+  "readout_init": "official",
+  "learning_rate": 0.0016
+}

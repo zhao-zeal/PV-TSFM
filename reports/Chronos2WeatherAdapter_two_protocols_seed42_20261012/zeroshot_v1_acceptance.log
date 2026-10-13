@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/accept_chronos2_weather_adapter.py", line 156, in <module>
+    accept(options.report.resolve(), options.protocol, options.gpu)
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/accept_chronos2_weather_adapter.py", line 42, in accept
+    assert data_protocol == json.loads((checkpoint_dir / 'data_protocol.json').read_text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

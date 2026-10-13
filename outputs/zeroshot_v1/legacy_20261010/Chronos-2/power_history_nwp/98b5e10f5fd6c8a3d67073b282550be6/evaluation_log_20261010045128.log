@@ -1,0 +1,6 @@
+2026-10-10 04:51:28,034 - BasicTS-C0 - INFO - C0: local pretrained weights loaded; no training or optimizer updates.
+2026-10-10 04:51:28,035 - BasicTS-C0 - INFO - Building test data loader.
+2026-10-10 05:15:03,928 - BasicTS-C0 - INFO - Complete zeroshot_v1 evaluation metrics: {'test_windows': 25450, 'mae': 0.06762706539883111, 'rmse': 0.13385069792262408, 'r2': 0.7062116610800808, 'data_protocol': 'zeroshot_v1', 'model': 'Chronos2_power_history_nwp', 'seed': 42, 'input_len': 24, 'output_len': 24, 'train_sites': [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 'validation_sites': [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 'test_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'split_version': 'chronological_target_split_v1', 'scaler_version': 'train_sites_and_time_only_fit_v1'}
+2026-10-10 05:15:03,928 - BasicTS-C0 - INFO - Result <test>: [test/time: 1408.42 (s), test/loss: 0.0676, test/MAE: 0.0676, test/RMSE: 0.1339]
+2026-10-10 05:15:03,928 - BasicTS-C0 - INFO - Test results saved to /home/zhaopp/workspace/BasicTS/outputs/zeroshot_v1/chronos2_cpu_nwp_20261010/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6/test_results.
+2026-10-10 05:15:03,928 - BasicTS-C0 - INFO - Test metrics saved to /home/zhaopp/workspace/BasicTS/outputs/zeroshot_v1/chronos2_cpu_nwp_20261010/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6/test_metrics.json.

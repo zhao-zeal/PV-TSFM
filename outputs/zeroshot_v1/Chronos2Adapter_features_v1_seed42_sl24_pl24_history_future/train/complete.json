@@ -1,0 +1,11 @@
+{
+  "windows": 76570,
+  "protocol": "zeroshot_v1",
+  "model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+  "input": "power + train-standardized historical/future NWP in Dataset_MMSP order",
+  "chronos_version": "2.2.2",
+  "feature_shape": [
+    2,
+    768
+  ]
+}

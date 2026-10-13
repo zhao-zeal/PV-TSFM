@@ -52,13 +52,14 @@ class PatchMemoryBank(nn.Module):
         n = new_patches.size(0)
         new_patches_flat = new_patches.mean(dim=1)  # [n, d_model]
 
-        if self.ptr + n > self.max_size:
+        pointer = self.ptr
+        if pointer + n > self.max_size:
             # Wrap around if the memory bank is full
-            self.patches[self.ptr:] = new_patches_flat[:self.max_size - self.ptr]
+            self.patches[pointer:] = new_patches_flat[:self.max_size - pointer]
             self.ptr = 0
         else:
-            self.patches[self.ptr:self.ptr + n] = new_patches_flat
-            self.ptr += n
+            self.patches[pointer:pointer + n] = new_patches_flat
+            self.ptr = pointer + n
 
     def retrieve(self, query_patches, top_k=5):
         """
@@ -318,6 +319,12 @@ class Model(nn.Module):
         Each variable in the time series will have its own prompt.
         """
         B, T, n_vars = x_enc.shape  # Get batch size, sequence length, and number of variables
+
+        prefix = "The time series is converted into an image using 1D and 2D convolutional layers, highlighting trends, periodic patterns, and multi-scale features for forecasting."
+        limit = self.vlm_manager.max_input_text_length
+        if len(prefix) >= limit:
+            # Official character truncation removes every sample-dependent statistic.
+            return [prefix[:limit]] * B
 
         # Initialize a list to store prompts for each batch
         prompts = []

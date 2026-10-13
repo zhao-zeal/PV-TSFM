@@ -1,0 +1,962 @@
+{
+  "checked_at": "2026-10-11T04:08:28+08:00",
+  "model": "Chronos2",
+  "dataset": "MMSP",
+  "seed": 42,
+  "seq_len": 24,
+  "pred_len": 24,
+  "primary_nwp_mode": "history_future",
+  "user_authorization": "User approved recommended history_future primary baseline migration acceptance and requested a four-input metric table with input as its second column.",
+  "evaluation_origin": "BasicTS historical complete frozen inference; accepted reuse, no new inference/training",
+  "pretrained_model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+  "migration_adapter_reference": "basicts-snapshot-20261010:src/pvtsfm/models/chronos2/__init__.py",
+  "current_model_adapter": "/home/zhaopp/workspace/PV-TSFM/models/Chronos2.py",
+  "runs": [
+    {
+      "protocol": "in_domain",
+      "nwp_mode": "none",
+      "input": "功率",
+      "state": "accepted_historical_evaluation_reuse",
+      "source_project": "BasicTS",
+      "source_output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power/2d02b20b471a4568fe289eefedeb366b",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power/2d02b20b471a4568fe289eefedeb366b/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power/2d02b20b471a4568fe289eefedeb366b/data_protocol.json",
+      "metadata_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power/2d02b20b471a4568fe289eefedeb366b/metadata.json",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power/2d02b20b471a4568fe289eefedeb366b/evaluation_log_20261010033053.log",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power/2d02b20b471a4568fe289eefedeb366b/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power/2d02b20b471a4568fe289eefedeb366b/test_results/targets.npy",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power/2d02b20b471a4568fe289eefedeb366b/metrics.json",
+      "pretrained_model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+      "local_training_checkpoint": null,
+      "effective_configuration": {
+        "model": "Chronos2",
+        "frozen": true,
+        "finetuned": false,
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "eval_batch_size": 64,
+        "nwp_mode": "none",
+        "point_quantile": 0.5,
+        "quantile_levels": [
+          0.1,
+          0.5,
+          0.9
+        ],
+        "cross_learning": false,
+        "context_length": null,
+        "limit_prediction_length": false,
+        "prediction_clipping": false,
+        "satellite_used": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.06612576353748548,
+        "rmse": 0.13700772151806792,
+        "r2": 0.6921895487672798,
+        "data_protocol": "in_domain",
+        "model": "C0",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_historical_artifact_reuse",
+        "checked_at": "2026-10-11T04:08:28+08:00",
+        "checks": [
+          "all25450x24 power inputs and targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved configuration, input mode, quantiles and frozen inference match current adapter",
+          "original and project pretrained config/weights are byte-identical",
+          "source and project power/NWP CSV are byte-identical",
+          "predictions/targets finite; full-array MAE/RMSE/global R2 recomputed and match saved metrics/log"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.01604604721069336,
+          3.2989437580108643
+        ]
+      }
+    },
+    {
+      "protocol": "in_domain",
+      "nwp_mode": "history",
+      "input": "功率+历史NWP",
+      "state": "accepted_historical_evaluation_reuse",
+      "source_project": "BasicTS",
+      "source_output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_nwp/af174c7084c2bd9d74137bebc7b74d05",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_nwp/af174c7084c2bd9d74137bebc7b74d05/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_nwp/af174c7084c2bd9d74137bebc7b74d05/data_protocol.json",
+      "metadata_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_nwp/af174c7084c2bd9d74137bebc7b74d05/metadata.json",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_nwp/af174c7084c2bd9d74137bebc7b74d05/evaluation_log_20261010033231.log",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_nwp/af174c7084c2bd9d74137bebc7b74d05/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_nwp/af174c7084c2bd9d74137bebc7b74d05/test_results/targets.npy",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_nwp/af174c7084c2bd9d74137bebc7b74d05/metrics.json",
+      "pretrained_model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+      "local_training_checkpoint": null,
+      "effective_configuration": {
+        "model": "Chronos2",
+        "frozen": true,
+        "finetuned": false,
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "eval_batch_size": 64,
+        "nwp_mode": "history",
+        "point_quantile": 0.5,
+        "quantile_levels": [
+          0.1,
+          0.5,
+          0.9
+        ],
+        "cross_learning": false,
+        "context_length": null,
+        "limit_prediction_length": false,
+        "prediction_clipping": false,
+        "satellite_used": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.0674510166024145,
+        "rmse": 0.13380876319196644,
+        "r2": 0.7063957169747191,
+        "data_protocol": "in_domain",
+        "model": "Chronos2_power_history_nwp",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_historical_artifact_reuse",
+        "checked_at": "2026-10-11T04:08:28+08:00",
+        "checks": [
+          "all25450x24 power inputs and targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved configuration, input mode, quantiles and frozen inference match current adapter",
+          "original and project pretrained config/weights are byte-identical",
+          "source and project power/NWP CSV are byte-identical",
+          "predictions/targets finite; full-array MAE/RMSE/global R2 recomputed and match saved metrics/log",
+          "15 weather features and source-training NWP scaler match current protocol exactly"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.017397195100784302,
+          3.095536470413208
+        ]
+      }
+    },
+    {
+      "protocol": "in_domain",
+      "nwp_mode": "future",
+      "input": "功率+未来NWP",
+      "state": "accepted_historical_evaluation_reuse",
+      "source_project": "BasicTS",
+      "source_output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_future_nwp/666057aaf43e617bc5c07807d5f42b30",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_future_nwp/666057aaf43e617bc5c07807d5f42b30/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_future_nwp/666057aaf43e617bc5c07807d5f42b30/data_protocol.json",
+      "metadata_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_future_nwp/666057aaf43e617bc5c07807d5f42b30/metadata.json",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_future_nwp/666057aaf43e617bc5c07807d5f42b30/evaluation_log_20261010040155.log",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_future_nwp/666057aaf43e617bc5c07807d5f42b30/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_future_nwp/666057aaf43e617bc5c07807d5f42b30/test_results/targets.npy",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_future_nwp/666057aaf43e617bc5c07807d5f42b30/metrics.json",
+      "pretrained_model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+      "local_training_checkpoint": null,
+      "effective_configuration": {
+        "model": "Chronos2",
+        "frozen": true,
+        "finetuned": false,
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "eval_batch_size": 64,
+        "nwp_mode": "future",
+        "point_quantile": 0.5,
+        "quantile_levels": [
+          0.1,
+          0.5,
+          0.9
+        ],
+        "cross_learning": false,
+        "context_length": null,
+        "limit_prediction_length": false,
+        "prediction_clipping": false,
+        "satellite_used": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.06327864530066583,
+        "rmse": 0.13040214711904027,
+        "r2": 0.7211550663151136,
+        "data_protocol": "in_domain",
+        "model": "Chronos2_power_future_nwp",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_historical_artifact_reuse",
+        "checked_at": "2026-10-11T04:08:28+08:00",
+        "checks": [
+          "all25450x24 power inputs and targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved configuration, input mode, quantiles and frozen inference match current adapter",
+          "original and project pretrained config/weights are byte-identical",
+          "source and project power/NWP CSV are byte-identical",
+          "predictions/targets finite; full-array MAE/RMSE/global R2 recomputed and match saved metrics/log",
+          "15 weather features and source-training NWP scaler match current protocol exactly"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.0203535258769989,
+          2.8502862453460693
+        ]
+      }
+    },
+    {
+      "protocol": "in_domain",
+      "nwp_mode": "history_future",
+      "input": "功率+历史NWP+未来NWP",
+      "state": "accepted_historical_evaluation_reuse",
+      "source_project": "BasicTS",
+      "source_output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_future_nwp/280595876b2765315be0b1d72096debc",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_future_nwp/280595876b2765315be0b1d72096debc/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_future_nwp/280595876b2765315be0b1d72096debc/data_protocol.json",
+      "metadata_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_future_nwp/280595876b2765315be0b1d72096debc/metadata.json",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_future_nwp/280595876b2765315be0b1d72096debc/evaluation_log_20261010042514.log",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_future_nwp/280595876b2765315be0b1d72096debc/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_future_nwp/280595876b2765315be0b1d72096debc/test_results/targets.npy",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_20261010/Chronos-2/power_history_future_nwp/280595876b2765315be0b1d72096debc/metrics.json",
+      "pretrained_model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+      "local_training_checkpoint": null,
+      "effective_configuration": {
+        "model": "Chronos2",
+        "frozen": true,
+        "finetuned": false,
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "eval_batch_size": 64,
+        "nwp_mode": "history_future",
+        "point_quantile": 0.5,
+        "quantile_levels": [
+          0.1,
+          0.5,
+          0.9
+        ],
+        "cross_learning": false,
+        "context_length": null,
+        "limit_prediction_length": false,
+        "prediction_clipping": false,
+        "satellite_used": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.06090954076926931,
+        "rmse": 0.11777119096394562,
+        "r2": 0.7725576115051715,
+        "data_protocol": "in_domain",
+        "model": "Chronos2_power_history_future_nwp",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_historical_artifact_reuse",
+        "checked_at": "2026-10-11T04:08:28+08:00",
+        "checks": [
+          "all25450x24 power inputs and targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved configuration, input mode, quantiles and frozen inference match current adapter",
+          "original and project pretrained config/weights are byte-identical",
+          "source and project power/NWP CSV are byte-identical",
+          "predictions/targets finite; full-array MAE/RMSE/global R2 recomputed and match saved metrics/log",
+          "15 weather features and source-training NWP scaler match current protocol exactly"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.16165921092033386,
+          2.230736255645752
+        ]
+      }
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "nwp_mode": "none",
+      "input": "功率",
+      "state": "accepted_historical_evaluation_reuse",
+      "source_project": "BasicTS",
+      "source_output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power/a2bdae6541fc02899c01df569e81819f",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power/a2bdae6541fc02899c01df569e81819f/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power/a2bdae6541fc02899c01df569e81819f/data_protocol.json",
+      "metadata_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power/a2bdae6541fc02899c01df569e81819f/metadata.json",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power/a2bdae6541fc02899c01df569e81819f/evaluation_log_20261010044949.log",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power/a2bdae6541fc02899c01df569e81819f/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power/a2bdae6541fc02899c01df569e81819f/test_results/targets.npy",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power/a2bdae6541fc02899c01df569e81819f/metrics.json",
+      "pretrained_model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+      "local_training_checkpoint": null,
+      "effective_configuration": {
+        "model": "Chronos2",
+        "frozen": true,
+        "finetuned": false,
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "eval_batch_size": 64,
+        "nwp_mode": "none",
+        "point_quantile": 0.5,
+        "quantile_levels": [
+          0.1,
+          0.5,
+          0.9
+        ],
+        "cross_learning": false,
+        "context_length": null,
+        "limit_prediction_length": false,
+        "prediction_clipping": false,
+        "satellite_used": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.06612576353748548,
+        "rmse": 0.13700772151806792,
+        "r2": 0.6921895487672798,
+        "data_protocol": "zeroshot_v1",
+        "model": "C0",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_historical_artifact_reuse",
+        "checked_at": "2026-10-11T04:08:28+08:00",
+        "checks": [
+          "all25450x24 power inputs and targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved configuration, input mode, quantiles and frozen inference match current adapter",
+          "original and project pretrained config/weights are byte-identical",
+          "source and project power/NWP CSV are byte-identical",
+          "predictions/targets finite; full-array MAE/RMSE/global R2 recomputed and match saved metrics/log"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.01604604721069336,
+          3.2989437580108643
+        ]
+      }
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "nwp_mode": "history",
+      "input": "功率+历史NWP",
+      "state": "accepted_historical_evaluation_reuse",
+      "source_project": "BasicTS",
+      "source_output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6/data_protocol.json",
+      "metadata_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6/metadata.json",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6/evaluation_log_20261010045128.log",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6/test_results/targets.npy",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_nwp/98b5e10f5fd6c8a3d67073b282550be6/metrics.json",
+      "pretrained_model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+      "local_training_checkpoint": null,
+      "effective_configuration": {
+        "model": "Chronos2",
+        "frozen": true,
+        "finetuned": false,
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "eval_batch_size": 64,
+        "nwp_mode": "history",
+        "point_quantile": 0.5,
+        "quantile_levels": [
+          0.1,
+          0.5,
+          0.9
+        ],
+        "cross_learning": false,
+        "context_length": null,
+        "limit_prediction_length": false,
+        "prediction_clipping": false,
+        "satellite_used": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.06762706539883111,
+        "rmse": 0.13385069792262408,
+        "r2": 0.7062116610800808,
+        "data_protocol": "zeroshot_v1",
+        "model": "Chronos2_power_history_nwp",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_historical_artifact_reuse",
+        "checked_at": "2026-10-11T04:08:28+08:00",
+        "checks": [
+          "all25450x24 power inputs and targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved configuration, input mode, quantiles and frozen inference match current adapter",
+          "original and project pretrained config/weights are byte-identical",
+          "source and project power/NWP CSV are byte-identical",
+          "predictions/targets finite; full-array MAE/RMSE/global R2 recomputed and match saved metrics/log",
+          "15 weather features and source-training NWP scaler match current protocol exactly"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.01703108847141266,
+          3.1338469982147217
+        ]
+      }
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "nwp_mode": "future",
+      "input": "功率+未来NWP",
+      "state": "accepted_historical_evaluation_reuse",
+      "source_project": "BasicTS",
+      "source_output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_future_nwp/495ddf0f1d8b1c1169743532116ccfdb",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_future_nwp/495ddf0f1d8b1c1169743532116ccfdb/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_future_nwp/495ddf0f1d8b1c1169743532116ccfdb/data_protocol.json",
+      "metadata_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_future_nwp/495ddf0f1d8b1c1169743532116ccfdb/metadata.json",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_future_nwp/495ddf0f1d8b1c1169743532116ccfdb/evaluation_log_20261010051508.log",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_future_nwp/495ddf0f1d8b1c1169743532116ccfdb/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_future_nwp/495ddf0f1d8b1c1169743532116ccfdb/test_results/targets.npy",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_future_nwp/495ddf0f1d8b1c1169743532116ccfdb/metrics.json",
+      "pretrained_model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+      "local_training_checkpoint": null,
+      "effective_configuration": {
+        "model": "Chronos2",
+        "frozen": true,
+        "finetuned": false,
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "eval_batch_size": 64,
+        "nwp_mode": "future",
+        "point_quantile": 0.5,
+        "quantile_levels": [
+          0.1,
+          0.5,
+          0.9
+        ],
+        "cross_learning": false,
+        "context_length": null,
+        "limit_prediction_length": false,
+        "prediction_clipping": false,
+        "satellite_used": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.063249425525915,
+        "rmse": 0.1303865059517301,
+        "r2": 0.7212219547642483,
+        "data_protocol": "zeroshot_v1",
+        "model": "Chronos2_power_future_nwp",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_historical_artifact_reuse",
+        "checked_at": "2026-10-11T04:08:28+08:00",
+        "checks": [
+          "all25450x24 power inputs and targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved configuration, input mode, quantiles and frozen inference match current adapter",
+          "original and project pretrained config/weights are byte-identical",
+          "source and project power/NWP CSV are byte-identical",
+          "predictions/targets finite; full-array MAE/RMSE/global R2 recomputed and match saved metrics/log",
+          "15 weather features and source-training NWP scaler match current protocol exactly"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.020561277866363525,
+          2.846266269683838
+        ]
+      }
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "nwp_mode": "history_future",
+      "input": "功率+历史NWP+未来NWP",
+      "state": "accepted_historical_evaluation_reuse",
+      "source_project": "BasicTS",
+      "source_output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_future_nwp/94e1c8f57aeb73ad9ef9be7e81558b66",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_future_nwp/94e1c8f57aeb73ad9ef9be7e81558b66/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_future_nwp/94e1c8f57aeb73ad9ef9be7e81558b66/data_protocol.json",
+      "metadata_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_future_nwp/94e1c8f57aeb73ad9ef9be7e81558b66/metadata.json",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_future_nwp/94e1c8f57aeb73ad9ef9be7e81558b66/evaluation_log_20261010053842.log",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_future_nwp/94e1c8f57aeb73ad9ef9be7e81558b66/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_future_nwp/94e1c8f57aeb73ad9ef9be7e81558b66/test_results/targets.npy",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/legacy_20261010/Chronos-2/power_history_future_nwp/94e1c8f57aeb73ad9ef9be7e81558b66/metrics.json",
+      "pretrained_model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+      "local_training_checkpoint": null,
+      "effective_configuration": {
+        "model": "Chronos2",
+        "frozen": true,
+        "finetuned": false,
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "eval_batch_size": 64,
+        "nwp_mode": "history_future",
+        "point_quantile": 0.5,
+        "quantile_levels": [
+          0.1,
+          0.5,
+          0.9
+        ],
+        "cross_learning": false,
+        "context_length": null,
+        "limit_prediction_length": false,
+        "prediction_clipping": false,
+        "satellite_used": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.06105234477797063,
+        "rmse": 0.11789729959345052,
+        "r2": 0.7720702630431349,
+        "data_protocol": "zeroshot_v1",
+        "model": "Chronos2_power_history_future_nwp",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_historical_artifact_reuse",
+        "checked_at": "2026-10-11T04:08:28+08:00",
+        "checks": [
+          "all25450x24 power inputs and targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved configuration, input mode, quantiles and frozen inference match current adapter",
+          "original and project pretrained config/weights are byte-identical",
+          "source and project power/NWP CSV are byte-identical",
+          "predictions/targets finite; full-array MAE/RMSE/global R2 recomputed and match saved metrics/log",
+          "15 weather features and source-training NWP scaler match current protocol exactly"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.15484905242919922,
+          2.185110569000244
+        ]
+      }
+    }
+  ],
+  "acceptance": {
+    "status": "passed_historical_artifact_reuse",
+    "checked_at": "2026-10-11T04:08:28+08:00",
+    "accepted_runs": 8,
+    "windows_per_run": 25450,
+    "primary_mode_selection": "User selected native history/future covariate use before registration; not selected by test metric.",
+    "new_training": false,
+    "new_model_inference": false,
+    "original_evidence_modified": false
+  },
+  "tables": {
+    "primary": "/home/zhaopp/workspace/PV-TSFM/reports/experiment_summary.csv",
+    "four_inputs": "/home/zhaopp/workspace/PV-TSFM/reports/chronos2_input_metrics.csv",
+    "reading_entry": "/home/zhaopp/workspace/PV-TSFM/docs/EXPERIMENT_STATUS.md"
+  },
+  "limitations": [
+    "Historical inference reused; not a fresh end-to-end inference through the current TSLib entry.",
+    "Future NWP availability assumed by the frozen protocol; issue time absent from CSV.",
+    "No finetuning or additional seeds; frozen pure-power predictions coincide across the two identical test inputs."
+  ]
+}

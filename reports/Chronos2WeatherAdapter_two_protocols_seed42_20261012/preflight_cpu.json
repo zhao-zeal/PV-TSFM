@@ -1,0 +1,176 @@
+{
+  "stage": "real_microbatch_correctness_check",
+  "device": "cpu",
+  "experiment_label": "A02",
+  "base_experiment_label": "A01",
+  "cpu_cores": [
+    9,
+    10
+  ],
+  "threads": 2,
+  "num_workers": 0,
+  "full_training_complete": false,
+  "formal_test_complete": false,
+  "software": {
+    "torch": "2.11.0+cu128",
+    "chronos-forecasting": "2.2.2",
+    "transformers": "4.57.6",
+    "numpy": "2.2.4",
+    "pandas": "2.2.3"
+  },
+  "runs": [
+    {
+      "protocol": "in_domain",
+      "sample_indices": [
+        0,
+        1,
+        2545,
+        25449
+      ],
+      "batch_size": 4,
+      "output_shape": [
+        4,
+        24,
+        1
+      ],
+      "trainable_parameters": 29249,
+      "zero_residual_initial_prediction_exact": true,
+      "cached_vs_direct_prediction_max_abs_difference": 0.02559414505958557,
+      "cached_vs_direct_prediction_matches": false,
+      "accepted_saved_prediction_max_abs_difference": 4.172325134277344e-07,
+      "frozen_base_state_sha256_before_and_after": "5ef5a8e1ad5afb7fcb67e94a2620c2a21bcf7cebed144786a04f2f72b48ebc9a",
+      "base_gradients_absent_and_weights_unchanged": true,
+      "all_weather_gradients_finite": true,
+      "upstream_gradients_nonzero_on_second_step": true,
+      "forecast_patch_hour_counts": [
+        16,
+        8
+      ],
+      "hourly_nwp_alignment_passed": true,
+      "missing_value_mask_passed": true,
+      "weather_state_reload_exact": true,
+      "transient_optimization_steps": [
+        {
+          "step": 1,
+          "loss": 0.019334115087985992,
+          "gradient_l1": {
+            "hidden_state_out.0.weight": 0.0,
+            "hidden_state_out.0.bias": 0.0,
+            "hidden_state_out.1.weight": 0.0,
+            "hidden_state_out.1.bias": 0.0,
+            "cov_out.weight": 0.0,
+            "cov_out.bias": 0.0,
+            "concat_layer.0.weight": 0.0,
+            "concat_layer.0.bias": 0.0,
+            "concat_layer.2.weight": 1.2907259464263916,
+            "concat_layer.2.bias": 0.375
+          }
+        },
+        {
+          "step": 2,
+          "loss": 0.019308220595121384,
+          "gradient_l1": {
+            "hidden_state_out.0.weight": 7.32574044377543e-05,
+            "hidden_state_out.0.bias": 0.00011452897888375446,
+            "hidden_state_out.1.weight": 0.01966089755296707,
+            "hidden_state_out.1.bias": 3.797767567448318e-05,
+            "cov_out.weight": 0.00030980646261014044,
+            "cov_out.bias": 2.5354338504257612e-05,
+            "concat_layer.0.weight": 0.001406954601407051,
+            "concat_layer.0.bias": 9.983323980122805e-05,
+            "concat_layer.2.weight": 1.2216578722000122,
+            "concat_layer.2.bias": 0.3541666567325592
+          }
+        }
+      ],
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 40,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      }
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "sample_indices": [
+        0,
+        1,
+        2545,
+        25449
+      ],
+      "batch_size": 4,
+      "output_shape": [
+        4,
+        24,
+        1
+      ],
+      "trainable_parameters": 29249,
+      "zero_residual_initial_prediction_exact": true,
+      "cached_vs_direct_prediction_max_abs_difference": 1.210719347000122e-07,
+      "cached_vs_direct_prediction_matches": true,
+      "accepted_saved_prediction_max_abs_difference": 3.5762786865234375e-07,
+      "frozen_base_state_sha256_before_and_after": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+      "base_gradients_absent_and_weights_unchanged": true,
+      "all_weather_gradients_finite": true,
+      "upstream_gradients_nonzero_on_second_step": true,
+      "forecast_patch_hour_counts": [
+        16,
+        8
+      ],
+      "hourly_nwp_alignment_passed": true,
+      "missing_value_mask_passed": true,
+      "weather_state_reload_exact": true,
+      "transient_optimization_steps": [
+        {
+          "step": 1,
+          "loss": 0.018200578168034554,
+          "gradient_l1": {
+            "hidden_state_out.0.weight": 0.0,
+            "hidden_state_out.0.bias": 0.0,
+            "hidden_state_out.1.weight": 0.0,
+            "hidden_state_out.1.bias": 0.0,
+            "cov_out.weight": 0.0,
+            "cov_out.bias": 0.0,
+            "concat_layer.0.weight": 0.0,
+            "concat_layer.0.bias": 0.0,
+            "concat_layer.2.weight": 1.949510097503662,
+            "concat_layer.2.bias": 0.5416666865348816
+          }
+        },
+        {
+          "step": 2,
+          "loss": 0.018162013962864876,
+          "gradient_l1": {
+            "hidden_state_out.0.weight": 0.00012931437231600285,
+            "hidden_state_out.0.bias": 0.0001893110602395609,
+            "hidden_state_out.1.weight": 0.031182650476694107,
+            "hidden_state_out.1.bias": 5.867917207069695e-05,
+            "cov_out.weight": 0.0003428034542594105,
+            "cov_out.bias": 3.7598994822474197e-05,
+            "concat_layer.0.weight": 0.002110482193529606,
+            "concat_layer.0.bias": 0.00014816656766925007,
+            "concat_layer.2.weight": 1.8124010562896729,
+            "concat_layer.2.bias": 0.5
+          }
+        }
+      ],
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 46,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      }
+    }
+  ],
+  "status": "blocked_native_encoder_alignment",
+  "cached_path_microbatch_checks_passed": true,
+  "full_experiment_ready": false
+}

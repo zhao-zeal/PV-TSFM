@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/run.py", line 230, in <module>
+    main()
+  File "/home/zhaopp/workspace/PV-TSFM/run.py", line 208, in main
+    configure_resources(args)
+  File "/home/zhaopp/workspace/PV-TSFM/run.py", line 187, in configure_resources
+    require_idle_gpus(str(args.gpu))
+  File "/home/zhaopp/workspace/PV-TSFM/utils/resources.py", line 21, in require_idle_gpus
+    raise ValueError(f'GPU {index} is occupied; select an idle GPU')
+ValueError: GPU 0 is occupied; select an idle GPU

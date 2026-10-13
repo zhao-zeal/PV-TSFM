@@ -1,0 +1,246 @@
+{
+  "checked_at": "2026-10-11T06:34:17.291120",
+  "diagnostic_only": true,
+  "training_configuration_changed": false,
+  "gpu3_snapshot": {
+    "utilization_percent": 9,
+    "memory_MiB": 701,
+    "power_W": 64.73
+  },
+  "live_process": {
+    "pid": 3385560,
+    "cpu_total_percent": 100,
+    "main_thread_percent": 74.8,
+    "autograd_thread_percent": 25.2,
+    "disk_read_kB_per_second": 0,
+    "disk_write_kB_per_second": 0,
+    "affinity": [
+      0,
+      7
+    ]
+  },
+  "data_only_profile": {
+    "cpu_core": 0,
+    "threads": 1,
+    "num_workers": 0,
+    "batch_size": 16,
+    "batches": 32,
+    "samples": 512,
+    "seconds": 1.5753181730397046,
+    "seconds_per_batch": 0.04922869290749077,
+    "get_group": [
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/groupby/groupby.py",
+        "line": 1022,
+        "function": "get_group",
+        "calls": 1024,
+        "self_seconds": 0.005349179,
+        "cumulative_seconds": 1.0763987430000002
+      }
+    ],
+    "top_functions": [
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.next>",
+        "calls": 1120,
+        "self_seconds": 0.000387846,
+        "cumulative_seconds": 1.574931663
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/utils/data/dataloader.py",
+        "line": 736,
+        "function": "__next__",
+        "calls": 32,
+        "self_seconds": 0.00043622200000000005,
+        "cumulative_seconds": 1.574855193
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/utils/data/dataloader.py",
+        "line": 799,
+        "function": "_next_data",
+        "calls": 32,
+        "self_seconds": 0.0027609320000000002,
+        "cumulative_seconds": 1.5719303420000001
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py",
+        "line": 49,
+        "function": "fetch",
+        "calls": 32,
+        "self_seconds": 0.00014467,
+        "cumulative_seconds": 1.568995882
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py",
+        "line": 54,
+        "function": "<listcomp>",
+        "calls": 32,
+        "self_seconds": 0.00252263,
+        "cumulative_seconds": 1.557197119
+      },
+      {
+        "file": "/home/zhaopp/workspace/PV-TSFM/data_provider/data_loader.py",
+        "line": 37,
+        "function": "__getitem__",
+        "calls": 512,
+        "self_seconds": 0.04378705,
+        "cumulative_seconds": 1.5546744890000002
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/indexing.py",
+        "line": 1176,
+        "function": "__getitem__",
+        "calls": 1536,
+        "self_seconds": 0.00503166,
+        "cumulative_seconds": 1.086895224
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/indexing.py",
+        "line": 1719,
+        "function": "_getitem_axis",
+        "calls": 1536,
+        "self_seconds": 0.003822282,
+        "cumulative_seconds": 1.077557646
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/groupby/groupby.py",
+        "line": 1022,
+        "function": "get_group",
+        "calls": 1024,
+        "self_seconds": 0.005349179,
+        "cumulative_seconds": 1.0763987430000002
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/indexing.py",
+        "line": 1696,
+        "function": "_get_list_axis",
+        "calls": 1024,
+        "self_seconds": 0.0009229030000000001,
+        "cumulative_seconds": 1.027756747
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/generic.py",
+        "line": 4142,
+        "function": "_take_with_is_copy",
+        "calls": 1024,
+        "self_seconds": 0.003852036,
+        "cumulative_seconds": 1.026833844
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/generic.py",
+        "line": 4027,
+        "function": "take",
+        "calls": 1024,
+        "self_seconds": 0.007320234,
+        "cumulative_seconds": 1.0073799540000001
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/managers.py",
+        "line": 869,
+        "function": "take",
+        "calls": 1024,
+        "self_seconds": 0.004258853,
+        "cumulative_seconds": 0.981865654
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/managers.py",
+        "line": 623,
+        "function": "reindex_indexer",
+        "calls": 1024,
+        "self_seconds": 0.007124918,
+        "cumulative_seconds": 0.8468445080000001
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/managers.py",
+        "line": 687,
+        "function": "<listcomp>",
+        "calls": 1024,
+        "self_seconds": 0.009179669000000001,
+        "cumulative_seconds": 0.833412609
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/blocks.py",
+        "line": 1287,
+        "function": "take_nd",
+        "calls": 15360,
+        "self_seconds": 0.023736922,
+        "cumulative_seconds": 0.82423294
+      },
+      {
+        "file": "/home/zhaopp/workspace/PV-TSFM/data_provider/protocols.py",
+        "line": 68,
+        "function": "__getitem__",
+        "calls": 512,
+        "self_seconds": 0.003263447,
+        "cumulative_seconds": 0.8241495430000001
+      },
+      {
+        "file": "/home/zhaopp/workspace/PV-TSFM/data_provider/mmsp_storage.py",
+        "line": 157,
+        "function": "__getitem__",
+        "calls": 512,
+        "self_seconds": 0.036951874,
+        "cumulative_seconds": 0.813122396
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/array_algos/take.py",
+        "line": 59,
+        "function": "take_nd",
+        "calls": 15360,
+        "self_seconds": 0.019848552000000002,
+        "cumulative_seconds": 0.785314531
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/array_algos/take.py",
+        "line": 120,
+        "function": "_take_nd_ndarray",
+        "calls": 15360,
+        "self_seconds": 0.696166913,
+        "cumulative_seconds": 0.762172571
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/frame.py",
+        "line": 12590,
+        "function": "values",
+        "calls": 1024,
+        "self_seconds": 0.000828424,
+        "cumulative_seconds": 0.20714927800000002
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/managers.py",
+        "line": 1633,
+        "function": "as_array",
+        "calls": 1024,
+        "self_seconds": 0.003619984,
+        "cumulative_seconds": 0.20632085400000003
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/managers.py",
+        "line": 1707,
+        "function": "_interleave",
+        "calls": 1024,
+        "self_seconds": 0.151815948,
+        "cumulative_seconds": 0.201280687
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/indexes/multi.py",
+        "line": 2235,
+        "function": "take",
+        "calls": 1024,
+        "self_seconds": 0.0058927860000000006,
+        "cumulative_seconds": 0.074950925
+      },
+      {
+        "file": "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/array_algos/take.py",
+        "line": 564,
+        "function": "_take_preprocess_indexer_and_fill_value",
+        "calls": 15360,
+        "self_seconds": 0.010388860000000001,
+        "cumulative_seconds": 0.048915128
+      }
+    ]
+  },
+  "interpretation": "Low GPU occupancy is consistent with CPU-side bottlenecks. Dataset performs two NWP get_group operations per sample. This data-only profile cannot measure the proportion of live training spent in data preparation versus Python/CUDA dispatch.",
+  "formal_test_metrics_available": false
+}

@@ -1,0 +1,27 @@
+{
+  "completed_epochs": 93,
+  "best_epoch": 83,
+  "baseline_validation_metrics": {
+    "mae": 0.03902923318701651,
+    "rmse": 0.09107973958792531,
+    "mse": 0.00829551896340429
+  },
+  "best_validation_metrics": {
+    "mae": 0.0384237307389292,
+    "rmse": 0.08913395782407188,
+    "mse": 0.007944862437383425
+  },
+  "stop_reason": "patience",
+  "selection": "minimum validation MAE, including epoch0 zero residual",
+  "optimizer": "AdamW",
+  "learning_rate": 1.6e-05,
+  "betas": [
+    0.9,
+    0.999
+  ],
+  "weight_decay": 0.05,
+  "loss": "L1",
+  "scheduler": null,
+  "precision": "FP32",
+  "trainable_parameters": 29249
+}

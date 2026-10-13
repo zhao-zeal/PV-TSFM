@@ -1,0 +1,19 @@
+{
+  "completed_epochs": 56,
+  "best_epoch": 46,
+  "baseline_validation_metrics": {
+    "mae": 0.040173460402256285,
+    "rmse": 0.09406747618084306,
+    "mse": 0.008848690075033475
+  },
+  "best_validation_metrics": {
+    "mae": 0.039621939034247954,
+    "rmse": 0.09318137394086992,
+    "mse": 0.008682768449508233
+  },
+  "stop_reason": "patience",
+  "selection": "minimum validation MAE including epoch0 zero residual",
+  "trainable_parameters": 29249,
+  "budget": "A02 max100/patience10, batch512/eval1024, FP32, L1, AdamW lr0.000016/wd0.05; no scheduler",
+  "initialization": "A02 Weather Adapter reinitialized seed42; frozen accepted A01 reused; no fitted A02 warm start"
+}

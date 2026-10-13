@@ -1,0 +1,135 @@
+2026-10-12T13:40:22.255975+08:00 selected idle GPU4 for ChronosX BF16 GPU preflight
+Some weights of ChronosX were not initialized from the model checkpoint at /home/zhaopp/workspace/PV-TSFM/pretrained/chronos-t5-small and are newly initialized: ['input_injection_block.concat_layer.network.0.bias', 'input_injection_block.concat_layer.network.0.weight', 'input_injection_block.concat_layer.network.2.bias', 'input_injection_block.concat_layer.network.2.weight', 'input_injection_block.cov_in.bias', 'input_injection_block.cov_in.weight', 'input_injection_block.emb_in.bias', 'input_injection_block.emb_in.weight', 'input_injection_block_decoder.concat_layer.network.0.bias', 'input_injection_block_decoder.concat_layer.network.0.weight', 'input_injection_block_decoder.concat_layer.network.2.bias', 'input_injection_block_decoder.concat_layer.network.2.weight', 'input_injection_block_decoder.cov_in.bias', 'input_injection_block_decoder.cov_in.weight', 'input_injection_block_decoder.emb_in.bias', 'input_injection_block_decoder.emb_in.weight', 'output_injection_block.concat_layer.network.0.bias', 'output_injection_block.concat_layer.network.0.weight', 'output_injection_block.concat_layer.network.2.bias', 'output_injection_block.concat_layer.network.2.weight', 'output_injection_block.cov_out.bias', 'output_injection_block.cov_out.weight', 'output_injection_block.hidden_state_out.bias', 'output_injection_block.hidden_state_out.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+{
+  "status": "passed_real_batch_forward_backward_and_prediction",
+  "gpu": 4,
+  "cpu_cores": [
+    9,
+    10
+  ],
+  "performance_reproduction_complete": false,
+  "train_microbatch_seconds": [
+    0.8785945605486631,
+    0.41435255762189627,
+    0.5372506137937307
+  ],
+  "validation_batch_seconds": [
+    0.03555089049041271,
+    0.032087297178804874,
+    0.031619695015251637
+  ],
+  "prediction_batch_seconds": 0.3435378512367606,
+  "prediction_shape": [
+    64,
+    24,
+    1
+  ],
+  "loss": 6.268898010253906,
+  "config": {
+    "task_name": "long_term_forecast",
+    "is_training": 1,
+    "model": "ChronosX",
+    "baseline_config": "extended_budget",
+    "adapter_version": "b131_linear_v1",
+    "cache_batch_size": 64,
+    "model_id": "ChronosX_ep200_pat20_seed42_sl24_pl24_history_future_IIBOIB",
+    "data": "MMSP",
+    "root_path": "/home/zhaopp/workspace/PV-TSFM/datasets/MMSP/data",
+    "protocol": "in_domain",
+    "modalities": "power_nwp",
+    "seq_len": 24,
+    "label_len": 12,
+    "pred_len": 24,
+    "seed": 42,
+    "batch_size": 1024,
+    "eval_batch_size": 64,
+    "train_epochs": 200,
+    "patience": 20,
+    "learning_rate": 0.01,
+    "num_workers": 0,
+    "checkpoints": "/home/zhaopp/workspace/PV-TSFM/checkpoints",
+    "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs",
+    "checkpoint": null,
+    "resume": null,
+    "use_gpu": 1,
+    "gpu": 4,
+    "d_model": 512,
+    "d_ff": 512,
+    "e_layers": 3,
+    "n_heads": 8,
+    "dropout": 0.05,
+    "factor": 5,
+    "patch_len": 16,
+    "stride": 8,
+    "seg_len": 12,
+    "moving_avg": 25,
+    "individual": false,
+    "fc_dropout": 0.05,
+    "head_dropout": 0.0,
+    "padding_patch": "end",
+    "revin": 1,
+    "affine": 0,
+    "subtract_last": 0,
+    "decomposition": 0,
+    "kernel_size": 25,
+    "lradj": "linear",
+    "precision": "bf16",
+    "max_steps": null,
+    "eval_steps": null,
+    "gradient_accumulation_steps": 1,
+    "num_samples": 20,
+    "covariate_injection": "IIB+OIB",
+    "injection_hidden_dim": 256,
+    "injection_layers": 1,
+    "vlm_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/clip-vit-base-patch32",
+    "preset": "script",
+    "fusion_modalities": 3,
+    "fusion_input": "original",
+    "guide_channels": 17,
+    "model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-t5-small",
+    "nwp_mode": "history_future",
+    "print_config": false,
+    "official_source": {
+      "repository": "https://github.com/amazon-science/chronos-forecasting/tree/chronosx",
+      "source_commit": "2b52bfc500e3ebab1ce846f0a2a60ee5ef2a14a7",
+      "reference_recipe": "src/chronosx/chronosx.py: ChronosXPipeline.train defaults"
+    },
+    "optimizer": "adamw_chronosx",
+    "monitor": "token_ce",
+    "drop_last": false,
+    "enc_in": 1,
+    "dec_in": 1,
+    "c_out": 1,
+    "content": "MMSP hourly photovoltaic power generation at solar power plants.",
+    "vlm_type": "clip",
+    "image_size": 56,
+    "periodicity": 24,
+    "norm_const": 0.4,
+    "three_channel_image": true,
+    "finetune_vlm": false,
+    "learnable_image": true,
+    "save_images": false,
+    "patch_memory_size": 100,
+    "top_k": 5,
+    "padding": 8,
+    "chronosx_drop_prob": 0.2,
+    "max_grad_norm": 1.0,
+    "effective_precision": "bf16"
+  },
+  "frozen_t5_verified": true,
+  "trainable_parameters": 2127616,
+  "total_parameters": 48281856,
+  "samples_per_window": 20,
+  "historical_future_nwp_shape": [
+    64,
+    24,
+    15
+  ]
+}
+2026-10-12T13:40:33.979752+08:00 selected idle GPU4 for in_domain train/test
+2026-10-12T13:55:53.041167+08:00 selected idle GPU0 for zeroshot_v1 train/test
+2026-10-12T14:12:26.829050+08:00 selected idle GPU0 for ChronosX full artifact acceptance
+Some weights of ChronosX were not initialized from the model checkpoint at /home/zhaopp/workspace/PV-TSFM/pretrained/chronos-t5-small and are newly initialized: ['input_injection_block.concat_layer.network.0.bias', 'input_injection_block.concat_layer.network.0.weight', 'input_injection_block.concat_layer.network.2.bias', 'input_injection_block.concat_layer.network.2.weight', 'input_injection_block.cov_in.bias', 'input_injection_block.cov_in.weight', 'input_injection_block.emb_in.bias', 'input_injection_block.emb_in.weight', 'input_injection_block_decoder.concat_layer.network.0.bias', 'input_injection_block_decoder.concat_layer.network.0.weight', 'input_injection_block_decoder.concat_layer.network.2.bias', 'input_injection_block_decoder.concat_layer.network.2.weight', 'input_injection_block_decoder.cov_in.bias', 'input_injection_block_decoder.cov_in.weight', 'input_injection_block_decoder.emb_in.bias', 'input_injection_block_decoder.emb_in.weight', 'output_injection_block.concat_layer.network.0.bias', 'output_injection_block.concat_layer.network.0.weight', 'output_injection_block.concat_layer.network.2.bias', 'output_injection_block.concat_layer.network.2.weight', 'output_injection_block.cov_out.bias', 'output_injection_block.cov_out.weight', 'output_injection_block.hidden_state_out.bias', 'output_injection_block.hidden_state_out.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Accepted and registered: in_domain, zeroshot_v1

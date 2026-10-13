@@ -1,0 +1,51 @@
+{
+  "test_windows": 25450,
+  "mae": 0.07145130384398299,
+  "rmse": 0.11830385552082275,
+  "r2": 0.7704955711629796,
+  "model": "TimeXer",
+  "seed": 42,
+  "data_protocol": "zeroshot_v1",
+  "baseline_config": "official",
+  "llm_model": "",
+  "input_len": 24,
+  "output_len": 24,
+  "train_sites": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "validation_sites": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "test_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "split_version": "chronological_target_split_v1",
+  "scaler_version": "train_sites_and_time_only_fit_v1"
+}

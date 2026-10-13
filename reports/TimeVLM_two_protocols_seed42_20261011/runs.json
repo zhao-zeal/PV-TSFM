@@ -1,0 +1,689 @@
+{
+  "model": "TimeVLM",
+  "authorization": "User requested Time-VLM reproduction; two accepted MMSP protocols seed42 24->24 only",
+  "state": "completed_artifact_acceptance_passed",
+  "preflight": {
+    "status": "passed_single_batch_forward_backward_and_memory_restore",
+    "prediction_shape": [
+      32,
+      24,
+      1
+    ],
+    "loss": 0.1866440773010254,
+    "first_train_step_seconds": 5.293742747046053,
+    "total_seconds": 8.96403789287433,
+    "memory_checkpoint_restore_predictions_equal": true,
+    "CLIP_frozen": true,
+    "parameter_gradients": {
+      "learnable_image_module.conv1d.weight": false,
+      "learnable_image_module.conv1d.bias": false,
+      "learnable_image_module.conv2d_1.weight": false,
+      "learnable_image_module.conv2d_1.bias": false,
+      "learnable_image_module.conv2d_2.weight": false,
+      "learnable_image_module.conv2d_2.bias": false
+    },
+    "limitations": [
+      "Single batch correctness check only; not full training or formal metrics",
+      "Official memory updates on every forward including validation/test",
+      "Official text prompt truncated to 77 characters; prefix identical across MMSP samples",
+      "Official image uint8 conversion disconnects image-generator gradients"
+    ],
+    "device": "CPU fp32 (initial check)"
+  },
+  "source_commit": {
+    "repository": "https://github.com/moyutian/ICML25-TimeVLM",
+    "source_commit": "b488910ed45f5b99e3a5f1b8eac9ab14dac070a5",
+    "reference_recipe": "scripts/full-shot/TimeVLM_ETTh1.sh",
+    "ported_branch": "CLIP (official full-shot script)"
+  },
+  "config": {
+    "task_name": "long_term_forecast",
+    "is_training": 1,
+    "model": "TimeVLM",
+    "baseline_config": "official",
+    "adapter_version": "b131_linear_v1",
+    "cache_batch_size": 64,
+    "model_id": "TimeVLM_official_seed42_sl24_pl24_power_none",
+    "data": "MMSP",
+    "root_path": "/home/zhaopp/workspace/PV-TSFM/datasets/MMSP/data",
+    "protocol": "in_domain",
+    "modalities": "power",
+    "seq_len": 24,
+    "label_len": 12,
+    "pred_len": 24,
+    "seed": 42,
+    "batch_size": 32,
+    "eval_batch_size": 32,
+    "train_epochs": 10,
+    "patience": 5,
+    "learning_rate": 0.001,
+    "num_workers": 0,
+    "checkpoints": "/home/zhaopp/workspace/PV-TSFM/checkpoints",
+    "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs",
+    "checkpoint": null,
+    "use_gpu": 1,
+    "gpu": 0,
+    "d_model": 128,
+    "d_ff": 768,
+    "e_layers": 2,
+    "n_heads": 8,
+    "dropout": 0.1,
+    "factor": 3,
+    "patch_len": 16,
+    "stride": 8,
+    "seg_len": 12,
+    "moving_avg": 25,
+    "individual": false,
+    "fc_dropout": 0.05,
+    "head_dropout": 0.0,
+    "padding_patch": "end",
+    "revin": 1,
+    "affine": 0,
+    "subtract_last": 0,
+    "decomposition": 0,
+    "kernel_size": 25,
+    "lradj": "type1",
+    "precision": "fp16",
+    "max_steps": 5000,
+    "eval_steps": 100,
+    "gradient_accumulation_steps": 1,
+    "num_samples": 20,
+    "covariate_injection": "IIB+OIB",
+    "injection_hidden_dim": 256,
+    "injection_layers": 1,
+    "vlm_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/clip-vit-base-patch32",
+    "preset": "script",
+    "fusion_modalities": 3,
+    "guide_channels": 17,
+    "model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+    "nwp_mode": "none",
+    "print_config": false,
+    "official_source": {
+      "repository": "https://github.com/moyutian/ICML25-TimeVLM",
+      "source_commit": "b488910ed45f5b99e3a5f1b8eac9ab14dac070a5",
+      "reference_recipe": "scripts/full-shot/TimeVLM_ETTh1.sh",
+      "ported_branch": "CLIP (official full-shot script)"
+    },
+    "optimizer": "adam",
+    "monitor": "mse",
+    "drop_last": false,
+    "enc_in": 1,
+    "dec_in": 1,
+    "c_out": 1,
+    "content": "MMSP hourly photovoltaic power generation at solar power plants.",
+    "vlm_type": "clip",
+    "image_size": 56,
+    "periodicity": 24,
+    "norm_const": 0.4,
+    "three_channel_image": true,
+    "finetune_vlm": false,
+    "learnable_image": true,
+    "save_images": false,
+    "patch_memory_size": 100,
+    "top_k": 5,
+    "padding": 8,
+    "chronosx_drop_prob": 0.2,
+    "max_grad_norm": null,
+    "effective_precision": "fp16"
+  },
+  "runs": [
+    {
+      "protocol": "in_domain",
+      "gpu": 0,
+      "cpu_cores": [
+        0,
+        7
+      ],
+      "threads": 2,
+      "num_workers": 0,
+      "pid": 3366026,
+      "argv": [
+        "--model",
+        "TimeVLM",
+        "--protocol",
+        "in_domain",
+        "--is_training",
+        "1",
+        "--seed",
+        "42",
+        "--seq_len",
+        "24",
+        "--pred_len",
+        "24",
+        "--num_workers",
+        "0",
+        "--use_gpu",
+        "1",
+        "--gpu",
+        "0",
+        "--model_id",
+        "TimeVLM_official_clip_seed42_sl24_pl24_power"
+      ],
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/TimeVLM_two_protocols_seed42_20261011/in_domain_training.log",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power",
+      "state": "completed_artifact_acceptance_passed",
+      "started_at": "2026-10-11T05:16:35.995982+08:00",
+      "startup_verification": {
+        "checked_at": "2026-10-11T05:17:26.320047+08:00",
+        "pid_alive": true,
+        "cpu_affinity": [
+          0,
+          7
+        ],
+        "saved_config_matches": true,
+        "protocol_windows": {
+          "train": 76570,
+          "validation": 25450,
+          "test": 25450
+        },
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "performance_reproduction_complete": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.07105578813964124,
+        "rmse": 0.12220230136553013,
+        "r2": 0.7551207179578641,
+        "model": "TimeVLM",
+        "seed": 42,
+        "data_protocol": "in_domain",
+        "baseline_config": "official",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      }
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "gpu": 3,
+      "cpu_cores": [
+        9,
+        10
+      ],
+      "threads": 2,
+      "num_workers": 0,
+      "pid": 3366027,
+      "argv": [
+        "--model",
+        "TimeVLM",
+        "--protocol",
+        "zeroshot_v1",
+        "--is_training",
+        "1",
+        "--seed",
+        "42",
+        "--seq_len",
+        "24",
+        "--pred_len",
+        "24",
+        "--num_workers",
+        "0",
+        "--use_gpu",
+        "1",
+        "--gpu",
+        "3",
+        "--model_id",
+        "TimeVLM_official_clip_seed42_sl24_pl24_power"
+      ],
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/TimeVLM_two_protocols_seed42_20261011/zeroshot_v1_training.log",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power",
+      "state": "completed_artifact_acceptance_passed",
+      "started_at": "2026-10-11T05:16:35.997613+08:00",
+      "startup_verification": {
+        "checked_at": "2026-10-11T05:17:26.320233+08:00",
+        "pid_alive": true,
+        "cpu_affinity": [
+          9,
+          10
+        ],
+        "saved_config_matches": true,
+        "protocol_windows": {
+          "train": 76570,
+          "validation": 25450,
+          "test": 25450
+        },
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "performance_reproduction_complete": false
+      },
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.06987500472570381,
+        "rmse": 0.12165875590433801,
+        "r2": 0.7572942777900238,
+        "model": "TimeVLM",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "official",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      }
+    }
+  ],
+  "preflight_gpu": {
+    "status": "passed_forward_backward_memory_restore_and_last_batch",
+    "device": "cuda:0",
+    "precision": "fp16 autocast",
+    "batch_size": 32,
+    "prediction_shape": [
+      32,
+      24,
+      1
+    ],
+    "train_step_seconds": 1.9326433069072664,
+    "evaluation_step_seconds": 0.09223579568788409,
+    "memory_restore_predictions_equal": true,
+    "last_batch_shape": [
+      10,
+      24,
+      1
+    ],
+    "CLIP_frozen": true,
+    "loss": 0.18065592646598816
+  },
+  "official_audit": {
+    "source_commit": "b488910ed45f5b99e3a5f1b8eac9ab14dac070a5",
+    "verified_online": true,
+    "core_architecture": "matches official CLIP full-shot branch",
+    "existing_adaptations": [
+      "relative imports/local CLIP loading",
+      "CPU support",
+      "register memory bank and pointer as checkpoint buffers",
+      "processor padding/truncation"
+    ],
+    "preserved_behaviors": [
+      "memory updates in training, validation, test; chronological evaluation consumes only current historical inputs",
+      "prompt truncates to 77 characters, shared prefix; statistical suffix not consumed",
+      "uint8 image conversion disconnects gradients to image generator"
+    ],
+    "task_adaptations": [
+      "MMSP single power target,24->24,seed42",
+      "label_len12; DataLoader0;twoCPUcores/process"
+    ],
+    "patch_len": 16,
+    "stride": 8,
+    "padding": 8
+  },
+  "started_at": "2026-10-11T05:16:35.993662+08:00",
+  "model_id": "TimeVLM_official_clip_seed42_sl24_pl24_power",
+  "subsequent_models_authorized": true,
+  "framework_or_protocol_changed": false,
+  "evaluation": "all25450windows x24;globalMAE/RMSE/R2;no clipping;validationMSE checkpoint selection",
+  "training_config": {
+    "batch_size": 32,
+    "eval_batch_size": 32,
+    "train_epochs": 10,
+    "patience": 5,
+    "learning_rate": 0.001,
+    "optimizer": "Adam",
+    "scheduler": "type1",
+    "loss": "MSE",
+    "precision": "fp16",
+    "d_model": 128,
+    "patch_len": 16,
+    "stride": 8,
+    "memory_size": 100,
+    "top_k": 5,
+    "CLIP_frozen": true
+  },
+  "actual_input": "historical power; derived images and constant truncated text prefix; no NWP/satellite",
+  "duration_estimate": {
+    "based_on": "first completed epoch of both protocols",
+    "epoch_seconds": [
+      306.34,
+      307.59
+    ],
+    "expected_full10epochs_and_test_end_beijing": "2026-10-11 06:08\u201306:12",
+    "early_stopping_may_finish_sooner": true,
+    "estimated_at": "2026-10-11T05:23:56.013220+08:00"
+  },
+  "first_epoch_validation": {
+    "in_domain": {
+      "mae": 0.06824894029282107,
+      "rmse": 0.11868466327456396,
+      "mse": 0.014086049296596632
+    },
+    "zeroshot_v1": {
+      "mae": 0.06373075081459159,
+      "rmse": 0.11375969216880233,
+      "mse": 0.012941267562340666
+    }
+  },
+  "first_epoch_validation_note": "validation only; not formal test metrics; full training ongoing",
+  "subsequent_scope": "Explicit user request: only FusionSF three input variants, two protocols, seed42, serially after TimeVLM completion and acceptance",
+  "subsequent_queue": "reports/FusionSF_inputs_two_protocols_seed42_20261011/runs.json",
+  "completed_at": "2026-10-11T06:07:59.613320+08:00",
+  "acceptance": {
+    "status": "passed_full_artifact_acceptance",
+    "checked_at": "2026-10-11T06:07:59.613350+08:00",
+    "runs": [
+      {
+        "protocol": "in_domain",
+        "status": "passed_full_artifact_acceptance",
+        "completed_epochs": 10,
+        "best_epoch": 9,
+        "selection": "minimum validation MSE; checkpoint includes memory state",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.07105578813964124,
+          "rmse": 0.12220230136553013,
+          "r2": 0.7551207179578641,
+          "model": "TimeVLM",
+          "seed": 42,
+          "data_protocol": "in_domain",
+          "baseline_config": "official",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "validation_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "checks": [
+          "all labels match raw CSV and accepted test reference",
+          "all site/time indices match accepted protocol",
+          "config/checkpoint/protocol match; no modality scaler is required",
+          "predictions/weights finite; every station nonzero",
+          "minimum validation MSE checkpoint selected",
+          "independent metric recomputation/log/unique index agree",
+          "first64 chronological test predictions replayed from checkpoint memory on idle GPU fp16"
+        ],
+        "first64_checkpoint_replay_max_absolute_difference": 0.0,
+        "checkpoint_replay_gpu": 0,
+        "comparison_to_TimeXer_same_protocol": {
+          "mae": {
+            "absolute_change": -0.0014857535180171216,
+            "relative_change_percent": -2.048141635903966
+          },
+          "rmse": {
+            "absolute_change": 0.002003951794491393,
+            "relative_change_percent": 1.667204085283247
+          },
+          "r2": {
+            "absolute_change": -0.007965523545337638,
+            "relative_change_percent": -1.043856265793286
+          }
+        },
+        "comparison_limit": "TimeVLM consumes power only and generated image/constant text; TimeXer additionally consumes historical NWP; difference does not isolate architecture effect",
+        "negative_prediction_fraction": 0.18824165029469547,
+        "prediction_range": [
+          -0.07867944240570068,
+          0.9374974966049194
+        ],
+        "evidence": {
+          "pred": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power/pred.npy",
+          "true": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power/true.npy",
+          "site_ids": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power/site_ids.npy",
+          "forecast_timestamps": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power/forecast_timestamps.npy",
+          "metrics": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power/metrics.json",
+          "config": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power/config.json",
+          "protocol": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power/data_protocol.json",
+          "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/TimeVLM_official_clip_seed42_sl24_pl24_power/checkpoint.pth",
+          "log": "/home/zhaopp/workspace/PV-TSFM/reports/TimeVLM_two_protocols_seed42_20261011/in_domain_training.log"
+        }
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "status": "passed_full_artifact_acceptance",
+        "completed_epochs": 10,
+        "best_epoch": 9,
+        "selection": "minimum validation MSE; checkpoint includes memory state",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.06987500472570381,
+          "rmse": 0.12165875590433801,
+          "r2": 0.7572942777900238,
+          "model": "TimeVLM",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "official",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "checks": [
+          "all labels match raw CSV and accepted test reference",
+          "all site/time indices match accepted protocol",
+          "config/checkpoint/protocol match; no modality scaler is required",
+          "predictions/weights finite; every station nonzero",
+          "minimum validation MSE checkpoint selected",
+          "independent metric recomputation/log/unique index agree",
+          "first64 chronological test predictions replayed from checkpoint memory on idle GPU fp16"
+        ],
+        "first64_checkpoint_replay_max_absolute_difference": 0.0,
+        "checkpoint_replay_gpu": 0,
+        "comparison_to_TimeXer_same_protocol": {
+          "mae": {
+            "absolute_change": -0.0015762991182791813,
+            "relative_change_percent": -2.2061166605456206
+          },
+          "rmse": {
+            "absolute_change": 0.003354900383515269,
+            "relative_change_percent": 2.8358335142549596
+          },
+          "r2": {
+            "absolute_change": -0.013201293372955836,
+            "relative_change_percent": -1.7133509739750918
+          }
+        },
+        "comparison_limit": "TimeVLM consumes power only and generated image/constant text; TimeXer additionally consumes historical NWP; difference does not isolate architecture effect",
+        "negative_prediction_fraction": 0.18751637197118534,
+        "prediction_range": [
+          -0.07421267032623291,
+          0.9034348726272583
+        ],
+        "evidence": {
+          "pred": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power/pred.npy",
+          "true": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power/true.npy",
+          "site_ids": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power/site_ids.npy",
+          "forecast_timestamps": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power/forecast_timestamps.npy",
+          "metrics": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power/metrics.json",
+          "config": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power/config.json",
+          "protocol": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power/data_protocol.json",
+          "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/TimeVLM_official_clip_seed42_sl24_pl24_power/checkpoint.pth",
+          "log": "/home/zhaopp/workspace/PV-TSFM/reports/TimeVLM_two_protocols_seed42_20261011/zeroshot_v1_training.log"
+        }
+      }
+    ],
+    "new_training": true,
+    "acceptance_full_reinference": false,
+    "acceptance_replay": "first64 chronological samples per protocol only; preserves stateful memory; metrics from original full formal test"
+  }
+}

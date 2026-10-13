@@ -1,0 +1,192 @@
+{
+  "diagnostic_only": true,
+  "formal_training_or_test": false,
+  "cpu_cores": [
+    9,
+    10
+  ],
+  "gpu": 0,
+  "checks": [
+    "in_domain/train/power_nwp: 40 samples, all sequences and covariates bitwise equal",
+    "in_domain/val/power_nwp: 40 samples, all sequences and covariates bitwise equal",
+    "in_domain/test/power_nwp: 40 samples, all sequences and covariates bitwise equal",
+    "zeroshot_v1/train/power_nwp: 40 samples, all sequences and covariates bitwise equal",
+    "zeroshot_v1/val/power_nwp: 40 samples, all sequences and covariates bitwise equal",
+    "zeroshot_v1/test/power_nwp: 40 samples, all sequences and covariates bitwise equal",
+    "in_domain/train/all: 40 samples, all sequences and covariates bitwise equal",
+    "in_domain/test/all: 40 samples, all sequences and covariates bitwise equal",
+    "TimeVLM prompts/token IDs/attention masks/CLIP normalized pixels bitwise equal, batch sizes1/10/32; every uint8 pixel value covered",
+    "TimeVLM real batch32 FP16 training: predictions, loss, every trainable gradient, memory contents/pointer bitwise equal at identical weights/RNG"
+  ],
+  "data": [
+    {
+      "protocol": "in_domain",
+      "modalities": "power_nwp",
+      "batch_size": 16,
+      "num_workers": 0,
+      "seconds_per_batch": {
+        "before": 0.040791414452542085,
+        "after": 0.003552172718627844,
+        "speedup": 11.483510989943994
+      }
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "modalities": "power_nwp",
+      "batch_size": 16,
+      "num_workers": 0,
+      "seconds_per_batch": {
+        "before": 0.03901740578294266,
+        "after": 0.003608227059885394,
+        "speedup": 10.813456341680988
+      }
+    },
+    {
+      "protocol": "in_domain",
+      "modalities": "all",
+      "batch_size": 16,
+      "num_workers": 0,
+      "seconds_per_batch": {
+        "before": 0.04335872623778414,
+        "after": 0.008516491812770255,
+        "speedup": 5.091148701953647
+      }
+    }
+  ],
+  "timevlm": {
+    "prediction_max_absolute_difference": 0.0,
+    "gradient_max_absolute_difference": 0.0,
+    "seconds_per_training_batch": {
+      "before": 0.08302509156055748,
+      "after": 0.04491800209507346,
+      "speedup": 1.8483700896764408
+    }
+  },
+  "status": "passed_bitwise_equivalence_and_real_batch_throughput",
+  "limitations": [
+    "Timing covers data-only iteration or a fixed-batch forward/backward; excludes optimizer, epoch validation, full testing and shared-host variability. GPU utilization and full epoch speedup require post-restart measurement.",
+    "Interrupted processes have only best checkpoints; original RNG/iterator and later states unavailable."
+  ],
+  "resumed_at": "2026-10-11T06:45:12.177771+08:00",
+  "post_restart": {
+    "runs": [
+      {
+        "pid": 3408863,
+        "model": "FusionSF",
+        "protocol": "in_domain",
+        "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/FusionSF_power_future_nwp_seed42_sl24_pl24/before_input_optimization.pth",
+        "resume_epoch": 2,
+        "cores": [
+          0,
+          7
+        ]
+      },
+      {
+        "pid": 3408848,
+        "model": "TimeVLM",
+        "protocol": "in_domain",
+        "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/TimeVLM_ep200_pat20_seed42_sl24_pl24_power_resume9/before_input_optimization.pth",
+        "resume_epoch": 10,
+        "cores": [
+          9,
+          10
+        ]
+      }
+    ],
+    "gpu_utilization_samples": {
+      "0": [
+        {
+          "utilization_percent": 14,
+          "memory_MiB": 1297
+        },
+        {
+          "utilization_percent": 13,
+          "memory_MiB": 1297
+        },
+        {
+          "utilization_percent": 10,
+          "memory_MiB": 1297
+        },
+        {
+          "utilization_percent": 13,
+          "memory_MiB": 1297
+        },
+        {
+          "utilization_percent": 15,
+          "memory_MiB": 1297
+        },
+        {
+          "utilization_percent": 15,
+          "memory_MiB": 1297
+        },
+        {
+          "utilization_percent": 15,
+          "memory_MiB": 1297
+        },
+        {
+          "utilization_percent": 15,
+          "memory_MiB": 1297
+        },
+        {
+          "utilization_percent": 14,
+          "memory_MiB": 1297
+        },
+        {
+          "utilization_percent": 14,
+          "memory_MiB": 1297
+        }
+      ],
+      "3": [
+        {
+          "utilization_percent": 16,
+          "memory_MiB": 721
+        },
+        {
+          "utilization_percent": 16,
+          "memory_MiB": 721
+        },
+        {
+          "utilization_percent": 16,
+          "memory_MiB": 721
+        },
+        {
+          "utilization_percent": 16,
+          "memory_MiB": 721
+        },
+        {
+          "utilization_percent": 17,
+          "memory_MiB": 721
+        },
+        {
+          "utilization_percent": 16,
+          "memory_MiB": 721
+        },
+        {
+          "utilization_percent": 16,
+          "memory_MiB": 721
+        },
+        {
+          "utilization_percent": 16,
+          "memory_MiB": 721
+        },
+        {
+          "utilization_percent": 15,
+          "memory_MiB": 721
+        },
+        {
+          "utilization_percent": 16,
+          "memory_MiB": 721
+        }
+      ]
+    },
+    "gpu_utilization_mean_percent": {
+      "0": 13.8,
+      "3": 16
+    },
+    "full_epoch_timing_pending": true,
+    "cpu_affinity": {
+      "3408863": "Cpus_allowed_list:\t0,7",
+      "3408848": "Cpus_allowed_list:\t9-10"
+    }
+  }
+}

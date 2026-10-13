@@ -1,0 +1,520 @@
+{
+  "approved_at": "2026-10-11T03:31:53+08:00",
+  "scope": "TimeXer only; in_domain and zeroshot_v1; seed42;24->24",
+  "authorization": "User explicitly requested estimating Cross-Unet duration then running TimeXer. Cross-Unet completed and accepted, so pending ordering/resource ambiguity resolved. No repeated approval requested.",
+  "state": "completed_artifact_acceptance_passed",
+  "multi_seed_authorized": false,
+  "subsequent_models_authorized": false,
+  "site1_training_authorized": false,
+  "framework_or_protocol_changed": false,
+  "official_config_verified_against": "scripts/official_reference/TimeXer/TimeXer.sh.txt and frozen models/official_presets.py",
+  "task_adaptations": [
+    "MMSP hourly24->24;patch12;15historicalNWP+1targetpower with accepted shared protocols",
+    "seed42 instead of author2021",
+    "DataLoader0,twoCPUcores/process,explicit idle GPUs"
+  ],
+  "training_config": {
+    "batch_size": 32,
+    "eval_batch_size": 32,
+    "train_epochs": 10,
+    "patience": 3,
+    "learning_rate": 0.0001,
+    "optimizer": "Adam",
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "loss": "MSE",
+    "monitor": "validation MSE",
+    "scheduler": "official type1 epoch scheduler",
+    "precision": "fp32",
+    "patch_len": 12,
+    "d_model": 512,
+    "d_ff": 512,
+    "e_layers": 2,
+    "n_heads": 8,
+    "factor": 3,
+    "dropout": 0.1,
+    "drop_last_train": false
+  },
+  "actual_inputs": [
+    "historical power",
+    "15historical NWP channels; future NWP loaded by common data interface but not consumed by model"
+  ],
+  "evaluation": "all25450windows x24;no clipping/mask;globalMAE/RMSE/R2;test never selects checkpoints",
+  "completed_previous_model_acceptance": "/home/zhaopp/workspace/PV-TSFM/reports/CrossUnet_two_protocols_seed42_20261010/runs.json",
+  "runs": [
+    {
+      "protocol": "in_domain",
+      "gpu": 3,
+      "cpu_cores": [
+        0,
+        7
+      ],
+      "threads": 2,
+      "num_workers": 0,
+      "seed": 42,
+      "model_id": "TimeXer_official_seed42_sl24_pl24_power_nwp_full",
+      "state": "completed_artifact_acceptance_passed",
+      "pid": 3313923,
+      "argv": [
+        "--model",
+        "TimeXer",
+        "--protocol",
+        "in_domain",
+        "--is_training",
+        "1",
+        "--seed",
+        "42",
+        "--seq_len",
+        "24",
+        "--pred_len",
+        "24",
+        "--num_workers",
+        "0",
+        "--use_gpu",
+        "1",
+        "--gpu",
+        "3",
+        "--model_id",
+        "TimeXer_official_seed42_sl24_pl24_power_nwp_full"
+      ],
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/TimeXer_two_protocols_seed42_20261011/in_domain_training.log",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full",
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.07254154165765836,
+        "rmse": 0.12019834957103874,
+        "r2": 0.7630862415032017,
+        "model": "TimeXer",
+        "seed": 42,
+        "data_protocol": "in_domain",
+        "baseline_config": "official",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "exec_session_id": 55321,
+      "started_at": "2026-10-11T03:32:55+08:00",
+      "startup_verification": {
+        "checked_at": "2026-10-11T03:34:40+08:00",
+        "pid_observed_alive": true,
+        "cpu_affinity_confirmed": [
+          0,
+          7
+        ],
+        "gpu_context_confirmed": 3,
+        "saved_config_and_protocol_match": true,
+        "scaler_saved": true,
+        "first_epoch_available": false,
+        "performance_reproduction_complete": false
+      },
+      "complete_test_metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/metrics.json",
+      "completed_test_log_time": "2026-10-11 04:05:32",
+      "original_pid_observed_exited_before_adapter_launch": true
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "gpu": 0,
+      "cpu_cores": [
+        9,
+        10
+      ],
+      "threads": 2,
+      "num_workers": 0,
+      "seed": 42,
+      "model_id": "TimeXer_official_seed42_sl24_pl24_power_nwp_full",
+      "state": "completed_artifact_acceptance_passed",
+      "pid": 3313957,
+      "argv": [
+        "--model",
+        "TimeXer",
+        "--protocol",
+        "zeroshot_v1",
+        "--is_training",
+        "1",
+        "--seed",
+        "42",
+        "--seq_len",
+        "24",
+        "--pred_len",
+        "24",
+        "--num_workers",
+        "0",
+        "--use_gpu",
+        "1",
+        "--gpu",
+        "0",
+        "--model_id",
+        "TimeXer_official_seed42_sl24_pl24_power_nwp_full"
+      ],
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/TimeXer_two_protocols_seed42_20261011/zeroshot_v1_training.log",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full",
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.07145130384398299,
+        "rmse": 0.11830385552082275,
+        "r2": 0.7704955711629796,
+        "model": "TimeXer",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "official",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "exec_session_id": 84988,
+      "started_at": "2026-10-11T03:32:55+08:00",
+      "startup_verification": {
+        "checked_at": "2026-10-11T03:34:40+08:00",
+        "pid_observed_alive": true,
+        "cpu_affinity_confirmed": [
+          9,
+          10
+        ],
+        "gpu_context_confirmed": 0,
+        "saved_config_and_protocol_match": true,
+        "scaler_saved": true,
+        "first_epoch_available": false,
+        "performance_reproduction_complete": false
+      },
+      "complete_test_metrics_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/metrics.json",
+      "completed_test_log_time": "2026-10-11 04:05:01",
+      "original_pid_observed_exited_before_adapter_launch": true
+    }
+  ],
+  "limitations": [
+    "Single seed only",
+    "Historical NWP interpolation remains bidirectional; strict online availability not established"
+  ],
+  "notes": "Training start only; no performance reproduction claim before complete training and formal evaluation.",
+  "updated_at": "2026-10-11T03:34:40+08:00",
+  "progress_reporting": "Read-only random checks every10-20min; no training control or automatic next model",
+  "random_checker": {
+    "pid": 3314572,
+    "exec_session_id": 16303,
+    "cpu_core": 7,
+    "threads": 1,
+    "interval_seconds": [
+      600,
+      1200
+    ],
+    "mode": "read-only;no model API,no training control,no next-model queue",
+    "status_file": "/home/zhaopp/workspace/PV-TSFM/reports/TimeXer_two_protocols_seed42_20261011/random_check_status.json",
+    "events_file": "/home/zhaopp/workspace/PV-TSFM/reports/TimeXer_two_protocols_seed42_20261011/random_check_events.jsonl"
+  },
+  "completion_state_verification": "Original TimeXer PIDs absent before Adapter launch; both Complete test metrics log entries verified. Completion-state update only; no full acceptance or main-table promotion.",
+  "acceptance": {
+    "status": "passed_full_artifact_acceptance",
+    "checked_at": "2026-10-11T05:05:28+08:00",
+    "runs": [
+      {
+        "protocol": "in_domain",
+        "status": "passed_full_artifact_acceptance",
+        "test_windows": 25450,
+        "completed_epochs": 7,
+        "best_epoch": 4,
+        "validation_selection": "lowest MSE, followed by 3 stale epochs",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.07254154165765836,
+          "rmse": 0.12019834957103874,
+          "r2": 0.7630862415032017,
+          "model": "TimeXer",
+          "seed": 42,
+          "data_protocol": "in_domain",
+          "baseline_config": "official",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "validation_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "metric_recomputation_max_absolute_difference": 0.0,
+        "sample_checkpoint_inference": {
+          "indices": [
+            0,
+            2545,
+            10000,
+            20000,
+            25449
+          ],
+          "max_absolute_difference_from_saved_gpu_prediction": 1.7881393432617188e-07,
+          "device": "CPU, one core/thread; identity check only"
+        },
+        "checks": [
+          "all labels match raw CSV",
+          "all sites/timestamps match current protocol",
+          "config/checkpoint/protocol match; active sites differ correctly by train/test role",
+          "scalers match accepted reference",
+          "all predictions and checkpoint tensors finite",
+          "best checkpoint is minimum validation MSE",
+          "full metrics and unique result index agree",
+          "no entirely zero station predictions"
+        ],
+        "prediction_range": [
+          -0.10222797095775604,
+          1.6540064811706543
+        ],
+        "negative_prediction_fraction": 0.050320890635232485,
+        "comparison_to_CrossUnet_same_protocol": {
+          "mae": {
+            "absolute_change": 0.029164129092254548,
+            "relative_change_percent": 67.23344562860062
+          },
+          "rmse": {
+            "absolute_change": 0.03582411738295378,
+            "relative_change_percent": 42.45859956757359
+          },
+          "r2": {
+            "absolute_change": -0.12017557231643727,
+            "relative_change_percent": -13.6058833786487
+          }
+        },
+        "comparison_limit": "TimeXer uses historical NWP only; Cross-Unet also uses future NWP. Difference does not isolate architecture effect.",
+        "evidence": {
+          "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/checkpoint.pth",
+          "config": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/config.json",
+          "protocol": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/data_protocol.json",
+          "scalers": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/scalers.npz",
+          "log": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/run.log",
+          "prediction": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/pred.npy",
+          "target": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/true.npy",
+          "site_ids": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/site_ids.npy",
+          "forecast_timestamps": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/forecast_timestamps.npy",
+          "metrics": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/TimeXer_official_seed42_sl24_pl24_power_nwp_full/metrics.json"
+        }
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "status": "passed_full_artifact_acceptance",
+        "test_windows": 25450,
+        "completed_epochs": 7,
+        "best_epoch": 4,
+        "validation_selection": "lowest MSE, followed by 3 stale epochs",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.07145130384398299,
+          "rmse": 0.11830385552082275,
+          "r2": 0.7704955711629796,
+          "model": "TimeXer",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "official",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "metric_recomputation_max_absolute_difference": 0.0,
+        "sample_checkpoint_inference": {
+          "indices": [
+            0,
+            2545,
+            10000,
+            20000,
+            25449
+          ],
+          "max_absolute_difference_from_saved_gpu_prediction": 2.384185791015625e-07,
+          "device": "CPU, one core/thread; identity check only"
+        },
+        "checks": [
+          "all labels match raw CSV",
+          "all sites/timestamps match current protocol",
+          "config/checkpoint/protocol match; active sites differ correctly by train/test role",
+          "scalers match accepted reference",
+          "all predictions and checkpoint tensors finite",
+          "best checkpoint is minimum validation MSE",
+          "full metrics and unique result index agree",
+          "no entirely zero station predictions"
+        ],
+        "prediction_range": [
+          -0.0741128921508789,
+          1.5213804244995117
+        ],
+        "negative_prediction_fraction": 0.03824983628028815,
+        "comparison_to_CrossUnet_same_protocol": {
+          "mae": {
+            "absolute_change": 0.026839273029443528,
+            "relative_change_percent": 60.16151369799639
+          },
+          "rmse": {
+            "absolute_change": 0.03414097526141971,
+            "relative_change_percent": 40.56535987859723
+          },
+          "r2": {
+            "absolute_change": -0.11335035318982623,
+            "relative_change_percent": -12.824673403662157
+          }
+        },
+        "comparison_limit": "TimeXer uses historical NWP only; Cross-Unet also uses future NWP. Difference does not isolate architecture effect.",
+        "evidence": {
+          "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/checkpoint.pth",
+          "config": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/config.json",
+          "protocol": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/data_protocol.json",
+          "scalers": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/scalers.npz",
+          "log": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/run.log",
+          "prediction": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/pred.npy",
+          "target": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/true.npy",
+          "site_ids": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/site_ids.npy",
+          "forecast_timestamps": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/forecast_timestamps.npy",
+          "metrics": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/TimeXer_official_seed42_sl24_pl24_power_nwp_full/metrics.json"
+        }
+      }
+    ],
+    "new_training": false,
+    "new_full_test_inference": false,
+    "verification_inference": "five CPU checkpoint samples per protocol only; full metrics independently recomputed from saved complete test arrays"
+  }
+}

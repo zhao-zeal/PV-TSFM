@@ -1,0 +1,18 @@
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:261: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:391: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+7 [8, 8]
+3 modal model, vq in ts
+7 [8, 8]
+3 modal model, vq in ts
+/home/zhaopp/workspace/PV-TSFM/scripts/check_fusionsf_readout_repair.py:83: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  prediction_min=float(prediction.min()), prediction_max=float(prediction.max()),
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/check_fusionsf_readout_repair.py", line 118, in <module>
+    main()
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/check_fusionsf_readout_repair.py", line 69, in main
+    assert torch.count_nonzero(prediction) > 0, 'Readout returned to the all-zero state'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Readout returned to the all-zero state

@@ -1,0 +1,68 @@
+{
+  "diagnostic_only": true,
+  "official_model_code_changed": false,
+  "gpu_available": false,
+  "sample_indices": [
+    0,
+    1,
+    2545,
+    25449
+  ],
+  "constant_weather_series": [
+    {
+      "sample_index": 0,
+      "weather_variable": "Low cloud cover",
+      "constant_value": -0.5195114612579346,
+      "native_cpu_loc": -0.5195115208625793,
+      "native_cpu_scale": 5.960464477539063e-08
+    },
+    {
+      "sample_index": 0,
+      "weather_variable": "Total precipitation",
+      "constant_value": -0.16315551102161407,
+      "native_cpu_loc": -0.16315554082393646,
+      "native_cpu_scale": 2.9802322387695312e-08
+    },
+    {
+      "sample_index": 1,
+      "weather_variable": "Low cloud cover",
+      "constant_value": -0.5195114612579346,
+      "native_cpu_loc": -0.5195115208625793,
+      "native_cpu_scale": 5.960464477539063e-08
+    },
+    {
+      "sample_index": 1,
+      "weather_variable": "Total precipitation",
+      "constant_value": -0.16315551102161407,
+      "native_cpu_loc": -0.16315554082393646,
+      "native_cpu_scale": 2.9802322387695312e-08
+    },
+    {
+      "sample_index": 2545,
+      "weather_variable": "Low cloud cover",
+      "constant_value": -0.5195114612579346,
+      "native_cpu_loc": -0.5195115208625793,
+      "native_cpu_scale": 5.960464477539063e-08
+    },
+    {
+      "sample_index": 2545,
+      "weather_variable": "Total precipitation",
+      "constant_value": -0.16315551102161407,
+      "native_cpu_loc": -0.16315554082393646,
+      "native_cpu_scale": 2.9802322387695312e-08
+    },
+    {
+      "sample_index": 25449,
+      "weather_variable": "Low cloud cover",
+      "constant_value": -0.5195114612579346,
+      "native_cpu_loc": -0.5195115208625793,
+      "native_cpu_scale": 5.960464477539063e-08
+    }
+  ],
+  "max_abs_difference_to_accepted_cached_prediction": {
+    "original": 0.02559414505958557,
+    "diagnostic_scale_floor": 8.704513311386108e-05,
+    "diagnostic_float64_reduction": 1.7881393432617188e-07
+  },
+  "interpretation": "Official CPU FP32 mean rounding on constant NWP yields tiny nonzero scales; a transient FP64 reduction diagnostic reduces cached prediction discrepancy to 1.79e-7. This supports normalization numerical sensitivity as the cause. Official code, model math, weights and formal inputs remain unchanged; native GPU identity is pending."
+}

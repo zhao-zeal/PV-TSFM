@@ -49,7 +49,8 @@ class Dataset_MMSP(MMSPProtocolDataset):
             'future_nwp': torch.empty(0),
             'satellite': sample.get('stl_input', torch.empty(0)).float(),
             'satellite_coords': sample.get('stl_coords', torch.empty(0)).float(),
-            'fusion_time': sample.get('ts_time', torch.empty(0)).float(),
+            'fusion_time': (sample['ts_time'] if 'ts_time' in sample else
+                            self.storage.data_sp_time[:, begin:end].T[..., None, None]).float(),
             'correlation_history': site['values'][correlation_begin:correlation_begin + self.seq_len].unsqueeze(-1).float(),
             'site_id': sample['site_id'],
             'forecast_timestamps': sample['forecast_timestamps'],
@@ -59,10 +60,13 @@ class Dataset_MMSP(MMSPProtocolDataset):
             'forecast_end_timestamp': sample['forecast_end_timestamp'],
             'split_id': sample['split_id'],
         }
-        if hasattr(self.storage, 'data_ec_grouped'):
+        if 'historical_nwp' in sample:
+            covariates['historical_nwp'] = sample['historical_nwp']
+            covariates['future_nwp'] = sample['future_nwp']
+        elif hasattr(self.storage, 'data_ec_values'):
             lat, lon = (round(float(value), 1) for value in site['lats_lons'])
             offset = int((record.input_start - self.storage.ec_start_time).total_seconds() // 3600)
-            values = self.storage.data_ec_grouped.get_group((lat, lon)).values
+            values = self.storage.data_ec_values[(lat, lon)]
             covariates['historical_nwp'] = torch.from_numpy(values[offset:offset + self.seq_len]).float()
             covariates['future_nwp'] = torch.from_numpy(values[offset + self.seq_len:offset + self.seq_len + self.pred_len]).float()
         return (

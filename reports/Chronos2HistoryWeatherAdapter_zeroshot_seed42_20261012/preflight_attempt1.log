@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 471, in <module>
+    main()
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 405, in main
+    preflight(opts.gpu);return
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 179, in preflight
+    assert not torch.equal(initial, changed_relation)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

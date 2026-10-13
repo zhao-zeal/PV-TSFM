@@ -1,0 +1,73 @@
+{
+  "protocol": "in_domain",
+  "variant": "power_future_nwp",
+  "stage": "early_resumed_training_validation_only",
+  "observed_at": "2026-10-12T15:11:59.535016+08:00",
+  "source_log": "/home/zhaopp/workspace/PV-TSFM/reports/FusionSF_inputs_two_protocols_seed42_20261011/power_future_nwp_in_domain.log",
+  "zero_reference": {
+    "mae": 0.11889694288576749,
+    "rmse": 0.2400417610195862
+  },
+  "matching_validation_epochs": [
+    {
+      "epoch": 3,
+      "train_loss": 0.1454266458749771,
+      "validation": {
+        "mae": 0.11889694288576746,
+        "rmse": 0.24004176101958627,
+        "mse": 0.05762004703338417
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.1454266458749771,
+      "validation": {
+        "mae": 0.11889694288576746,
+        "rmse": 0.24004176101958627,
+        "mse": 0.05762004703338417
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.14542657136917114,
+      "validation": {
+        "mae": 0.11889694288576746,
+        "rmse": 0.24004176101958627,
+        "mse": 0.05762004703338417
+      }
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.14542661607265472,
+      "validation": {
+        "mae": 0.11889694288576746,
+        "rmse": 0.24004176101958627,
+        "mse": 0.05762004703338417
+      }
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.14542661607265472,
+      "validation": {
+        "mae": 0.11889694288576746,
+        "rmse": 0.24004176101958627,
+        "mse": 0.05762004703338417
+      }
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.14542661607265472,
+      "validation": {
+        "mae": 0.11889694288576746,
+        "rmse": 0.24004176101958627,
+        "mse": 0.05762004703338417
+      }
+    }
+  ],
+  "suspected_all_zero_prediction": true,
+  "full_prediction_zero_confirmed": false,
+  "permanent_degeneration_proven": false,
+  "action": "Record only; continue authorized configuration; require nonzero per-site formal predictions for acceptance",
+  "batch_size": 256,
+  "gpu": 4
+}

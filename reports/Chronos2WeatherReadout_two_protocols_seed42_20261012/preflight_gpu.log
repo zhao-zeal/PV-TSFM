@@ -1,0 +1,47 @@
+in_domain A04-a: checked train cache (76570 windows)
+in_domain A04-a: checked val cache (25450 windows)
+in_domain A04-a: checked test cache (25450 windows)
+A04 context in_domain/train: 6400/76570
+A04 context in_domain/train: 12800/76570
+A04 context in_domain/train: 19200/76570
+A04 context in_domain/train: 25600/76570
+A04 context in_domain/train: 32000/76570
+A04 context in_domain/train: 38400/76570
+A04 context in_domain/train: 44800/76570
+A04 context in_domain/train: 51200/76570
+A04 context in_domain/train: 57600/76570
+A04 context in_domain/train: 64000/76570
+A04 context in_domain/train: 70400/76570
+in_domain A04-b: checked train cache (76570 windows)
+A04 context in_domain/val: 6400/25450
+A04 context in_domain/val: 12800/25450
+A04 context in_domain/val: 19200/25450
+in_domain A04-b: checked val cache (25450 windows)
+A04 context in_domain/test: 6400/25450
+A04 context in_domain/test: 12800/25450
+A04 context in_domain/test: 19200/25450
+in_domain A04-b: checked test cache (25450 windows)
+zeroshot_v1 A04-a: checked train cache (76570 windows)
+zeroshot_v1 A04-a: checked val cache (25450 windows)
+zeroshot_v1 A04-a: checked test cache (25450 windows)
+A04 context zeroshot_v1/train: 6400/76570
+A04 context zeroshot_v1/train: 12800/76570
+A04 context zeroshot_v1/train: 19200/76570
+A04 context zeroshot_v1/train: 25600/76570
+A04 context zeroshot_v1/train: 32000/76570
+A04 context zeroshot_v1/train: 38400/76570
+A04 context zeroshot_v1/train: 44800/76570
+A04 context zeroshot_v1/train: 51200/76570
+A04 context zeroshot_v1/train: 57600/76570
+A04 context zeroshot_v1/train: 64000/76570
+A04 context zeroshot_v1/train: 70400/76570
+zeroshot_v1 A04-b: checked train cache (76570 windows)
+A04 context zeroshot_v1/val: 6400/25450
+A04 context zeroshot_v1/val: 12800/25450
+A04 context zeroshot_v1/val: 19200/25450
+zeroshot_v1 A04-b: checked val cache (25450 windows)
+A04 context zeroshot_v1/test: 6400/25450
+A04 context zeroshot_v1/test: 12800/25450
+A04 context zeroshot_v1/test: 19200/25450
+zeroshot_v1 A04-b: checked test cache (25450 windows)
+A04 preflight passed: 29249 trainable parameters per variant

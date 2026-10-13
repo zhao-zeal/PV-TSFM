@@ -1,0 +1,29 @@
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:261: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:391: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+7 [8, 8]
+3 modal model, vq in ts
+3 modal model, vq in ctx
+7 [8, 8]
+3 modal model, vq in ts
+3 modal model, vq in ctx
+{"variant": "power_satellite_history_future_nwp", "protocol": "in_domain", "batch_size": 64, "status": "passed", "final_nonzero": 1536}
+7 [8, 8]
+3 modal model, vq in ts
+3 modal model, vq in ctx
+7 [8, 8]
+3 modal model, vq in ts
+3 modal model, vq in ctx
+{"variant": "power_satellite_history_future_nwp", "protocol": "zeroshot_v1", "batch_size": 64, "status": "passed", "final_nonzero": 1536}
+7 [8, 8]
+3 modal model, vq in ts
+7 [8, 8]
+3 modal model, vq in ts
+{"variant": "power_history_future_nwp", "protocol": "in_domain", "batch_size": 256, "status": "passed", "final_nonzero": 6144}
+7 [8, 8]
+3 modal model, vq in ts
+7 [8, 8]
+3 modal model, vq in ts
+{"variant": "power_history_future_nwp", "protocol": "zeroshot_v1", "batch_size": 256, "status": "passed", "final_nonzero": 6144}
+{"status": "passed_real_batch_positive_readout_and_supervised_gradients", "evidence": "/home/zhaopp/workspace/PV-TSFM/reports/FusionSF_inputs_two_protocols_seed42_20261011/positive_readout_remaining_preflight_20261012.json"}

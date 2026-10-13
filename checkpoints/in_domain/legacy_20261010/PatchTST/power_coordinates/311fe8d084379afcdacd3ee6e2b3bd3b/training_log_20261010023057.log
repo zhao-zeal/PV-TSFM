@@ -1,0 +1,326 @@
+2026-10-10 02:30:57,247 - BasicTS-training - INFO - Initializing training.
+2026-10-10 02:30:57,247 - BasicTS-training - INFO - Building train data loader.
+2026-10-10 02:30:59,022 - BasicTS-training - INFO - Set optim: AdamW
+2026-10-10 02:30:59,022 - BasicTS-training - INFO - Set lr_scheduler: ReduceLROnPlateau
+2026-10-10 02:30:59,022 - BasicTS-training - INFO - Building val data loader.
+2026-10-10 02:30:59,023 - BasicTS-training - INFO - Building test data loader.
+2026-10-10 02:30:59,024 - BasicTS-training - INFO - Total parameters: 9503256
+2026-10-10 02:30:59,024 - BasicTS-training - INFO - Trainable parameters: 9503256
+2026-10-10 02:30:59,024 - BasicTS-training - INFO - Use early stopping with patience 20.
+2026-10-10 02:30:59,026 - BasicTS-training - INFO - Epoch 1 / 50
+2026-10-10 02:31:59,261 - BasicTS-training - INFO - Result <train>: [train/time: 60.23 (s), train/lr: 2.00e-04, train/loss: 0.0196, train/MAE: 0.0823, train/RMSE: 0.1401]
+2026-10-10 02:31:59,262 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:32:08,784 - BasicTS-training - INFO - Result <val>: [val/time: 9.52 (s), val/loss: 0.0134, val/MAE: 0.0643, val/RMSE: 0.1156]
+2026-10-10 02:32:08,902 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:32:09,011 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_01.pt saved
+2026-10-10 02:32:09,011 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:17
+2026-10-10 02:32:09,011 - BasicTS-training - INFO - Epoch 2 / 50
+2026-10-10 02:33:08,037 - BasicTS-training - INFO - Result <train>: [train/time: 59.03 (s), train/lr: 2.00e-04, train/loss: 0.0185, train/MAE: 0.0771, train/RMSE: 0.1359]
+2026-10-10 02:33:08,039 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:33:17,192 - BasicTS-training - INFO - Result <val>: [val/time: 9.15 (s), val/loss: 0.0134, val/MAE: 0.0635, val/RMSE: 0.1156]
+2026-10-10 02:33:17,369 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:33:17,479 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_02.pt saved
+2026-10-10 02:33:17,479 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:39
+2026-10-10 02:33:17,479 - BasicTS-training - INFO - Epoch 3 / 50
+2026-10-10 02:34:18,488 - BasicTS-training - INFO - Result <train>: [train/time: 61.01 (s), train/lr: 2.00e-04, train/loss: 0.0182, train/MAE: 0.0756, train/RMSE: 0.1348]
+2026-10-10 02:34:18,489 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:34:27,516 - BasicTS-training - INFO - Result <val>: [val/time: 9.03 (s), val/loss: 0.0128, val/MAE: 0.0609, val/RMSE: 0.1129]
+2026-10-10 02:34:27,693 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:34:27,800 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_03.pt saved
+2026-10-10 02:34:27,800 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:58
+2026-10-10 02:34:27,800 - BasicTS-training - INFO - Epoch 4 / 50
+2026-10-10 02:35:27,022 - BasicTS-training - INFO - Result <train>: [train/time: 59.22 (s), train/lr: 2.00e-04, train/loss: 0.0185, train/MAE: 0.0770, train/RMSE: 0.1358]
+2026-10-10 02:35:27,023 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:35:36,397 - BasicTS-training - INFO - Result <val>: [val/time: 9.37 (s), val/loss: 0.0130, val/MAE: 0.0610, val/RMSE: 0.1141]
+2026-10-10 02:35:36,515 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_04.pt saved
+2026-10-10 02:35:36,515 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:47
+2026-10-10 02:35:36,515 - BasicTS-training - INFO - Epoch 5 / 50
+2026-10-10 02:36:38,637 - BasicTS-training - INFO - Result <train>: [train/time: 62.12 (s), train/lr: 2.00e-04, train/loss: 0.0180, train/MAE: 0.0743, train/RMSE: 0.1340]
+2026-10-10 02:36:38,639 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:36:48,034 - BasicTS-training - INFO - Result <val>: [val/time: 9.40 (s), val/loss: 0.0131, val/MAE: 0.0623, val/RMSE: 0.1143]
+2026-10-10 02:36:48,151 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_05.pt saved
+2026-10-10 02:36:48,151 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:10
+2026-10-10 02:36:48,151 - BasicTS-training - INFO - Epoch 6 / 50
+2026-10-10 02:37:50,824 - BasicTS-training - INFO - Result <train>: [train/time: 62.67 (s), train/lr: 2.00e-04, train/loss: 0.0179, train/MAE: 0.0738, train/RMSE: 0.1337]
+2026-10-10 02:37:50,825 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:37:59,964 - BasicTS-training - INFO - Result <val>: [val/time: 9.14 (s), val/loss: 0.0131, val/MAE: 0.0616, val/RMSE: 0.1145]
+2026-10-10 02:38:00,080 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_06.pt saved
+2026-10-10 02:38:00,080 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:27
+2026-10-10 02:38:00,080 - BasicTS-training - INFO - Epoch 7 / 50
+2026-10-10 02:39:02,557 - BasicTS-training - INFO - Result <train>: [train/time: 62.48 (s), train/lr: 2.00e-04, train/loss: 0.0177, train/MAE: 0.0734, train/RMSE: 0.1332]
+2026-10-10 02:39:02,558 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:39:11,835 - BasicTS-training - INFO - Result <val>: [val/time: 9.28 (s), val/loss: 0.0130, val/MAE: 0.0603, val/RMSE: 0.1142]
+2026-10-10 02:39:12,018 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:39:12,132 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_07.pt saved
+2026-10-10 02:39:12,132 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:41
+2026-10-10 02:39:12,132 - BasicTS-training - INFO - Epoch 8 / 50
+2026-10-10 02:40:14,236 - BasicTS-training - INFO - Result <train>: [train/time: 62.10 (s), train/lr: 2.00e-04, train/loss: 0.0177, train/MAE: 0.0734, train/RMSE: 0.1332]
+2026-10-10 02:40:14,237 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:40:23,593 - BasicTS-training - INFO - Result <val>: [val/time: 9.36 (s), val/loss: 0.0130, val/MAE: 0.0597, val/RMSE: 0.1141]
+2026-10-10 02:40:23,766 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:40:23,879 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_08.pt saved
+2026-10-10 02:40:23,879 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:49
+2026-10-10 02:40:23,879 - BasicTS-training - INFO - Epoch 9 / 50
+2026-10-10 02:41:25,316 - BasicTS-training - INFO - Result <train>: [train/time: 61.44 (s), train/lr: 2.00e-04, train/loss: 0.0177, train/MAE: 0.0730, train/RMSE: 0.1329]
+2026-10-10 02:41:25,317 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:41:34,504 - BasicTS-training - INFO - Result <val>: [val/time: 9.19 (s), val/loss: 0.0125, val/MAE: 0.0584, val/RMSE: 0.1117]
+2026-10-10 02:41:34,672 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:41:34,781 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_09.pt saved
+2026-10-10 02:41:34,781 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:50
+2026-10-10 02:41:34,781 - BasicTS-training - INFO - Epoch 10 / 50
+2026-10-10 02:42:33,121 - BasicTS-training - INFO - Result <train>: [train/time: 58.34 (s), train/lr: 2.00e-04, train/loss: 0.0176, train/MAE: 0.0728, train/RMSE: 0.1326]
+2026-10-10 02:42:33,122 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:42:42,476 - BasicTS-training - INFO - Result <val>: [val/time: 9.35 (s), val/loss: 0.0125, val/MAE: 0.0580, val/RMSE: 0.1117]
+2026-10-10 02:42:42,647 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:42:42,759 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_10.pt saved
+2026-10-10 02:42:42,902 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:38
+2026-10-10 02:42:42,903 - BasicTS-training - INFO - Epoch 11 / 50
+2026-10-10 02:43:42,443 - BasicTS-training - INFO - Result <train>: [train/time: 59.54 (s), train/lr: 2.00e-04, train/loss: 0.0175, train/MAE: 0.0726, train/RMSE: 0.1325]
+2026-10-10 02:43:42,444 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:43:51,591 - BasicTS-training - INFO - Result <val>: [val/time: 9.15 (s), val/loss: 0.0131, val/MAE: 0.0601, val/RMSE: 0.1143]
+2026-10-10 02:43:51,705 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_11.pt saved
+2026-10-10 02:43:51,706 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:31
+2026-10-10 02:43:51,706 - BasicTS-training - INFO - Epoch 12 / 50
+2026-10-10 02:44:51,767 - BasicTS-training - INFO - Result <train>: [train/time: 60.06 (s), train/lr: 2.00e-04, train/loss: 0.0175, train/MAE: 0.0725, train/RMSE: 0.1323]
+2026-10-10 02:44:51,768 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:45:01,042 - BasicTS-training - INFO - Result <val>: [val/time: 9.27 (s), val/loss: 0.0124, val/MAE: 0.0571, val/RMSE: 0.1115]
+2026-10-10 02:45:01,236 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:45:01,347 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_12.pt saved
+2026-10-10 02:45:01,347 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:28
+2026-10-10 02:45:01,347 - BasicTS-training - INFO - Epoch 13 / 50
+2026-10-10 02:46:01,241 - BasicTS-training - INFO - Result <train>: [train/time: 59.89 (s), train/lr: 2.00e-04, train/loss: 0.0174, train/MAE: 0.0722, train/RMSE: 0.1320]
+2026-10-10 02:46:01,242 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:46:10,471 - BasicTS-training - INFO - Result <val>: [val/time: 9.23 (s), val/loss: 0.0126, val/MAE: 0.0583, val/RMSE: 0.1122]
+2026-10-10 02:46:10,587 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_13.pt saved
+2026-10-10 02:46:10,588 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:24
+2026-10-10 02:46:10,588 - BasicTS-training - INFO - Epoch 14 / 50
+2026-10-10 02:47:10,533 - BasicTS-training - INFO - Result <train>: [train/time: 59.94 (s), train/lr: 2.00e-04, train/loss: 0.0174, train/MAE: 0.0721, train/RMSE: 0.1320]
+2026-10-10 02:47:10,534 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:47:19,846 - BasicTS-training - INFO - Result <val>: [val/time: 9.31 (s), val/loss: 0.0127, val/MAE: 0.0590, val/RMSE: 0.1127]
+2026-10-10 02:47:19,962 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_14.pt saved
+2026-10-10 02:47:19,962 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:22
+2026-10-10 02:47:19,962 - BasicTS-training - INFO - Epoch 15 / 50
+2026-10-10 02:48:19,286 - BasicTS-training - INFO - Result <train>: [train/time: 59.32 (s), train/lr: 2.00e-04, train/loss: 0.0174, train/MAE: 0.0720, train/RMSE: 0.1319]
+2026-10-10 02:48:19,287 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:48:28,303 - BasicTS-training - INFO - Result <val>: [val/time: 9.02 (s), val/loss: 0.0132, val/MAE: 0.0609, val/RMSE: 0.1147]
+2026-10-10 02:48:28,417 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_15.pt saved
+2026-10-10 02:48:28,417 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:16
+2026-10-10 02:48:28,417 - BasicTS-training - INFO - Epoch 16 / 50
+2026-10-10 02:49:27,719 - BasicTS-training - INFO - Result <train>: [train/time: 59.30 (s), train/lr: 2.00e-04, train/loss: 0.0173, train/MAE: 0.0717, train/RMSE: 0.1315]
+2026-10-10 02:49:27,720 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:49:36,878 - BasicTS-training - INFO - Result <val>: [val/time: 9.16 (s), val/loss: 0.0125, val/MAE: 0.0581, val/RMSE: 0.1119]
+2026-10-10 02:49:36,993 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_16.pt saved
+2026-10-10 02:49:36,993 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:12
+2026-10-10 02:49:36,993 - BasicTS-training - INFO - Epoch 17 / 50
+2026-10-10 02:50:37,580 - BasicTS-training - INFO - Result <train>: [train/time: 60.59 (s), train/lr: 2.00e-04, train/loss: 0.0173, train/MAE: 0.0716, train/RMSE: 0.1314]
+2026-10-10 02:50:37,581 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:50:46,963 - BasicTS-training - INFO - Result <val>: [val/time: 9.38 (s), val/loss: 0.0127, val/MAE: 0.0588, val/RMSE: 0.1128]
+2026-10-10 02:50:47,077 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_17.pt saved
+2026-10-10 02:50:47,077 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:13
+2026-10-10 02:50:47,077 - BasicTS-training - INFO - Epoch 18 / 50
+2026-10-10 02:51:46,771 - BasicTS-training - INFO - Result <train>: [train/time: 59.69 (s), train/lr: 2.00e-04, train/loss: 0.0172, train/MAE: 0.0715, train/RMSE: 0.1313]
+2026-10-10 02:51:46,772 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:51:56,041 - BasicTS-training - INFO - Result <val>: [val/time: 9.27 (s), val/loss: 0.0128, val/MAE: 0.0589, val/RMSE: 0.1132]
+2026-10-10 02:51:56,159 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_18.pt saved
+2026-10-10 02:51:56,160 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:11
+2026-10-10 02:51:56,160 - BasicTS-training - INFO - Epoch 19 / 50
+2026-10-10 02:52:56,488 - BasicTS-training - INFO - Result <train>: [train/time: 60.33 (s), train/lr: 2.00e-04, train/loss: 0.0172, train/MAE: 0.0713, train/RMSE: 0.1311]
+2026-10-10 02:52:56,490 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:53:05,810 - BasicTS-training - INFO - Result <val>: [val/time: 9.32 (s), val/loss: 0.0125, val/MAE: 0.0573, val/RMSE: 0.1119]
+2026-10-10 02:53:05,926 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_19.pt saved
+2026-10-10 02:53:05,926 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:10
+2026-10-10 02:53:05,926 - BasicTS-training - INFO - Epoch 20 / 50
+2026-10-10 02:54:04,967 - BasicTS-training - INFO - Result <train>: [train/time: 59.04 (s), train/lr: 2.00e-04, train/loss: 0.0172, train/MAE: 0.0711, train/RMSE: 0.1310]
+2026-10-10 02:54:04,968 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:54:14,239 - BasicTS-training - INFO - Result <val>: [val/time: 9.27 (s), val/loss: 0.0124, val/MAE: 0.0571, val/RMSE: 0.1115]
+2026-10-10 02:54:14,421 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:54:14,534 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_20.pt saved
+2026-10-10 02:54:14,690 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:08
+2026-10-10 02:54:14,690 - BasicTS-training - INFO - Epoch 21 / 50
+2026-10-10 02:55:13,517 - BasicTS-training - INFO - Result <train>: [train/time: 58.83 (s), train/lr: 2.00e-04, train/loss: 0.0171, train/MAE: 0.0711, train/RMSE: 0.1309]
+2026-10-10 02:55:13,517 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:55:22,816 - BasicTS-training - INFO - Result <val>: [val/time: 9.30 (s), val/loss: 0.0134, val/MAE: 0.0601, val/RMSE: 0.1156]
+2026-10-10 02:55:22,930 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_21.pt saved
+2026-10-10 02:55:22,930 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:04
+2026-10-10 02:55:22,930 - BasicTS-training - INFO - Epoch 22 / 50
+2026-10-10 02:56:21,911 - BasicTS-training - INFO - Result <train>: [train/time: 58.98 (s), train/lr: 2.00e-04, train/loss: 0.0171, train/MAE: 0.0708, train/RMSE: 0.1306]
+2026-10-10 02:56:21,913 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:56:31,319 - BasicTS-training - INFO - Result <val>: [val/time: 9.41 (s), val/loss: 0.0124, val/MAE: 0.0570, val/RMSE: 0.1114]
+2026-10-10 02:56:31,488 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 02:56:31,601 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_22.pt saved
+2026-10-10 02:56:31,601 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:02
+2026-10-10 02:56:31,601 - BasicTS-training - INFO - Epoch 23 / 50
+2026-10-10 02:57:31,411 - BasicTS-training - INFO - Result <train>: [train/time: 59.81 (s), train/lr: 2.00e-04, train/loss: 0.0171, train/MAE: 0.0708, train/RMSE: 0.1306]
+2026-10-10 02:57:31,412 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:57:40,624 - BasicTS-training - INFO - Result <val>: [val/time: 9.21 (s), val/loss: 0.0129, val/MAE: 0.0595, val/RMSE: 0.1137]
+2026-10-10 02:57:40,742 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_23.pt saved
+2026-10-10 02:57:40,742 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:29:00
+2026-10-10 02:57:40,742 - BasicTS-training - INFO - Epoch 24 / 50
+2026-10-10 02:58:39,669 - BasicTS-training - INFO - Result <train>: [train/time: 58.93 (s), train/lr: 2.00e-04, train/loss: 0.0169, train/MAE: 0.0705, train/RMSE: 0.1302]
+2026-10-10 02:58:39,670 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:58:48,820 - BasicTS-training - INFO - Result <val>: [val/time: 9.15 (s), val/loss: 0.0128, val/MAE: 0.0585, val/RMSE: 0.1130]
+2026-10-10 02:58:48,936 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_24.pt saved
+2026-10-10 02:58:48,936 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:57
+2026-10-10 02:58:48,936 - BasicTS-training - INFO - Epoch 25 / 50
+2026-10-10 02:59:47,498 - BasicTS-training - INFO - Result <train>: [train/time: 58.56 (s), train/lr: 2.00e-04, train/loss: 0.0169, train/MAE: 0.0705, train/RMSE: 0.1301]
+2026-10-10 02:59:47,500 - BasicTS-training - INFO - Start validation.
+2026-10-10 02:59:56,739 - BasicTS-training - INFO - Result <val>: [val/time: 9.24 (s), val/loss: 0.0126, val/MAE: 0.0581, val/RMSE: 0.1122]
+2026-10-10 02:59:56,855 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_25.pt saved
+2026-10-10 02:59:56,856 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:54
+2026-10-10 02:59:56,856 - BasicTS-training - INFO - Epoch 26 / 50
+2026-10-10 03:00:55,964 - BasicTS-training - INFO - Result <train>: [train/time: 59.11 (s), train/lr: 2.00e-04, train/loss: 0.0169, train/MAE: 0.0703, train/RMSE: 0.1299]
+2026-10-10 03:00:55,965 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:01:05,247 - BasicTS-training - INFO - Result <val>: [val/time: 9.28 (s), val/loss: 0.0132, val/MAE: 0.0594, val/RMSE: 0.1148]
+2026-10-10 03:01:05,362 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_26.pt saved
+2026-10-10 03:01:05,362 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:52
+2026-10-10 03:01:05,362 - BasicTS-training - INFO - Epoch 27 / 50
+2026-10-10 03:02:05,254 - BasicTS-training - INFO - Result <train>: [train/time: 59.89 (s), train/lr: 2.00e-04, train/loss: 0.0169, train/MAE: 0.0703, train/RMSE: 0.1299]
+2026-10-10 03:02:05,255 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:02:14,518 - BasicTS-training - INFO - Result <val>: [val/time: 9.26 (s), val/loss: 0.0128, val/MAE: 0.0590, val/RMSE: 0.1130]
+2026-10-10 03:02:14,633 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_27.pt saved
+2026-10-10 03:02:14,634 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:52
+2026-10-10 03:02:14,634 - BasicTS-training - INFO - Epoch 28 / 50
+2026-10-10 03:03:13,444 - BasicTS-training - INFO - Result <train>: [train/time: 58.81 (s), train/lr: 2.00e-04, train/loss: 0.0168, train/MAE: 0.0701, train/RMSE: 0.1295]
+2026-10-10 03:03:13,445 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:03:22,892 - BasicTS-training - INFO - Result <val>: [val/time: 9.45 (s), val/loss: 0.0131, val/MAE: 0.0591, val/RMSE: 0.1142]
+2026-10-10 03:03:23,009 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_28.pt saved
+2026-10-10 03:03:23,009 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:50
+2026-10-10 03:03:23,009 - BasicTS-training - INFO - Epoch 29 / 50
+2026-10-10 03:04:22,693 - BasicTS-training - INFO - Result <train>: [train/time: 59.68 (s), train/lr: 2.00e-04, train/loss: 0.0168, train/MAE: 0.0701, train/RMSE: 0.1295]
+2026-10-10 03:04:22,694 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:04:32,066 - BasicTS-training - INFO - Result <val>: [val/time: 9.37 (s), val/loss: 0.0125, val/MAE: 0.0573, val/RMSE: 0.1120]
+2026-10-10 03:04:32,180 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_29.pt saved
+2026-10-10 03:04:32,181 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:49
+2026-10-10 03:04:32,181 - BasicTS-training - INFO - Epoch 30 / 50
+2026-10-10 03:05:30,528 - BasicTS-training - INFO - Result <train>: [train/time: 58.35 (s), train/lr: 2.00e-04, train/loss: 0.0167, train/MAE: 0.0699, train/RMSE: 0.1294]
+2026-10-10 03:05:30,529 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:05:39,834 - BasicTS-training - INFO - Result <val>: [val/time: 9.30 (s), val/loss: 0.0129, val/MAE: 0.0575, val/RMSE: 0.1137]
+2026-10-10 03:05:39,955 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_30.pt saved
+2026-10-10 03:05:40,111 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:47
+2026-10-10 03:05:40,111 - BasicTS-training - INFO - Epoch 31 / 50
+2026-10-10 03:06:39,575 - BasicTS-training - INFO - Result <train>: [train/time: 59.46 (s), train/lr: 2.00e-04, train/loss: 0.0167, train/MAE: 0.0699, train/RMSE: 0.1293]
+2026-10-10 03:06:39,576 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:06:48,895 - BasicTS-training - INFO - Result <val>: [val/time: 9.32 (s), val/loss: 0.0136, val/MAE: 0.0605, val/RMSE: 0.1168]
+2026-10-10 03:06:49,013 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_31.pt saved
+2026-10-10 03:06:49,014 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:46
+2026-10-10 03:06:49,014 - BasicTS-training - INFO - Epoch 32 / 50
+2026-10-10 03:07:48,237 - BasicTS-training - INFO - Result <train>: [train/time: 59.22 (s), train/lr: 2.00e-04, train/loss: 0.0167, train/MAE: 0.0698, train/RMSE: 0.1291]
+2026-10-10 03:07:48,238 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:07:57,597 - BasicTS-training - INFO - Result <val>: [val/time: 9.36 (s), val/loss: 0.0130, val/MAE: 0.0584, val/RMSE: 0.1142]
+2026-10-10 03:07:57,713 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_32.pt saved
+2026-10-10 03:07:57,713 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:45
+2026-10-10 03:07:57,713 - BasicTS-training - INFO - Epoch 33 / 50
+2026-10-10 03:08:57,942 - BasicTS-training - INFO - Result <train>: [train/time: 60.23 (s), train/lr: 2.00e-04, train/loss: 0.0166, train/MAE: 0.0697, train/RMSE: 0.1290]
+2026-10-10 03:08:57,944 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:09:07,221 - BasicTS-training - INFO - Result <val>: [val/time: 9.28 (s), val/loss: 0.0137, val/MAE: 0.0604, val/RMSE: 0.1172]
+2026-10-10 03:09:07,337 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_33.pt saved
+2026-10-10 03:09:07,337 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:46
+2026-10-10 03:09:07,337 - BasicTS-training - INFO - Epoch 34 / 50
+2026-10-10 03:10:06,770 - BasicTS-training - INFO - Result <train>: [train/time: 59.43 (s), train/lr: 1.00e-04, train/loss: 0.0161, train/MAE: 0.0682, train/RMSE: 0.1269]
+2026-10-10 03:10:06,771 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:10:16,222 - BasicTS-training - INFO - Result <val>: [val/time: 9.45 (s), val/loss: 0.0128, val/MAE: 0.0567, val/RMSE: 0.1130]
+2026-10-10 03:10:16,372 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt saved
+2026-10-10 03:10:16,488 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_34.pt saved
+2026-10-10 03:10:16,488 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:45
+2026-10-10 03:10:16,488 - BasicTS-training - INFO - Epoch 35 / 50
+2026-10-10 03:11:16,070 - BasicTS-training - INFO - Result <train>: [train/time: 59.58 (s), train/lr: 1.00e-04, train/loss: 0.0159, train/MAE: 0.0678, train/RMSE: 0.1262]
+2026-10-10 03:11:16,071 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:11:25,153 - BasicTS-training - INFO - Result <val>: [val/time: 9.08 (s), val/loss: 0.0131, val/MAE: 0.0579, val/RMSE: 0.1145]
+2026-10-10 03:11:25,272 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_35.pt saved
+2026-10-10 03:11:25,272 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:45
+2026-10-10 03:11:25,272 - BasicTS-training - INFO - Epoch 36 / 50
+2026-10-10 03:12:24,537 - BasicTS-training - INFO - Result <train>: [train/time: 59.27 (s), train/lr: 1.00e-04, train/loss: 0.0159, train/MAE: 0.0677, train/RMSE: 0.1259]
+2026-10-10 03:12:24,539 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:12:33,799 - BasicTS-training - INFO - Result <val>: [val/time: 9.26 (s), val/loss: 0.0134, val/MAE: 0.0583, val/RMSE: 0.1158]
+2026-10-10 03:12:33,917 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_36.pt saved
+2026-10-10 03:12:33,917 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:44
+2026-10-10 03:12:33,917 - BasicTS-training - INFO - Epoch 37 / 50
+2026-10-10 03:13:33,801 - BasicTS-training - INFO - Result <train>: [train/time: 59.88 (s), train/lr: 1.00e-04, train/loss: 0.0158, train/MAE: 0.0675, train/RMSE: 0.1256]
+2026-10-10 03:13:33,803 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:13:43,216 - BasicTS-training - INFO - Result <val>: [val/time: 9.41 (s), val/loss: 0.0131, val/MAE: 0.0575, val/RMSE: 0.1147]
+2026-10-10 03:13:43,334 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_37.pt saved
+2026-10-10 03:13:43,334 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:44
+2026-10-10 03:13:43,334 - BasicTS-training - INFO - Epoch 38 / 50
+2026-10-10 03:14:43,219 - BasicTS-training - INFO - Result <train>: [train/time: 59.88 (s), train/lr: 1.00e-04, train/loss: 0.0158, train/MAE: 0.0675, train/RMSE: 0.1256]
+2026-10-10 03:14:43,220 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:14:52,796 - BasicTS-training - INFO - Result <val>: [val/time: 9.58 (s), val/loss: 0.0133, val/MAE: 0.0591, val/RMSE: 0.1152]
+2026-10-10 03:14:52,914 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_38.pt saved
+2026-10-10 03:14:52,914 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:44
+2026-10-10 03:14:52,914 - BasicTS-training - INFO - Epoch 39 / 50
+2026-10-10 03:15:52,173 - BasicTS-training - INFO - Result <train>: [train/time: 59.26 (s), train/lr: 1.00e-04, train/loss: 0.0157, train/MAE: 0.0673, train/RMSE: 0.1252]
+2026-10-10 03:15:52,174 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:16:01,353 - BasicTS-training - INFO - Result <val>: [val/time: 9.18 (s), val/loss: 0.0138, val/MAE: 0.0596, val/RMSE: 0.1174]
+2026-10-10 03:16:01,470 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_39.pt saved
+2026-10-10 03:16:01,470 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:43
+2026-10-10 03:16:01,470 - BasicTS-training - INFO - Epoch 40 / 50
+2026-10-10 03:17:00,892 - BasicTS-training - INFO - Result <train>: [train/time: 59.42 (s), train/lr: 1.00e-04, train/loss: 0.0156, train/MAE: 0.0673, train/RMSE: 0.1251]
+2026-10-10 03:17:00,893 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:17:10,209 - BasicTS-training - INFO - Result <val>: [val/time: 9.32 (s), val/loss: 0.0135, val/MAE: 0.0589, val/RMSE: 0.1160]
+2026-10-10 03:17:10,325 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_40.pt saved
+2026-10-10 03:17:10,485 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:43
+2026-10-10 03:17:10,485 - BasicTS-training - INFO - Epoch 41 / 50
+2026-10-10 03:18:10,372 - BasicTS-training - INFO - Result <train>: [train/time: 59.89 (s), train/lr: 1.00e-04, train/loss: 0.0156, train/MAE: 0.0671, train/RMSE: 0.1248]
+2026-10-10 03:18:10,373 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:18:19,604 - BasicTS-training - INFO - Result <val>: [val/time: 9.23 (s), val/loss: 0.0149, val/MAE: 0.0608, val/RMSE: 0.1219]
+2026-10-10 03:18:19,722 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_41.pt saved
+2026-10-10 03:18:19,722 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:43
+2026-10-10 03:18:19,722 - BasicTS-training - INFO - Epoch 42 / 50
+2026-10-10 03:19:19,295 - BasicTS-training - INFO - Result <train>: [train/time: 59.57 (s), train/lr: 1.00e-04, train/loss: 0.0156, train/MAE: 0.0672, train/RMSE: 0.1248]
+2026-10-10 03:19:19,296 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:19:28,802 - BasicTS-training - INFO - Result <val>: [val/time: 9.51 (s), val/loss: 0.0134, val/MAE: 0.0584, val/RMSE: 0.1157]
+2026-10-10 03:19:28,920 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_42.pt saved
+2026-10-10 03:19:28,920 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:43
+2026-10-10 03:19:28,920 - BasicTS-training - INFO - Epoch 43 / 50
+2026-10-10 03:20:28,891 - BasicTS-training - INFO - Result <train>: [train/time: 59.97 (s), train/lr: 1.00e-04, train/loss: 0.0155, train/MAE: 0.0671, train/RMSE: 0.1247]
+2026-10-10 03:20:28,892 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:20:38,310 - BasicTS-training - INFO - Result <val>: [val/time: 9.42 (s), val/loss: 0.0142, val/MAE: 0.0597, val/RMSE: 0.1191]
+2026-10-10 03:20:38,427 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_43.pt saved
+2026-10-10 03:20:38,427 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:43
+2026-10-10 03:20:38,427 - BasicTS-training - INFO - Epoch 44 / 50
+2026-10-10 03:21:37,757 - BasicTS-training - INFO - Result <train>: [train/time: 59.33 (s), train/lr: 1.00e-04, train/loss: 0.0155, train/MAE: 0.0670, train/RMSE: 0.1244]
+2026-10-10 03:21:37,758 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:21:47,134 - BasicTS-training - INFO - Result <val>: [val/time: 9.38 (s), val/loss: 0.0148, val/MAE: 0.0617, val/RMSE: 0.1218]
+2026-10-10 03:21:47,250 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_44.pt saved
+2026-10-10 03:21:47,250 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:42
+2026-10-10 03:21:47,250 - BasicTS-training - INFO - Epoch 45 / 50
+2026-10-10 03:22:44,644 - BasicTS-training - INFO - Result <train>: [train/time: 57.39 (s), train/lr: 5.00e-05, train/loss: 0.0150, train/MAE: 0.0657, train/RMSE: 0.1226]
+2026-10-10 03:22:44,645 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:22:54,005 - BasicTS-training - INFO - Result <val>: [val/time: 9.36 (s), val/loss: 0.0143, val/MAE: 0.0600, val/RMSE: 0.1194]
+2026-10-10 03:22:54,120 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_45.pt saved
+2026-10-10 03:22:54,120 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:40
+2026-10-10 03:22:54,120 - BasicTS-training - INFO - Epoch 46 / 50
+2026-10-10 03:23:54,683 - BasicTS-training - INFO - Result <train>: [train/time: 60.56 (s), train/lr: 5.00e-05, train/loss: 0.0149, train/MAE: 0.0655, train/RMSE: 0.1221]
+2026-10-10 03:23:54,684 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:24:03,860 - BasicTS-training - INFO - Result <val>: [val/time: 9.18 (s), val/loss: 0.0143, val/MAE: 0.0594, val/RMSE: 0.1197]
+2026-10-10 03:24:03,977 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_46.pt saved
+2026-10-10 03:24:03,977 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:40
+2026-10-10 03:24:03,977 - BasicTS-training - INFO - Epoch 47 / 50
+2026-10-10 03:25:03,765 - BasicTS-training - INFO - Result <train>: [train/time: 59.79 (s), train/lr: 5.00e-05, train/loss: 0.0148, train/MAE: 0.0653, train/RMSE: 0.1217]
+2026-10-10 03:25:03,766 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:25:13,146 - BasicTS-training - INFO - Result <val>: [val/time: 9.38 (s), val/loss: 0.0149, val/MAE: 0.0610, val/RMSE: 0.1221]
+2026-10-10 03:25:13,263 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_47.pt saved
+2026-10-10 03:25:13,263 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:40
+2026-10-10 03:25:13,263 - BasicTS-training - INFO - Epoch 48 / 50
+2026-10-10 03:26:13,239 - BasicTS-training - INFO - Result <train>: [train/time: 59.98 (s), train/lr: 5.00e-05, train/loss: 0.0148, train/MAE: 0.0653, train/RMSE: 0.1216]
+2026-10-10 03:26:13,241 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:26:22,609 - BasicTS-training - INFO - Result <val>: [val/time: 9.37 (s), val/loss: 0.0145, val/MAE: 0.0600, val/RMSE: 0.1206]
+2026-10-10 03:26:22,727 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_48.pt saved
+2026-10-10 03:26:22,727 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:41
+2026-10-10 03:26:22,727 - BasicTS-training - INFO - Epoch 49 / 50
+2026-10-10 03:27:22,655 - BasicTS-training - INFO - Result <train>: [train/time: 59.93 (s), train/lr: 5.00e-05, train/loss: 0.0147, train/MAE: 0.0652, train/RMSE: 0.1213]
+2026-10-10 03:27:22,657 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:27:31,895 - BasicTS-training - INFO - Result <val>: [val/time: 9.24 (s), val/loss: 0.0143, val/MAE: 0.0594, val/RMSE: 0.1196]
+2026-10-10 03:27:32,010 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_49.pt saved
+2026-10-10 03:27:32,010 - BasicTS-training - INFO - The estimated training finish time is 2026-10-10 03:28:41
+2026-10-10 03:27:32,011 - BasicTS-training - INFO - Epoch 50 / 50
+2026-10-10 03:28:31,401 - BasicTS-training - INFO - Result <train>: [train/time: 59.39 (s), train/lr: 5.00e-05, train/loss: 0.0147, train/MAE: 0.0651, train/RMSE: 0.1211]
+2026-10-10 03:28:31,402 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:28:40,557 - BasicTS-training - INFO - Result <val>: [val/time: 9.15 (s), val/loss: 0.0147, val/MAE: 0.0606, val/RMSE: 0.1213]
+2026-10-10 03:28:40,673 - BasicTS-training - INFO - Checkpoint checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_50.pt saved
+2026-10-10 03:28:40,838 - BasicTS-training - INFO - The training finished at 2026-10-10 03:28:40
+2026-10-10 03:28:40,839 - BasicTS-training - INFO - Evaluating the best model on the test set.
+2026-10-10 03:28:40,839 - BasicTS-training - INFO - Loading Checkpoint from 'checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt'
+2026-10-10 03:28:50,528 - BasicTS-training - INFO - Complete fixed_v1 evaluation metrics: {'test_windows': 25450, 'mae': 0.06388545466910436, 'rmse': 0.11559199956112538, 'r2': 0.7808967465014476}
+2026-10-10 03:28:50,528 - BasicTS-training - INFO - Result <test>: [test/time: 9.51 (s), test/loss: 0.0134, test/MAE: 0.0639, test/RMSE: 0.1156]
+2026-10-10 03:28:50,528 - BasicTS-training - INFO - Test results saved to checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/test_results.
+2026-10-10 03:28:50,528 - BasicTS-training - INFO - Test metrics saved to checkpoints/fixed_v1/reproduction_20261010/PatchTST/311fe8d084379afcdacd3ee6e2b3bd3b/test_metrics.json.

@@ -1,6 +1,7 @@
 """Original FusionSF backbones behind the common TSLib forward signature."""
 
 from dataclasses import asdict
+import math
 
 import torch
 from torch import nn
@@ -17,15 +18,21 @@ class Model(nn.Module):
         if configs.seq_len != configs.pred_len:
             raise ValueError('Original FusionSF requires seq_len == pred_len')
         self.three_modal = configs.fusion_modalities == 3
+        fusion_input = getattr(configs, 'fusion_input', 'original')
+        self.use_history_nwp = fusion_input in ('power_satellite_history_future_nwp', 'power_history_future_nwp')
+        self.use_satellite = fusion_input not in ('power_future_nwp', 'power_history_future_nwp')
         self.guide_channels = configs.guide_channels
         architecture = FusionSFConfig(input_len=configs.seq_len, output_len=configs.pred_len,
                                       mlp_ratio=4 if self.three_modal else 1,
                                       guide_channels=self.guide_channels)
+        if self.use_history_nwp:
+            architecture.ts_channels = 16  # Power plus the 15 standardized historical weather variables.
         if configs.preset == 'script':
             if not self.three_modal:
                 raise ValueError('FusionSF script preset requires three modalities')
             architecture.ctx_masking_ratio = 0.99
-            architecture.vq_in_ts = architecture.vq_in_ctx = True
+            architecture.vq_in_ts = True
+            architecture.vq_in_ctx = self.use_satellite
         params = asdict(architecture)
         params.pop('input_len')
         params.pop('output_len')
@@ -34,11 +41,29 @@ class Model(nn.Module):
             for key in ('guide_channels', 'vq_in_ts', 'vq_in_ctx', 'vq_in_guide'):
                 params.pop(key)
         backbone = FusionSF3M if self.three_modal else FusionSF2M
+        if self.three_modal:
+            params['use_satellite'] = self.use_satellite
         self.backbone = backbone(**params, ts_length=configs.seq_len,
                                  time_coords_encoder=Cyclical_embedding(frequencies=frequencies))
+        self.readout_initialization = getattr(configs, 'fusion_readout_init', 'official')
+        if self.readout_initialization == 'positive_v1':
+            if fusion_input not in ('power_future_nwp', 'power_satellite_history_future_nwp', 'power_history_future_nwp'):
+                raise ValueError('Positive readout initialization is approved for FusionSF input variants only')
+            # Preserve the random direction and upstream gradients. At initialization,
+            # LayerNorm has unit gain/zero bias and ||h|| <= sqrt(d), so |W h| <= .05.
+            # The .1 bias therefore puts every initial output in [.05, .15].
+            with torch.no_grad():
+                for head in self.backbone.mlp_heads:
+                    linear = head[1]
+                    maximum_norm = 0.05 / math.sqrt(linear.in_features)
+                    scale = (maximum_norm / linear.weight.norm(dim=1, keepdim=True).clamp_min(1e-12)).clamp_max(1.)
+                    linear.weight.mul_(scale)
+                    linear.bias.fill_(0.1)
 
     def forward(self, x_enc, x_mark_enc, x_dec, x_mark_dec, covariates=None):
         cov = covariates
+        if self.use_history_nwp:
+            x_enc = torch.cat([x_enc, cov['historical_nwp']], dim=-1)
         values = [cov['satellite'], cov['satellite_coords'], x_enc,
                   cov['site_coords'][..., None, None], cov['fusion_time']]
         if self.three_modal:

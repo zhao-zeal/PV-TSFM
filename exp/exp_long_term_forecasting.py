@@ -4,6 +4,8 @@ import csv
 from contextlib import nullcontext
 import json
 import logging
+import math
+import time
 from pathlib import Path
 
 import numpy as np
@@ -53,6 +55,16 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         if self.args.optimizer == 'adamw_chronosx':
             return torch.optim.AdamW(params, lr=self.args.learning_rate, weight_decay=0.,
                                      fused=self.device.type == 'cuda')
+        if (self.args.model == 'FusionSF'
+                and getattr(self.args, 'fusion_readout_init', 'official') == 'positive_v1'):
+            groups = [[], []]
+            for name, parameter in self.model.named_parameters():
+                if parameter.requires_grad:
+                    groups[int(name.startswith('backbone.mlp_heads.'))].append(parameter)
+            return torch.optim.AdamW([
+                {'params': groups[0], 'lr': self.args.learning_rate},
+                {'params': groups[1], 'lr': self.args.learning_rate * self.args.fusion_readout_lr_factor},
+            ], weight_decay=0.05, betas=(0.9, 0.95))
         return torch.optim.AdamW(params, lr=self.args.learning_rate,
                                  weight_decay=0.05, betas=(0.9, 0.95))
 
@@ -83,10 +95,11 @@ class Exp_Long_Term_Forecast(Exp_Basic):
             total_loss = samples = 0
             for batch in loader:
                 batch_x, _, _, _, covariates, targets = self._prepare_batch(batch)
-                loss = self.model.token_loss(batch_x, targets, covariates)
-                total_loss += loss.item() * len(batch_x)
+                with self._autocast():
+                    loss = self.model.token_loss(batch_x, targets, covariates)
+                total_loss += loss.detach() * len(batch_x)
                 samples += len(batch_x)
-            return {'token_ce': total_loss / samples}
+            return {'token_ce': (total_loss / samples).item()}
         for batch in loader:
             result, targets, _ = self._forward_batch(batch)
             prediction = result['prediction'] if isinstance(result, dict) else result
@@ -101,6 +114,9 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         train_data, train_loader = self._get_data('train')
         _, val_loader = self._get_data('val')
         directory = Path(self.args.checkpoints) / self.args.protocol / setting
+        if self.args.model == 'ChronosX':
+            self.args.eval_steps = math.ceil(len(train_loader) / self.args.gradient_accumulation_steps)
+            self.args.max_steps = self.args.eval_steps * self.args.train_epochs
         self._save_config(directory, train_data)
         optimizer = self._select_optimizer()
         scheduler = self._select_scheduler(optimizer)
@@ -109,7 +125,32 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         if self.args.model == 'ChronosX':
             return self._train_chronosx(train_loader, val_loader, optimizer, scheduler, best_path)
         scaler = torch.amp.GradScaler('cuda', enabled=self.args.effective_precision == 'fp16')
-        for epoch in range(1, self.args.train_epochs + 1):
+        first_epoch = 1
+        if getattr(self.args, 'resume', None):
+            checkpoint = load_model_checkpoint(self.model, self.args.resume, self.device)
+            allowed = {'train_epochs', 'patience', 'gpu', 'use_gpu', 'model_id', 'resume',
+                       'baseline_config', 'print_config', 'output_dir', 'checkpoints'}
+            # User approved larger batches only for the resumed FusionSF input variants.
+            if (self.args.model == 'FusionSF'
+                    and self.args.baseline_config == 'fusion_input_variant'
+                    and self.args.fusion_input != 'original'):
+                allowed.update({'batch_size', 'eval_batch_size'})
+            for key, value in checkpoint['config'].items():
+                if key not in allowed and value != getattr(self.args, key, None):
+                    raise ValueError(f'Resume configuration differs: {key}')
+            optimizer.load_state_dict(checkpoint['optim_state_dict'])
+            scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+            if 'scaler_state_dict' in checkpoint:
+                scaler.load_state_dict(checkpoint['scaler_state_dict'])
+            stopping.best = checkpoint['validation_metrics'][self.args.monitor]
+            first_epoch = checkpoint['epoch'] + 1
+            checkpoint['config'] = vars(self.args)
+            torch.save(checkpoint, best_path)
+            logging.info('Resume from epoch %d: best_validation_%s=%s lr=%s; total_max_epochs=%d patience=%d',
+                         first_epoch - 1, self.args.monitor, stopping.best,
+                         optimizer.param_groups[0]['lr'], self.args.train_epochs, self.args.patience)
+            del checkpoint
+        for epoch in range(first_epoch, self.args.train_epochs + 1):
             self.model.train()
             total_loss, total_samples = 0., 0
             for batch in train_loader:
@@ -136,6 +177,7 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                     'epoch': epoch, 'model_state_dict': self.model.state_dict(),
                     'optim_state_dict': optimizer.state_dict(),
                     'scheduler_state_dict': scheduler.state_dict(),
+                    'scaler_state_dict': scaler.state_dict(),
                     'validation_metrics': validation, 'config': vars(self.args),
                 }, best_path)
             if stopped:
@@ -144,33 +186,47 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         return self.model
 
     def _train_chronosx(self, train_loader, val_loader, optimizer, scheduler, best_path):
-        """Official step budget, accumulation, linear LR and best token-CE checkpoint."""
-        iterator = iter(train_loader)
-        best = float('inf')
-        for step in range(1, self.args.max_steps + 1):
+        """Epoch/patience budget with token CE, configurable precision and accumulation."""
+        stopping = EarlyStopping(self.args.patience)
+        step = 0
+        accumulation = self.args.gradient_accumulation_steps
+        scaler = torch.amp.GradScaler('cuda', enabled=self.args.effective_precision == 'fp16')
+        for epoch in range(1, self.args.train_epochs + 1):
+            train_start = time.perf_counter()
             self.model.train()
             optimizer.zero_grad(set_to_none=True)
-            for _ in range(self.args.gradient_accumulation_steps):
-                try:
-                    batch = next(iterator)
-                except StopIteration:
-                    iterator = iter(train_loader)
-                    batch = next(iterator)
+            total_loss, total_samples = 0., 0
+            for index, batch in enumerate(train_loader):
                 batch_x, _, _, _, covariates, targets = self._prepare_batch(batch)
-                loss = self.model.token_loss(batch_x, targets, covariates, augment=True)
-                (loss / self.args.gradient_accumulation_steps).backward()
-            torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.args.max_grad_norm)
-            optimizer.step()
-            scheduler.step()
-            if step % self.args.eval_steps == 0 or step == self.args.max_steps:
-                validation = self.vali(val_loader)
-                logging.info('Step %d validation=%s lr=%s', step, validation, optimizer.param_groups[0]['lr'])
-                if validation['token_ce'] < best:
-                    best = validation['token_ce']
-                    torch.save({'step': step, 'model_state_dict': self.model.state_dict(),
-                                'optim_state_dict': optimizer.state_dict(),
-                                'scheduler_state_dict': scheduler.state_dict(),
-                                'validation_metrics': validation, 'config': vars(self.args)}, best_path)
+                with self._autocast():
+                    loss = self.model.token_loss(batch_x, targets, covariates, augment=True)
+                group_size = min(accumulation, len(train_loader) - (index // accumulation) * accumulation)
+                scaler.scale(loss / group_size).backward()
+                total_loss += loss.detach() * len(targets)
+                total_samples += len(targets)
+                if (index + 1) % accumulation == 0 or index + 1 == len(train_loader):
+                    scaler.unscale_(optimizer)
+                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), self.args.max_grad_norm)
+                    scaler.step(optimizer)
+                    scaler.update()
+                    scheduler.step()
+                    optimizer.zero_grad(set_to_none=True)
+                    step += 1
+            train_loss = (total_loss / total_samples).item()
+            train_seconds = time.perf_counter() - train_start
+            validation_start = time.perf_counter()
+            validation = self.vali(val_loader)
+            validation_seconds = time.perf_counter() - validation_start
+            improved, stopped = stopping.update(validation['token_ce'])
+            logging.info('Epoch %d train_loss=%s validation=%s lr=%s step=%d train_seconds=%.3f validation_seconds=%.3f windows_per_second=%.3f', epoch,
+                         train_loss, validation, optimizer.param_groups[0]['lr'], step,
+                         train_seconds, validation_seconds, total_samples / train_seconds)
+            if improved:
+                torch.save({'epoch': epoch, 'step': step, 'model_state_dict': self.model.state_dict(),
+                            'optim_state_dict': optimizer.state_dict(), 'scheduler_state_dict': scheduler.state_dict(),
+                            'scaler_state_dict': scaler.state_dict(), 'validation_metrics': validation, 'config': vars(self.args)}, best_path)
+            if stopped:
+                break
         load_model_checkpoint(self.model, best_path, self.device)
         return self.model
 
@@ -183,6 +239,10 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         protocol = self._save_config(directory, data)
         self.model.eval()
         predictions, targets, sites, times = [], [], [], []
+        if self.args.model == 'ChronosX':
+            torch.save({'cpu': torch.get_rng_state(),
+                        'cuda': torch.cuda.get_rng_state(self.device) if self.args.use_gpu else None},
+                       directory / 'prediction_rng_state.pth')
         for batch in loader:
             result, truth, covariates = self._forward_batch(batch)
             prediction = result['prediction'] if isinstance(result, dict) else result
@@ -207,6 +267,9 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         return metrics
 
     def _record_result(self, directory, metrics):
+        if self.args.model == 'FusionSF' and self.args.baseline_config == 'fusion_input_variant':
+            logging.info('FusionSF input artifacts saved; formal registration awaits full artifact acceptance')
+            return
         table = Path(__file__).resolve().parents[1] / 'reports' / self.args.protocol / 'results.csv'
         table.parent.mkdir(parents=True, exist_ok=True)
         fields = ['data_protocol', 'model', 'baseline_config', 'llm_model', 'seed', 'input_len', 'output_len', 'train_sites',

@@ -1,0 +1,49 @@
+{
+  "test_windows": 25450,
+  "mae": 0.06090954076926931,
+  "rmse": 0.11777119096394562,
+  "r2": 0.7725576115051715,
+  "data_protocol": "in_domain",
+  "model": "Chronos2_power_history_future_nwp",
+  "seed": 42,
+  "input_len": 24,
+  "output_len": 24,
+  "train_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "validation_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "test_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "split_version": "chronological_target_split_v1",
+  "scaler_version": "train_sites_and_time_only_fit_v1"
+}

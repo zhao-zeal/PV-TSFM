@@ -1,0 +1,51 @@
+{
+  "test_windows": 25450,
+  "mae": 0.04359043873272131,
+  "rmse": 0.0931104824230411,
+  "r2": 0.8578357404758096,
+  "model": "Chronos2HistoryWeatherAdapter",
+  "seed": 42,
+  "data_protocol": "zeroshot_v1",
+  "baseline_config": "history_weather_adapter_variant",
+  "llm_model": "",
+  "input_len": 24,
+  "output_len": 24,
+  "train_sites": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "validation_sites": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "test_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "split_version": "chronological_target_split_v1",
+  "scaler_version": "train_sites_and_time_only_fit_v1"
+}

@@ -1,0 +1,21 @@
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:261: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:391: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+7 [8, 8]
+3 modal model, vq in ts
+power_future_nwp 16 263.70 windows/s 13.71% GPU
+power_future_nwp 64 870.85 windows/s 19.14% GPU
+power_future_nwp 256 2207.42 windows/s 38.50% GPU
+7 [8, 8]
+3 modal model, vq in ts
+3 modal model, vq in ctx
+power_satellite_history_future_nwp 16 99.66 windows/s 52.57% GPU
+power_satellite_history_future_nwp 64 139.06 windows/s 96.20% GPU
+power_satellite_history_future_nwp 256 capacity rejected
+7 [8, 8]
+3 modal model, vq in ts
+power_history_future_nwp 16 263.92 windows/s 14.29% GPU
+power_history_future_nwp 64 901.88 windows/s 21.07% GPU
+power_history_future_nwp 256 2111.83 windows/s 38.00% GPU
+/home/zhaopp/workspace/PV-TSFM/reports/FusionSF_inputs_two_protocols_seed42_20261011/batch_throughput_20261012.json

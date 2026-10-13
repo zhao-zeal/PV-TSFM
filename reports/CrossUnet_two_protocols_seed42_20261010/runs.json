@@ -1,0 +1,533 @@
+{
+  "approved_at": "2026-10-10T23:28:50+08:00",
+  "scope": "Cross-Unet only; in_domain and zeroshot_v1; seed42; 24->24",
+  "authorization": "User: 验收，然后启动后续模型; established order FusionSF -> Cross-Unet -> TimeXer; next model only after current model acceptance",
+  "state": "both_protocols_completed_and_accepted",
+  "multi_seed_authorized": false,
+  "subsequent_models_authorized": false,
+  "site1_training_authorized": false,
+  "framework_or_protocol_changed": false,
+  "official_config_verified_against": "scripts/official_reference/CrossUnet/use_cross_unet.py.txt",
+  "task_adaptations": [
+    "MMSP hourly24->24 and 15NWP+1power with shared accepted protocols",
+    "seed42 instead of author2021",
+    "DataLoader0, twoCPUcores/process and explicit idle GPUs"
+  ],
+  "training_config": {
+    "batch_size": 128,
+    "eval_batch_size": 128,
+    "train_epochs": 100,
+    "patience": 10,
+    "learning_rate": 0.0001,
+    "optimizer": "Adam",
+    "betas": [
+      0.95,
+      0.999
+    ],
+    "loss": "power MSE",
+    "monitor": "validation MSE",
+    "scheduler": "official type3; constructor initial lr=base/25",
+    "precision": "fp32",
+    "seg_len": 12,
+    "d_model": 256,
+    "d_ff": 512,
+    "e_layers": 3,
+    "n_heads": 4,
+    "factor": 10,
+    "dropout": 0.05,
+    "drop_last_train": true
+  },
+  "actual_inputs": [
+    "historical power",
+    "historical NWP",
+    "future NWP",
+    "historical power correlation block"
+  ],
+  "evaluation": "all 25450 windows x24 horizons; no clipping/mask; global MAE/RMSE/R2; test never selects checkpoints",
+  "completed_previous_model_acceptance": "/home/zhaopp/workspace/PV-TSFM/reports/FusionSF_two_protocols_seed42_20261010/acceptance.md",
+  "runs": [
+    {
+      "protocol": "in_domain",
+      "gpu": 3,
+      "cpu_cores": [
+        0,
+        7
+      ],
+      "threads": 2,
+      "num_workers": 0,
+      "seed": 42,
+      "model_id": "CrossUnet_official_seed42_sl24_pl24_power_nwp_full",
+      "state": "completed_and_accepted",
+      "pid": 3251810,
+      "argv": [
+        "--model",
+        "Cross-Unet",
+        "--protocol",
+        "in_domain",
+        "--is_training",
+        "1",
+        "--seed",
+        "42",
+        "--seq_len",
+        "24",
+        "--pred_len",
+        "24",
+        "--num_workers",
+        "0",
+        "--use_gpu",
+        "1",
+        "--gpu",
+        "3",
+        "--model_id",
+        "CrossUnet_official_seed42_sl24_pl24_power_nwp_full"
+      ],
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/CrossUnet_two_protocols_seed42_20261010/in_domain_training.log",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/CrossUnet_official_seed42_sl24_pl24_power_nwp_full",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/CrossUnet_official_seed42_sl24_pl24_power_nwp_full",
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.04337741256540381,
+        "rmse": 0.08437423218808496,
+        "r2": 0.883261813819639,
+        "model": "CrossUnet",
+        "seed": 42,
+        "data_protocol": "in_domain",
+        "baseline_config": "official",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "exec_session_id": 49092,
+      "started_at": "2026-10-10T23:30:17+08:00",
+      "startup_verification": {
+        "checked_at": "2026-10-10T23:32:41+08:00",
+        "pid_observed_alive": true,
+        "cpu_affinity_confirmed": [
+          0,
+          7
+        ],
+        "gpu_context_confirmed": 3,
+        "saved_config_matches": true,
+        "saved_protocol_sites_windows_modalities_confirmed": true,
+        "train_scaler_saved": true,
+        "traceback_in_log": false,
+        "first_epoch_available": false,
+        "performance_reproduction_complete": false
+      },
+      "completed_epochs_observed": 42,
+      "best_validation_epoch": 32,
+      "best_validation_metrics": {
+        "mae": 0.044849978167406095,
+        "rmse": 0.08939542247360864,
+        "mse": 0.007991541559234972
+      },
+      "progress_observed_at": "2026-10-11T03:31:10+08:00"
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "gpu": 0,
+      "cpu_cores": [
+        9,
+        10
+      ],
+      "threads": 2,
+      "num_workers": 0,
+      "seed": 42,
+      "model_id": "CrossUnet_official_seed42_sl24_pl24_power_nwp_full",
+      "state": "completed_and_accepted",
+      "pid": 3251849,
+      "argv": [
+        "--model",
+        "Cross-Unet",
+        "--protocol",
+        "zeroshot_v1",
+        "--is_training",
+        "1",
+        "--seed",
+        "42",
+        "--seq_len",
+        "24",
+        "--pred_len",
+        "24",
+        "--num_workers",
+        "0",
+        "--use_gpu",
+        "1",
+        "--gpu",
+        "0",
+        "--model_id",
+        "CrossUnet_official_seed42_sl24_pl24_power_nwp_full"
+      ],
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/CrossUnet_two_protocols_seed42_20261010/zeroshot_v1_training.log",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/CrossUnet_official_seed42_sl24_pl24_power_nwp_full",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/CrossUnet_official_seed42_sl24_pl24_power_nwp_full",
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.04461203081453946,
+        "rmse": 0.08416288025940304,
+        "r2": 0.8838459243528058,
+        "model": "CrossUnet",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "official",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "exec_session_id": 42046,
+      "started_at": "2026-10-10T23:30:17+08:00",
+      "startup_verification": {
+        "checked_at": "2026-10-10T23:32:41+08:00",
+        "pid_observed_alive": true,
+        "cpu_affinity_confirmed": [
+          9,
+          10
+        ],
+        "gpu_context_confirmed": 0,
+        "saved_config_matches": true,
+        "saved_protocol_sites_windows_modalities_confirmed": true,
+        "train_scaler_saved": true,
+        "traceback_in_log": false,
+        "first_epoch_available": false,
+        "performance_reproduction_complete": false
+      },
+      "completed_epochs_observed": 43,
+      "best_validation_epoch": 33,
+      "best_validation_metrics": {
+        "mae": 0.04303929359833524,
+        "rmse": 0.08544096094647351,
+        "mse": 0.007300157807456812
+      },
+      "progress_observed_at": "2026-10-11T03:31:10+08:00"
+    }
+  ],
+  "limitations": [
+    "Single seed only",
+    "NWP issue times absent; future availability assumed, bidirectional interpolation remains"
+  ],
+  "notes": "Start training only; no performance reproduction claim before full training and formal evaluation.",
+  "updated_at": "2026-10-11T03:31:10+08:00",
+  "progress_reporting": "Read-only random checks every10-20min; no training control or automatic next model.",
+  "random_checker": {
+    "pid": 3252475,
+    "exec_session_id": 8477,
+    "cpu_core": 7,
+    "threads": 1,
+    "interval_seconds": [
+      600,
+      1200
+    ],
+    "mode": "read-only, no model API, no training control, no automatic next model",
+    "status_file": "/home/zhaopp/workspace/PV-TSFM/reports/CrossUnet_two_protocols_seed42_20261010/random_check_status.json",
+    "events_file": "/home/zhaopp/workspace/PV-TSFM/reports/CrossUnet_two_protocols_seed42_20261010/random_check_events.jsonl"
+  },
+  "acceptance": {
+    "checked_at": "2026-10-11T03:31:10+08:00",
+    "status": "passed",
+    "scope": "Required prerequisite to previously authorized TimeXer launch after Cross-Unet; no additional inference or training",
+    "runs": [
+      {
+        "protocol": "in_domain",
+        "status": "passed_formal_evaluation_artifact_acceptance",
+        "completed_epochs": 42,
+        "selected_checkpoint_epoch": 32,
+        "selected_validation": {
+          "mae": 0.044849978167406095,
+          "rmse": 0.08939542247360864,
+          "mse": 0.007991541559234972
+        },
+        "test_metrics": {
+          "test_windows": 25450,
+          "mae": 0.04337741256540381,
+          "rmse": 0.08437423218808496,
+          "r2": 0.883261813819639,
+          "model": "CrossUnet",
+          "seed": 42,
+          "data_protocol": "in_domain",
+          "baseline_config": "official",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "validation_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "checks": [
+          "configuration/protocol/scalers agree",
+          "all25450x24 raw labels match sourceCSV",
+          "all site/time indices match protocol;2545windows/site",
+          "prediction/target/weights finite;each site prediction not allzero",
+          "MAE/RMSE/globalR2 independently recomputed",
+          "checkpoint matches minimum validationMSE and patience10 stopping",
+          "metrics match log and unique results-index row",
+          "FusionSF comparison has identical targets/site/time indices within each protocol"
+        ],
+        "prediction_range": [
+          -0.06616121530532837,
+          0.9280880689620972
+        ],
+        "negative_prediction_fraction": 0.3214849377865095,
+        "comparison_to_FusionSF": {
+          "mae": {
+            "FusionSF": 0.04087580292590828,
+            "CrossUnet": 0.04337741256540381,
+            "absolute": 0.002501609639495528,
+            "relative_percent": 6.120025688620623
+          },
+          "rmse": {
+            "FusionSF": 0.09126494137634125,
+            "CrossUnet": 0.08437423218808496,
+            "absolute": -0.006890709188256294,
+            "relative_percent": -7.550225841751956
+          },
+          "r2": {
+            "FusionSF": 0.8634155582253689,
+            "CrossUnet": 0.883261813819639,
+            "absolute": 0.019846255594270112,
+            "relative_percent": 2.298575165249672
+          }
+        },
+        "comparison_limitation": "Same protocol and test arrays but actual modalities differ: Cross-Unet history/futureNWP+power/correlation; FusionSF satellite+power/futureNWP+coords; does not isolate architecture effects. No clipping of raw predictions.",
+        "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/CrossUnet_official_seed42_sl24_pl24_power_nwp_full/checkpoint.pth",
+        "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/CrossUnet_official_seed42_sl24_pl24_power_nwp_full"
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "status": "passed_formal_evaluation_artifact_acceptance",
+        "completed_epochs": 43,
+        "selected_checkpoint_epoch": 33,
+        "selected_validation": {
+          "mae": 0.04303929359833524,
+          "rmse": 0.08544096094647351,
+          "mse": 0.007300157807456812
+        },
+        "test_metrics": {
+          "test_windows": 25450,
+          "mae": 0.04461203081453946,
+          "rmse": 0.08416288025940304,
+          "r2": 0.8838459243528058,
+          "model": "CrossUnet",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "official",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "checks": [
+          "configuration/protocol/scalers agree",
+          "all25450x24 raw labels match sourceCSV",
+          "all site/time indices match protocol;2545windows/site",
+          "prediction/target/weights finite;each site prediction not allzero",
+          "MAE/RMSE/globalR2 independently recomputed",
+          "checkpoint matches minimum validationMSE and patience10 stopping",
+          "metrics match log and unique results-index row",
+          "FusionSF comparison has identical targets/site/time indices within each protocol"
+        ],
+        "prediction_range": [
+          -0.06110586225986481,
+          0.8944002389907837
+        ],
+        "negative_prediction_fraction": 0.23419613621480026,
+        "comparison_to_FusionSF": {
+          "mae": {
+            "FusionSF": 0.04159837163992613,
+            "CrossUnet": 0.04461203081453946,
+            "absolute": 0.0030136591746133326,
+            "relative_percent": 7.244656595453902
+          },
+          "rmse": {
+            "FusionSF": 0.08982209536444095,
+            "CrossUnet": 0.08416288025940304,
+            "absolute": -0.005659215105037918,
+            "relative_percent": -6.300471038975896
+          },
+          "r2": {
+            "FusionSF": 0.8677000628819711,
+            "CrossUnet": 0.8838459243528058,
+            "absolute": 0.016145861470834744,
+            "relative_percent": 1.860765276103371
+          }
+        },
+        "comparison_limitation": "Same protocol and test arrays but actual modalities differ: Cross-Unet history/futureNWP+power/correlation; FusionSF satellite+power/futureNWP+coords; does not isolate architecture effects. No clipping of raw predictions.",
+        "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/CrossUnet_official_seed42_sl24_pl24_power_nwp_full/checkpoint.pth",
+        "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/CrossUnet_official_seed42_sl24_pl24_power_nwp_full"
+      }
+    ],
+    "limitations": [
+      "Single seed42 only",
+      "Modalities differ from FusionSF, so metric changes do not isolate architecture effect",
+      "NWP issue times absent; future availability assumed; bidirectional interpolation remains"
+    ]
+  },
+  "latest_user_decision": "Prior user request: estimate Cross-Unet duration then run TimeXer; Cross-Unet now completed and accepted, previous ordering/resource conflict resolved; start TimeXer two-protocol seed42 only.",
+  "pcorr_usage_audit_20261012": {
+    "status": "passed",
+    "evidence_path": "/home/zhaopp/workspace/PV-TSFM/reports/CrossUnet_two_protocols_seed42_20261010/pcorr_usage_check_20261012.json",
+    "device": "CPU",
+    "new_training": false,
+    "full_evaluation_repeated": false,
+    "source_and_checkpoint_unchanged": true,
+    "encoder_uses": 3,
+    "decoder_uses": 4,
+    "bottleneck_direct_use": false,
+    "official_PV_power_Decoder_only_check": {
+      "status": "passed",
+      "source_commit": "bfd6bd5080ee33f2fff0395fd0c394c9ab8fcb2a",
+      "working_copy_and_pristine_commit_checked": true,
+      "encoder_outputs_held_fixed": true,
+      "decoder_layers": 4,
+      "model_source_modified": false,
+      "formal_training_started": false
+    }
+  }
+}

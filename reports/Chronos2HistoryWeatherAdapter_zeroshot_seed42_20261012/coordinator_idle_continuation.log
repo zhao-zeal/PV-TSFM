@@ -1,0 +1,13 @@
+2026-10-12T21:55:49.087576+08:00 A03-a: accepted {'test_windows': 25450, 'mae': 0.043617596593603265, 'rmse': 0.0933005734445039, 'r2': 0.8572546730305235, 'model': 'Chronos2HistoryWeatherAdapter', 'seed': 42, 'data_protocol': 'zeroshot_v1', 'baseline_config': 'history_weather_adapter_variant', 'llm_model': '', 'input_len': 24, 'output_len': 24, 'train_sites': [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 'validation_sites': [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 'test_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'split_version': 'chronological_target_split_v1', 'scaler_version': 'train_sites_and_time_only_fit_v1'}
+2026-10-12T21:55:49.089569+08:00 A03-b: training started GPU0
+2026-10-12T22:00:35.420731+08:00 A03-b: accepted {'test_windows': 25450, 'mae': 0.04362878272629496, 'rmse': 0.09297425103040916, 'r2': 0.8582514416149868, 'model': 'Chronos2HistoryWeatherAdapter', 'seed': 42, 'data_protocol': 'zeroshot_v1', 'baseline_config': 'history_weather_adapter_variant', 'llm_model': '', 'input_len': 24, 'output_len': 24, 'train_sites': [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 'validation_sites': [10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 'test_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'split_version': 'chronological_target_split_v1', 'scaler_version': 'train_sites_and_time_only_fit_v1'}
+2026-10-12T22:00:35.422810+08:00 A03-c: training started GPU0
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 529, in <module>
+    main()
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 511, in main
+    run['pid']=execute('worker',opts.gpu,Path(run['log']),variant,REPORT/f'{variant}_gpu_utilization.csv')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 426, in execute
+    raise RuntimeError(f'{stage} {variant or ""} exited {process.returncode}; see {log}')
+RuntimeError: worker c exited 1; see /home/zhaopp/workspace/PV-TSFM/reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/c_training.log

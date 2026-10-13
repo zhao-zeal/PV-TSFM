@@ -1,0 +1,6 @@
+2026-10-10 03:30:53,044 - BasicTS-C0 - INFO - C0: local pretrained weights loaded; no training or optimizer updates.
+2026-10-10 03:30:53,044 - BasicTS-C0 - INFO - Building test data loader.
+2026-10-10 03:32:27,212 - BasicTS-C0 - INFO - Complete in_domain evaluation metrics: {'test_windows': 25450, 'mae': 0.06612576353748548, 'rmse': 0.13700772151806792, 'r2': 0.6921895487672798, 'data_protocol': 'in_domain', 'model': 'C0', 'seed': 42, 'input_len': 24, 'output_len': 24, 'train_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'validation_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'test_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'split_version': 'chronological_target_split_v1', 'scaler_version': 'train_sites_and_time_only_fit_v1'}
+2026-10-10 03:32:27,212 - BasicTS-C0 - INFO - Result <test>: [test/time: 93.13 (s), test/loss: 0.0661, test/MAE: 0.0661, test/RMSE: 0.1370]
+2026-10-10 03:32:27,213 - BasicTS-C0 - INFO - Test results saved to /home/zhaopp/workspace/BasicTS/outputs/in_domain/chronos2_cpu_nwp_20261010/power/2d02b20b471a4568fe289eefedeb366b/test_results.
+2026-10-10 03:32:27,213 - BasicTS-C0 - INFO - Test metrics saved to /home/zhaopp/workspace/BasicTS/outputs/in_domain/chronos2_cpu_nwp_20261010/power/2d02b20b471a4568fe289eefedeb366b/test_metrics.json.

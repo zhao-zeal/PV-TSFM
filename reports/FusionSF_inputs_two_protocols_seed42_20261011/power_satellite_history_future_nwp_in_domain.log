@@ -1,0 +1,17 @@
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:261: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:391: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+7 [8, 8]
+3 modal model, vq in ts
+3 modal model, vq in ctx
+2026-10-12 19:21:20,720 Epoch 1 train_loss=0.21917206048965454 validation={'mae': 0.2681892534792816, 'rmse': 0.3796619551206209, 'mse': 0.14414320016601234} lr=0.0003199210496585171
+2026-10-12 19:32:50,376 Epoch 2 train_loss=0.1497575342655182 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.000639368553097047
+2026-10-12 19:44:26,842 Epoch 3 train_loss=0.14543770253658295 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0009578697430094784
+2026-10-12 19:56:07,401 Epoch 4 train_loss=0.1454499214887619 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.001274953408841266
+2026-10-12 20:07:37,324 Epoch 5 train_loss=0.1454678326845169 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0015901506724761102
+2026-10-12 20:19:11,744 Epoch 6 train_loss=0.14548847079277039 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0015858298005829512
+2026-10-12 20:30:45,440 Epoch 7 train_loss=0.14548681676387787 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0015807334095509981
+2026-10-12 20:42:21,977 Epoch 8 train_loss=0.14548592269420624 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0015748665289029048
+2026-10-12 20:54:01,079 Epoch 9 train_loss=0.14547991752624512 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0015682349485415545
+2026-10-12 21:05:43,540 Epoch 10 train_loss=0.14547957479953766 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.001560845213036123

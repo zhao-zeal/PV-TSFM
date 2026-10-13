@@ -1,0 +1,154 @@
+{
+  "status": "retry_failed_stopped_pending_discussion",
+  "data_protocol": "site1_v1",
+  "model": "FusionSF",
+  "seed": 42,
+  "input_len": 24,
+  "output_len": 24,
+  "guide_channels": 17,
+  "batch_size": 16,
+  "runs": [
+    {
+      "folder": "/home/zhaopp/workspace/PV-TSFM/reports/site1_FusionSF_20261010",
+      "learning_rate": 0.0016,
+      "completed_epochs": 4,
+      "best_epoch": 2,
+      "validation_mae": 0.11134913287192007,
+      "validation_rmse": 0.23242938078803516,
+      "test_mae": null,
+      "test_rmse": null,
+      "test_r2": null,
+      "status": "stopped_degenerate_predictions"
+    },
+    {
+      "folder": "/home/zhaopp/workspace/PV-TSFM/reports/site1_FusionSF_lr0p00016_20261010",
+      "learning_rate": 0.00016,
+      "completed_epochs": 3,
+      "best_epoch": 2,
+      "validation_mae": 0.11134913287192007,
+      "validation_rmse": 0.23242938078803516,
+      "test_mae": null,
+      "test_rmse": null,
+      "test_r2": null,
+      "status": "stopped_degenerate_predictions"
+    }
+  ],
+  "validation_metric_changes": {
+    "validation_mae": {
+      "absolute": 0.0,
+      "relative_percent": 0.0
+    },
+    "validation_rmse": {
+      "absolute": 0.0,
+      "relative_percent": 0.0
+    }
+  },
+  "diagnosis": {
+    "checkpoint_epoch": 2,
+    "indices": [
+      0,
+      3828,
+      7656
+    ],
+    "checks": [
+      {
+        "training_mode": false,
+        "prediction_min": 0.0,
+        "prediction_max": 0.0,
+        "all_predictions_zero": true,
+        "pre_relu_min": -3.5604605674743652,
+        "pre_relu_max": -2.2605583667755127,
+        "regression_loss": 0.13451388478279114,
+        "head_weight_gradient_max": 0.0,
+        "head_bias_gradient_max": 0.0
+      },
+      {
+        "training_mode": true,
+        "prediction_min": 0.0,
+        "prediction_max": 0.0,
+        "all_predictions_zero": true,
+        "pre_relu_min": -3.5126030445098877,
+        "pre_relu_max": -1.983612298965454,
+        "regression_loss": 0.13451388478279114,
+        "head_weight_gradient_max": 0.0,
+        "head_bias_gradient_max": 0.0
+      }
+    ],
+    "updated_checkpoint": false,
+    "optimizer_steps": 0
+  },
+  "test_evaluated": false,
+  "official_output_relu_and_l1_plus_vq_verified": true,
+  "third_run_started": false,
+  "protocol_recheck": {
+    "checked_at": "2026-10-10T18:54:29+08:00",
+    "status": "passed_data_protocol_checks_only",
+    "authorized_scope": "Complete site1_v1 data protocol verification only; defer FusionSF zero-prediction changes, do not affect active experiments",
+    "dataset": "MMSP",
+    "protocol": "site1_v1",
+    "sites": {
+      "train": [
+        1
+      ],
+      "validation": [
+        1
+      ],
+      "test": [
+        1
+      ]
+    },
+    "input_len": 24,
+    "label_len": 12,
+    "output_len": 24,
+    "train_validation_test_ratios": [
+      0.6,
+      0.2,
+      0.2
+    ],
+    "windows": {
+      "train": 7657,
+      "validation": 2545,
+      "test": 2545
+    },
+    "checks": {
+      "all_target_windows_within_own_split": true,
+      "target_times_disjoint_across_splits": true,
+      "first_middle_last_samples_checked_each_split": true,
+      "power_and_time_equal_to_in_domain_site1": true,
+      "sequence_and_nwp_shapes_correct": true,
+      "sampled_floating_inputs_finite": true,
+      "sampled_nwp_history_future_and_forecast_timestamps_aligned": true,
+      "decoder_history_matches_encoder_tail": true,
+      "site1_training_grid_nwp_scaler_independently_recomputed": true,
+      "both_old_site1_saved_protocols_and_scalers_match_current": true,
+      "shared_satellite_training_scaler_matches_both_active_ten_site_runs": true
+    },
+    "scaler_fit_ranges": {
+      "satellite": "2021-01-01 00:00:00..2021-11-18 23:00:00",
+      "nwp": "2021-01-02 00:00:00..2021-11-18 23:00:00"
+    },
+    "implementation_paths": [
+      "data_provider/protocols.py",
+      "data_provider/split_utils.py",
+      "data_provider/mmsp_storage.py",
+      "data_provider/data_loader.py"
+    ],
+    "saved_site1_protocols": [
+      "checkpoints/site1_v1/FusionSF_official_script3_guide17_seed42_sl24_pl24_all_site1/data_protocol.json",
+      "checkpoints/site1_v1/FusionSF_official_script3_guide17_seed42_lr0p00016_site1/data_protocol.json"
+    ],
+    "model_forwards": 0,
+    "optimizer_steps": 0,
+    "new_training_started": false,
+    "runtime_code_changed": false,
+    "active_training_pids_observed_running": [
+      2635253,
+      2642044
+    ],
+    "limitations": [
+      "NWP issue times absent; future availability assumed, bidirectional interpolation remains, strict online no-leakage not established",
+      "FusionSF zero predictions not repaired or retested; previous runs stopped after 4/3 epochs inside 5-epoch warmup",
+      "No formal Site1 test evaluation; MAE/RMSE/R2 are still unavailable"
+    ]
+  }
+}

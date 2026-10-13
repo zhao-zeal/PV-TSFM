@@ -1,0 +1,87 @@
+{
+  "protocol": "in_domain",
+  "status": "passed_full_artifact_acceptance",
+  "metrics": {
+    "test_windows": 25450,
+    "mae": 0.048576305294935604,
+    "rmse": 0.10959593773582196,
+    "r2": 0.803038116976817,
+    "model": "ChronosX",
+    "seed": 42,
+    "data_protocol": "in_domain",
+    "baseline_config": "extended_budget",
+    "llm_model": "",
+    "input_len": 24,
+    "output_len": 24,
+    "train_sites": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "validation_sites": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "test_sites": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "split_version": "chronological_target_split_v1",
+    "scaler_version": "train_sites_and_time_only_fit_v1"
+  },
+  "completed_epochs": 22,
+  "best_epoch": 2,
+  "selection": "minimum validation token CE",
+  "checks": [
+    "all labels match raw CSV/reference",
+    "sites/timestamps/config/protocol agree",
+    "train-only NWP scaler unchanged",
+    "finite predictions/weights; each station nonzero",
+    "minimum validation CE checkpoint and patience20/max200",
+    "full metrics/log/unique index agree",
+    "first sampled batch replayed using saved CPU/CUDA RNG"
+  ],
+  "sampled_checkpoint_replay_max_absolute_difference": 0.0,
+  "comparison_to_frozen_Chronos2_history_future": {
+    "mae": {
+      "absolute_change": -0.01233323547433371,
+      "relative_change_percent": -20.248446004630193
+    },
+    "rmse": {
+      "absolute_change": -0.008175253228123652,
+      "relative_change_percent": -6.9416409575296045
+    },
+    "r2": {
+      "absolute_change": 0.03048050547164549,
+      "relative_change_percent": 3.9454022609731965
+    }
+  },
+  "comparison_limit": "Same MMSP power/history/future NWP; different pretrained backbone and adapters; seed42 only",
+  "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/ChronosX_ep200_pat20_seed42_sl24_pl24_history_future_IIBOIB",
+  "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/ChronosX_ep200_pat20_seed42_sl24_pl24_history_future_IIBOIB/checkpoint.pth",
+  "log": "/home/zhaopp/workspace/PV-TSFM/reports/ChronosX_two_protocols_seed42_20261011/in_domain_training.log",
+  "accepted_at": "2026-10-12T14:00:27.647738+08:00"
+}

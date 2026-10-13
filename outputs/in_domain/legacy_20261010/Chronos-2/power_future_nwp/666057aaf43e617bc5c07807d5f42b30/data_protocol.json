@@ -1,0 +1,135 @@
+{
+  "version": "in_domain",
+  "protocol_origin": "project_fixed_v1",
+  "previous_name": "fixed_v1",
+  "window_pipeline": "fixed_v1",
+  "split_version": "chronological_target_split_v1",
+  "scaler_version": "train_sites_and_time_only_fit_v1",
+  "nwp_channels": 15,
+  "nwp_interpolation": "per_grid_bidirectional",
+  "sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "train_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "validation_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "test_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "input_len": 24,
+  "output_len": 24,
+  "target_time_ranges": {
+    "train": [
+      "2021-01-02 00:00:00",
+      "2021-11-19 00:00:00"
+    ],
+    "validation": [
+      "2021-11-19 00:00:00",
+      "2022-03-06 00:00:00"
+    ],
+    "test": [
+      "2022-03-06 00:00:00",
+      "2022-06-21 00:00:00"
+    ]
+  },
+  "windows": {
+    "train": 76570,
+    "validation": 25450,
+    "test": 25450
+  },
+  "scaler_fit": {
+    "nwp": {
+      "feature_names": [
+        "Clear-sky direct solar radiation at surface",
+        "Direct solar radiation",
+        "Downward UV radiation at the surface",
+        "Surface solar radiation downwards",
+        "Surface net solar radiation",
+        "Surface pressure",
+        "Sunshine duration",
+        "Low cloud cover",
+        "Total cloud cover",
+        "2 metre temperature",
+        "2 metre dewpoint temperature",
+        "Skin temperature",
+        "Total precipitation",
+        "100 metre U wind component",
+        "100 metre V wind component"
+      ],
+      "fit_range": "2021-01-02 00:00:00..2021-11-18 23:00:00",
+      "fit_coordinates": [
+        [
+          14.6,
+          15.7
+        ],
+        [
+          14.7,
+          15.5
+        ],
+        [
+          14.7,
+          17.5
+        ],
+        [
+          14.8,
+          15.7
+        ],
+        [
+          14.8,
+          17.1
+        ],
+        [
+          14.8,
+          17.3
+        ],
+        [
+          14.8,
+          17.6
+        ],
+        [
+          15.0,
+          17.6
+        ]
+      ]
+    }
+  }
+}

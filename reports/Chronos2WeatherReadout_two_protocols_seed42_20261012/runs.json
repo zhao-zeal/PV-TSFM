@@ -1,0 +1,1124 @@
+{
+  "state": "completed_artifact_acceptance_passed",
+  "started_at": "2026-10-12T22:57:36.840684+08:00",
+  "coordinator_pid": 608737,
+  "gpu": 5,
+  "cpu_cores": [
+    9,
+    10
+  ],
+  "threads": 2,
+  "num_workers": 0,
+  "source_sha256": {
+    "layers/chronos2_weather_readout.py": "2d8222ef1c9c651e3dbd31a7fb4e41c188a87dcd53c54163b363141c746d6437",
+    "models/Chronos2WeatherReadout.py": "545dadd0fa9a093f6055c81b767fed79eb03effb81388e44379fe420e2ad0daf",
+    "exp/exp_chronos2_weather_readout.py": "ac3cc45dbb9632ae13a62f94b682b43a7ad7fc10b7dff8984118f71041fa6012",
+    "scripts/run_chronos2_weather_readout.py": "006640ea9ac2b4cfd7ec4de9a82e0a82ee997264350e2a7dec5cf8579b141061",
+    "exp/exp_chronos2_history_weather_adapter.py": "18fccea5de78511bad2beba5b73c67d60004dd8715b161794944047cfc3cc147",
+    "scripts/run_chronos2_history_weather_adapter.py": "ce7f576026607a3e2eccba59f83fd39fe2adb61cbaf02829e4d8242d984dba05"
+  },
+  "seed": 42,
+  "authorization": "User approved A04 proposal, then explicitly included in_domain; four serial runs",
+  "multi_seed_started": false,
+  "hyperparameter_search_started": false,
+  "runs": [
+    {
+      "protocol": "in_domain",
+      "variant": "a",
+      "state": "completed_artifact_acceptance_passed",
+      "model_id": "Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future",
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2WeatherReadout_two_protocols_seed42_20261012/in_domain_a_training.log",
+      "started_at": "2026-10-13T01:18:00.854082+08:00",
+      "pid": 660124,
+      "returncode": 0,
+      "finished_at": "2026-10-13T01:23:00.324657+08:00",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04390995594051363,
+        "rmse": 0.09581349841344505,
+        "r2": 0.8494618172155486,
+        "model": "Chronos2WeatherReadout",
+        "seed": 42,
+        "data_protocol": "in_domain",
+        "baseline_config": "weather_conditioned_chronos_readout_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_full_training_test_artifact_acceptance",
+        "protocol": "in_domain",
+        "variant": "a",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04390995594051363,
+          "rmse": 0.09581349841344505,
+          "r2": 0.8494618172155486,
+          "model": "Chronos2WeatherReadout",
+          "seed": 42,
+          "data_protocol": "in_domain",
+          "baseline_config": "weather_conditioned_chronos_readout_variant",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "validation_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "completed_epochs": 80,
+        "best_epoch": 70,
+        "trainable_parameters": 29249,
+        "checkpoint_sha256": "1f82141203312304fc0c372b57f825cc387590468c4b6a5265596199bc7c3920",
+        "frozen_state_sha256": "5ef5a8e1ad5afb7fcb67e94a2620c2a21bcf7cebed144786a04f2f72b48ebc9a",
+        "selected_checkpoint_replay_max_abs_difference": 3.5762786865234375e-07,
+        "base_provenance": {
+          "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+          "checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+          "base_version": "b131_linear_v1",
+          "base_best_epoch": 40,
+          "base_experiment_label": "A01",
+          "historical_name": "E11",
+          "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+          "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+        },
+        "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future/analysis.json",
+        "comparison_to_A02": {
+          "mae": {
+            "absolute_change": 1.322984229265578e-06,
+            "improvement_percent": -0.0030130389861664493
+          },
+          "rmse": {
+            "absolute_change": -5.669150430294423e-05,
+            "improvement_percent": 0.059133610094631923
+          },
+          "r2": {
+            "absolute_change": 0.00017819536855190332
+          }
+        },
+        "accepted_at": "2026-10-13T01:23:44.570333+08:00"
+      }
+    },
+    {
+      "protocol": "in_domain",
+      "variant": "b",
+      "state": "completed_artifact_acceptance_passed",
+      "model_id": "Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future",
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2WeatherReadout_two_protocols_seed42_20261012/in_domain_b_training.log",
+      "started_at": "2026-10-13T01:23:45.358432+08:00",
+      "pid": 661701,
+      "returncode": 0,
+      "finished_at": "2026-10-13T01:28:16.338594+08:00",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04396189896311157,
+        "rmse": 0.09616236610214705,
+        "r2": 0.8483635686272881,
+        "model": "Chronos2WeatherReadout",
+        "seed": 42,
+        "data_protocol": "in_domain",
+        "baseline_config": "weather_conditioned_chronos_readout_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_full_training_test_artifact_acceptance",
+        "protocol": "in_domain",
+        "variant": "b",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04396189896311157,
+          "rmse": 0.09616236610214705,
+          "r2": 0.8483635686272881,
+          "model": "Chronos2WeatherReadout",
+          "seed": 42,
+          "data_protocol": "in_domain",
+          "baseline_config": "weather_conditioned_chronos_readout_variant",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "validation_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "completed_epochs": 56,
+        "best_epoch": 46,
+        "trainable_parameters": 29249,
+        "checkpoint_sha256": "65a3b79bfc7b657cb1b0856d1f1e088e48868ecd28380f0c2e80c18a76b2b03c",
+        "frozen_state_sha256": "5ef5a8e1ad5afb7fcb67e94a2620c2a21bcf7cebed144786a04f2f72b48ebc9a",
+        "selected_checkpoint_replay_max_abs_difference": 3.5762786865234375e-07,
+        "base_provenance": {
+          "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+          "checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+          "base_version": "b131_linear_v1",
+          "base_best_epoch": 40,
+          "base_experiment_label": "A01",
+          "historical_name": "E11",
+          "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+          "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+        },
+        "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future/analysis.json",
+        "comparison_to_A02": {
+          "mae": {
+            "absolute_change": 5.326600682720173e-05,
+            "improvement_percent": -0.12131101161868009
+          },
+          "rmse": {
+            "absolute_change": 0.0002921761843990567,
+            "improvement_percent": -0.3047622880999086
+          },
+          "r2": {
+            "absolute_change": -0.0009200532197085609
+          }
+        },
+        "accepted_at": "2026-10-13T01:29:00.790950+08:00"
+      }
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "variant": "a",
+      "state": "completed_artifact_acceptance_passed",
+      "model_id": "Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future",
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2WeatherReadout_two_protocols_seed42_20261012/zeroshot_v1_a_training.log",
+      "started_at": "2026-10-13T01:29:01.560025+08:00",
+      "pid": 663203,
+      "returncode": 0,
+      "finished_at": "2026-10-13T01:33:32.597758+08:00",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04379378392871792,
+        "rmse": 0.09336113004183283,
+        "r2": 0.8570693156160972,
+        "model": "Chronos2WeatherReadout",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "weather_conditioned_chronos_readout_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_full_training_test_artifact_acceptance",
+        "protocol": "zeroshot_v1",
+        "variant": "a",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04379378392871792,
+          "rmse": 0.09336113004183283,
+          "r2": 0.8570693156160972,
+          "model": "Chronos2WeatherReadout",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "weather_conditioned_chronos_readout_variant",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "completed_epochs": 62,
+        "best_epoch": 52,
+        "trainable_parameters": 29249,
+        "checkpoint_sha256": "8ac6661def28f1486a5bc0d481af63a225697b5ba3f1163822a465a9beb50cd6",
+        "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+        "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+        "base_provenance": {
+          "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+          "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+          "base_version": "b131_linear_v1",
+          "base_best_epoch": 46,
+          "base_experiment_label": "A01",
+          "historical_name": "E11",
+          "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+          "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+        },
+        "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future/analysis.json",
+        "comparison_to_A02": {
+          "mae": {
+            "absolute_change": 0.00017227392065943814,
+            "improvement_percent": -0.39492883356768915
+          },
+          "rmse": {
+            "absolute_change": 0.000419494227294398,
+            "improvement_percent": -0.4513523176324152
+          },
+          "r2": {
+            "absolute_change": -0.0012815588823253954
+          }
+        },
+        "accepted_at": "2026-10-13T01:34:20.062494+08:00"
+      }
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "variant": "b",
+      "state": "completed_artifact_acceptance_passed",
+      "model_id": "Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future",
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2WeatherReadout_two_protocols_seed42_20261012/zeroshot_v1_b_training.log",
+      "started_at": "2026-10-13T01:34:20.896463+08:00",
+      "pid": 664136,
+      "returncode": 0,
+      "finished_at": "2026-10-13T01:38:06.648335+08:00",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.043709636467616955,
+        "rmse": 0.09343980118183524,
+        "r2": 0.8568283318684237,
+        "model": "Chronos2WeatherReadout",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "weather_conditioned_chronos_readout_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_full_training_test_artifact_acceptance",
+        "protocol": "zeroshot_v1",
+        "variant": "b",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.043709636467616955,
+          "rmse": 0.09343980118183524,
+          "r2": 0.8568283318684237,
+          "model": "Chronos2WeatherReadout",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "weather_conditioned_chronos_readout_variant",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "completed_epochs": 52,
+        "best_epoch": 42,
+        "trainable_parameters": 29249,
+        "checkpoint_sha256": "6f1edfd76f8a448abec6f153ad28fd0dad5f2ce42ec751f6f17dcaecc7c74b55",
+        "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+        "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+        "base_provenance": {
+          "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+          "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+          "base_version": "b131_linear_v1",
+          "base_best_epoch": 46,
+          "base_experiment_label": "A01",
+          "historical_name": "E11",
+          "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+          "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+        },
+        "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future/analysis.json",
+        "comparison_to_A02": {
+          "mae": {
+            "absolute_change": 8.812645955847548e-05,
+            "improvement_percent": -0.20202523833355454
+          },
+          "rmse": {
+            "absolute_change": 0.0004981653672968128,
+            "improvement_percent": -0.5359980625807826
+          },
+          "r2": {
+            "absolute_change": -0.0015225426299989575
+          }
+        },
+        "accepted_at": "2026-10-13T01:38:24.388940+08:00"
+      }
+    }
+  ],
+  "completed_at": "2026-10-13T01:38:25.198723+08:00",
+  "acceptance": [
+    {
+      "status": "passed_full_training_test_artifact_acceptance",
+      "protocol": "in_domain",
+      "variant": "a",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04390995594051363,
+        "rmse": 0.09581349841344505,
+        "r2": 0.8494618172155486,
+        "model": "Chronos2WeatherReadout",
+        "seed": 42,
+        "data_protocol": "in_domain",
+        "baseline_config": "weather_conditioned_chronos_readout_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "completed_epochs": 80,
+      "best_epoch": 70,
+      "trainable_parameters": 29249,
+      "checkpoint_sha256": "1f82141203312304fc0c372b57f825cc387590468c4b6a5265596199bc7c3920",
+      "frozen_state_sha256": "5ef5a8e1ad5afb7fcb67e94a2620c2a21bcf7cebed144786a04f2f72b48ebc9a",
+      "selected_checkpoint_replay_max_abs_difference": 3.5762786865234375e-07,
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 40,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future/analysis.json",
+      "comparison_to_A02": {
+        "mae": {
+          "absolute_change": 1.322984229265578e-06,
+          "improvement_percent": -0.0030130389861664493
+        },
+        "rmse": {
+          "absolute_change": -5.669150430294423e-05,
+          "improvement_percent": 0.059133610094631923
+        },
+        "r2": {
+          "absolute_change": 0.00017819536855190332
+        }
+      },
+      "accepted_at": "2026-10-13T01:23:44.570333+08:00"
+    },
+    {
+      "status": "passed_full_training_test_artifact_acceptance",
+      "protocol": "in_domain",
+      "variant": "b",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04396189896311157,
+        "rmse": 0.09616236610214705,
+        "r2": 0.8483635686272881,
+        "model": "Chronos2WeatherReadout",
+        "seed": 42,
+        "data_protocol": "in_domain",
+        "baseline_config": "weather_conditioned_chronos_readout_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "completed_epochs": 56,
+      "best_epoch": 46,
+      "trainable_parameters": 29249,
+      "checkpoint_sha256": "65a3b79bfc7b657cb1b0856d1f1e088e48868ecd28380f0c2e80c18a76b2b03c",
+      "frozen_state_sha256": "5ef5a8e1ad5afb7fcb67e94a2620c2a21bcf7cebed144786a04f2f72b48ebc9a",
+      "selected_checkpoint_replay_max_abs_difference": 3.5762786865234375e-07,
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 40,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future/analysis.json",
+      "comparison_to_A02": {
+        "mae": {
+          "absolute_change": 5.326600682720173e-05,
+          "improvement_percent": -0.12131101161868009
+        },
+        "rmse": {
+          "absolute_change": 0.0002921761843990567,
+          "improvement_percent": -0.3047622880999086
+        },
+        "r2": {
+          "absolute_change": -0.0009200532197085609
+        }
+      },
+      "accepted_at": "2026-10-13T01:29:00.790950+08:00"
+    },
+    {
+      "status": "passed_full_training_test_artifact_acceptance",
+      "protocol": "zeroshot_v1",
+      "variant": "a",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04379378392871792,
+        "rmse": 0.09336113004183283,
+        "r2": 0.8570693156160972,
+        "model": "Chronos2WeatherReadout",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "weather_conditioned_chronos_readout_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "completed_epochs": 62,
+      "best_epoch": 52,
+      "trainable_parameters": 29249,
+      "checkpoint_sha256": "8ac6661def28f1486a5bc0d481af63a225697b5ba3f1163822a465a9beb50cd6",
+      "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+      "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 46,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2WeatherReadout_A04a_seed42_sl24_pl24_history_future/analysis.json",
+      "comparison_to_A02": {
+        "mae": {
+          "absolute_change": 0.00017227392065943814,
+          "improvement_percent": -0.39492883356768915
+        },
+        "rmse": {
+          "absolute_change": 0.000419494227294398,
+          "improvement_percent": -0.4513523176324152
+        },
+        "r2": {
+          "absolute_change": -0.0012815588823253954
+        }
+      },
+      "accepted_at": "2026-10-13T01:34:20.062494+08:00"
+    },
+    {
+      "status": "passed_full_training_test_artifact_acceptance",
+      "protocol": "zeroshot_v1",
+      "variant": "b",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.043709636467616955,
+        "rmse": 0.09343980118183524,
+        "r2": 0.8568283318684237,
+        "model": "Chronos2WeatherReadout",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "weather_conditioned_chronos_readout_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "completed_epochs": 52,
+      "best_epoch": 42,
+      "trainable_parameters": 29249,
+      "checkpoint_sha256": "6f1edfd76f8a448abec6f153ad28fd0dad5f2ce42ec751f6f17dcaecc7c74b55",
+      "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+      "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 46,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2WeatherReadout_A04b_seed42_sl24_pl24_history_future/analysis.json",
+      "comparison_to_A02": {
+        "mae": {
+          "absolute_change": 8.812645955847548e-05,
+          "improvement_percent": -0.20202523833355454
+        },
+        "rmse": {
+          "absolute_change": 0.0004981653672968128,
+          "improvement_percent": -0.5359980625807826
+        },
+        "r2": {
+          "absolute_change": -0.0015225426299989575
+        }
+      },
+      "accepted_at": "2026-10-13T01:38:24.388940+08:00"
+    }
+  ],
+  "acceptance_review_20261013": {
+    "checked_at": "2026-10-13T15:58:07.830949+08:00",
+    "mode": "saved_artifacts_only; no training/inference; existing GPU replay reused",
+    "checks": [
+      "all 25450x24 metrics recomputed",
+      "full labels match raw CSV; sites/times match baseline",
+      "config/protocol/train-only scalers match; reference comparison limited to consumed modalities",
+      "finite weights/predictions; all sites nonzero",
+      "validation-MAE best checkpoint and early stopping",
+      "metrics/log/unique formal index agree",
+      "A04 attention shape/normalization/entropy and parameter count verified"
+    ],
+    "runs": [
+      {
+        "protocol": "in_domain",
+        "variant": "a",
+        "status": "passed_saved_artifact_revalidation",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04390995594051363,
+          "rmse": 0.09581349841344505,
+          "r2": 0.8494618172155486
+        },
+        "best_epoch": 70,
+        "completed_epochs": 80,
+        "comparison_to_baseline": {
+          "mae": {
+            "absolute_change": 1.322984229265578e-06,
+            "relative_change_percent": 0.0030130389861664493
+          },
+          "rmse": {
+            "absolute_change": -5.669150430294423e-05,
+            "relative_change_percent": -0.059133610094631923
+          },
+          "r2": {
+            "absolute_change": 0.00017819536855190332,
+            "relative_change_percent": 0.020981844459024106
+          }
+        },
+        "prediction_range": [
+          -0.0368819497525692,
+          1.861100435256958
+        ],
+        "zero_fraction": 0.0
+      },
+      {
+        "protocol": "in_domain",
+        "variant": "b",
+        "status": "passed_saved_artifact_revalidation",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04396189896311157,
+          "rmse": 0.09616236610214705,
+          "r2": 0.8483635686272881
+        },
+        "best_epoch": 46,
+        "completed_epochs": 56,
+        "comparison_to_baseline": {
+          "mae": {
+            "absolute_change": 5.326600682720173e-05,
+            "relative_change_percent": 0.1213110116186801
+          },
+          "rmse": {
+            "absolute_change": 0.0002921761843990567,
+            "relative_change_percent": 0.30476228809990863
+          },
+          "r2": {
+            "absolute_change": -0.0009200532197085609,
+            "relative_change_percent": -0.10833285795711645
+          }
+        },
+        "prediction_range": [
+          -0.039757139980793,
+          1.841508150100708
+        ],
+        "zero_fraction": 0.0
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "variant": "a",
+        "status": "passed_saved_artifact_revalidation",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04379378392871792,
+          "rmse": 0.09336113004183283,
+          "r2": 0.8570693156160972
+        },
+        "best_epoch": 52,
+        "completed_epochs": 62,
+        "comparison_to_baseline": {
+          "mae": {
+            "absolute_change": 0.00017227392065943814,
+            "relative_change_percent": 0.39492883356768915
+          },
+          "rmse": {
+            "absolute_change": 0.000419494227294398,
+            "relative_change_percent": 0.4513523176324151
+          },
+          "r2": {
+            "absolute_change": -0.0012815588823253954,
+            "relative_change_percent": -0.14930477971194173
+          }
+        },
+        "prediction_range": [
+          -0.05226115509867668,
+          1.5999099016189575
+        ],
+        "zero_fraction": 0.0
+      },
+      {
+        "protocol": "zeroshot_v1",
+        "variant": "b",
+        "status": "passed_saved_artifact_revalidation",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.043709636467616955,
+          "rmse": 0.09343980118183524,
+          "r2": 0.8568283318684237
+        },
+        "best_epoch": 42,
+        "completed_epochs": 52,
+        "comparison_to_baseline": {
+          "mae": {
+            "absolute_change": 8.812645955847548e-05,
+            "relative_change_percent": 0.2020252383335545
+          },
+          "rmse": {
+            "absolute_change": 0.0004981653672968128,
+            "relative_change_percent": 0.5359980625807826
+          },
+          "r2": {
+            "absolute_change": -0.0015225426299989575,
+            "relative_change_percent": -0.1773799823864169
+          }
+        },
+        "prediction_range": [
+          -0.03487575799226761,
+          1.6036508083343506
+        ],
+        "zero_fraction": 0.0
+      }
+    ]
+  }
+}

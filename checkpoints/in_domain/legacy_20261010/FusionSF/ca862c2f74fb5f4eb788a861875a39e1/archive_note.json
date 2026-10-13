@@ -1,0 +1,8 @@
+{
+  "status": "completed_results_archived_and_checkpoint_verified",
+  "source": "/home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_best_val_MAE.pt",
+  "no_final_test_metrics": false,
+  "initial_archive_status": "validation_checkpoint_snapshot_only",
+  "completed_result_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/legacy_completed_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1",
+  "regression_result_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/stage0_FusionSF_legacy_guide15_seed42"
+}

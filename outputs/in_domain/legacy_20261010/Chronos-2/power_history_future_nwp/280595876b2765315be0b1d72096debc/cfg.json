@@ -1,0 +1,107 @@
+{
+    "model": {
+        "name": "ChronosC0",
+        "module": "basicts.models.Chronos2"
+    },
+    "model_config": {
+        "model_path": "/home/zhaopp/models/chronos-2",
+        "input_len": 24,
+        "output_len": 24,
+        "batch_size": 64,
+        "nwp_mode": "history_future",
+        "cross_learning": false
+    },
+    "dataset_name": "MMSP",
+    "dataset_type": {
+        "name": "MMSPForecastingDataset",
+        "module": "basicts.data.MMSP.dataset"
+    },
+    "dataset_params": {
+        "data_dir": "/home/zhaopp/workspace/FusionSF/data/MMSP/data",
+        "protocol": "in_domain",
+        "input_len": 24,
+        "output_len": 24,
+        "num_sites": 10,
+        "num_ignored_sites": 0,
+        "modality_mode": "power_nwp",
+        "train_ratio": 0.6,
+        "valid_ratio": 0.2,
+        "test_ratio": 0.2,
+        "dataset_name": "MMSP"
+    },
+    "gpus": null,
+    "seed": 42,
+    "scaler": null,
+    "rescale": false,
+    "null_val": NaN,
+    "metrics": [
+        "MAE",
+        "RMSE"
+    ],
+    "target_metric": "MAE",
+    "best_metric": "min",
+    "callbacks": [
+        {
+            "name": "MMSPResults",
+            "module": "examples.forecasting.fusionsf.callbacks",
+            "params": {}
+        }
+    ],
+    "test_data_num_workers": 0,
+    "eval_after_train": false,
+    "save_results": true,
+    "ckpt_save_dir": "/home/zhaopp/workspace/BasicTS/outputs/in_domain/chronos2_cpu_nwp_20261010/power_history_future_nwp",
+    "taskflow": {
+        "name": "BasicTSForecastingTaskFlow",
+        "module": "basicts.runners.taskflow.forecasting_taskflow",
+        "params": {}
+    },
+    "gpu_num": 0,
+    "null_to_num": 0.0,
+    "norm_each_channel": true,
+    "ddp_find_unused_parameters": false,
+    "compile_model": false,
+    "num_epochs": 100,
+    "num_steps": null,
+    "loss": "MAE",
+    "optimizer": {
+        "name": "Adam",
+        "module": "torch.optim.adam"
+    },
+    "optimizer_params": {
+        "lr": 0.0002,
+        "weight_decay": 0.0005
+    },
+    "lr_scheduler": null,
+    "lr_scheduler_params": null,
+    "ckpt_save_strategy": null,
+    "finetune_from": null,
+    "strict_load": true,
+    "train_batch_size": 64,
+    "train_data_prefetch": false,
+    "train_data_shuffle": true,
+    "train_data_collate_fn": null,
+    "train_data_num_workers": 0,
+    "train_data_pin_memory": false,
+    "val_batch_size": 64,
+    "val_interval": 1,
+    "val_data_prefetch": false,
+    "val_data_shuffle": false,
+    "val_data_collate_fn": null,
+    "val_data_num_workers": 0,
+    "val_data_pin_memory": false,
+    "tf32": false,
+    "deterministic": false,
+    "cudnn_enabled": true,
+    "cudnn_benchmark": true,
+    "cudnn_determinstic": false,
+    "test_batch_size": 64,
+    "test_interval": 1,
+    "test_data_prefetch": false,
+    "test_data_shuffle": false,
+    "test_data_collate_fn": null,
+    "test_data_pin_memory": false,
+    "eval_horizons": null,
+    "data_protocol": "in_domain",
+    "experiment_model_name": "Chronos2_power_history_future_nwp"
+}

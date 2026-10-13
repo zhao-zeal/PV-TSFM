@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-10T23:32:39+08:00",
+  "checker_pid": 3099197,
+  "next_check_seconds": 1071,
+  "runs": [
+    {
+      "run": "PVTSFM_in_domain_guide17",
+      "pid": 2635253,
+      "alive": false,
+      "test_complete": true,
+      "latest_validation": [
+        30,
+        0.04207794462961765,
+        0.09994288270462272
+      ],
+      "issues": []
+    },
+    {
+      "run": "PVTSFM_zeroshot_guide17",
+      "pid": 2642044,
+      "alive": false,
+      "test_complete": true,
+      "latest_validation": [
+        29,
+        0.04184333781777094,
+        0.1018955409427701
+      ],
+      "issues": []
+    }
+  ]
+}

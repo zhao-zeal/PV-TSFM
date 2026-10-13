@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/accept_chronos2_weather_adapter.py", line 147, in <module>
+    accept(options.report.resolve(), options.protocol, options.gpu)
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/accept_chronos2_weather_adapter.py", line 64, in accept
+    assert len(rows) == 1
+           ^^^^^^^^^^^^^^
+AssertionError

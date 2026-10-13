@@ -1,0 +1,746 @@
+{
+  "diagnostic_only": true,
+  "formal_training_or_test": false,
+  "gpu": 4,
+  "cpu_cores": [
+    0,
+    7
+  ],
+  "threads": 2,
+  "num_workers": 0,
+  "created_at": "2026-10-12T14:58:11.949033+08:00",
+  "seed": 42,
+  "precision": "fp32",
+  "candidates": [
+    16,
+    64,
+    256
+  ],
+  "measurement_seconds": 8.0,
+  "selection": "maximum measured end-to-end training windows/second among feasible batches",
+  "sampling": "nvidia-smi every 0.5s during measured real data/forward/backward/AdamW steps",
+  "runs": [
+    {
+      "variant": "power_future_nwp",
+      "protocol": "in_domain",
+      "candidates": [
+        {
+          "batch_size": 16,
+          "status": "passed_real_training_steps",
+          "steps": 132,
+          "windows": 2112,
+          "seconds": 8.009241817519069,
+          "windows_per_second": 263.6953719364925,
+          "peak_allocated_mib": 264.8876953125,
+          "mean_utilization_percent": 13.714285714285714,
+          "peak_utilization_percent": 17,
+          "utilization_samples": [
+            {
+              "time": 1791788297.8260677,
+              "memory_mib": 721,
+              "utilization_percent": 2
+            },
+            {
+              "time": 1791788298.408055,
+              "memory_mib": 721,
+              "utilization_percent": 2
+            },
+            {
+              "time": 1791788298.987953,
+              "memory_mib": 721,
+              "utilization_percent": 17
+            },
+            {
+              "time": 1791788299.5670137,
+              "memory_mib": 721,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788300.1457863,
+              "memory_mib": 721,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788300.7231746,
+              "memory_mib": 721,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788301.304017,
+              "memory_mib": 721,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788301.8914113,
+              "memory_mib": 721,
+              "utilization_percent": 15
+            },
+            {
+              "time": 1791788302.469982,
+              "memory_mib": 721,
+              "utilization_percent": 15
+            },
+            {
+              "time": 1791788303.0877779,
+              "memory_mib": 721,
+              "utilization_percent": 15
+            },
+            {
+              "time": 1791788303.674291,
+              "memory_mib": 721,
+              "utilization_percent": 15
+            },
+            {
+              "time": 1791788304.2520714,
+              "memory_mib": 721,
+              "utilization_percent": 15
+            },
+            {
+              "time": 1791788304.8305628,
+              "memory_mib": 721,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788305.4140081,
+              "memory_mib": 721,
+              "utilization_percent": 16
+            }
+          ],
+          "final_diagnostic_loss": 0.156631737947464
+        },
+        {
+          "batch_size": 64,
+          "status": "passed_real_training_steps",
+          "steps": 109,
+          "windows": 6976,
+          "seconds": 8.010593911632895,
+          "windows_per_second": 870.8467907566168,
+          "peak_allocated_mib": 781.16064453125,
+          "mean_utilization_percent": 19.142857142857142,
+          "peak_utilization_percent": 24,
+          "utilization_samples": [
+            {
+              "time": 1791788306.1473262,
+              "memory_mib": 1245,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788306.7409978,
+              "memory_mib": 1245,
+              "utilization_percent": 23
+            },
+            {
+              "time": 1791788307.3239977,
+              "memory_mib": 1245,
+              "utilization_percent": 23
+            },
+            {
+              "time": 1791788307.9162555,
+              "memory_mib": 1245,
+              "utilization_percent": 24
+            },
+            {
+              "time": 1791788308.5009995,
+              "memory_mib": 1245,
+              "utilization_percent": 0
+            },
+            {
+              "time": 1791788309.0831497,
+              "memory_mib": 1245,
+              "utilization_percent": 0
+            },
+            {
+              "time": 1791788309.6651933,
+              "memory_mib": 1245,
+              "utilization_percent": 24
+            },
+            {
+              "time": 1791788310.24608,
+              "memory_mib": 1245,
+              "utilization_percent": 24
+            },
+            {
+              "time": 1791788310.8440638,
+              "memory_mib": 1245,
+              "utilization_percent": 22
+            },
+            {
+              "time": 1791788311.4240928,
+              "memory_mib": 1245,
+              "utilization_percent": 22
+            },
+            {
+              "time": 1791788312.0201557,
+              "memory_mib": 1245,
+              "utilization_percent": 19
+            },
+            {
+              "time": 1791788312.598762,
+              "memory_mib": 1245,
+              "utilization_percent": 24
+            },
+            {
+              "time": 1791788313.1791043,
+              "memory_mib": 1245,
+              "utilization_percent": 24
+            },
+            {
+              "time": 1791788313.7607224,
+              "memory_mib": 1245,
+              "utilization_percent": 23
+            }
+          ],
+          "final_diagnostic_loss": 0.14138419926166534
+        },
+        {
+          "batch_size": 256,
+          "status": "passed_real_training_steps",
+          "steps": 69,
+          "windows": 17664,
+          "seconds": 8.002102172933519,
+          "windows_per_second": 2207.419952690318,
+          "peak_allocated_mib": 2753.61962890625,
+          "mean_utilization_percent": 38.5,
+          "peak_utilization_percent": 48,
+          "utilization_samples": [
+            {
+              "time": 1791788314.6008089,
+              "memory_mib": 3299,
+              "utilization_percent": 48
+            },
+            {
+              "time": 1791788315.1820152,
+              "memory_mib": 3299,
+              "utilization_percent": 48
+            },
+            {
+              "time": 1791788315.7649999,
+              "memory_mib": 3299,
+              "utilization_percent": 29
+            },
+            {
+              "time": 1791788316.3439605,
+              "memory_mib": 3299,
+              "utilization_percent": 29
+            },
+            {
+              "time": 1791788316.9246204,
+              "memory_mib": 3299,
+              "utilization_percent": 41
+            },
+            {
+              "time": 1791788317.504181,
+              "memory_mib": 3299,
+              "utilization_percent": 44
+            },
+            {
+              "time": 1791788318.0831022,
+              "memory_mib": 3299,
+              "utilization_percent": 44
+            },
+            {
+              "time": 1791788318.676015,
+              "memory_mib": 3299,
+              "utilization_percent": 39
+            },
+            {
+              "time": 1791788319.3071156,
+              "memory_mib": 3299,
+              "utilization_percent": 39
+            },
+            {
+              "time": 1791788319.890038,
+              "memory_mib": 3299,
+              "utilization_percent": 26
+            },
+            {
+              "time": 1791788320.4682496,
+              "memory_mib": 3299,
+              "utilization_percent": 30
+            },
+            {
+              "time": 1791788321.1130624,
+              "memory_mib": 3299,
+              "utilization_percent": 30
+            },
+            {
+              "time": 1791788321.694061,
+              "memory_mib": 3299,
+              "utilization_percent": 46
+            },
+            {
+              "time": 1791788322.2750006,
+              "memory_mib": 3299,
+              "utilization_percent": 46
+            }
+          ],
+          "final_diagnostic_loss": 0.13886526226997375
+        }
+      ],
+      "selected_batch_size": 256,
+      "selected_eval_batch_size": 64,
+      "eval_forward_finite": true,
+      "resume_source": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/FusionSF_power_future_nwp_seed42_sl24_pl24/checkpoint.pth",
+      "source_epoch": 2,
+      "checkpoint_not_modified": true,
+      "training_trajectory_equivalent": false
+    },
+    {
+      "variant": "power_satellite_history_future_nwp",
+      "protocol": "in_domain",
+      "candidates": [
+        {
+          "batch_size": 16,
+          "status": "passed_real_training_steps",
+          "steps": 50,
+          "windows": 800,
+          "seconds": 8.027079821564257,
+          "windows_per_second": 99.66264417239867,
+          "peak_allocated_mib": 9448.03857421875,
+          "mean_utilization_percent": 52.57142857142857,
+          "peak_utilization_percent": 97,
+          "utilization_samples": [
+            {
+              "time": 1791788331.5534427,
+              "memory_mib": 11881,
+              "utilization_percent": 53
+            },
+            {
+              "time": 1791788332.1372507,
+              "memory_mib": 19097,
+              "utilization_percent": 53
+            },
+            {
+              "time": 1791788332.7215,
+              "memory_mib": 19129,
+              "utilization_percent": 35
+            },
+            {
+              "time": 1791788333.3062894,
+              "memory_mib": 19129,
+              "utilization_percent": 35
+            },
+            {
+              "time": 1791788333.8944094,
+              "memory_mib": 19129,
+              "utilization_percent": 61
+            },
+            {
+              "time": 1791788334.481,
+              "memory_mib": 19129,
+              "utilization_percent": 97
+            },
+            {
+              "time": 1791788335.0850005,
+              "memory_mib": 19129,
+              "utilization_percent": 97
+            },
+            {
+              "time": 1791788335.669439,
+              "memory_mib": 19129,
+              "utilization_percent": 80
+            },
+            {
+              "time": 1791788336.2492251,
+              "memory_mib": 19129,
+              "utilization_percent": 80
+            },
+            {
+              "time": 1791788336.8433046,
+              "memory_mib": 19155,
+              "utilization_percent": 29
+            },
+            {
+              "time": 1791788337.4321227,
+              "memory_mib": 19155,
+              "utilization_percent": 29
+            },
+            {
+              "time": 1791788338.0162265,
+              "memory_mib": 19155,
+              "utilization_percent": 15
+            },
+            {
+              "time": 1791788338.607489,
+              "memory_mib": 19155,
+              "utilization_percent": 36
+            },
+            {
+              "time": 1791788339.2069998,
+              "memory_mib": 19155,
+              "utilization_percent": 36
+            }
+          ],
+          "final_diagnostic_loss": 0.19444048404693604
+        },
+        {
+          "batch_size": 64,
+          "status": "passed_real_training_steps",
+          "steps": 18,
+          "windows": 1152,
+          "seconds": 8.284468277357519,
+          "windows_per_second": 139.05539395311092,
+          "peak_allocated_mib": 36350.98046875,
+          "mean_utilization_percent": 96.2,
+          "peak_utilization_percent": 100,
+          "utilization_samples": [
+            {
+              "time": 1791788341.9006066,
+              "memory_mib": 29495,
+              "utilization_percent": 95
+            },
+            {
+              "time": 1791788342.4847596,
+              "memory_mib": 29495,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788343.073582,
+              "memory_mib": 29495,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788343.660002,
+              "memory_mib": 29649,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788344.2459996,
+              "memory_mib": 39509,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788344.8274848,
+              "memory_mib": 36949,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788345.430005,
+              "memory_mib": 36949,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788346.014522,
+              "memory_mib": 36949,
+              "utilization_percent": 64
+            },
+            {
+              "time": 1791788346.6020052,
+              "memory_mib": 36949,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788347.2009819,
+              "memory_mib": 36949,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788347.7860014,
+              "memory_mib": 36949,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788348.3740098,
+              "memory_mib": 36949,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788348.9610012,
+              "memory_mib": 36949,
+              "utilization_percent": 100
+            },
+            {
+              "time": 1791788349.5466375,
+              "memory_mib": 36949,
+              "utilization_percent": 92
+            },
+            {
+              "time": 1791788350.1290746,
+              "memory_mib": 36949,
+              "utilization_percent": 92
+            }
+          ],
+          "final_diagnostic_loss": 0.1771707534790039
+        },
+        {
+          "batch_size": 256,
+          "status": "capacity_rejected",
+          "error": "CUDA out of memory. Tried to allocate 384.00 MiB. GPU 4 has a total capacity of 47.37 GiB of which 170.06 MiB is free. Including non-PyTorch memory, this process has 47.18 GiB memory in use. Of the allocated memory 46.39 GiB is allocated by PyTorch, and 404.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)"
+        }
+      ],
+      "selected_batch_size": 64,
+      "selected_eval_batch_size": 64,
+      "eval_forward_finite": true,
+      "resume_source": null,
+      "source_epoch": null,
+      "checkpoint_not_modified": true,
+      "training_trajectory_equivalent": false
+    },
+    {
+      "variant": "power_history_future_nwp",
+      "protocol": "in_domain",
+      "candidates": [
+        {
+          "batch_size": 16,
+          "status": "passed_real_training_steps",
+          "steps": 132,
+          "windows": 2112,
+          "seconds": 8.002466028556228,
+          "windows_per_second": 263.9186461352637,
+          "peak_allocated_mib": 264.419921875,
+          "mean_utilization_percent": 14.285714285714286,
+          "peak_utilization_percent": 16,
+          "utilization_samples": [
+            {
+              "time": 1791788357.0990064,
+              "memory_mib": 781,
+              "utilization_percent": 0
+            },
+            {
+              "time": 1791788357.6801176,
+              "memory_mib": 781,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788358.2640047,
+              "memory_mib": 781,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788358.930579,
+              "memory_mib": 781,
+              "utilization_percent": 14
+            },
+            {
+              "time": 1791788359.5512958,
+              "memory_mib": 781,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788360.1406026,
+              "memory_mib": 781,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788360.7240036,
+              "memory_mib": 781,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788361.3080013,
+              "memory_mib": 781,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788361.8930006,
+              "memory_mib": 781,
+              "utilization_percent": 14
+            },
+            {
+              "time": 1791788362.4769995,
+              "memory_mib": 781,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788363.0587034,
+              "memory_mib": 781,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788363.6389983,
+              "memory_mib": 781,
+              "utilization_percent": 14
+            },
+            {
+              "time": 1791788364.2210002,
+              "memory_mib": 781,
+              "utilization_percent": 14
+            },
+            {
+              "time": 1791788364.7968612,
+              "memory_mib": 781,
+              "utilization_percent": 16
+            }
+          ],
+          "final_diagnostic_loss": 0.16111834347248077
+        },
+        {
+          "batch_size": 64,
+          "status": "passed_real_training_steps",
+          "steps": 113,
+          "windows": 7232,
+          "seconds": 8.018781363032758,
+          "windows_per_second": 901.8826767543651,
+          "peak_allocated_mib": 781.7587890625,
+          "mean_utilization_percent": 21.071428571428573,
+          "peak_utilization_percent": 25,
+          "utilization_samples": [
+            {
+              "time": 1791788365.380738,
+              "memory_mib": 1245,
+              "utilization_percent": 16
+            },
+            {
+              "time": 1791788365.964001,
+              "memory_mib": 1245,
+              "utilization_percent": 21
+            },
+            {
+              "time": 1791788366.5492716,
+              "memory_mib": 1245,
+              "utilization_percent": 22
+            },
+            {
+              "time": 1791788367.1329975,
+              "memory_mib": 1245,
+              "utilization_percent": 22
+            },
+            {
+              "time": 1791788367.7225153,
+              "memory_mib": 1245,
+              "utilization_percent": 19
+            },
+            {
+              "time": 1791788368.3039985,
+              "memory_mib": 1245,
+              "utilization_percent": 19
+            },
+            {
+              "time": 1791788368.884053,
+              "memory_mib": 1245,
+              "utilization_percent": 18
+            },
+            {
+              "time": 1791788369.465999,
+              "memory_mib": 1245,
+              "utilization_percent": 18
+            },
+            {
+              "time": 1791788370.0470104,
+              "memory_mib": 1245,
+              "utilization_percent": 21
+            },
+            {
+              "time": 1791788370.6273162,
+              "memory_mib": 1245,
+              "utilization_percent": 23
+            },
+            {
+              "time": 1791788371.212005,
+              "memory_mib": 1245,
+              "utilization_percent": 23
+            },
+            {
+              "time": 1791788371.7979975,
+              "memory_mib": 1245,
+              "utilization_percent": 24
+            },
+            {
+              "time": 1791788372.3820066,
+              "memory_mib": 1245,
+              "utilization_percent": 24
+            },
+            {
+              "time": 1791788372.9970222,
+              "memory_mib": 1245,
+              "utilization_percent": 25
+            }
+          ],
+          "final_diagnostic_loss": 0.13854661583900452
+        },
+        {
+          "batch_size": 256,
+          "status": "passed_real_training_steps",
+          "steps": 66,
+          "windows": 16896,
+          "seconds": 8.000656827352941,
+          "windows_per_second": 2111.8266118145866,
+          "peak_allocated_mib": 2752.8564453125,
+          "mean_utilization_percent": 38.0,
+          "peak_utilization_percent": 45,
+          "utilization_samples": [
+            {
+              "time": 1791788373.8242586,
+              "memory_mib": 3285,
+              "utilization_percent": 27
+            },
+            {
+              "time": 1791788374.414589,
+              "memory_mib": 3285,
+              "utilization_percent": 27
+            },
+            {
+              "time": 1791788374.994864,
+              "memory_mib": 3285,
+              "utilization_percent": 42
+            },
+            {
+              "time": 1791788375.583062,
+              "memory_mib": 3285,
+              "utilization_percent": 44
+            },
+            {
+              "time": 1791788376.1642935,
+              "memory_mib": 3285,
+              "utilization_percent": 44
+            },
+            {
+              "time": 1791788376.867882,
+              "memory_mib": 3285,
+              "utilization_percent": 45
+            },
+            {
+              "time": 1791788377.4530025,
+              "memory_mib": 3285,
+              "utilization_percent": 45
+            },
+            {
+              "time": 1791788378.037507,
+              "memory_mib": 3285,
+              "utilization_percent": 28
+            },
+            {
+              "time": 1791788378.6230066,
+              "memory_mib": 3285,
+              "utilization_percent": 34
+            },
+            {
+              "time": 1791788379.2100058,
+              "memory_mib": 3285,
+              "utilization_percent": 34
+            },
+            {
+              "time": 1791788379.794,
+              "memory_mib": 3285,
+              "utilization_percent": 43
+            },
+            {
+              "time": 1791788380.3762448,
+              "memory_mib": 3285,
+              "utilization_percent": 43
+            },
+            {
+              "time": 1791788380.9568772,
+              "memory_mib": 3285,
+              "utilization_percent": 34
+            },
+            {
+              "time": 1791788381.5410612,
+              "memory_mib": 3285,
+              "utilization_percent": 42
+            }
+          ],
+          "final_diagnostic_loss": 0.14024031162261963
+        }
+      ],
+      "selected_batch_size": 256,
+      "selected_eval_batch_size": 64,
+      "eval_forward_finite": true,
+      "resume_source": null,
+      "source_epoch": null,
+      "checkpoint_not_modified": true,
+      "training_trajectory_equivalent": false
+    }
+  ],
+  "status": "passed_three_inputs_real_steps_and_eval_capacity"
+}

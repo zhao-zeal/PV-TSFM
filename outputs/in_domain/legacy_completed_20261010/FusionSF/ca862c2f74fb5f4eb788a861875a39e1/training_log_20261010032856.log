@@ -1,0 +1,238 @@
+2026-10-10 03:28:56,522 - BasicTS-training - INFO - Initializing training.
+2026-10-10 03:28:56,522 - BasicTS-training - INFO - Building train data loader.
+2026-10-10 03:29:03,454 - BasicTS-training - INFO - Set optim: AdamW
+2026-10-10 03:29:03,454 - BasicTS-training - INFO - Set lr_scheduler: CosineWarmupScheduler
+2026-10-10 03:29:03,454 - BasicTS-training - INFO - Building val data loader.
+2026-10-10 03:29:03,455 - BasicTS-training - INFO - Building test data loader.
+2026-10-10 03:29:03,459 - BasicTS-training - INFO - Total parameters: 11144770
+2026-10-10 03:29:03,459 - BasicTS-training - INFO - Trainable parameters: 11144770
+2026-10-10 03:29:03,459 - BasicTS-training - INFO - Use early stopping with patience 20.
+2026-10-10 03:29:03,461 - BasicTS-training - INFO - Epoch 1 / 100
+2026-10-10 03:41:24,214 - BasicTS-training - INFO - Result <train>: [train/time: 740.75 (s), train/lr: 0.00e+00, train/loss: 0.3290, train/MAE: 0.3166, train/RMSE: 0.4579]
+2026-10-10 03:41:24,215 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:43:34,930 - BasicTS-training - INFO - Result <val>: [val/time: 130.71 (s), val/loss: 0.3788, val/MAE: 0.3788, val/RMSE: 0.5308]
+2026-10-10 03:43:35,161 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_best_val_MAE.pt saved
+2026-10-10 03:43:35,380 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_001.pt saved
+2026-10-10 03:43:35,381 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 03:41:57
+2026-10-10 03:43:35,381 - BasicTS-training - INFO - Epoch 2 / 100
+2026-10-10 03:55:56,718 - BasicTS-training - INFO - Result <train>: [train/time: 741.34 (s), train/lr: 3.20e-04, train/loss: 0.1464, train/MAE: 0.1455, train/RMSE: 0.2709]
+2026-10-10 03:55:56,720 - BasicTS-training - INFO - Start validation.
+2026-10-10 03:58:07,472 - BasicTS-training - INFO - Result <val>: [val/time: 130.75 (s), val/loss: 0.1189, val/MAE: 0.1189, val/RMSE: 0.2400]
+2026-10-10 03:58:07,758 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_best_val_MAE.pt saved
+2026-10-10 03:58:07,988 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_002.pt saved
+2026-10-10 03:58:07,989 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 03:42:40
+2026-10-10 03:58:07,989 - BasicTS-training - INFO - Epoch 3 / 100
+2026-10-10 04:10:29,289 - BasicTS-training - INFO - Result <train>: [train/time: 741.30 (s), train/lr: 6.39e-04, train/loss: 0.1454, train/MAE: 0.1454, train/RMSE: 0.2708]
+2026-10-10 04:10:29,290 - BasicTS-training - INFO - Start validation.
+2026-10-10 04:12:40,026 - BasicTS-training - INFO - Result <val>: [val/time: 130.73 (s), val/loss: 0.1189, val/MAE: 0.1189, val/RMSE: 0.2400]
+2026-10-10 04:12:40,276 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_003.pt saved
+2026-10-10 04:12:40,277 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 03:42:44
+2026-10-10 04:12:40,277 - BasicTS-training - INFO - Epoch 4 / 100
+2026-10-10 04:25:01,461 - BasicTS-training - INFO - Result <train>: [train/time: 741.18 (s), train/lr: 9.58e-04, train/loss: 0.1455, train/MAE: 0.1454, train/RMSE: 0.2708]
+2026-10-10 04:25:01,463 - BasicTS-training - INFO - Start validation.
+2026-10-10 04:27:12,292 - BasicTS-training - INFO - Result <val>: [val/time: 130.83 (s), val/loss: 0.1189, val/MAE: 0.1189, val/RMSE: 0.2400]
+2026-10-10 04:27:12,537 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_004.pt saved
+2026-10-10 04:27:12,537 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 03:42:45
+2026-10-10 04:27:12,538 - BasicTS-training - INFO - Epoch 5 / 100
+2026-10-10 04:39:35,882 - BasicTS-training - INFO - Result <train>: [train/time: 743.34 (s), train/lr: 1.27e-03, train/loss: 0.1455, train/MAE: 0.1454, train/RMSE: 0.2708]
+2026-10-10 04:39:35,883 - BasicTS-training - INFO - Start validation.
+2026-10-10 04:41:46,913 - BasicTS-training - INFO - Result <val>: [val/time: 131.03 (s), val/loss: 0.1189, val/MAE: 0.1189, val/RMSE: 0.2400]
+2026-10-10 04:41:47,146 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_005.pt saved
+2026-10-10 04:41:47,147 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 03:43:33
+2026-10-10 04:41:47,147 - BasicTS-training - INFO - Epoch 6 / 100
+2026-10-10 04:54:30,751 - BasicTS-training - INFO - Result <train>: [train/time: 763.60 (s), train/lr: 1.59e-03, train/loss: 0.1455, train/MAE: 0.1454, train/RMSE: 0.2708]
+2026-10-10 04:54:30,753 - BasicTS-training - INFO - Start validation.
+2026-10-10 04:56:43,396 - BasicTS-training - INFO - Result <val>: [val/time: 132.64 (s), val/loss: 0.1189, val/MAE: 0.1189, val/RMSE: 0.2400]
+2026-10-10 04:56:43,640 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_006.pt saved
+2026-10-10 04:56:43,640 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 03:50:10
+2026-10-10 04:56:43,641 - BasicTS-training - INFO - Epoch 7 / 100
+2026-10-10 05:09:47,675 - BasicTS-training - INFO - Result <train>: [train/time: 784.03 (s), train/lr: 1.59e-03, train/loss: 0.1265, train/MAE: 0.1260, train/RMSE: 0.2467]
+2026-10-10 05:09:47,677 - BasicTS-training - INFO - Start validation.
+2026-10-10 05:12:00,192 - BasicTS-training - INFO - Result <val>: [val/time: 132.51 (s), val/loss: 0.0418, val/MAE: 0.0418, val/RMSE: 0.1019]
+2026-10-10 05:12:00,480 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_best_val_MAE.pt saved
+2026-10-10 05:12:00,712 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_007.pt saved
+2026-10-10 05:12:00,713 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 03:59:47
+2026-10-10 05:12:00,713 - BasicTS-training - INFO - Epoch 8 / 100
+2026-10-10 05:25:00,834 - BasicTS-training - INFO - Result <train>: [train/time: 780.12 (s), train/lr: 1.58e-03, train/loss: 0.0414, train/MAE: 0.0399, train/RMSE: 0.0883]
+2026-10-10 05:25:00,836 - BasicTS-training - INFO - Start validation.
+2026-10-10 05:27:13,136 - BasicTS-training - INFO - Result <val>: [val/time: 132.30 (s), val/loss: 0.0447, val/MAE: 0.0447, val/RMSE: 0.1103]
+2026-10-10 05:27:13,385 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_008.pt saved
+2026-10-10 05:27:13,386 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:06:05
+2026-10-10 05:27:13,386 - BasicTS-training - INFO - Epoch 9 / 100
+2026-10-10 05:40:20,683 - BasicTS-training - INFO - Result <train>: [train/time: 787.30 (s), train/lr: 1.57e-03, train/loss: 0.0375, train/MAE: 0.0361, train/RMSE: 0.0817]
+2026-10-10 05:40:20,685 - BasicTS-training - INFO - Start validation.
+2026-10-10 05:42:33,077 - BasicTS-training - INFO - Result <val>: [val/time: 132.39 (s), val/loss: 0.0415, val/MAE: 0.0415, val/RMSE: 0.1021]
+2026-10-10 05:42:33,385 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_best_val_MAE.pt saved
+2026-10-10 05:42:33,622 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_009.pt saved
+2026-10-10 05:42:33,623 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:12:23
+2026-10-10 05:42:33,623 - BasicTS-training - INFO - Epoch 10 / 100
+2026-10-10 05:55:42,262 - BasicTS-training - INFO - Result <train>: [train/time: 788.64 (s), train/lr: 1.57e-03, train/loss: 0.0357, train/MAE: 0.0343, train/RMSE: 0.0782]
+2026-10-10 05:55:42,264 - BasicTS-training - INFO - Start validation.
+2026-10-10 05:57:54,424 - BasicTS-training - INFO - Result <val>: [val/time: 132.16 (s), val/loss: 0.0412, val/MAE: 0.0412, val/RMSE: 0.1020]
+2026-10-10 05:57:54,730 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_best_val_MAE.pt saved
+2026-10-10 05:57:54,966 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_010.pt saved
+2026-10-10 05:57:55,122 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:17:38
+2026-10-10 05:57:55,122 - BasicTS-training - INFO - Epoch 11 / 100
+2026-10-10 06:10:45,133 - BasicTS-training - INFO - Result <train>: [train/time: 770.01 (s), train/lr: 1.56e-03, train/loss: 0.0342, train/MAE: 0.0328, train/RMSE: 0.0756]
+2026-10-10 06:10:45,135 - BasicTS-training - INFO - Start validation.
+2026-10-10 06:12:56,531 - BasicTS-training - INFO - Result <val>: [val/time: 131.39 (s), val/loss: 0.0435, val/MAE: 0.0435, val/RMSE: 0.1064]
+2026-10-10 06:12:56,772 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_011.pt saved
+2026-10-10 06:12:56,773 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:18:55
+2026-10-10 06:12:56,773 - BasicTS-training - INFO - Epoch 12 / 100
+2026-10-10 06:25:34,137 - BasicTS-training - INFO - Result <train>: [train/time: 757.36 (s), train/lr: 1.55e-03, train/loss: 0.0330, train/MAE: 0.0316, train/RMSE: 0.0728]
+2026-10-10 06:25:34,139 - BasicTS-training - INFO - Start validation.
+2026-10-10 06:27:45,538 - BasicTS-training - INFO - Result <val>: [val/time: 131.40 (s), val/loss: 0.0416, val/MAE: 0.0416, val/RMSE: 0.1013]
+2026-10-10 06:27:45,774 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_012.pt saved
+2026-10-10 06:27:45,774 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:18:14
+2026-10-10 06:27:45,774 - BasicTS-training - INFO - Epoch 13 / 100
+2026-10-10 06:40:25,294 - BasicTS-training - INFO - Result <train>: [train/time: 759.52 (s), train/lr: 1.54e-03, train/loss: 0.0319, train/MAE: 0.0306, train/RMSE: 0.0703]
+2026-10-10 06:40:25,296 - BasicTS-training - INFO - Start validation.
+2026-10-10 06:42:36,639 - BasicTS-training - INFO - Result <val>: [val/time: 131.34 (s), val/loss: 0.0416, val/MAE: 0.0416, val/RMSE: 0.1002]
+2026-10-10 06:42:36,883 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_013.pt saved
+2026-10-10 06:42:36,883 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:17:56
+2026-10-10 06:42:36,883 - BasicTS-training - INFO - Epoch 14 / 100
+2026-10-10 06:55:16,366 - BasicTS-training - INFO - Result <train>: [train/time: 759.48 (s), train/lr: 1.53e-03, train/loss: 0.0310, train/MAE: 0.0297, train/RMSE: 0.0685]
+2026-10-10 06:55:16,368 - BasicTS-training - INFO - Start validation.
+2026-10-10 06:57:27,757 - BasicTS-training - INFO - Result <val>: [val/time: 131.39 (s), val/loss: 0.0424, val/MAE: 0.0424, val/RMSE: 0.1045]
+2026-10-10 06:57:28,007 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_014.pt saved
+2026-10-10 06:57:28,008 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:17:40
+2026-10-10 06:57:28,008 - BasicTS-training - INFO - Epoch 15 / 100
+2026-10-10 07:10:09,383 - BasicTS-training - INFO - Result <train>: [train/time: 761.38 (s), train/lr: 1.52e-03, train/loss: 0.0303, train/MAE: 0.0290, train/RMSE: 0.0668]
+2026-10-10 07:10:09,385 - BasicTS-training - INFO - Start validation.
+2026-10-10 07:12:21,367 - BasicTS-training - INFO - Result <val>: [val/time: 131.98 (s), val/loss: 0.0421, val/MAE: 0.0421, val/RMSE: 0.1038]
+2026-10-10 07:12:21,609 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_015.pt saved
+2026-10-10 07:12:21,610 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:17:43
+2026-10-10 07:12:21,610 - BasicTS-training - INFO - Epoch 16 / 100
+2026-10-10 07:24:56,885 - BasicTS-training - INFO - Result <train>: [train/time: 755.27 (s), train/lr: 1.51e-03, train/loss: 0.0300, train/MAE: 0.0286, train/RMSE: 0.0660]
+2026-10-10 07:24:56,887 - BasicTS-training - INFO - Start validation.
+2026-10-10 07:27:08,138 - BasicTS-training - INFO - Result <val>: [val/time: 131.25 (s), val/loss: 0.0403, val/MAE: 0.0403, val/RMSE: 0.0957]
+2026-10-10 07:27:08,443 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_best_val_MAE.pt saved
+2026-10-10 07:27:08,675 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_016.pt saved
+2026-10-10 07:27:08,676 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:17:04
+2026-10-10 07:27:08,676 - BasicTS-training - INFO - Epoch 17 / 100
+2026-10-10 07:39:43,378 - BasicTS-training - INFO - Result <train>: [train/time: 754.70 (s), train/lr: 1.50e-03, train/loss: 0.0295, train/MAE: 0.0281, train/RMSE: 0.0650]
+2026-10-10 07:39:43,380 - BasicTS-training - INFO - Start validation.
+2026-10-10 07:41:54,741 - BasicTS-training - INFO - Result <val>: [val/time: 131.36 (s), val/loss: 0.0419, val/MAE: 0.0419, val/RMSE: 0.1016]
+2026-10-10 07:41:54,982 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_017.pt saved
+2026-10-10 07:41:54,982 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:16:26
+2026-10-10 07:41:54,982 - BasicTS-training - INFO - Epoch 18 / 100
+2026-10-10 07:54:32,767 - BasicTS-training - INFO - Result <train>: [train/time: 757.79 (s), train/lr: 1.49e-03, train/loss: 0.0290, train/MAE: 0.0276, train/RMSE: 0.0639]
+2026-10-10 07:54:32,769 - BasicTS-training - INFO - Start validation.
+2026-10-10 07:56:44,138 - BasicTS-training - INFO - Result <val>: [val/time: 131.37 (s), val/loss: 0.0417, val/MAE: 0.0417, val/RMSE: 0.0987]
+2026-10-10 07:56:44,377 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_018.pt saved
+2026-10-10 07:56:44,378 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:16:09
+2026-10-10 07:56:44,378 - BasicTS-training - INFO - Epoch 19 / 100
+2026-10-10 08:09:24,653 - BasicTS-training - INFO - Result <train>: [train/time: 760.28 (s), train/lr: 1.48e-03, train/loss: 0.0287, train/MAE: 0.0273, train/RMSE: 0.0632]
+2026-10-10 08:09:24,655 - BasicTS-training - INFO - Start validation.
+2026-10-10 08:11:35,134 - BasicTS-training - INFO - Result <val>: [val/time: 130.48 (s), val/loss: 0.0409, val/MAE: 0.0409, val/RMSE: 0.0999]
+2026-10-10 08:11:35,381 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_019.pt saved
+2026-10-10 08:11:35,382 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:16:03
+2026-10-10 08:11:35,382 - BasicTS-training - INFO - Epoch 20 / 100
+2026-10-10 08:24:25,680 - BasicTS-training - INFO - Result <train>: [train/time: 770.30 (s), train/lr: 1.46e-03, train/loss: 0.0284, train/MAE: 0.0270, train/RMSE: 0.0625]
+2026-10-10 08:24:25,682 - BasicTS-training - INFO - Start validation.
+2026-10-10 08:26:36,098 - BasicTS-training - INFO - Result <val>: [val/time: 130.41 (s), val/loss: 0.0422, val/MAE: 0.0422, val/RMSE: 0.1024]
+2026-10-10 08:26:36,331 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_020.pt saved
+2026-10-10 08:26:36,528 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:16:47
+2026-10-10 08:26:36,528 - BasicTS-training - INFO - Epoch 21 / 100
+2026-10-10 08:39:18,930 - BasicTS-training - INFO - Result <train>: [train/time: 762.40 (s), train/lr: 1.45e-03, train/loss: 0.0280, train/MAE: 0.0265, train/RMSE: 0.0618]
+2026-10-10 08:39:18,933 - BasicTS-training - INFO - Start validation.
+2026-10-10 08:41:29,579 - BasicTS-training - INFO - Result <val>: [val/time: 130.64 (s), val/loss: 0.0423, val/MAE: 0.0423, val/RMSE: 0.1002]
+2026-10-10 08:41:29,825 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_021.pt saved
+2026-10-10 08:41:29,825 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:16:50
+2026-10-10 08:41:29,825 - BasicTS-training - INFO - Epoch 22 / 100
+2026-10-10 08:54:02,095 - BasicTS-training - INFO - Result <train>: [train/time: 752.27 (s), train/lr: 1.43e-03, train/loss: 0.0278, train/MAE: 0.0264, train/RMSE: 0.0614]
+2026-10-10 08:54:02,097 - BasicTS-training - INFO - Start validation.
+2026-10-10 08:56:12,312 - BasicTS-training - INFO - Result <val>: [val/time: 130.21 (s), val/loss: 0.0445, val/MAE: 0.0445, val/RMSE: 0.1087]
+2026-10-10 08:56:12,550 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_022.pt saved
+2026-10-10 08:56:12,550 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:16:05
+2026-10-10 08:56:12,551 - BasicTS-training - INFO - Epoch 23 / 100
+2026-10-10 09:08:22,764 - BasicTS-training - INFO - Result <train>: [train/time: 730.21 (s), train/lr: 1.42e-03, train/loss: 0.0275, train/MAE: 0.0261, train/RMSE: 0.0609]
+2026-10-10 09:08:22,766 - BasicTS-training - INFO - Start validation.
+2026-10-10 09:10:33,366 - BasicTS-training - INFO - Result <val>: [val/time: 130.60 (s), val/loss: 0.0417, val/MAE: 0.0417, val/RMSE: 0.1025]
+2026-10-10 09:10:33,602 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_023.pt saved
+2026-10-10 09:10:33,603 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:13:50
+2026-10-10 09:10:33,603 - BasicTS-training - INFO - Epoch 24 / 100
+2026-10-10 09:22:46,227 - BasicTS-training - INFO - Result <train>: [train/time: 732.62 (s), train/lr: 1.40e-03, train/loss: 0.0272, train/MAE: 0.0258, train/RMSE: 0.0600]
+2026-10-10 09:22:46,230 - BasicTS-training - INFO - Start validation.
+2026-10-10 09:24:56,811 - BasicTS-training - INFO - Result <val>: [val/time: 130.58 (s), val/loss: 0.0420, val/MAE: 0.0420, val/RMSE: 0.1038]
+2026-10-10 09:24:57,044 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_024.pt saved
+2026-10-10 09:24:57,045 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:11:55
+2026-10-10 09:24:57,045 - BasicTS-training - INFO - Epoch 25 / 100
+2026-10-10 09:37:12,382 - BasicTS-training - INFO - Result <train>: [train/time: 735.34 (s), train/lr: 1.38e-03, train/loss: 0.0271, train/MAE: 0.0257, train/RMSE: 0.0599]
+2026-10-10 09:37:12,384 - BasicTS-training - INFO - Start validation.
+2026-10-10 09:39:23,257 - BasicTS-training - INFO - Result <val>: [val/time: 130.87 (s), val/loss: 0.0420, val/MAE: 0.0420, val/RMSE: 0.1035]
+2026-10-10 09:39:23,485 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_025.pt saved
+2026-10-10 09:39:23,486 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:10:22
+2026-10-10 09:39:23,486 - BasicTS-training - INFO - Epoch 26 / 100
+2026-10-10 09:51:44,942 - BasicTS-training - INFO - Result <train>: [train/time: 741.46 (s), train/lr: 1.37e-03, train/loss: 0.0267, train/MAE: 0.0252, train/RMSE: 0.0590]
+2026-10-10 09:51:44,944 - BasicTS-training - INFO - Start validation.
+2026-10-10 09:53:55,780 - BasicTS-training - INFO - Result <val>: [val/time: 130.83 (s), val/loss: 0.0423, val/MAE: 0.0423, val/RMSE: 0.1044]
+2026-10-10 09:53:56,016 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_026.pt saved
+2026-10-10 09:53:56,016 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:09:20
+2026-10-10 09:53:56,017 - BasicTS-training - INFO - Epoch 27 / 100
+2026-10-10 10:06:05,104 - BasicTS-training - INFO - Result <train>: [train/time: 729.09 (s), train/lr: 1.35e-03, train/loss: 0.0265, train/MAE: 0.0250, train/RMSE: 0.0585]
+2026-10-10 10:06:05,105 - BasicTS-training - INFO - Start validation.
+2026-10-10 10:08:15,840 - BasicTS-training - INFO - Result <val>: [val/time: 130.73 (s), val/loss: 0.0429, val/MAE: 0.0429, val/RMSE: 0.1081]
+2026-10-10 10:08:16,137 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_027.pt saved
+2026-10-10 10:08:16,137 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:07:36
+2026-10-10 10:08:16,137 - BasicTS-training - INFO - Epoch 28 / 100
+2026-10-10 10:20:28,905 - BasicTS-training - INFO - Result <train>: [train/time: 732.77 (s), train/lr: 1.33e-03, train/loss: 0.0262, train/MAE: 0.0249, train/RMSE: 0.0582]
+2026-10-10 10:20:28,907 - BasicTS-training - INFO - Start validation.
+2026-10-10 10:22:39,367 - BasicTS-training - INFO - Result <val>: [val/time: 130.46 (s), val/loss: 0.0418, val/MAE: 0.0418, val/RMSE: 0.1027]
+2026-10-10 10:22:39,602 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_028.pt saved
+2026-10-10 10:22:39,603 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:06:11
+2026-10-10 10:22:39,603 - BasicTS-training - INFO - Epoch 29 / 100
+2026-10-10 10:34:57,468 - BasicTS-training - INFO - Result <train>: [train/time: 737.86 (s), train/lr: 1.31e-03, train/loss: 0.0259, train/MAE: 0.0246, train/RMSE: 0.0574]
+2026-10-10 10:34:57,471 - BasicTS-training - INFO - Start validation.
+2026-10-10 10:37:08,371 - BasicTS-training - INFO - Result <val>: [val/time: 130.90 (s), val/loss: 0.0404, val/MAE: 0.0404, val/RMSE: 0.0984]
+2026-10-10 10:37:08,608 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_029.pt saved
+2026-10-10 10:37:08,608 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:05:12
+2026-10-10 10:37:08,608 - BasicTS-training - INFO - Epoch 30 / 100
+2026-10-10 10:49:21,360 - BasicTS-training - INFO - Result <train>: [train/time: 732.75 (s), train/lr: 1.29e-03, train/loss: 0.0258, train/MAE: 0.0244, train/RMSE: 0.0573]
+2026-10-10 10:49:21,361 - BasicTS-training - INFO - Start validation.
+2026-10-10 10:51:32,694 - BasicTS-training - INFO - Result <val>: [val/time: 131.33 (s), val/loss: 0.0409, val/MAE: 0.0409, val/RMSE: 0.1017]
+2026-10-10 10:51:32,938 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_030.pt saved
+2026-10-10 10:51:33,119 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:04:01
+2026-10-10 10:51:33,120 - BasicTS-training - INFO - Epoch 31 / 100
+2026-10-10 11:04:02,085 - BasicTS-training - INFO - Result <train>: [train/time: 748.97 (s), train/lr: 1.27e-03, train/loss: 0.0252, train/MAE: 0.0239, train/RMSE: 0.0560]
+2026-10-10 11:04:02,087 - BasicTS-training - INFO - Start validation.
+2026-10-10 11:06:13,808 - BasicTS-training - INFO - Result <val>: [val/time: 131.72 (s), val/loss: 0.0447, val/MAE: 0.0447, val/RMSE: 0.1108]
+2026-10-10 11:06:14,050 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_031.pt saved
+2026-10-10 11:06:14,051 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:03:48
+2026-10-10 11:06:14,051 - BasicTS-training - INFO - Epoch 32 / 100
+2026-10-10 11:18:41,848 - BasicTS-training - INFO - Result <train>: [train/time: 747.80 (s), train/lr: 1.25e-03, train/loss: 0.0251, train/MAE: 0.0237, train/RMSE: 0.0558]
+2026-10-10 11:18:41,850 - BasicTS-training - INFO - Start validation.
+2026-10-10 11:20:52,641 - BasicTS-training - INFO - Result <val>: [val/time: 130.79 (s), val/loss: 0.0408, val/MAE: 0.0408, val/RMSE: 0.0993]
+2026-10-10 11:20:52,886 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_032.pt saved
+2026-10-10 11:20:52,886 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:03:29
+2026-10-10 11:20:52,886 - BasicTS-training - INFO - Epoch 33 / 100
+2026-10-10 11:33:26,508 - BasicTS-training - INFO - Result <train>: [train/time: 753.62 (s), train/lr: 1.23e-03, train/loss: 0.0248, train/MAE: 0.0235, train/RMSE: 0.0553]
+2026-10-10 11:33:26,510 - BasicTS-training - INFO - Start validation.
+2026-10-10 11:35:37,299 - BasicTS-training - INFO - Result <val>: [val/time: 130.79 (s), val/loss: 0.0434, val/MAE: 0.0434, val/RMSE: 0.1075]
+2026-10-10 11:35:37,543 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_033.pt saved
+2026-10-10 11:35:37,544 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:03:29
+2026-10-10 11:35:37,544 - BasicTS-training - INFO - Epoch 34 / 100
+2026-10-10 11:47:52,732 - BasicTS-training - INFO - Result <train>: [train/time: 735.19 (s), train/lr: 1.21e-03, train/loss: 0.0244, train/MAE: 0.0232, train/RMSE: 0.0545]
+2026-10-10 11:47:52,734 - BasicTS-training - INFO - Start validation.
+2026-10-10 11:50:03,317 - BasicTS-training - INFO - Result <val>: [val/time: 130.58 (s), val/loss: 0.0420, val/MAE: 0.0420, val/RMSE: 0.1052]
+2026-10-10 11:50:03,554 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_034.pt saved
+2026-10-10 11:50:03,555 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:02:34
+2026-10-10 11:50:03,555 - BasicTS-training - INFO - Epoch 35 / 100
+2026-10-10 12:02:29,456 - BasicTS-training - INFO - Result <train>: [train/time: 745.90 (s), train/lr: 1.19e-03, train/loss: 0.0242, train/MAE: 0.0229, train/RMSE: 0.0541]
+2026-10-10 12:02:29,458 - BasicTS-training - INFO - Start validation.
+2026-10-10 12:04:40,969 - BasicTS-training - INFO - Result <val>: [val/time: 131.51 (s), val/loss: 0.0420, val/MAE: 0.0420, val/RMSE: 0.1017]
+2026-10-10 12:04:41,211 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_035.pt saved
+2026-10-10 12:04:41,211 - BasicTS-training - INFO - The estimated training finish time is 2026-10-11 04:02:16
+2026-10-10 12:04:41,211 - BasicTS-training - INFO - Epoch 36 / 100
+2026-10-10 12:17:17,151 - BasicTS-training - INFO - Result <train>: [train/time: 755.94 (s), train/lr: 1.16e-03, train/loss: 0.0239, train/MAE: 0.0228, train/RMSE: 0.0537]
+2026-10-10 12:17:17,153 - BasicTS-training - INFO - Start validation.
+2026-10-10 12:19:28,395 - BasicTS-training - INFO - Early stopping at epoch 36.
+2026-10-10 12:19:28,396 - BasicTS-training - INFO - Result <val>: [val/time: 131.24 (s), val/loss: 0.0426, val/MAE: 0.0426, val/RMSE: 0.1054]
+2026-10-10 12:19:28,640 - BasicTS-training - INFO - Checkpoint /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_036.pt saved
+2026-10-10 12:19:28,644 - BasicTS-training - INFO - The training finished at 2026-10-10 12:19:28
+2026-10-10 12:19:28,644 - BasicTS-training - INFO - Evaluating the best model on the test set.
+2026-10-10 12:19:28,645 - BasicTS-training - INFO - Loading Checkpoint from '/home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/FusionSF3Modal_best_val_MAE.pt'
+2026-10-10 12:21:47,429 - BasicTS-training - INFO - Complete in_domain evaluation metrics: {'test_windows': 25450, 'mae': 0.04780034881873366, 'rmse': 0.10953583251576295, 'r2': 0.8032540956219328, 'data_protocol': 'in_domain', 'model': 'FusionSF', 'seed': 42, 'input_len': 24, 'output_len': 24, 'train_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'validation_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'test_sites': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 'split_version': 'chronological_target_split_v1', 'scaler_version': 'train_sites_and_time_only_fit_v1'}
+2026-10-10 12:21:47,430 - BasicTS-training - INFO - Result <test>: [test/time: 138.27 (s), test/loss: 0.0478, test/MAE: 0.0478, test/RMSE: 0.1095]
+2026-10-10 12:21:47,430 - BasicTS-training - INFO - Test results saved to /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/test_results.
+2026-10-10 12:21:47,430 - BasicTS-training - INFO - Test metrics saved to /home/zhaopp/workspace/BasicTS/checkpoints/in_domain/reproduction_20261010/FusionSF/ca862c2f74fb5f4eb788a861875a39e1/test_metrics.json.

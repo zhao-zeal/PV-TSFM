@@ -1,0 +1,398 @@
+{
+  "checked_at": "2026-10-11T04:24:24+08:00",
+  "dataset": "MMSP",
+  "seed": 42,
+  "seq_len": 24,
+  "pred_len": 24,
+  "user_authorization": "User accepted legacy implementation/configuration differences and explicitly instructed to fill the table.",
+  "evaluation_origin": "BasicTS historical complete training/test evidence; reuse of FusionSF repository variants",
+  "runs": [
+    {
+      "model": "DLinear",
+      "protocol": "in_domain",
+      "state": "accepted_historical_variant_reuse",
+      "baseline_config": "legacy_fusionsf",
+      "implementation": "FusionSF repository baseline implementation, not original-author official version",
+      "input": "历史功率+经纬度",
+      "seed": 42,
+      "seq_len": 24,
+      "pred_len": 24,
+      "source_project": "BasicTS",
+      "source_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef/data_protocol.json",
+      "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef/FusionSFDLinear_best_val_MAE.pt",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef/training_log_20261010022801.log",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef/metrics.json",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef/test_results/targets.npy",
+      "inputs_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/DLinear/power_coordinates/f892b16805555e2fb6b6bf47dbc034ef/test_results/inputs.npy",
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.07754141851075573,
+        "rmse": 0.12392542570963284,
+        "r2": 0.7481661455534558,
+        "data_protocol": "in_domain",
+        "model": "DLinear",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "architecture": {
+        "input_len": 24,
+        "output_len": 24,
+        "enc_in": 3,
+        "moving_avg": 13,
+        "individual": false
+      },
+      "training_configuration": {
+        "loss": "MSE",
+        "optimizer": {
+          "name": "AdamW",
+          "module": "torch.optim.adamw"
+        },
+        "optimizer_params": {
+          "lr": 0.0016,
+          "weight_decay": 0.05,
+          "betas": [
+            0.9,
+            0.95
+          ]
+        },
+        "num_epochs": 50,
+        "train_batch_size": 64,
+        "lr_scheduler": {
+          "name": "ReduceLROnPlateau",
+          "module": "torch.optim.lr_scheduler"
+        },
+        "lr_scheduler_params": {
+          "mode": "min",
+          "factor": 0.5,
+          "patience": 10
+        }
+      },
+      "completed_epochs": 19,
+      "selected_checkpoint_epoch": 9,
+      "best_validation_metrics": {
+        "val/MAE": 0.0741091734264595
+      },
+      "acceptance": {
+        "status": "passed_historical_variant_artifact_reuse",
+        "checked_at": "2026-10-11T04:24:24+08:00",
+        "checks": [
+          "all25450x24 saved power inputs/targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved protocol sites, boundaries, window counts and evaluation scale match current in_domain",
+          "predictions, targets and checkpoint tensors finite",
+          "uniform full-array MAE/RMSE/global R2 match original metrics and complete-training log",
+          "complete log records evaluation of best-val-MAE checkpoint; selected checkpoint retained",
+          "legacy implementation/input/training differences explicitly recorded"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.18366408348083496,
+          0.9183987379074097
+        ]
+      }
+    },
+    {
+      "model": "PatchTST",
+      "protocol": "in_domain",
+      "state": "accepted_historical_variant_reuse",
+      "baseline_config": "legacy_fusionsf",
+      "implementation": "FusionSF repository baseline implementation, not original-author official version",
+      "input": "历史功率+经纬度",
+      "seed": 42,
+      "seq_len": 24,
+      "pred_len": 24,
+      "source_project": "BasicTS",
+      "source_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b",
+      "config_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b/cfg.json",
+      "protocol_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b/data_protocol.json",
+      "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b/FusionSFPatchTST_best_val_MAE.pt",
+      "log_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b/training_log_20261010023057.log",
+      "metrics_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b/metrics.json",
+      "prediction_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b/test_results/prediction.npy",
+      "target_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b/test_results/targets.npy",
+      "inputs_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/legacy_20261010/PatchTST/power_coordinates/311fe8d084379afcdacd3ee6e2b3bd3b/test_results/inputs.npy",
+      "current_test_metrics": {
+        "test_windows": 25450,
+        "mae": 0.06388545466910436,
+        "rmse": 0.11559199956112538,
+        "r2": 0.7808967465014476,
+        "data_protocol": "in_domain",
+        "model": "PatchTST",
+        "seed": 42,
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "validation_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "architecture": {
+        "input_len": 24,
+        "output_len": 24,
+        "enc_in": 3,
+        "c_out": 3,
+        "d_model": 512,
+        "n_heads": 8,
+        "e_layers": 3,
+        "d_ff": 2048,
+        "factor": 5,
+        "dropout": 0.05,
+        "embed": "timeF",
+        "activation": "gelu",
+        "output_attention": false,
+        "patch_len": 16,
+        "stride": 8
+      },
+      "training_configuration": {
+        "loss": "MSE",
+        "optimizer": {
+          "name": "AdamW",
+          "module": "torch.optim.adamw"
+        },
+        "optimizer_params": {
+          "lr": 0.0002,
+          "weight_decay": 0.05,
+          "betas": [
+            0.9,
+            0.95
+          ]
+        },
+        "num_epochs": 50,
+        "train_batch_size": 16,
+        "lr_scheduler": {
+          "name": "ReduceLROnPlateau",
+          "module": "torch.optim.lr_scheduler"
+        },
+        "lr_scheduler_params": {
+          "mode": "min",
+          "factor": 0.5,
+          "patience": 10
+        }
+      },
+      "completed_epochs": 50,
+      "selected_checkpoint_epoch": 34,
+      "best_validation_metrics": {
+        "val/MAE": 0.056673585725381004
+      },
+      "acceptance": {
+        "status": "passed_historical_variant_artifact_reuse",
+        "checked_at": "2026-10-11T04:24:24+08:00",
+        "checks": [
+          "all25450x24 saved power inputs/targets match current raw CSV",
+          "all site IDs and forecast timestamps match current protocol windows",
+          "saved protocol sites, boundaries, window counts and evaluation scale match current in_domain",
+          "predictions, targets and checkpoint tensors finite",
+          "uniform full-array MAE/RMSE/global R2 match original metrics and complete-training log",
+          "complete log records evaluation of best-val-MAE checkpoint; selected checkpoint retained",
+          "legacy implementation/input/training differences explicitly recorded"
+        ],
+        "metric_absolute_change_from_source": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "new_training": false,
+        "new_model_inference": false,
+        "prediction_range": [
+          -0.0478501170873642,
+          1.2534476518630981
+        ]
+      }
+    }
+  ],
+  "acceptance": {
+    "status": "passed_historical_variant_artifact_reuse",
+    "accepted_runs": 2,
+    "new_training": false,
+    "new_model_inference": false,
+    "original_artifacts_modified": false
+  },
+  "zeroshot_v1": {
+    "status": "not_accepted_missing_complete_artifacts",
+    "table_metrics": {
+      "DLinear": {
+        "mae": 0.07811652081214716,
+        "rmse": 0.12445281229189378,
+        "r2": 0.7460181375665693
+      },
+      "PatchTST": {
+        "mae": 0.06457397442145014,
+        "rmse": 0.11509319802796064,
+        "r2": 0.7827836112957784
+      }
+    },
+    "historical_registry": "/home/zhaopp/workspace/PV-TSFM/docs/history_audit_20261010/experiment_registry.csv",
+    "new_experiment_authorized": false,
+    "table_entry_status": "historical_registry_only_missing_original_artifacts_not_fully_accepted",
+    "table_fill_authorization": "User explicitly requested filling the two zeroshot historical results after being informed that original artifacts are missing.",
+    "table_filled_at": "2026-10-11T04:29:48+08:00",
+    "formal_protocol_index_registered": false,
+    "new_training": false,
+    "new_model_inference": false,
+    "source_records": [
+      {
+        "model": "DLinear",
+        "record_id": "R0004",
+        "run_id": "checkpoints/zeroshot_v1/reproduction_20261010/DLinear/ce6a0edb691196b87d3dddfaecda454a",
+        "protocol": "zeroshot_v1",
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "train_sites": "10,11,12,13,14,15,16,17,18,19",
+        "validation_sites": "10,11,12,13,14,15,16,17,18,19",
+        "test_sites": "0,1,2,3,4,5,6,7,8,9",
+        "evaluated_windows": 25450,
+        "input": "historical_PV + site_latitude_longitude (3 channels); no direct NWP/satellite input",
+        "metric_absolute_change_from_registry": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "missing_original_artifact_paths": {
+          "config_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/DLinear/ce6a0edb691196b87d3dddfaecda454a/cfg.json",
+          "protocol_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/DLinear/ce6a0edb691196b87d3dddfaecda454a/data_protocol.json",
+          "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/DLinear/ce6a0edb691196b87d3dddfaecda454a/FusionSFDLinear_best_val_MAE.pt",
+          "log_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/DLinear/ce6a0edb691196b87d3dddfaecda454a/training_log_20261010122153.log",
+          "prediction_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/DLinear/ce6a0edb691196b87d3dddfaecda454a/test_results/prediction.npy",
+          "target_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/DLinear/ce6a0edb691196b87d3dddfaecda454a/test_results/targets.npy"
+        },
+        "notes": "Original artifact paths retained for provenance; files missing after internal BasicTS archive cleanup. Current metrics cannot be independently recomputed from predictions."
+      },
+      {
+        "model": "PatchTST",
+        "record_id": "R0005",
+        "run_id": "checkpoints/zeroshot_v1/reproduction_20261010/PatchTST/1904bd1371e0fb1a40718469d59a64d6",
+        "protocol": "zeroshot_v1",
+        "seed": 42,
+        "seq_len": 24,
+        "pred_len": 24,
+        "train_sites": "10,11,12,13,14,15,16,17,18,19",
+        "validation_sites": "10,11,12,13,14,15,16,17,18,19",
+        "test_sites": "0,1,2,3,4,5,6,7,8,9",
+        "evaluated_windows": 25450,
+        "input": "historical_PV + site_latitude_longitude (3 channels); no direct NWP/satellite input",
+        "metric_absolute_change_from_registry": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "metric_relative_change_percent": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "missing_original_artifact_paths": {
+          "config_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/PatchTST/1904bd1371e0fb1a40718469d59a64d6/cfg.json",
+          "protocol_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/PatchTST/1904bd1371e0fb1a40718469d59a64d6/data_protocol.json",
+          "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/PatchTST/1904bd1371e0fb1a40718469d59a64d6/FusionSFPatchTST_best_val_MAE.pt",
+          "log_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/PatchTST/1904bd1371e0fb1a40718469d59a64d6/training_log_20261010122153.log",
+          "prediction_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/PatchTST/1904bd1371e0fb1a40718469d59a64d6/test_results/prediction.npy",
+          "target_path": "/home/zhaopp/workspace/PV-TSFM/archives/BasicTS_20261010/checkpoints/zeroshot_v1/reproduction_20261010/PatchTST/1904bd1371e0fb1a40718469d59a64d6/test_results/targets.npy"
+        },
+        "notes": "Original artifact paths retained for provenance; files missing after internal BasicTS archive cleanup. Current metrics cannot be independently recomputed from predictions."
+      }
+    ]
+  },
+  "limitations": [
+    "Legacy implementations and training settings differ from original-author official references; explicitly accepted by user.",
+    "No new training or inference through the current TSLib entry; original full-test outputs recomputed only.",
+    "Zero-shot artifacts missing; historical registry metrics displayed in the main table by explicit user authorization, not fully accepted or registered in the formal protocol index."
+  ]
+}

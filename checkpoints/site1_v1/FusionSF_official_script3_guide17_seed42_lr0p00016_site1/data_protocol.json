@@ -1,0 +1,84 @@
+{
+  "version": "site1_v1",
+  "protocol_origin": "project_fixed_v1",
+  "previous_name": null,
+  "window_pipeline": "fixed_v1",
+  "split_version": "chronological_target_split_v1",
+  "scaler_version": "train_sites_and_time_only_fit_v1",
+  "nwp_channels": 15,
+  "nwp_interpolation": "per_grid_bidirectional",
+  "sites": [
+    1
+  ],
+  "train_sites": [
+    1
+  ],
+  "validation_sites": [
+    1
+  ],
+  "test_sites": [
+    1
+  ],
+  "input_len": 24,
+  "output_len": 24,
+  "target_time_ranges": {
+    "train": [
+      "2021-01-02 00:00:00",
+      "2021-11-19 00:00:00"
+    ],
+    "validation": [
+      "2021-11-19 00:00:00",
+      "2022-03-06 00:00:00"
+    ],
+    "test": [
+      "2022-03-06 00:00:00",
+      "2022-06-21 00:00:00"
+    ]
+  },
+  "windows": {
+    "train": 7657,
+    "validation": 2545,
+    "test": 2545
+  },
+  "scaler_fit": {
+    "satellite": {
+      "fit_range": "2021-01-01 00:00:00..2021-11-18 23:00:00"
+    },
+    "nwp": {
+      "feature_names": [
+        "Clear-sky direct solar radiation at surface",
+        "Direct solar radiation",
+        "Downward UV radiation at the surface",
+        "Surface solar radiation downwards",
+        "Surface net solar radiation",
+        "Surface pressure",
+        "Sunshine duration",
+        "Low cloud cover",
+        "Total cloud cover",
+        "2 metre temperature",
+        "2 metre dewpoint temperature",
+        "Skin temperature",
+        "Total precipitation",
+        "100 metre U wind component",
+        "100 metre V wind component"
+      ],
+      "fit_range": "2021-01-02 00:00:00..2021-11-18 23:00:00",
+      "fit_coordinates": [
+        [
+          14.6,
+          15.7
+        ]
+      ]
+    }
+  },
+  "data_interface": "tslib_four_sequences_plus_covariates_v1",
+  "label_len": 12,
+  "modalities": "all",
+  "calendar_features": [
+    "hour",
+    "dayofweek",
+    "day",
+    "dayofyear"
+  ],
+  "future_nwp_availability": "assumed available; issue time absent from CSV"
+}

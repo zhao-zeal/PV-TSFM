@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_fusionsf_inputs.py", line 415, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_fusionsf_inputs.py", line 325, in main
+    run['acceptance'] = accept(run, args.gpu)
+                        ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_fusionsf_inputs.py", line 200, in accept
+    assert mask.sum() == 2545 and np.any(pred[mask] != 0), f'zero station {site}'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: zero station 0
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_fusionsf_inputs.py", line 410, in <module>
+    raise
+          
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_fusionsf_inputs.py", line 395, in main
+    run['state'] = 'complete_pending_acceptance' if returncode == 0 else 'failed'
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/home/zhaopp/workspace/PV-TSFM/.venv/bin/python', '-u', '/home/zhaopp/workspace/PV-TSFM/scripts/run_fusionsf_inputs.py', '--accept-run', '0', '--gpu', '4']' returned non-zero exit status 1.

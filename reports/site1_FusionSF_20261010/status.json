@@ -1,0 +1,12 @@
+{
+  "folder": "/home/zhaopp/workspace/PV-TSFM/reports/site1_FusionSF_20261010",
+  "learning_rate": 0.0016,
+  "completed_epochs": 4,
+  "best_epoch": 2,
+  "validation_mae": 0.11134913287192007,
+  "validation_rmse": 0.23242938078803516,
+  "test_mae": null,
+  "test_rmse": null,
+  "test_r2": null,
+  "status": "stopped_degenerate_predictions"
+}

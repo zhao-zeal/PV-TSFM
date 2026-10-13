@@ -1,0 +1,10 @@
+[
+  {
+    "attempt": 1,
+    "status": "check_assertion_corrected",
+    "full_training_started": false,
+    "error": "A03-a marginal statistics are invariant to permutation; incorrectly required pairing sensitivity",
+    "correction": "For A03-a check marginal-value sensitivity and permutation invariance; for b/c check pairing sensitivity",
+    "log": "reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/preflight_attempt1.log"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "checked_at": "2026-10-12T20:53:34.190677+08:00",
+  "variant": "power_satellite_history_future_nwp",
+  "protocol": "in_domain",
+  "latest_completed_epoch": 8,
+  "observation": "Epochs 2 through 8 have identical validation metrics matching the previously observed zero-prediction reference; current checkpoint predictions have not been replayed, so all-zero predictions remain suspected rather than confirmed.",
+  "validation_mae": 0.11889694288576746,
+  "validation_rmse": 0.24004176101958627,
+  "formal_test_completed": false,
+  "action": "Recorded for review; authorized training continues without automatic stop, configuration change, or rerun.",
+  "source_log": "/home/zhaopp/workspace/PV-TSFM/reports/FusionSF_inputs_two_protocols_seed42_20261011/power_satellite_history_future_nwp_in_domain.log",
+  "matching_epoch_lines": [
+    "2026-10-12 19:32:50,376 Epoch 2 train_loss=0.1497575342655182 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.000639368553097047",
+    "2026-10-12 19:44:26,842 Epoch 3 train_loss=0.14543770253658295 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0009578697430094784",
+    "2026-10-12 19:56:07,401 Epoch 4 train_loss=0.1454499214887619 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.001274953408841266",
+    "2026-10-12 20:07:37,324 Epoch 5 train_loss=0.1454678326845169 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0015901506724761102",
+    "2026-10-12 20:19:11,744 Epoch 6 train_loss=0.14548847079277039 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0015858298005829512",
+    "2026-10-12 20:30:45,440 Epoch 7 train_loss=0.14548681676387787 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0015807334095509981",
+    "2026-10-12 20:42:21,977 Epoch 8 train_loss=0.14548592269420624 validation={'mae': 0.11889694288576746, 'rmse': 0.24004176101958627, 'mse': 0.05762004703338417} lr=0.0015748665289029048"
+  ]
+}

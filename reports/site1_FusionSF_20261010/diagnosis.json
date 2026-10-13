@@ -1,0 +1,25 @@
+{
+  "status": "degenerate_zero_predictions_confirmed",
+  "data_protocol": "site1_v1",
+  "seed": 42,
+  "guide_channels": 17,
+  "checkpoint_epoch": 2,
+  "checkpoint_validation": {
+    "mae": 0.11134913287192007,
+    "rmse": 0.23242938078803516,
+    "mse": 0.05402341705350945
+  },
+  "validation_windows_checked": [
+    0,
+    1272,
+    2544
+  ],
+  "prediction_min": 0.0,
+  "prediction_max": 0.0,
+  "all_checked_predictions_zero": true,
+  "pre_relu_min": -4.707137107849121,
+  "pre_relu_max": -4.014493465423584,
+  "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/site1_v1/FusionSF_official_script3_guide17_seed42_sl24_pl24_all_site1/checkpoint.pth",
+  "action": "Stopped training after 3 completed epochs; no test evaluation or hyperparameter change",
+  "hypothesis": "Default learning rate may cause output-head collapse; causal contribution is unverified"
+}

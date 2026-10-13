@@ -19,9 +19,12 @@ def build_parser():
     parser.add_argument('--is_training', type=int, choices=[0, 1], help='1: train then test; 0: test only')
     parser.add_argument('--model', required=True, choices=[
         'DLinear', 'PatchTST', 'FusionSF', 'CrossUnet', 'Cross-Unet', 'TimeXer',
-        'Chronos2', 'Chronos-2', 'TimesFM3', 'ChronosX',
+        'Chronos2', 'Chronos-2', 'Chronos2Adapter', 'Chronos2WeatherAdapter', 'TimesFM3', 'ChronosX',
         'TimeVLM', 'Time-VLM', 'Dlinear', 'Ours'])
-    parser.add_argument('--baseline_config', choices=['official', 'legacy_fusionsf'], default='official')
+    parser.add_argument('--baseline_config', choices=['official', 'legacy_fusionsf', 'migrated_adapter', 'fusion_input_variant', 'extended_budget', 'weather_adapter_variant'], default='official')
+    parser.add_argument('--adapter_version', choices=['b131_linear_v1', 'b131_mlp63_v1'], default='b131_linear_v1')
+    parser.add_argument('--cache_batch_size', type=int, default=64)
+    parser.add_argument('--adapter_base_checkpoint', help='Accepted same-protocol b131_linear_v1 checkpoint for Weather Adapter')
     parser.add_argument('--model_id', help='Explicit run name; choose a new name for a separate run')
     parser.add_argument('--data', default='MMSP', choices=['MMSP'])
     parser.add_argument('--root_path', default=str(ROOT / 'datasets/MMSP/data'))
@@ -40,6 +43,7 @@ def build_parser():
     parser.add_argument('--checkpoints', default=str(ROOT / 'checkpoints'))
     parser.add_argument('--output_dir', default=str(ROOT / 'outputs'))
     parser.add_argument('--checkpoint', help='Existing BasicTS or project model checkpoint for test-only mode')
+    parser.add_argument('--resume', help='Resume TimeVLM/FusionSF from a saved model/optimizer/scheduler checkpoint')
     parser.add_argument('--use_gpu', type=int, choices=[0, 1], default=0)
     parser.add_argument('--gpu', type=int, default=0, help='Explicit idle GPU index')
     parser.add_argument('--d_model', type=int)
@@ -74,6 +78,11 @@ def build_parser():
     parser.add_argument('--vlm_path', help='Project-local CLIP directory')
     parser.add_argument('--preset', choices=['script', 'experiment'], default='script')
     parser.add_argument('--fusion_modalities', type=int, choices=[2, 3], default=3)
+    parser.add_argument('--fusion_input', choices=['original', 'power_future_nwp',
+                        'power_satellite_history_future_nwp', 'power_history_future_nwp'],
+                        default='original')
+    parser.add_argument('--fusion_readout_init', choices=['official', 'positive_v1'], default='official',
+                        help='Opt-in positive readout initialization for the approved FusionSF input repairs')
     parser.add_argument('--guide_channels', type=int, choices=[15, 17], default=17,
                         help='FusionSF official NWP input: rounded lat/lon + 15 weather variables')
     parser.add_argument('--model_path', help='Local pretrained checkpoint directory')
@@ -86,6 +95,17 @@ def parse_args(argv=None):
     parser = build_parser()
     args = parser.parse_args(argv)
     args.model = MODEL_ALIASES.get(args.model, args.model)
+    if args.fusion_readout_init != 'official' and (
+            args.model != 'FusionSF' or args.fusion_input not in (
+                'power_future_nwp', 'power_satellite_history_future_nwp', 'power_history_future_nwp')
+            or args.protocol not in ('in_domain', 'zeroshot_v1')):
+        parser.error('positive_v1 is restricted to the approved FusionSF input variants and two protocols')
+    if args.fusion_readout_init != 'official' and args.resume:
+        parser.error('The positive readout repair starts from epoch1; do not resume the dead checkpoint')
+    if args.model == 'FusionSF' and args.fusion_readout_init == 'positive_v1':
+        args.fusion_readout_lr_factor = 0.01
+    if args.resume and (args.model not in ('TimeVLM', 'FusionSF') or args.is_training != 1):
+        parser.error('--resume supports TimeVLM/FusionSF training only')
     sources = json.loads((ROOT / 'models/baseline_sources.json').read_text())
     args.official_source = sources.get(args.model)
     if args.model == 'Ours':
@@ -101,6 +121,37 @@ def parse_args(argv=None):
         'gradient_accumulation_steps': 1,
     }
     defaults.update(PRESETS.get(args.model, {}))
+    if args.model == 'Chronos2Adapter':
+        defaults.update(seed=42, batch_size=512, eval_batch_size=1024,
+                        train_epochs=100, patience=10, learning_rate=0.000016,
+                        monitor='mae', precision='fp32', drop_last=False,
+                        optimizer='adamw_adapter', lradj='none')
+        args.optimizer_betas = [0.9, 0.999]
+        args.weight_decay = 0.05
+        args.loss = 'L1'
+        args.adapter_stage1_learning_rate = 0.0016
+        args.baseline_config = 'migrated_adapter'
+        args.nwp_mode = 'history_future'
+        if args.seq_len != 24 or args.pred_len != 24:
+            parser.error('Migrated E11/E12 adapters require 24 -> 24')
+    if args.model == 'Chronos2WeatherAdapter':
+        if args.protocol not in ('in_domain', 'zeroshot_v1') or (args.seq_len, args.pred_len) != (24, 24):
+            parser.error('Weather Adapter is authorized only for in_domain/zeroshot_v1, 24 -> 24')
+        if args.seed not in (None, 42):
+            parser.error('Weather Adapter is authorized only for seed42')
+        defaults.update(seed=42, batch_size=512, eval_batch_size=1024,
+                        train_epochs=100, patience=10, learning_rate=0.000016,
+                        monitor='mae', precision='fp32', drop_last=False,
+                        optimizer='adamw_adapter', lradj='none')
+        args.optimizer_betas = [0.9, 0.999]
+        args.weight_decay, args.loss = 0.05, 'L1'
+        args.baseline_config, args.nwp_mode = 'weather_adapter_variant', 'history_future'
+        args.adapter_version = 'b131_linear_weather_v2'
+        args.experiment_label = 'A02'
+        args.base_experiment_label = 'A01'
+        args.adapter_base_checkpoint = args.adapter_base_checkpoint or str(
+            ROOT / 'checkpoints' / args.protocol /
+            'Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future' / 'checkpoint.pth')
     if args.baseline_config == 'legacy_fusionsf':
         if args.model not in LEGACY:
             parser.error('legacy_fusionsf is only for archived DLinear/PatchTST runs')
@@ -111,6 +162,10 @@ def parse_args(argv=None):
     for name, default in defaults.items():
         if getattr(args, name, None) is None:
             setattr(args, name, default)
+    if args.model == 'TimeVLM' and args.baseline_config == 'official' and (args.train_epochs, args.patience) != (10, 5):
+        args.baseline_config = 'extended_budget'
+    if args.model == 'ChronosX':
+        args.baseline_config = 'extended_budget'
     args.enc_in = args.dec_in = args.c_out = 1
     args.vlm_path = args.vlm_path or str(ROOT / 'pretrained/clip-vit-base-patch32')
     args.content = 'MMSP hourly photovoltaic power generation at solar power plants.'
@@ -128,8 +183,15 @@ def parse_args(argv=None):
         parser.error('Official DLinear fixes its decomposition kernel to 25')
     required_modalities = 'power'
     if args.model == 'FusionSF':
-        required_modalities = 'all' if args.fusion_modalities == 3 else 'satellite'
-    elif args.model in ('CrossUnet', 'TimeXer', 'ChronosX') or (args.model == 'Chronos2' and args.nwp_mode != 'none'):
+        if args.fusion_input != 'original':
+            if args.fusion_modalities != 3:
+                parser.error('FusionSF NWP variants use the three-branch backbone')
+            args.baseline_config = 'fusion_input_variant'
+            args.nwp_mode = 'future' if args.fusion_input == 'power_future_nwp' else 'history_future'
+            required_modalities = 'all' if args.fusion_input == 'power_satellite_history_future_nwp' else 'power_nwp'
+        else:
+            required_modalities = 'all' if args.fusion_modalities == 3 else 'satellite'
+    elif args.model in ('CrossUnet', 'TimeXer', 'ChronosX', 'Chronos2Adapter', 'Chronos2WeatherAdapter') or (args.model == 'Chronos2' and args.nwp_mode != 'none'):
         required_modalities = 'power_nwp'
     args.modalities = args.modalities or required_modalities
     if (required_modalities == 'all' and args.modalities != 'all') or (
@@ -142,8 +204,12 @@ def parse_args(argv=None):
     variant = ''
     if args.model == 'FusionSF':
         variant = f'_{args.preset}{args.fusion_modalities}_guide{args.guide_channels}'
+        if args.fusion_input != 'original':
+            variant += f'_{args.fusion_input}'
     elif args.model == 'ChronosX':
         variant = f'_{args.covariate_injection}'
+    elif args.model in ('Chronos2Adapter', 'Chronos2WeatherAdapter'):
+        variant = f'_{args.adapter_version}'
     args.model_id = args.model_id or f'{args.model}_{args.baseline_config}{variant}_seed{args.seed}_sl{args.seq_len}_pl{args.pred_len}_{args.modalities}_{args.nwp_mode}'
     if Path(args.model_id).name != args.model_id:
         parser.error('model_id must be a directory name, without path separators')
@@ -161,13 +227,19 @@ def parse_args(argv=None):
 
 
 def configure_resources(args):
-    cores = sorted(os.sched_getaffinity(0))[:4]
+    available = os.sched_getaffinity(0)
+    if args.model == 'Chronos2WeatherAdapter':
+        cores = [9, 10] if {9, 10}.issubset(available) else sorted(available)[:2]
+    else:
+        cores = sorted(available)[:4]
     os.sched_setaffinity(0, cores)
     for name in ('OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
         os.environ[name] = str(len(cores))
     if args.use_gpu:
         from utils.resources import require_idle_gpus
         require_idle_gpus(str(args.gpu))
+    if args.model in ('Chronos2Adapter', 'Chronos2WeatherAdapter'):
+        os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
     import torch
     torch.set_num_threads(len(cores))
     torch.set_num_interop_threads(1)
@@ -175,6 +247,10 @@ def configure_resources(args):
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
     torch.backends.cudnn.benchmark = bool(args.use_gpu)
+    if args.model in ('Chronos2Adapter', 'Chronos2WeatherAdapter'):
+        torch.use_deterministic_algorithms(True)
+        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
 
 
 def main(argv=None):
@@ -186,6 +262,12 @@ def main(argv=None):
     import numpy as np
     import torch
     from exp.exp_long_term_forecasting import Exp_Long_Term_Forecast
+    if args.model == 'Chronos2Adapter':
+        from exp.exp_chronos2_adapter import Exp_Chronos2_Adapter
+        Exp_Long_Term_Forecast = Exp_Chronos2_Adapter
+    elif args.model == 'Chronos2WeatherAdapter':
+        from exp.exp_chronos2_weather_adapter import Exp_Chronos2_Weather_Adapter
+        Exp_Long_Term_Forecast = Exp_Chronos2_Weather_Adapter
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)

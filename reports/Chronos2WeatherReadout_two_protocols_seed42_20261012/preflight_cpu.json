@@ -1,0 +1,73 @@
+{
+  "status": "passed_bounded_CPU_checks",
+  "source_sha256": {
+    "layers/chronos2_weather_readout.py": "2d8222ef1c9c651e3dbd31a7fb4e41c188a87dcd53c54163b363141c746d6437",
+    "models/Chronos2WeatherReadout.py": "545dadd0fa9a093f6055c81b767fed79eb03effb81388e44379fe420e2ad0daf",
+    "exp/exp_chronos2_weather_readout.py": "ac3cc45dbb9632ae13a62f94b682b43a7ad7fc10b7dff8984118f71041fa6012",
+    "scripts/run_chronos2_weather_readout.py": "006640ea9ac2b4cfd7ec4de9a82e0a82ee997264350e2a7dec5cf8579b141061",
+    "exp/exp_chronos2_history_weather_adapter.py": "18fccea5de78511bad2beba5b73c67d60004dd8715b161794944047cfc3cc147",
+    "scripts/run_chronos2_history_weather_adapter.py": "ce7f576026607a3e2eccba59f83fd39fe2adb61cbaf02829e4d8242d984dba05"
+  },
+  "variants": [
+    {
+      "protocol": "in_domain",
+      "variant": "a",
+      "trainable_parameters": 29249,
+      "zero_output_equal_A02": true,
+      "finite_forward_backward": true,
+      "attention_step2_gradient_l1": 4.458409966900945e-05,
+      "frozen_unchanged": true,
+      "limitation": "CPU bounded cache checks; b synthetic memory; GPU native/context-cache checks still required"
+    },
+    {
+      "protocol": "in_domain",
+      "variant": "b",
+      "trainable_parameters": 29249,
+      "zero_output_equal_A02": true,
+      "finite_forward_backward": true,
+      "attention_step2_gradient_l1": 8.46312686917372e-05,
+      "frozen_unchanged": true,
+      "limitation": "CPU bounded cache checks; b synthetic memory; GPU native/context-cache checks still required"
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "variant": "a",
+      "trainable_parameters": 29249,
+      "zero_output_equal_A02": true,
+      "finite_forward_backward": true,
+      "attention_step2_gradient_l1": 3.44528270943556e-05,
+      "frozen_unchanged": true,
+      "limitation": "CPU bounded cache checks; b synthetic memory; GPU native/context-cache checks still required"
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "variant": "b",
+      "trainable_parameters": 29249,
+      "zero_output_equal_A02": true,
+      "finite_forward_backward": true,
+      "attention_step2_gradient_l1": 7.710701174801216e-05,
+      "frozen_unchanged": true,
+      "limitation": "CPU bounded cache checks; b synthetic memory; GPU native/context-cache checks still required"
+    }
+  ],
+  "full_training_complete": false,
+  "CPU_native_encode_check": {
+    "forecast_tokens_loc_scale_exactly_equal": true,
+    "raw_context_shape": [
+      2,
+      2,
+      768
+    ],
+    "prediction_shape": [
+      2,
+      24,
+      1
+    ],
+    "attention_shape": [
+      2,
+      24,
+      4
+    ],
+    "REG_excluded": true
+  }
+}

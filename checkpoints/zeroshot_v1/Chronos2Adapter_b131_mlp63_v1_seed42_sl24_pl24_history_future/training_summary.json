@@ -1,0 +1,21 @@
+{
+  "stage": "b131_mlp63_v1",
+  "completed_epochs": 73,
+  "best_epoch": 63,
+  "best_validation_metrics": {
+    "mae": 0.038873812873663434,
+    "rmse": 0.09096337807288206,
+    "mse": 0.00827433615043008
+  },
+  "stop_reason": "patience",
+  "learning_rate": 1.6e-05,
+  "optimizer": "AdamW",
+  "betas": [
+    0.9,
+    0.999
+  ],
+  "weight_decay": 0.05,
+  "loss": "L1",
+  "scheduler": null,
+  "trainable_parameters": 98367
+}

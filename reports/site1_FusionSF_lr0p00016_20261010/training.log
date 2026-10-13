@@ -1,0 +1,79 @@
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:261: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+/home/zhaopp/workspace/PV-TSFM/.venv/lib/python3.11/site-packages/vector_quantize_pytorch/vector_quantize_pytorch.py:391: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  @autocast(enabled = False)
+2026-10-10 13:47:33,119 Epoch 1 train_loss=0.25419437885284424 validation={'mae': 0.2569980150182936, 'rmse': 0.3900430381650219, 'mse': 0.15213357162100072} lr=3.1992104965851706e-05
+2026-10-10 13:49:23,559 Epoch 2 train_loss=0.15614494681358337 validation={'mae': 0.11134913287192007, 'rmse': 0.23242938078803516, 'mse': 0.05402341705350945} lr=6.39368553097047e-05
+2026-10-10 13:51:14,477 Epoch 3 train_loss=0.15062513947486877 validation={'mae': 0.11134913287192007, 'rmse': 0.23242938078803516, 'mse': 0.05402341705350945} lr=9.578697430094784e-05
+7 [8, 8]
+3 modal model, vq in ts
+3 modal model, vq in ctx
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/run.py", line 204, in <module>
+    main()
+  File "/home/zhaopp/workspace/PV-TSFM/run.py", line 199, in main
+    experiment.train(args.model_id)
+  File "/home/zhaopp/workspace/PV-TSFM/exp/exp_long_term_forecasting.py", line 125, in train
+    validation = self.vali(val_loader)
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/exp/exp_long_term_forecasting.py", line 90, in vali
+    for batch in loader:
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 741, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 801, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 54, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/torch/utils/data/_utils/fetch.py", line 54, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/data_provider/data_loader.py", line 43, in __getitem__
+    sample = super().__getitem__(index)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/data_provider/protocols.py", line 71, in __getitem__
+    sample = self.storage[raw_index]
+             ~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/data_provider/mmsp_storage.py", line 201, in __getitem__
+    values = self.data_ec_grouped.get_group((lat, lon)).values
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/groupby/groupby.py", line 1118, in get_group
+    return self._selected_obj.iloc[indexer]
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/indexing.py", line 1191, in __getitem__
+    return self._getitem_axis(maybe_callable, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/indexing.py", line 1743, in _getitem_axis
+    return self._get_list_axis(key, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/indexing.py", line 1714, in _get_list_axis
+    return self.obj._take_with_is_copy(key, axis=axis)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/generic.py", line 4153, in _take_with_is_copy
+    result = self.take(indices=indices, axis=axis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/generic.py", line 4133, in take
+    new_data = self._mgr.take(
+               ^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/managers.py", line 894, in take
+    return self.reindex_indexer(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/managers.py", line 687, in reindex_indexer
+    new_blocks = [
+                 ^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/managers.py", line 688, in <listcomp>
+    blk.take_nd(
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/internals/blocks.py", line 1307, in take_nd
+    new_values = algos.take_nd(
+                 ^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/array_algos/take.py", line 117, in take_nd
+    return _take_nd_ndarray(arr, indexer, axis, fill_value, allow_fill)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/miniconda3/envs/torch/lib/python3.11/site-packages/pandas/core/array_algos/take.py", line 162, in _take_nd_ndarray
+    func(arr, indexer, out, fill_value)
+KeyboardInterrupt

@@ -1,0 +1,496 @@
+{
+  "status": "passed",
+  "stage": "CPU_microbatch_dependency_and_gradient_check",
+  "checked_at": "2026-10-12T22:17:32.298697+08:00",
+  "cpu_cores": [
+    9,
+    10
+  ],
+  "threads": 2,
+  "new_training": false,
+  "full_evaluation": false,
+  "original_source_checkpoint_unchanged": true,
+  "source_sha256": {
+    "models/CrossUnet.py": "b557469212b4cb2cfd38d0db58499b581d9ab6fdbf496dc1d030f2b5ef300559",
+    "layers/crossunet/official_model.py": "c580d3569dc0fa3b414f3873fc059d5c978f820227bf38c564fa774e9c65b127",
+    "layers/crossunet/attention.py": "09cbc116856086baeed064c3984ba63dd03f004c38b28a0c2079f7a3549add96",
+    "layers/crossunet/encoder_decoder.py": "0d58185dd37000da86357febeb51c5377f117a12f9cc0f0fcce4eaa6a28a85be"
+  },
+  "runs": [
+    {
+      "protocol": "in_domain",
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/CrossUnet_official_seed42_sl24_pl24_power_nwp_full/checkpoint.pth",
+      "checkpoint_sha256": "85e4102a18c8974ce27311f1c2baea9f7746ad0a2dc84d26af5a2f96935c5fa4",
+      "checkpoint_epoch": 32,
+      "sample_indices": [
+        0,
+        1000,
+        2545,
+        25449
+      ],
+      "model_enc_in": 16,
+      "usenonlinearproject": true,
+      "all_switchchannel_false": true,
+      "output_shape": [
+        4,
+        24,
+        1
+      ],
+      "correlation_input_shape": [
+        4,
+        24,
+        17
+      ],
+      "correlation_matrix_shape": [
+        4,
+        16,
+        16
+      ],
+      "total_matrix_sum": [
+        0.9999999403953552,
+        0.9999999403953552,
+        1.0,
+        1.0000001192092896
+      ],
+      "normalization": "softmax over flattened 256 entries, not row-wise",
+      "call_trace": [
+        {
+          "module": "encoder.encode_blocks.0.encode_layers.0",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "encoder.encode_blocks.1.encode_layers.0",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "encoder.encode_blocks.2.encode_layers.0",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "decoder.decode_layers.0.self_attention",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "decoder.decode_layers.1.self_attention",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "decoder.decode_layers.2.self_attention",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "decoder.decode_layers.3.self_attention",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        }
+      ],
+      "selected_checkpoint_saved_prediction_max_abs_difference": 1.0728836059570312e-06,
+      "PCorr_gradients": {
+        "channelprohec.0.weight": {
+          "l1": 0.17373508214950562,
+          "finite": true
+        },
+        "channelprohec.2.weight": {
+          "l1": 1.075383186340332,
+          "finite": true
+        },
+        "channel_proj2.0.weight": {
+          "l1": 1.2491040229797363,
+          "finite": true
+        },
+        "channel_proj2.2.weight": {
+          "l1": 7.489079475402832,
+          "finite": true
+        }
+      },
+      "PCorr_saved_optimizer_state": {
+        "channelprohec.0.weight": {
+          "step": 19136.0,
+          "exp_avg_l1": 0.0016275739762932062,
+          "exp_avg_sq_l1": 2.593061481093173e-06
+        },
+        "channelprohec.2.weight": {
+          "step": 19136.0,
+          "exp_avg_l1": 0.019541393965482712,
+          "exp_avg_sq_l1": 0.00023331830743700266
+        },
+        "channel_proj2.0.weight": {
+          "step": 19136.0,
+          "exp_avg_l1": 0.021600626409053802,
+          "exp_avg_sq_l1": 7.202021947705362e-07
+        },
+        "channel_proj2.2.weight": {
+          "step": 19136.0,
+          "exp_avg_l1": 0.14694665372371674,
+          "exp_avg_sq_l1": 0.0004708319320343435
+        }
+      },
+      "matrix_interventions": {
+        "zero": {
+          "max_abs_prediction_change": 0.5623095631599426,
+          "mean_abs_prediction_change": 0.1491834670305252
+        },
+        "identity": {
+          "max_abs_prediction_change": 0.5451214909553528,
+          "mean_abs_prediction_change": 0.15071767568588257
+        },
+        "sample_permutation": {
+          "max_abs_prediction_change": 0.02966567873954773,
+          "mean_abs_prediction_change": 0.006531561259180307
+        }
+      },
+      "baseline_restored_exact": true
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/CrossUnet_official_seed42_sl24_pl24_power_nwp_full/checkpoint.pth",
+      "checkpoint_sha256": "c8295d40e6f2a172d0f885ad227ec840ef07b79a2b40b606a9f3b987e1e3fe1e",
+      "checkpoint_epoch": 33,
+      "sample_indices": [
+        0,
+        1000,
+        2545,
+        25449
+      ],
+      "model_enc_in": 16,
+      "usenonlinearproject": true,
+      "all_switchchannel_false": true,
+      "output_shape": [
+        4,
+        24,
+        1
+      ],
+      "correlation_input_shape": [
+        4,
+        24,
+        17
+      ],
+      "correlation_matrix_shape": [
+        4,
+        16,
+        16
+      ],
+      "total_matrix_sum": [
+        0.9999998211860657,
+        0.9999999403953552,
+        1.0,
+        1.0
+      ],
+      "normalization": "softmax over flattened 256 entries, not row-wise",
+      "call_trace": [
+        {
+          "module": "encoder.encode_blocks.0.encode_layers.0",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "encoder.encode_blocks.1.encode_layers.0",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "encoder.encode_blocks.2.encode_layers.0",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "decoder.decode_layers.0.self_attention",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "decoder.decode_layers.1.self_attention",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "decoder.decode_layers.2.self_attention",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        },
+        {
+          "module": "decoder.decode_layers.3.self_attention",
+          "shape": [
+            4,
+            16,
+            16
+          ],
+          "matrix_matches": true,
+          "multiplication_matches": true,
+          "diagnostic_detach_does_not_modify_input": true
+        }
+      ],
+      "selected_checkpoint_saved_prediction_max_abs_difference": 1.2218952178955078e-06,
+      "PCorr_gradients": {
+        "channelprohec.0.weight": {
+          "l1": 0.03486967086791992,
+          "finite": true
+        },
+        "channelprohec.2.weight": {
+          "l1": 0.22913429141044617,
+          "finite": true
+        },
+        "channel_proj2.0.weight": {
+          "l1": 0.3783881664276123,
+          "finite": true
+        },
+        "channel_proj2.2.weight": {
+          "l1": 2.56955623626709,
+          "finite": true
+        }
+      },
+      "PCorr_saved_optimizer_state": {
+        "channelprohec.0.weight": {
+          "step": 19734.0,
+          "exp_avg_l1": 0.0025630102027207613,
+          "exp_avg_sq_l1": 9.555291171636782e-07
+        },
+        "channelprohec.2.weight": {
+          "step": 19734.0,
+          "exp_avg_l1": 0.010211784392595291,
+          "exp_avg_sq_l1": 0.00010735095565905795
+        },
+        "channel_proj2.0.weight": {
+          "step": 19734.0,
+          "exp_avg_l1": 0.01911947689950466,
+          "exp_avg_sq_l1": 5.385720669437433e-07
+        },
+        "channel_proj2.2.weight": {
+          "step": 19734.0,
+          "exp_avg_l1": 0.10293865203857422,
+          "exp_avg_sq_l1": 0.0003134902217425406
+        }
+      },
+      "matrix_interventions": {
+        "zero": {
+          "max_abs_prediction_change": 0.5279207825660706,
+          "mean_abs_prediction_change": 0.1305457055568695
+        },
+        "identity": {
+          "max_abs_prediction_change": 0.5327926874160767,
+          "mean_abs_prediction_change": 0.13242419064044952
+        },
+        "sample_permutation": {
+          "max_abs_prediction_change": 0.010839700698852539,
+          "mean_abs_prediction_change": 0.002282799454405904
+        }
+      },
+      "baseline_restored_exact": true
+    }
+  ],
+  "PV_power_official_decoder_check": {
+    "stage": "official_source_decoder_only_forward_and_autograd_check",
+    "checked_at": "2026-10-12T22:29:07.779602+08:00",
+    "repository": "/home/zhaopp/workspace/PV-power",
+    "source_commit": "bfd6bd5080ee33f2fff0395fd0c394c9ab8fcb2a",
+    "full_training": false,
+    "formal_evaluation": false,
+    "checkpoint_updated": false,
+    "cpu_cores": [
+      9,
+      10
+    ],
+    "threads": 2,
+    "inputs": "Synthetic batch of 2; official short-horizon geometry L96/H16, historical power1+weather1; random initial weights, not performance evidence",
+    "runs": [
+      {
+        "source": "working_copy",
+        "source_sha256": {
+          "models/Cross_Unet.py": "7e96a67fa54af6d66803084f8f60e39450d1df6634e2dff60ba012dc6c603148",
+          "layers/CrossUnet_EncDec.py": "df001082a509e90fa2b8ab1929480dc5cbc7309627d64fe70cfd52c467cce34c",
+          "layers/CrossUentattn.py": "f262055721eea1e11ef7c49903be4999a59dced22fecda5b0c2c460974ca23ae",
+          "utils/masking.py": "7f4464860a1438af0cea1ae06cd69ff3f3fdccf8fb06b3f943231b457c607f81"
+        },
+        "encoder_outputs_held_fixed_detached": true,
+        "decoder_train_mode": true,
+        "dropout_draws_matched": true,
+        "decoder_layers_receiving_same_matrix": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "correlation_shape": [
+          2,
+          2,
+          2
+        ],
+        "prediction_shape": [
+          2,
+          16,
+          1
+        ],
+        "correlation_gradient_l1": 1.035977840423584,
+        "projection_gradient_l1": {
+          "channelprohec.0.weight": 0.00016828840307425708,
+          "channelprohec.2.weight": 0.009019768796861172,
+          "channel_proj2.0.weight": 0.07792568951845169,
+          "channel_proj2.2.weight": 1.034895658493042
+        },
+        "encoder_gradients_absent": true,
+        "decoder_only_matrix_interventions": {
+          "zero": {
+            "max_abs": 1.0393645763397217,
+            "mean_abs": 0.40184882283210754
+          },
+          "identity": {
+            "max_abs": 1.130825400352478,
+            "mean_abs": 0.38774242997169495
+          },
+          "sample_permutation": {
+            "max_abs": 0.00035899877548217773,
+            "mean_abs": 0.00011061830446124077
+          }
+        },
+        "restored_prediction_exact": true
+      },
+      {
+        "source": "official_commit",
+        "source_sha256": {
+          "models/Cross_Unet.py": "8c1c819f486cbfe952f964f6fd526db382263a6d4344bf34cef7fb794fee6a4c",
+          "layers/CrossUnet_EncDec.py": "df001082a509e90fa2b8ab1929480dc5cbc7309627d64fe70cfd52c467cce34c",
+          "layers/CrossUentattn.py": "f262055721eea1e11ef7c49903be4999a59dced22fecda5b0c2c460974ca23ae",
+          "utils/masking.py": "7f4464860a1438af0cea1ae06cd69ff3f3fdccf8fb06b3f943231b457c607f81"
+        },
+        "encoder_outputs_held_fixed_detached": true,
+        "decoder_train_mode": true,
+        "dropout_draws_matched": true,
+        "decoder_layers_receiving_same_matrix": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "correlation_shape": [
+          2,
+          2,
+          2
+        ],
+        "prediction_shape": [
+          2,
+          16,
+          1
+        ],
+        "correlation_gradient_l1": 1.035977840423584,
+        "projection_gradient_l1": {
+          "channelprohec.0.weight": 0.00016828840307425708,
+          "channelprohec.2.weight": 0.009019768796861172,
+          "channel_proj2.0.weight": 0.07792568951845169,
+          "channel_proj2.2.weight": 1.034895658493042
+        },
+        "encoder_gradients_absent": true,
+        "decoder_only_matrix_interventions": {
+          "zero": {
+            "max_abs": 1.0393645763397217,
+            "mean_abs": 0.40184882283210754
+          },
+          "identity": {
+            "max_abs": 1.130825400352478,
+            "mean_abs": 0.38774242997169495
+          },
+          "sample_permutation": {
+            "max_abs": 0.00035899877548217773,
+            "mean_abs": 0.00011061830446124077
+          }
+        },
+        "restored_prediction_exact": true
+      }
+    ],
+    "status": "passed",
+    "official_training_source_review": {
+      "repository": "https://github.com/ZjuMachine/PV-power",
+      "current_main_checked": true,
+      "model_forward": "Cross_Unet.py passes computed corr into self.decoder(dec_in, enc_out, corr)",
+      "decoder_forward": "Every DecoderLayer passes corr into its TwoStageAttentionLayer; channel matrix product enters residual, then cross-attention and linear_pred",
+      "training": "exp_main.py Adam(self.model.parameters()), criterion(outputs,batch_y), loss.backward(), model_optim.step(); test uses same model forward under no_grad",
+      "gradient_scope": "Matrix and nonlinear projection receive gradients through Decoder with Encoder outputs detached; raw Pearson coefficients themselves are input-derived, not independent nn.Parameters",
+      "detach_scope": "Only detached diagnostic copies; live matrix product and prediction retain autograd",
+      "local_working_copy": "PV-power has pre-existing changes to nan/negative-value handling and training logging/input transfer; no loss/corr detach blocks Decoder training",
+      "versions": "Official git HEAD bfd6bd5080ee33f2fff0395fd0c394c9ab8fcb2a and current main show this same path"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "windows": 76570,
+  "protocol": "in_domain",
+  "source": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/Chronos2Adapter_features_v1_seed42_sl24_pl24_history_future/train",
+  "source_manifest_sha256": "2e20219aadea6acb6825d150f4f23437cfd79dc1c98a7e5f09cafc660f93395c",
+  "scaler_sha256": "d5d8a8b5333dd7ad06351372c2b0c5d9b0f9ce2ebd190b076d1f1eee3492d66f",
+  "future_nwp_shape": [
+    76570,
+    24,
+    15
+  ],
+  "input": "Dataset_MMSP train-standardized future NWP; no extra normalization"
+}

@@ -1,0 +1,703 @@
+{
+  "diagnostic_only": true,
+  "formal_training_resumed": false,
+  "gpu": 0,
+  "cpu_cores": [
+    0,
+    7
+  ],
+  "batch_size": 16,
+  "num_workers": 0,
+  "precision": "fp32",
+  "required_gpu_utilization_percent": 99,
+  "runs": [
+    {
+      "model": "original_three_modal",
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/FusionSF_official_script3_guide17_seed42_sl24_pl24_all_full/checkpoint.pth",
+      "source_epoch": 10,
+      "input_shapes": [
+        [
+          16,
+          24,
+          1
+        ],
+        [
+          16,
+          36,
+          1
+        ],
+        [
+          16,
+          24,
+          4
+        ],
+        [
+          16,
+          36,
+          4
+        ]
+      ],
+      "covariate_shapes": {
+        "site_coords": [
+          16,
+          2
+        ],
+        "historical_nwp": [
+          16,
+          24,
+          15
+        ],
+        "future_nwp": [
+          16,
+          24,
+          15
+        ],
+        "satellite": [
+          16,
+          24,
+          1,
+          64,
+          64
+        ],
+        "satellite_coords": [
+          16,
+          2,
+          64,
+          64
+        ],
+        "fusion_time": [
+          16,
+          24,
+          3,
+          64,
+          64
+        ],
+        "correlation_history": [
+          16,
+          24,
+          1
+        ],
+        "site_id": [
+          16
+        ],
+        "forecast_timestamps": [
+          16,
+          24
+        ],
+        "input_start_timestamp": [
+          16
+        ],
+        "input_end_timestamp": [
+          16
+        ],
+        "forecast_start_timestamp": [
+          16
+        ],
+        "forecast_end_timestamp": [
+          16
+        ],
+        "split_id": [
+          16
+        ]
+      },
+      "parameters": 11144898,
+      "profile_gpu_kernel_count_per_step": 5211.0,
+      "profile_gpu_busy_ms_per_step": 84.21425233333254,
+      "profile_wall_ms_per_step": 221.86128133333335,
+      "profile_gpu_busy_fraction": 0.37958066331910184,
+      "top_cpu_events": [
+        {
+          "name": "cudaLaunchKernel",
+          "calls": 14871,
+          "self_cpu_us": 74471.43900000141,
+          "self_device_us": 0.0,
+          "cpu_total_us": 76118.45100000146
+        },
+        {
+          "name": "cudaStreamSynchronize",
+          "calls": 153,
+          "self_cpu_us": 28698.2299999999,
+          "self_device_us": 0,
+          "cpu_total_us": 28698.2299999999
+        },
+        {
+          "name": "aten::mm",
+          "calls": 1641,
+          "self_cpu_us": 26712.271999996003,
+          "self_device_us": 29384.741999999897,
+          "cpu_total_us": 39658.18199999813
+        },
+        {
+          "name": "aten::bmm",
+          "calls": 1032,
+          "self_cpu_us": 17458.23299999901,
+          "self_device_us": 45398.01899999917,
+          "cpu_total_us": 23127.804999998465
+        },
+        {
+          "name": "aten::empty",
+          "calls": 4449,
+          "self_cpu_us": 17420.255000000707,
+          "self_device_us": 0,
+          "cpu_total_us": 17420.255000000707
+        },
+        {
+          "name": "aten::mul",
+          "calls": 1752,
+          "self_cpu_us": 16448.89499999953,
+          "self_device_us": 29767.558000000747,
+          "cpu_total_us": 25072.827999997273
+        },
+        {
+          "name": "Optimizer.step#AdamW.step",
+          "calls": 3,
+          "self_cpu_us": 15098.549000000872,
+          "self_device_us": 0.0,
+          "cpu_total_us": 32781.38100000005
+        },
+        {
+          "name": "aten::addmm",
+          "calls": 483,
+          "self_cpu_us": 12473.023999999608,
+          "self_device_us": 7814.056000000026,
+          "cpu_total_us": 16539.647000000055
+        },
+        {
+          "name": "aten::view",
+          "calls": 7665,
+          "self_cpu_us": 11761.661000001182,
+          "self_device_us": 0,
+          "cpu_total_us": 11761.661000001182
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 3168,
+          "self_cpu_us": 10979.375000001959,
+          "self_device_us": 0,
+          "cpu_total_us": 10979.375000001959
+        },
+        {
+          "name": "aten::permute",
+          "calls": 4623,
+          "self_cpu_us": 10049.02999999814,
+          "self_device_us": 0,
+          "cpu_total_us": 12324.486999999339
+        },
+        {
+          "name": "aten::copy_",
+          "calls": 1656,
+          "self_cpu_us": 9901.105000000825,
+          "self_device_us": 35696.07199999932,
+          "cpu_total_us": 49315.96000000085
+        },
+        {
+          "name": "aten::sum",
+          "calls": 783,
+          "self_cpu_us": 9364.052999999774,
+          "self_device_us": 7118.9420000008195,
+          "cpu_total_us": 14143.797000000439
+        },
+        {
+          "name": "autograd::engine::evaluate_function: ViewBackward0",
+          "calls": 2616,
+          "self_cpu_us": 9088.2550000029,
+          "self_device_us": 0.0,
+          "cpu_total_us": 21330.421000003655
+        },
+        {
+          "name": "aten::reshape",
+          "calls": 6627,
+          "self_cpu_us": 8779.190999990138,
+          "self_device_us": 0.0,
+          "cpu_total_us": 45959.67699999315
+        },
+        {
+          "name": "aten::cat",
+          "calls": 891,
+          "self_cpu_us": 8449.41899999862,
+          "self_device_us": 21165.925000000156,
+          "cpu_total_us": 13053.693999999696
+        },
+        {
+          "name": "aten::add",
+          "calls": 897,
+          "self_cpu_us": 8416.562999997657,
+          "self_device_us": 10608.332999999204,
+          "cpu_total_us": 14064.123999998474
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 14415,
+          "self_cpu_us": 7611.061000003808,
+          "self_device_us": 0,
+          "cpu_total_us": 7611.061000003808
+        },
+        {
+          "name": "autograd::engine::evaluate_function: PermuteBackward0",
+          "calls": 2184,
+          "self_cpu_us": 7372.184999998732,
+          "self_device_us": 0,
+          "cpu_total_us": 14526.213000000542
+        },
+        {
+          "name": "autograd::engine::evaluate_function: torch::autograd::AccumulateGrad",
+          "calls": 1974,
+          "self_cpu_us": 6929.763999997347,
+          "self_device_us": 0,
+          "cpu_total_us": 12956.23999999986
+        },
+        {
+          "name": "aten::native_dropout",
+          "calls": 540,
+          "self_cpu_us": 6881.746999999443,
+          "self_device_us": 1989.6579999992173,
+          "cpu_total_us": 16034.656000000316
+        },
+        {
+          "name": "aten::t",
+          "calls": 3546,
+          "self_cpu_us": 6677.063999998694,
+          "self_device_us": 0,
+          "cpu_total_us": 12264.432999998446
+        },
+        {
+          "name": "aten::einsum",
+          "calls": 360,
+          "self_cpu_us": 6055.649999999467,
+          "self_device_us": 0.0,
+          "cpu_total_us": 33567.437999999645
+        },
+        {
+          "name": "autograd::engine::evaluate_function: AddmmBackward0",
+          "calls": 483,
+          "self_cpu_us": 5512.431999998458,
+          "self_device_us": 0.0,
+          "cpu_total_us": 44830.532999999996
+        },
+        {
+          "name": "aten::native_layer_norm",
+          "calls": 360,
+          "self_cpu_us": 5504.369000000865,
+          "self_device_us": 2447.633999999365,
+          "cpu_total_us": 11730.682000000575
+        }
+      ],
+      "synchronization_events": [
+        {
+          "name": "cudaStreamSynchronize",
+          "calls": 153,
+          "self_cpu_us": 28698.2299999999,
+          "self_device_us": 0,
+          "cpu_total_us": 28698.2299999999
+        },
+        {
+          "name": "aten::item",
+          "calls": 3897,
+          "self_cpu_us": 2869.419000000308,
+          "self_device_us": 0.0,
+          "cpu_total_us": 4418.990999998923
+        },
+        {
+          "name": "aten::_local_scalar_dense",
+          "calls": 3897,
+          "self_cpu_us": 921.3409999988098,
+          "self_device_us": 65.53500000013992,
+          "cpu_total_us": 1549.571999998615
+        },
+        {
+          "name": "cudaDeviceSynchronize",
+          "calls": 2,
+          "self_cpu_us": 18.88500000012573,
+          "self_device_us": 0,
+          "cpu_total_us": 18.88500000012573
+        }
+      ],
+      "full_step_median_seconds": 0.17286873375996947,
+      "data_median_seconds": 0.012738815508782864,
+      "utilization_percent": {
+        "samples": [
+          0,
+          54,
+          68,
+          93,
+          65,
+          32,
+          21,
+          78,
+          68,
+          25,
+          68,
+          45,
+          76,
+          61,
+          63,
+          59,
+          85,
+          60,
+          30,
+          52,
+          68,
+          35,
+          92,
+          32,
+          50
+        ],
+        "mean": 57.65217391304348,
+        "min": 21,
+        "max": 93
+      },
+      "utilization_log": "/home/zhaopp/workspace/PV-TSFM/reports/FusionSF_inputs_two_protocols_seed42_20261011/gpu_utilization_original_three_modal.csv",
+      "formal_training": false
+    },
+    {
+      "model": "power_future_nwp",
+      "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/FusionSF_power_future_nwp_seed42_sl24_pl24/checkpoint.pth",
+      "source_epoch": 2,
+      "input_shapes": [
+        [
+          16,
+          24,
+          1
+        ],
+        [
+          16,
+          36,
+          1
+        ],
+        [
+          16,
+          24,
+          4
+        ],
+        [
+          16,
+          36,
+          4
+        ]
+      ],
+      "covariate_shapes": {
+        "site_coords": [
+          16,
+          2
+        ],
+        "historical_nwp": [
+          16,
+          24,
+          15
+        ],
+        "future_nwp": [
+          16,
+          24,
+          15
+        ],
+        "satellite": [
+          16,
+          0
+        ],
+        "satellite_coords": [
+          16,
+          0
+        ],
+        "fusion_time": [
+          16,
+          24,
+          3,
+          1,
+          1
+        ],
+        "correlation_history": [
+          16,
+          24,
+          1
+        ],
+        "site_id": [
+          16
+        ],
+        "forecast_timestamps": [
+          16,
+          24
+        ],
+        "input_start_timestamp": [
+          16
+        ],
+        "input_end_timestamp": [
+          16
+        ],
+        "forecast_start_timestamp": [
+          16
+        ],
+        "forecast_end_timestamp": [
+          16
+        ],
+        "split_id": [
+          16
+        ]
+      },
+      "parameters": 6767618,
+      "profile_gpu_kernel_count_per_step": 2288.3333333333335,
+      "profile_gpu_busy_ms_per_step": 10.922020666666741,
+      "profile_wall_ms_per_step": 91.86182466666666,
+      "profile_gpu_busy_fraction": 0.1188961868142594,
+      "top_cpu_events": [
+        {
+          "name": "cudaLaunchKernel",
+          "calls": 6621,
+          "self_cpu_us": 32266.11300000069,
+          "self_device_us": 0,
+          "cpu_total_us": 32266.11300000069
+        },
+        {
+          "name": "aten::mm",
+          "calls": 774,
+          "self_cpu_us": 11569.922000000006,
+          "self_device_us": 5090.819000000207,
+          "cpu_total_us": 17401.408000000218
+        },
+        {
+          "name": "Optimizer.step#AdamW.step",
+          "calls": 3,
+          "self_cpu_us": 10168.892000000676,
+          "self_device_us": 0.0,
+          "cpu_total_us": 18486.799000000028
+        },
+        {
+          "name": "aten::bmm",
+          "calls": 552,
+          "self_cpu_us": 8655.737999999863,
+          "self_device_us": 5489.290999999688,
+          "cpu_total_us": 11343.322000000016
+        },
+        {
+          "name": "aten::empty",
+          "calls": 2088,
+          "self_cpu_us": 8098.6139999994575,
+          "self_device_us": 0,
+          "cpu_total_us": 8098.6139999994575
+        },
+        {
+          "name": "aten::addmm",
+          "calls": 264,
+          "self_cpu_us": 6570.6770000000615,
+          "self_device_us": 1679.6449999999818,
+          "cpu_total_us": 8794.498999999796
+        },
+        {
+          "name": "aten::mul",
+          "calls": 624,
+          "self_cpu_us": 5808.601999999872,
+          "self_device_us": 927.8380000005372,
+          "cpu_total_us": 8846.77800000014
+        },
+        {
+          "name": "aten::empty_strided",
+          "calls": 1602,
+          "self_cpu_us": 5371.313999999135,
+          "self_device_us": 0,
+          "cpu_total_us": 5371.313999999135
+        },
+        {
+          "name": "aten::permute",
+          "calls": 2472,
+          "self_cpu_us": 4948.823000000029,
+          "self_device_us": 0,
+          "cpu_total_us": 6164.189999999933
+        },
+        {
+          "name": "aten::copy_",
+          "calls": 741,
+          "self_cpu_us": 4729.299999999546,
+          "self_device_us": 1412.0369999998275,
+          "cpu_total_us": 9763.523999999969
+        },
+        {
+          "name": "aten::view",
+          "calls": 3264,
+          "self_cpu_us": 4652.2939999999835,
+          "self_device_us": 0,
+          "cpu_total_us": 4652.2939999999835
+        },
+        {
+          "name": "aten::sum",
+          "calls": 420,
+          "self_cpu_us": 4597.311999999942,
+          "self_device_us": 1991.5859999997465,
+          "cpu_total_us": 6709.577000000042
+        },
+        {
+          "name": "autograd::engine::evaluate_function: PermuteBackward0",
+          "calls": 1176,
+          "self_cpu_us": 3802.147000000463,
+          "self_device_us": 0,
+          "cpu_total_us": 7363.951999999859
+        },
+        {
+          "name": "aten::reshape",
+          "calls": 2682,
+          "self_cpu_us": 3725.953999998732,
+          "self_device_us": 0.0,
+          "cpu_total_us": 20247.324999999102
+        },
+        {
+          "name": "autograd::engine::evaluate_function: ViewBackward0",
+          "calls": 1029,
+          "self_cpu_us": 3364.2139999998326,
+          "self_device_us": 0.0,
+          "cpu_total_us": 8433.61599999966
+        },
+        {
+          "name": "autograd::engine::evaluate_function: torch::autograd::AccumulateGrad",
+          "calls": 1008,
+          "self_cpu_us": 3259.9889999995503,
+          "self_device_us": 0,
+          "cpu_total_us": 6167.413999999699
+        },
+        {
+          "name": "aten::as_strided",
+          "calls": 6330,
+          "self_cpu_us": 3259.561000001314,
+          "self_device_us": 0,
+          "cpu_total_us": 3259.561000001314
+        },
+        {
+          "name": "aten::native_dropout",
+          "calls": 252,
+          "self_cpu_us": 3112.3839999998654,
+          "self_device_us": 472.3500000000113,
+          "cpu_total_us": 7207.509999999966
+        },
+        {
+          "name": "aten::t",
+          "calls": 1734,
+          "self_cpu_us": 2971.9490000004807,
+          "self_device_us": 0,
+          "cpu_total_us": 5477.188000000322
+        },
+        {
+          "name": "aten::einsum",
+          "calls": 192,
+          "self_cpu_us": 2960.94099999985,
+          "self_device_us": 0.0,
+          "cpu_total_us": 19926.885999999737
+        },
+        {
+          "name": "aten::add",
+          "calls": 297,
+          "self_cpu_us": 2934.5629999998228,
+          "self_device_us": 338.71900000026517,
+          "cpu_total_us": 4261.0050000000865
+        },
+        {
+          "name": "autograd::engine::evaluate_function: AddmmBackward0",
+          "calls": 264,
+          "self_cpu_us": 2731.125000000291,
+          "self_device_us": 0.0,
+          "cpu_total_us": 22404.989000000292
+        },
+        {
+          "name": "aten::native_layer_norm",
+          "calls": 180,
+          "self_cpu_us": 2527.1420000002054,
+          "self_device_us": 494.3999999999669,
+          "cpu_total_us": 5480.249999999922
+        },
+        {
+          "name": "aten::cat",
+          "calls": 237,
+          "self_cpu_us": 2329.1789999997163,
+          "self_device_us": 692.2280000002177,
+          "cpu_total_us": 3608.7779999999016
+        },
+        {
+          "name": "aten::add_",
+          "calls": 1206,
+          "self_cpu_us": 2245.3919999999,
+          "self_device_us": 267.8399999997073,
+          "cpu_total_us": 3210.2979999997897
+        }
+      ],
+      "synchronization_events": [
+        {
+          "name": "aten::item",
+          "calls": 1986,
+          "self_cpu_us": 1130.1759999998435,
+          "self_device_us": 0.0,
+          "cpu_total_us": 1897.5479999992012
+        },
+        {
+          "name": "aten::_local_scalar_dense",
+          "calls": 1986,
+          "self_cpu_us": 447.11699999931943,
+          "self_device_us": 33.854000000005726,
+          "cpu_total_us": 767.3719999993577
+        },
+        {
+          "name": "cudaStreamSynchronize",
+          "calls": 99,
+          "self_cpu_us": 432.25600000014924,
+          "self_device_us": 0,
+          "cpu_total_us": 432.25600000014924
+        },
+        {
+          "name": "cudaDeviceSynchronize",
+          "calls": 2,
+          "self_cpu_us": 8.977000000013504,
+          "self_device_us": 0,
+          "cpu_total_us": 8.977000000013504
+        }
+      ],
+      "full_step_median_seconds": 0.07060051104053855,
+      "data_median_seconds": 0.004629216389730573,
+      "utilization_percent": {
+        "samples": [
+          0,
+          14,
+          14,
+          13,
+          13,
+          14,
+          14,
+          13,
+          13,
+          13,
+          14,
+          14,
+          14,
+          13,
+          13,
+          12,
+          11,
+          12,
+          13,
+          13,
+          13,
+          13,
+          14,
+          14,
+          14
+        ],
+        "mean": 13.217391304347826,
+        "min": 11,
+        "max": 14
+      },
+      "utilization_log": "/home/zhaopp/workspace/PV-TSFM/reports/FusionSF_inputs_two_protocols_seed42_20261011/gpu_utilization_power_future_nwp.csv",
+      "formal_training": false
+    }
+  ],
+  "status": "profiled_original_and_variant_under_identical_resources",
+  "threshold_check": {
+    "required_percent": 99,
+    "steady_sampling_seconds": 25,
+    "startup_samples_excluded": 2,
+    "original_passed": false,
+    "variant_passed": false,
+    "decision": "Stop formal training and both coordinators per user; no further experiments or batch/config changes",
+    "checked_at": "2026-10-11T06:52:43.308172+08:00"
+  },
+  "comparison": {
+    "gpu_utilization_absolute_change_percentage_points": -44.43478260869565,
+    "gpu_utilization_relative_change_percent": -77.07390648567119,
+    "profile_device_busy_time_absolute_change_ms": -73.2922316666658,
+    "profile_device_busy_time_relative_change_percent": -87.03067430506209
+  },
+  "interpretation": "Removing satellite VQ/encoder/cross-attention reduces GPU compute much more than host dispatch. NWP data-only optimization is bitwise validated and effective, but remaining low utilization is primarily many small operators/host dispatch. VQ scalar/sync exists but is not the largest remaining measured CPU hotspot. Source checkpoint epochs differ (original10, variant2); this is a short runtime diagnostic, not an accuracy comparison or a historical utilization record."
+}

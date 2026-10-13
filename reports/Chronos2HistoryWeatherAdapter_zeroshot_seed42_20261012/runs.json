@@ -1,0 +1,915 @@
+{
+  "state": "completed_artifact_acceptance_passed",
+  "started_at": "2026-10-12T21:48:33.374486+08:00",
+  "coordinator_pid": 572573,
+  "gpu": 0,
+  "cpu_cores": [
+    9,
+    10
+  ],
+  "threads": 2,
+  "num_workers": 0,
+  "source_sha256": {
+    "layers/chronos2_history_weather_adapter.py": "a296fafb1757dae169bda2d21d43b66e75797b5ea19baf9dd1948ac8a56ce615",
+    "models/Chronos2HistoryWeatherAdapter.py": "5b0c31016a54ff28a783eb517b5119e1ff4add1736d2454a007948833f9cf2fa",
+    "exp/exp_chronos2_history_weather_adapter.py": "18fccea5de78511bad2beba5b73c67d60004dd8715b161794944047cfc3cc147",
+    "scripts/run_chronos2_history_weather_adapter.py": "9489b7d7cdf2e8d17b728d9fcb97591e64d54077535f353f8c6ed5b17a396b0d"
+  },
+  "protocol": "zeroshot_v1",
+  "seed": 42,
+  "authorization": "User: preserve A02 protocol and record limitations, continue A03",
+  "multi_seed_started": false,
+  "parameter_matched_control_started": false,
+  "runs": [
+    {
+      "variant": "a",
+      "state": "completed_artifact_acceptance_passed",
+      "model_id": "Chronos2HistoryWeatherAdapter_A03a_seed42_sl24_pl24_history_future",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03a_seed42_sl24_pl24_history_future",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03a_seed42_sl24_pl24_history_future",
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/a_training.log",
+      "started_at": "2026-10-12T21:48:33.375834+08:00",
+      "pid": 563633,
+      "returncode": 0,
+      "finished_at": "2026-10-12T21:52:04.485346+08:00",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.043617596593603265,
+        "rmse": 0.0933005734445039,
+        "r2": 0.8572546730305235,
+        "model": "Chronos2HistoryWeatherAdapter",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "history_weather_adapter_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_full_training_test_artifact_acceptance",
+        "variant": "a",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.043617596593603265,
+          "rmse": 0.0933005734445039,
+          "r2": 0.8572546730305235,
+          "model": "Chronos2HistoryWeatherAdapter",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "history_weather_adapter_variant",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "completed_epochs": 54,
+        "best_epoch": 44,
+        "trainable_parameters": 31873,
+        "relation_parameters": 2624,
+        "checkpoint_sha256": "46a7b193837c01a39651665de6a7d376b9f41204d4d6e449b03460a1d0e953ab",
+        "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+        "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+        "base_provenance": {
+          "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+          "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+          "base_version": "b131_linear_v1",
+          "base_best_epoch": 46,
+          "base_experiment_label": "A01",
+          "historical_name": "E11",
+          "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+          "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+        },
+        "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03a_seed42_sl24_pl24_history_future/analysis.json",
+        "comparison_to_A02": {
+          "mae": {
+            "absolute_change": -3.913414455214426e-06,
+            "improvement_percent": 0.008971295249732244
+          },
+          "rmse": {
+            "absolute_change": 0.0003589376299654723,
+            "improvement_percent": -0.38619680708194004
+          },
+          "r2": {
+            "absolute_change": -0.0010962014678991272
+          }
+        },
+        "accepted_at": "2026-10-12T21:55:48.288989+08:00"
+      }
+    },
+    {
+      "variant": "b",
+      "state": "completed_artifact_acceptance_passed",
+      "model_id": "Chronos2HistoryWeatherAdapter_A03b_seed42_sl24_pl24_history_future",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03b_seed42_sl24_pl24_history_future",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03b_seed42_sl24_pl24_history_future",
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/b_training.log",
+      "started_at": "2026-10-12T21:55:49.087734+08:00",
+      "pid": 568459,
+      "returncode": 0,
+      "finished_at": "2026-10-12T22:00:20.657419+08:00",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04362878272629496,
+        "rmse": 0.09297425103040916,
+        "r2": 0.8582514416149868,
+        "model": "Chronos2HistoryWeatherAdapter",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "history_weather_adapter_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_full_training_test_artifact_acceptance",
+        "variant": "b",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04362878272629496,
+          "rmse": 0.09297425103040916,
+          "r2": 0.8582514416149868,
+          "model": "Chronos2HistoryWeatherAdapter",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "history_weather_adapter_variant",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "completed_epochs": 70,
+        "best_epoch": 60,
+        "trainable_parameters": 31777,
+        "relation_parameters": 2528,
+        "checkpoint_sha256": "015c946358a06f7ce6a9994fa28afb1b6b807cc7dc99ab96b4883e75b71839f2",
+        "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+        "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+        "base_provenance": {
+          "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+          "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+          "base_version": "b131_linear_v1",
+          "base_best_epoch": 46,
+          "base_experiment_label": "A01",
+          "historical_name": "E11",
+          "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+          "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+        },
+        "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03b_seed42_sl24_pl24_history_future/analysis.json",
+        "comparison_to_A02": {
+          "mae": {
+            "absolute_change": 7.272718236479847e-06,
+            "improvement_percent": -0.016672321144170183
+          },
+          "rmse": {
+            "absolute_change": 3.26152158707238e-05,
+            "improvement_percent": -0.035092147437351166
+          },
+          "r2": {
+            "absolute_change": -9.94328834358349e-05
+          }
+        },
+        "accepted_at": "2026-10-12T22:00:34.635213+08:00"
+      }
+    },
+    {
+      "variant": "c",
+      "state": "completed_artifact_acceptance_passed",
+      "model_id": "Chronos2HistoryWeatherAdapter_A03c_seed42_sl24_pl24_history_future",
+      "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03c_seed42_sl24_pl24_history_future",
+      "checkpoint_dir": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03c_seed42_sl24_pl24_history_future",
+      "log": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/c_training.log",
+      "started_at": "2026-10-12T22:02:57.359260+08:00",
+      "pid": 572578,
+      "returncode": 0,
+      "finished_at": "2026-10-12T22:06:31.816707+08:00",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04359043873272131,
+        "rmse": 0.0931104824230411,
+        "r2": 0.8578357404758096,
+        "model": "Chronos2HistoryWeatherAdapter",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "history_weather_adapter_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "acceptance": {
+        "status": "passed_full_training_test_artifact_acceptance",
+        "variant": "c",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04359043873272131,
+          "rmse": 0.0931104824230411,
+          "r2": 0.8578357404758096,
+          "model": "Chronos2HistoryWeatherAdapter",
+          "seed": 42,
+          "data_protocol": "zeroshot_v1",
+          "baseline_config": "history_weather_adapter_variant",
+          "llm_model": "",
+          "input_len": 24,
+          "output_len": 24,
+          "train_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "validation_sites": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "test_sites": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ],
+          "split_version": "chronological_target_split_v1",
+          "scaler_version": "train_sites_and_time_only_fit_v1"
+        },
+        "completed_epochs": 54,
+        "best_epoch": 44,
+        "trainable_parameters": 31873,
+        "relation_parameters": 2624,
+        "checkpoint_sha256": "fee794c4603035946b9181155db6d12b6b65679d9366c291c50e2e94b84bad5e",
+        "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+        "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+        "base_provenance": {
+          "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+          "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+          "base_version": "b131_linear_v1",
+          "base_best_epoch": 46,
+          "base_experiment_label": "A01",
+          "historical_name": "E11",
+          "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+          "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+        },
+        "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03c_seed42_sl24_pl24_history_future/analysis.json",
+        "comparison_to_A02": {
+          "mae": {
+            "absolute_change": -3.10712753371703e-05,
+            "improvement_percent": 0.07122925210849029
+          },
+          "rmse": {
+            "absolute_change": 0.0001688466085026652,
+            "improvement_percent": -0.18166950368680007
+          },
+          "r2": {
+            "absolute_change": -0.0005151340226130507
+          }
+        },
+        "accepted_at": "2026-10-12T22:06:47.024001+08:00"
+      }
+    }
+  ],
+  "lifecycle_corrections": [
+    {
+      "at": "2026-10-12T21:55:34.464448+08:00",
+      "failure": "accept a exited 1; see /home/zhaopp/workspace/PV-TSFM/reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/a_acceptance.log",
+      "failed_at": "2026-10-12T21:52:04.730198+08:00",
+      "previous_coordinator_pid": 563632,
+      "correction": "Bounded readiness check at GPU phase handoff; complete a acceptance without retraining/full reinference, then run pending b/c",
+      "numerical_code_unchanged": true,
+      "gpu_preflight_repeated": false,
+      "previous_runner": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/runner_before_idle_handoff_fix.py",
+      "current_execution_source_sha256": {
+        "layers/chronos2_history_weather_adapter.py": "a296fafb1757dae169bda2d21d43b66e75797b5ea19baf9dd1948ac8a56ce615",
+        "models/Chronos2HistoryWeatherAdapter.py": "5b0c31016a54ff28a783eb517b5119e1ff4add1736d2454a007948833f9cf2fa",
+        "exp/exp_chronos2_history_weather_adapter.py": "18fccea5de78511bad2beba5b73c67d60004dd8715b161794944047cfc3cc147",
+        "scripts/run_chronos2_history_weather_adapter.py": "ddaf18d8e6de11cd3b8914c49b15a058d67c796690d4b9604cfc47c53e56b241"
+      }
+    },
+    {
+      "at": "2026-10-12T22:02:57.356341+08:00",
+      "failure": "worker c exited 1; see /home/zhaopp/workspace/PV-TSFM/reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/c_training.log",
+      "failed_at": "2026-10-12T22:00:35.864404+08:00",
+      "previous_coordinator_pid": 568352,
+      "correction": "Require two stable idle checks inside worker before loading; c was not trained, a/b are accepted and not repeated",
+      "numerical_code_unchanged": true,
+      "gpu_preflight_repeated": false,
+      "previous_runner": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/runner_before_idle_handoff_fix.py",
+      "current_execution_source_sha256": {
+        "layers/chronos2_history_weather_adapter.py": "a296fafb1757dae169bda2d21d43b66e75797b5ea19baf9dd1948ac8a56ce615",
+        "models/Chronos2HistoryWeatherAdapter.py": "5b0c31016a54ff28a783eb517b5119e1ff4add1736d2454a007948833f9cf2fa",
+        "exp/exp_chronos2_history_weather_adapter.py": "18fccea5de78511bad2beba5b73c67d60004dd8715b161794944047cfc3cc147",
+        "scripts/run_chronos2_history_weather_adapter.py": "ce7f576026607a3e2eccba59f83fd39fe2adb61cbaf02829e4d8242d984dba05"
+      }
+    }
+  ],
+  "completed_at": "2026-10-12T22:06:47.805061+08:00",
+  "acceptance": [
+    {
+      "status": "passed_full_training_test_artifact_acceptance",
+      "variant": "a",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.043617596593603265,
+        "rmse": 0.0933005734445039,
+        "r2": 0.8572546730305235,
+        "model": "Chronos2HistoryWeatherAdapter",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "history_weather_adapter_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "completed_epochs": 54,
+      "best_epoch": 44,
+      "trainable_parameters": 31873,
+      "relation_parameters": 2624,
+      "checkpoint_sha256": "46a7b193837c01a39651665de6a7d376b9f41204d4d6e449b03460a1d0e953ab",
+      "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+      "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 46,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03a_seed42_sl24_pl24_history_future/analysis.json",
+      "comparison_to_A02": {
+        "mae": {
+          "absolute_change": -3.913414455214426e-06,
+          "improvement_percent": 0.008971295249732244
+        },
+        "rmse": {
+          "absolute_change": 0.0003589376299654723,
+          "improvement_percent": -0.38619680708194004
+        },
+        "r2": {
+          "absolute_change": -0.0010962014678991272
+        }
+      },
+      "accepted_at": "2026-10-12T21:55:48.288989+08:00"
+    },
+    {
+      "status": "passed_full_training_test_artifact_acceptance",
+      "variant": "b",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04362878272629496,
+        "rmse": 0.09297425103040916,
+        "r2": 0.8582514416149868,
+        "model": "Chronos2HistoryWeatherAdapter",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "history_weather_adapter_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "completed_epochs": 70,
+      "best_epoch": 60,
+      "trainable_parameters": 31777,
+      "relation_parameters": 2528,
+      "checkpoint_sha256": "015c946358a06f7ce6a9994fa28afb1b6b807cc7dc99ab96b4883e75b71839f2",
+      "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+      "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 46,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03b_seed42_sl24_pl24_history_future/analysis.json",
+      "comparison_to_A02": {
+        "mae": {
+          "absolute_change": 7.272718236479847e-06,
+          "improvement_percent": -0.016672321144170183
+        },
+        "rmse": {
+          "absolute_change": 3.26152158707238e-05,
+          "improvement_percent": -0.035092147437351166
+        },
+        "r2": {
+          "absolute_change": -9.94328834358349e-05
+        }
+      },
+      "accepted_at": "2026-10-12T22:00:34.635213+08:00"
+    },
+    {
+      "status": "passed_full_training_test_artifact_acceptance",
+      "variant": "c",
+      "metrics": {
+        "test_windows": 25450,
+        "mae": 0.04359043873272131,
+        "rmse": 0.0931104824230411,
+        "r2": 0.8578357404758096,
+        "model": "Chronos2HistoryWeatherAdapter",
+        "seed": 42,
+        "data_protocol": "zeroshot_v1",
+        "baseline_config": "history_weather_adapter_variant",
+        "llm_model": "",
+        "input_len": 24,
+        "output_len": 24,
+        "train_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "validation_sites": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "test_sites": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "split_version": "chronological_target_split_v1",
+        "scaler_version": "train_sites_and_time_only_fit_v1"
+      },
+      "completed_epochs": 54,
+      "best_epoch": 44,
+      "trainable_parameters": 31873,
+      "relation_parameters": 2624,
+      "checkpoint_sha256": "fee794c4603035946b9181155db6d12b6b65679d9366c291c50e2e94b84bad5e",
+      "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+      "selected_checkpoint_replay_max_abs_difference": 4.172325134277344e-07,
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 46,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "analysis_path": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03c_seed42_sl24_pl24_history_future/analysis.json",
+      "comparison_to_A02": {
+        "mae": {
+          "absolute_change": -3.10712753371703e-05,
+          "improvement_percent": 0.07122925210849029
+        },
+        "rmse": {
+          "absolute_change": 0.0001688466085026652,
+          "improvement_percent": -0.18166950368680007
+        },
+        "r2": {
+          "absolute_change": -0.0005151340226130507
+        }
+      },
+      "accepted_at": "2026-10-12T22:06:47.024001+08:00"
+    }
+  ],
+  "evaluation": {
+    "A02_reference": {
+      "test_windows": 25450,
+      "mae": 0.04362151000805848,
+      "rmse": 0.09294163581453843,
+      "r2": 0.8583508744984226
+    },
+    "runs": [
+      {
+        "variant": "a",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.043617596593603265,
+          "rmse": 0.0933005734445039,
+          "r2": 0.8572546730305235
+        },
+        "relative_improvement_percent": {
+          "mae": 0.008971295249732244,
+          "rmse": -0.38619680708194004
+        },
+        "horizons_improved": {
+          "mae": 11,
+          "rmse": 2
+        },
+        "worst10_rmse": 0.19740924295659085,
+        "A02_common_worst10_rmse": 0.1968993124356282,
+        "analysis": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03a_seed42_sl24_pl24_history_future/analysis.json",
+        "selected_validation": {
+          "mae": 0.0385827908891808,
+          "rmse": 0.08955144221484816,
+          "mse": 0.00801946080275929
+        }
+      },
+      {
+        "variant": "b",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04362878272629496,
+          "rmse": 0.09297425103040916,
+          "r2": 0.8582514416149868
+        },
+        "relative_improvement_percent": {
+          "mae": -0.016672321144170183,
+          "rmse": -0.035092147437351166
+        },
+        "horizons_improved": {
+          "mae": 7,
+          "rmse": 13
+        },
+        "worst10_rmse": 0.19479276068810183,
+        "A02_common_worst10_rmse": 0.19444317028999245,
+        "analysis": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03b_seed42_sl24_pl24_history_future/analysis.json",
+        "selected_validation": {
+          "mae": 0.03833199804826694,
+          "rmse": 0.08885167521921342,
+          "mse": 0.007894620189260584
+        }
+      },
+      {
+        "variant": "c",
+        "metrics": {
+          "test_windows": 25450,
+          "mae": 0.04359043873272131,
+          "rmse": 0.0931104824230411,
+          "r2": 0.8578357404758096
+        },
+        "relative_improvement_percent": {
+          "mae": 0.07122925210849029,
+          "rmse": -0.18166950368680007
+        },
+        "horizons_improved": {
+          "mae": 14,
+          "rmse": 6
+        },
+        "worst10_rmse": 0.1967380354846131,
+        "A02_common_worst10_rmse": 0.19625512715615925,
+        "analysis": "/home/zhaopp/workspace/PV-TSFM/outputs/zeroshot_v1/Chronos2HistoryWeatherAdapter_A03c_seed42_sl24_pl24_history_future/analysis.json",
+        "selected_validation": {
+          "mae": 0.03857548178894196,
+          "rmse": 0.08950630934699917,
+          "mse": 0.00801137941292071
+        }
+      }
+    ],
+    "supported_observations": [
+      "All three variants preserve the accepted zero-shot splits/scalers/windows and frozen A01; correctness and artifact checks passed",
+      "A03-a/c slightly reduce aggregate MAE (0.008971%/0.071229%) but increase RMSE (0.386197%/0.181670%); A03-b worsens both",
+      "All variants have worse RMSE on their own worst10% windows than A02; on the fixed A02 worst10% subset b slightly improves, a/c worsen",
+      "All three improve the low forecast-weather-change group but worsen MAE/RMSE in the high-change group",
+      "b has lower RMSE than a; c has slightly lower MAE than a/b; neither establishes consistent gain over A02"
+    ],
+    "unproven_hypotheses": [
+      "Explicit historical information improves robust zero-shot generalization",
+      "Pearson relations have independent causal or predictive importance beyond history statistics and capacity",
+      "A learned relation encoder is necessary or reliably better across seeds"
+    ],
+    "limitations": [
+      "Seed42 only and overlapping evaluation windows; no stability/significance claim",
+      "A03 trainable count is about 9% above A02; no capacity-matched control",
+      "A02 bidirectional NWP interpolation and unverified issue-time availability retained under explicit user decision"
+    ],
+    "next_stage": "No consistent meaningful benefit established; do not auto-start additional seeds, parameter controls, modules or tuning"
+  },
+  "delivery": {
+    "new_files": [
+      "layers/chronos2_history_weather_adapter.py",
+      "models/Chronos2HistoryWeatherAdapter.py",
+      "exp/exp_chronos2_history_weather_adapter.py",
+      "scripts/run_chronos2_history_weather_adapter.py"
+    ],
+    "modified_files": [
+      "docs/EXPERIMENT_STATUS.md",
+      "reports/chronos2_adapter_metrics.csv"
+    ],
+    "original_A01_A02_source_and_checkpoints_unchanged": true,
+    "GPU_readiness_corrections": "Only orchestration changed; original checked runner snapshot and failures retained; a/b trained once, c loaded/trained only after successful readiness",
+    "current_execution_source_sha256": {
+      "layers/chronos2_history_weather_adapter.py": "a296fafb1757dae169bda2d21d43b66e75797b5ea19baf9dd1948ac8a56ce615",
+      "models/Chronos2HistoryWeatherAdapter.py": "5b0c31016a54ff28a783eb517b5119e1ff4add1736d2454a007948833f9cf2fa",
+      "exp/exp_chronos2_history_weather_adapter.py": "18fccea5de78511bad2beba5b73c67d60004dd8715b161794944047cfc3cc147",
+      "scripts/run_chronos2_history_weather_adapter.py": "ce7f576026607a3e2eccba59f83fd39fe2adb61cbaf02829e4d8242d984dba05"
+    },
+    "cleanup": [
+      "Temporary /tmp/a03_review.py removed; temporary scaler-check directories removed automatically",
+      {
+        "generated_bytecode_removed": [
+          "models/__pycache__/Chronos2HistoryWeatherAdapter.cpython-311.pyc",
+          "exp/__pycache__/exp_chronos2_history_weather_adapter.cpython-311.pyc",
+          "layers/__pycache__/chronos2_history_weather_adapter.cpython-311.pyc"
+        ],
+        "tracked": false,
+        "reproducible_from_preserved_sources": true
+      }
+    ],
+    "completed_at": "2026-10-12T22:10:19.872698+08:00",
+    "final_resource_check": {
+      "A03_processes_running": false,
+      "GPU0_memory_MiB": 18,
+      "GPU0_utilization_percent": 0
+    },
+    "original_file_and_checkpoint_sha256_final_check_passed": true
+  }
+}

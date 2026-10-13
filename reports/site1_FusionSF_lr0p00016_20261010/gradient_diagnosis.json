@@ -1,0 +1,34 @@
+{
+  "checkpoint_epoch": 2,
+  "indices": [
+    0,
+    3828,
+    7656
+  ],
+  "checks": [
+    {
+      "training_mode": false,
+      "prediction_min": 0.0,
+      "prediction_max": 0.0,
+      "all_predictions_zero": true,
+      "pre_relu_min": -3.5604605674743652,
+      "pre_relu_max": -2.2605583667755127,
+      "regression_loss": 0.13451388478279114,
+      "head_weight_gradient_max": 0.0,
+      "head_bias_gradient_max": 0.0
+    },
+    {
+      "training_mode": true,
+      "prediction_min": 0.0,
+      "prediction_max": 0.0,
+      "all_predictions_zero": true,
+      "pre_relu_min": -3.5126030445098877,
+      "pre_relu_max": -1.983612298965454,
+      "regression_loss": 0.13451388478279114,
+      "head_weight_gradient_max": 0.0,
+      "head_bias_gradient_max": 0.0
+    }
+  ],
+  "updated_checkpoint": false,
+  "optimizer_steps": 0
+}

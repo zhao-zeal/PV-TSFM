@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 529, in <module>
+    main()
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 466, in main
+    raise ValueError('This is not the recorded idle-handoff failure; do not implicitly restart')
+ValueError: This is not the recorded idle-handoff failure; do not implicitly restart

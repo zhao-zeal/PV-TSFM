@@ -1,0 +1,123 @@
+{
+    "model": {
+        "name": "FusionSFDLinear",
+        "module": "basicts.models.FusionSFBaselines"
+    },
+    "model_config": {
+        "input_len": 24,
+        "output_len": 24,
+        "enc_in": 3,
+        "moving_avg": 13,
+        "individual": false
+    },
+    "dataset_name": "MMSP",
+    "dataset_type": {
+        "name": "MMSPForecastingDataset",
+        "module": "basicts.data.MMSP.dataset"
+    },
+    "dataset_params": {
+        "data_dir": "/home/zhaopp/workspace/FusionSF/data/MMSP/data",
+        "protocol": "fixed_v1",
+        "modality_mode": "power",
+        "input_len": 24,
+        "output_len": 24,
+        "num_sites": 10,
+        "num_ignored_sites": 0,
+        "train_ratio": 0.6,
+        "valid_ratio": 0.2,
+        "test_ratio": 0.2,
+        "dataset_name": "MMSP"
+    },
+    "gpus": "6",
+    "seed": 42,
+    "scaler": null,
+    "rescale": false,
+    "null_val": NaN,
+    "loss": "MSE",
+    "optimizer": {
+        "name": "AdamW",
+        "module": "torch.optim.adamw"
+    },
+    "optimizer_params": {
+        "lr": 0.0016,
+        "weight_decay": 0.05,
+        "betas": [
+            0.9,
+            0.95
+        ]
+    },
+    "lr_scheduler": {
+        "name": "ReduceLROnPlateau",
+        "module": "torch.optim.lr_scheduler"
+    },
+    "lr_scheduler_params": {
+        "mode": "min",
+        "factor": 0.5,
+        "patience": 10
+    },
+    "num_epochs": 50,
+    "metrics": [
+        "MAE",
+        "RMSE"
+    ],
+    "target_metric": "MAE",
+    "best_metric": "min",
+    "callbacks": [
+        {
+            "name": "EarlyStopping",
+            "module": "basicts.runners.callback.early_stopping",
+            "params": {}
+        },
+        {
+            "name": "MMSPResults",
+            "module": "examples.forecasting.fusionsf.callbacks",
+            "params": {}
+        }
+    ],
+    "train_data_num_workers": 4,
+    "val_data_num_workers": 4,
+    "test_data_num_workers": 4,
+    "test_interval": 51,
+    "eval_after_train": true,
+    "save_results": true,
+    "ckpt_save_dir": "checkpoints/fixed_v1/reproduction_20261010/DLinear",
+    "taskflow": {
+        "name": "BasicTSForecastingTaskFlow",
+        "module": "basicts.runners.taskflow.forecasting_taskflow",
+        "params": {}
+    },
+    "gpu_num": 1,
+    "null_to_num": 0.0,
+    "norm_each_channel": true,
+    "ddp_find_unused_parameters": false,
+    "compile_model": false,
+    "num_steps": null,
+    "ckpt_save_strategy": null,
+    "finetune_from": null,
+    "strict_load": true,
+    "train_batch_size": 64,
+    "train_data_prefetch": false,
+    "train_data_shuffle": true,
+    "train_data_collate_fn": null,
+    "train_data_pin_memory": false,
+    "val_batch_size": 64,
+    "val_interval": 1,
+    "val_data_prefetch": false,
+    "val_data_shuffle": false,
+    "val_data_collate_fn": null,
+    "val_data_pin_memory": false,
+    "tf32": false,
+    "deterministic": false,
+    "cudnn_enabled": true,
+    "cudnn_benchmark": true,
+    "cudnn_determinstic": false,
+    "test_batch_size": 64,
+    "test_data_prefetch": false,
+    "test_data_shuffle": false,
+    "test_data_collate_fn": null,
+    "test_data_pin_memory": false,
+    "eval_horizons": null,
+    "lr_scheduler_monitor": "RMSE",
+    "data_protocol": "fixed_v1",
+    "fusionsf_preset": "TSbaselines.sh"
+}

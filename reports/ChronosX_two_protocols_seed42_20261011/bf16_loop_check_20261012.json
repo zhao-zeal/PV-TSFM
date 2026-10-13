@@ -1,0 +1,19 @@
+{
+  "status": "passed_cpu_real_batch_bf16_train_validation_save_reload_and_sampled_prediction",
+  "diagnostic_only": true,
+  "formal_training_complete": false,
+  "device": "cpu",
+  "cpu_cores": [
+    9,
+    10
+  ],
+  "batch_size": 2,
+  "precision": "bf16",
+  "validation_token_ce": 3.734109401702881,
+  "prediction_shape": [
+    2,
+    24,
+    1
+  ],
+  "frozen_backbone_verified": true
+}

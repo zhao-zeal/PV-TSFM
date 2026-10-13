@@ -1,0 +1,376 @@
+{
+  "status": "passed",
+  "stage": "real_GPU_correctness_checks",
+  "full_training_complete": false,
+  "formal_test_complete": false,
+  "source_sha256": {
+    "layers/chronos2_weather_readout.py": "2d8222ef1c9c651e3dbd31a7fb4e41c188a87dcd53c54163b363141c746d6437",
+    "models/Chronos2WeatherReadout.py": "545dadd0fa9a093f6055c81b767fed79eb03effb81388e44379fe420e2ad0daf",
+    "exp/exp_chronos2_weather_readout.py": "ac3cc45dbb9632ae13a62f94b682b43a7ad7fc10b7dff8984118f71041fa6012",
+    "scripts/run_chronos2_weather_readout.py": "006640ea9ac2b4cfd7ec4de9a82e0a82ee997264350e2a7dec5cf8579b141061",
+    "exp/exp_chronos2_history_weather_adapter.py": "18fccea5de78511bad2beba5b73c67d60004dd8715b161794944047cfc3cc147",
+    "scripts/run_chronos2_history_weather_adapter.py": "ce7f576026607a3e2eccba59f83fd39fe2adb61cbaf02829e4d8242d984dba05"
+  },
+  "variants": [
+    {
+      "protocol": "in_domain",
+      "variant": "a",
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 40,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "trainable_parameters": 29249,
+      "frozen_parameters": 119718204,
+      "memory_shape": [
+        4,
+        2,
+        768
+      ],
+      "attention_shape": [
+        4,
+        24,
+        2
+      ],
+      "initial_weather_weights_equal_seed42_A02": true,
+      "epoch0_output_exactly_initialized_A02": true,
+      "native_encode_forecast_tokens_loc_scale_exactly_equal": true,
+      "native_cache_max_abs_difference": 2.980232238769531e-07,
+      "frozen_state_sha256": "5ef5a8e1ad5afb7fcb67e94a2620c2a21bcf7cebed144786a04f2f72b48ebc9a",
+      "frozen_gradients_absent_weights_unchanged": true,
+      "finite_output_all_gradients": true,
+      "trainable_readout_and_attention_receive_nonzero_gradients_step2": true,
+      "query_only_intervention_prediction_max_difference": 1.0311603546142578e-05,
+      "missing_weather_finite": true,
+      "no_future_power_or_decoder_access": true,
+      "full_splits_window_cache_alignment": [
+        {
+          "split": "train",
+          "windows": 76570,
+          "input_manifest_sha256": "6664508407778397206434a07dd2a5f88323fc4a3bc8fe45d75ad17b0e408291"
+        },
+        {
+          "split": "val",
+          "windows": 25450,
+          "input_manifest_sha256": "96689b6337794de4221ebefba27461123047edddd57837a5d29dc916ace116d2"
+        },
+        {
+          "split": "test",
+          "windows": 25450,
+          "input_manifest_sha256": "a9c2081a3d0224cb2e237dca30d2c6bc169a4e7155f5965719d594c7c63500d5"
+        }
+      ],
+      "transient_steps": [
+        {
+          "step": 1,
+          "loss": 0.033775314688682556,
+          "gradient_l1": {
+            "weather_adapter.hidden_state_out.0.weight": 0.0,
+            "weather_adapter.hidden_state_out.0.bias": 0.0,
+            "weather_adapter.hidden_state_out.1.weight": 0.0,
+            "weather_adapter.hidden_state_out.1.bias": 0.0,
+            "weather_adapter.cov_out.weight": 0.0,
+            "weather_adapter.cov_out.bias": 0.0,
+            "weather_adapter.concat_layer.0.weight": 0.0,
+            "weather_adapter.concat_layer.0.bias": 0.0,
+            "weather_adapter.concat_layer.2.weight": 0.3971139192581177,
+            "weather_adapter.concat_layer.2.bias": 0.1458333283662796
+          },
+          "attention_gradient_l1": 0.0
+        },
+        {
+          "step": 2,
+          "loss": 0.03376662731170654,
+          "gradient_l1": {
+            "weather_adapter.hidden_state_out.0.weight": 2.297710489074234e-05,
+            "weather_adapter.hidden_state_out.0.bias": 3.978202221333049e-05,
+            "weather_adapter.hidden_state_out.1.weight": 0.005720335990190506,
+            "weather_adapter.hidden_state_out.1.bias": 1.2701930245384574e-05,
+            "weather_adapter.cov_out.weight": 0.00011241016181884333,
+            "weather_adapter.cov_out.bias": 8.867537871992681e-06,
+            "weather_adapter.concat_layer.0.weight": 0.0004338308935984969,
+            "weather_adapter.concat_layer.0.bias": 3.933317930204794e-05,
+            "weather_adapter.concat_layer.2.weight": 0.3971131443977356,
+            "weather_adapter.concat_layer.2.bias": 0.1458333283662796
+          },
+          "attention_gradient_l1": 3.850198118016124e-05
+        }
+      ]
+    },
+    {
+      "protocol": "in_domain",
+      "variant": "b",
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "1354c6afc24e3f39f2eab5fbf4ddb21dc229b17fa230aba289e654e946db1f82",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 40,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "trainable_parameters": 29249,
+      "frozen_parameters": 119718204,
+      "memory_shape": [
+        4,
+        4,
+        768
+      ],
+      "attention_shape": [
+        4,
+        24,
+        4
+      ],
+      "initial_weather_weights_equal_seed42_A02": true,
+      "epoch0_output_exactly_initialized_A02": true,
+      "native_encode_forecast_tokens_loc_scale_exactly_equal": true,
+      "native_cache_max_abs_difference": 2.980232238769531e-07,
+      "frozen_state_sha256": "5ef5a8e1ad5afb7fcb67e94a2620c2a21bcf7cebed144786a04f2f72b48ebc9a",
+      "frozen_gradients_absent_weights_unchanged": true,
+      "finite_output_all_gradients": true,
+      "trainable_readout_and_attention_receive_nonzero_gradients_step2": true,
+      "query_only_intervention_prediction_max_difference": 1.7255544662475586e-05,
+      "missing_weather_finite": true,
+      "no_future_power_or_decoder_access": true,
+      "full_splits_window_cache_alignment": [
+        {
+          "split": "train",
+          "windows": 76570,
+          "input_manifest_sha256": "6664508407778397206434a07dd2a5f88323fc4a3bc8fe45d75ad17b0e408291"
+        },
+        {
+          "split": "val",
+          "windows": 25450,
+          "input_manifest_sha256": "96689b6337794de4221ebefba27461123047edddd57837a5d29dc916ace116d2"
+        },
+        {
+          "split": "test",
+          "windows": 25450,
+          "input_manifest_sha256": "a9c2081a3d0224cb2e237dca30d2c6bc169a4e7155f5965719d594c7c63500d5"
+        }
+      ],
+      "transient_steps": [
+        {
+          "step": 1,
+          "loss": 0.033775314688682556,
+          "gradient_l1": {
+            "weather_adapter.hidden_state_out.0.weight": 0.0,
+            "weather_adapter.hidden_state_out.0.bias": 0.0,
+            "weather_adapter.hidden_state_out.1.weight": 0.0,
+            "weather_adapter.hidden_state_out.1.bias": 0.0,
+            "weather_adapter.cov_out.weight": 0.0,
+            "weather_adapter.cov_out.bias": 0.0,
+            "weather_adapter.concat_layer.0.weight": 0.0,
+            "weather_adapter.concat_layer.0.bias": 0.0,
+            "weather_adapter.concat_layer.2.weight": 0.41867688298225403,
+            "weather_adapter.concat_layer.2.bias": 0.1458333283662796
+          },
+          "attention_gradient_l1": 0.0
+        },
+        {
+          "step": 2,
+          "loss": 0.033766284584999084,
+          "gradient_l1": {
+            "weather_adapter.hidden_state_out.0.weight": 2.3333810531767085e-05,
+            "weather_adapter.hidden_state_out.0.bias": 4.8644949856679887e-05,
+            "weather_adapter.hidden_state_out.1.weight": 0.005834520794451237,
+            "weather_adapter.hidden_state_out.1.bias": 1.458120641473215e-05,
+            "weather_adapter.cov_out.weight": 0.00011989049380645156,
+            "weather_adapter.cov_out.bias": 9.079487426788546e-06,
+            "weather_adapter.concat_layer.0.weight": 0.0004145014099776745,
+            "weather_adapter.concat_layer.0.bias": 3.7833266105735675e-05,
+            "weather_adapter.concat_layer.2.weight": 0.41867607831954956,
+            "weather_adapter.concat_layer.2.bias": 0.1458333283662796
+          },
+          "attention_gradient_l1": 7.898703188402578e-05
+        }
+      ]
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "variant": "a",
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 46,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "trainable_parameters": 29249,
+      "frozen_parameters": 119718204,
+      "memory_shape": [
+        4,
+        2,
+        768
+      ],
+      "attention_shape": [
+        4,
+        24,
+        2
+      ],
+      "initial_weather_weights_equal_seed42_A02": true,
+      "epoch0_output_exactly_initialized_A02": true,
+      "native_encode_forecast_tokens_loc_scale_exactly_equal": true,
+      "native_cache_max_abs_difference": 3.5762786865234375e-07,
+      "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+      "frozen_gradients_absent_weights_unchanged": true,
+      "finite_output_all_gradients": true,
+      "trainable_readout_and_attention_receive_nonzero_gradients_step2": true,
+      "query_only_intervention_prediction_max_difference": 8.910894393920898e-06,
+      "missing_weather_finite": true,
+      "no_future_power_or_decoder_access": true,
+      "full_splits_window_cache_alignment": [
+        {
+          "split": "train",
+          "windows": 76570,
+          "input_manifest_sha256": "449d34098d2c61c2ae3e69a475c1748370bb25fed80499b87b82a9a45c468dcc"
+        },
+        {
+          "split": "val",
+          "windows": 25450,
+          "input_manifest_sha256": "f9afd0f3c79d5a348bf63cae9f6154b0edb81dc6118b6a7834e3dbbc62c67349"
+        },
+        {
+          "split": "test",
+          "windows": 25450,
+          "input_manifest_sha256": "eb06979baff157192aaa02d1ff0180839112dd8ce611b2550e13d04f42e965d8"
+        }
+      ],
+      "transient_steps": [
+        {
+          "step": 1,
+          "loss": 0.021494310349225998,
+          "gradient_l1": {
+            "weather_adapter.hidden_state_out.0.weight": 0.0,
+            "weather_adapter.hidden_state_out.0.bias": 0.0,
+            "weather_adapter.hidden_state_out.1.weight": 0.0,
+            "weather_adapter.hidden_state_out.1.bias": 0.0,
+            "weather_adapter.cov_out.weight": 0.0,
+            "weather_adapter.cov_out.bias": 0.0,
+            "weather_adapter.concat_layer.0.weight": 0.0,
+            "weather_adapter.concat_layer.0.bias": 0.0,
+            "weather_adapter.concat_layer.2.weight": 0.24929746985435486,
+            "weather_adapter.concat_layer.2.bias": 0.041666656732559204
+          },
+          "attention_gradient_l1": 0.0
+        },
+        {
+          "step": 2,
+          "loss": 0.02148965559899807,
+          "gradient_l1": {
+            "weather_adapter.hidden_state_out.0.weight": 2.5473462301306427e-05,
+            "weather_adapter.hidden_state_out.0.bias": 3.2370982808060944e-05,
+            "weather_adapter.hidden_state_out.1.weight": 0.006323597859591246,
+            "weather_adapter.hidden_state_out.1.bias": 9.895440598484129e-06,
+            "weather_adapter.cov_out.weight": 0.00017279711028095335,
+            "weather_adapter.cov_out.bias": 7.884480510256253e-06,
+            "weather_adapter.concat_layer.0.weight": 0.0005751389544457197,
+            "weather_adapter.concat_layer.0.bias": 1.983318361453712e-05,
+            "weather_adapter.concat_layer.2.weight": 0.24929696321487427,
+            "weather_adapter.concat_layer.2.bias": 0.041666656732559204
+          },
+          "attention_gradient_l1": 4.144118429394439e-05
+        }
+      ]
+    },
+    {
+      "protocol": "zeroshot_v1",
+      "variant": "b",
+      "base_provenance": {
+        "checkpoint_path": "/home/zhaopp/workspace/PV-TSFM/checkpoints/zeroshot_v1/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth",
+        "checkpoint_sha256": "cec7fef44fe32a2b43812666fad8aeb29ca975b66bce6d1827509bf47dc0cd4e",
+        "base_version": "b131_linear_v1",
+        "base_best_epoch": 46,
+        "base_experiment_label": "A01",
+        "historical_name": "E11",
+        "acceptance_path": "/home/zhaopp/workspace/PV-TSFM/reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json",
+        "official_inspiration": "ChronosX OIB; power residual rather than token logits"
+      },
+      "trainable_parameters": 29249,
+      "frozen_parameters": 119718204,
+      "memory_shape": [
+        4,
+        4,
+        768
+      ],
+      "attention_shape": [
+        4,
+        24,
+        4
+      ],
+      "initial_weather_weights_equal_seed42_A02": true,
+      "epoch0_output_exactly_initialized_A02": true,
+      "native_encode_forecast_tokens_loc_scale_exactly_equal": true,
+      "native_cache_max_abs_difference": 3.5762786865234375e-07,
+      "frozen_state_sha256": "66a0af89b228c64711342beb40a2fff54e3f087cb4549e47af47ea4b96464736",
+      "frozen_gradients_absent_weights_unchanged": true,
+      "finite_output_all_gradients": true,
+      "trainable_readout_and_attention_receive_nonzero_gradients_step2": true,
+      "query_only_intervention_prediction_max_difference": 1.7315149307250977e-05,
+      "missing_weather_finite": true,
+      "no_future_power_or_decoder_access": true,
+      "full_splits_window_cache_alignment": [
+        {
+          "split": "train",
+          "windows": 76570,
+          "input_manifest_sha256": "449d34098d2c61c2ae3e69a475c1748370bb25fed80499b87b82a9a45c468dcc"
+        },
+        {
+          "split": "val",
+          "windows": 25450,
+          "input_manifest_sha256": "f9afd0f3c79d5a348bf63cae9f6154b0edb81dc6118b6a7834e3dbbc62c67349"
+        },
+        {
+          "split": "test",
+          "windows": 25450,
+          "input_manifest_sha256": "eb06979baff157192aaa02d1ff0180839112dd8ce611b2550e13d04f42e965d8"
+        }
+      ],
+      "transient_steps": [
+        {
+          "step": 1,
+          "loss": 0.021494310349225998,
+          "gradient_l1": {
+            "weather_adapter.hidden_state_out.0.weight": 0.0,
+            "weather_adapter.hidden_state_out.0.bias": 0.0,
+            "weather_adapter.hidden_state_out.1.weight": 0.0,
+            "weather_adapter.hidden_state_out.1.bias": 0.0,
+            "weather_adapter.cov_out.weight": 0.0,
+            "weather_adapter.cov_out.bias": 0.0,
+            "weather_adapter.concat_layer.0.weight": 0.0,
+            "weather_adapter.concat_layer.0.bias": 0.0,
+            "weather_adapter.concat_layer.2.weight": 0.21317343413829803,
+            "weather_adapter.concat_layer.2.bias": 0.041666656732559204
+          },
+          "attention_gradient_l1": 0.0
+        },
+        {
+          "step": 2,
+          "loss": 0.021490231156349182,
+          "gradient_l1": {
+            "weather_adapter.hidden_state_out.0.weight": 2.201594179496169e-05,
+            "weather_adapter.hidden_state_out.0.bias": 3.131397534161806e-05,
+            "weather_adapter.hidden_state_out.1.weight": 0.005514922551810741,
+            "weather_adapter.hidden_state_out.1.bias": 9.424600648344494e-06,
+            "weather_adapter.cov_out.weight": 0.0001387433585477993,
+            "weather_adapter.cov_out.bias": 8.560407877666876e-06,
+            "weather_adapter.concat_layer.0.weight": 0.0005147320334799588,
+            "weather_adapter.concat_layer.0.bias": 1.7999893316300586e-05,
+            "weather_adapter.concat_layer.2.weight": 0.2131730318069458,
+            "weather_adapter.concat_layer.2.bias": 0.041666656732559204
+          },
+          "attention_gradient_l1": 6.605381349800155e-05
+        }
+      ]
+    }
+  ]
+}

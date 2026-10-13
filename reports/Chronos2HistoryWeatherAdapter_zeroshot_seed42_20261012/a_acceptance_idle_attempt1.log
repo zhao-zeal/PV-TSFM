@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 476, in <module>
+    main()
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 413, in main
+    accept(opts.variant,opts.gpu);return
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 233, in accept
+    np, torch = configure(gpu)
+                ^^^^^^^^^^^^^^
+  File "/home/zhaopp/workspace/PV-TSFM/scripts/run_chronos2_history_weather_adapter.py", line 44, in configure
+    require_idle_gpus(str(gpu))
+  File "/home/zhaopp/workspace/PV-TSFM/utils/resources.py", line 21, in require_idle_gpus
+    raise ValueError(f'GPU {index} is occupied; select an idle GPU')
+ValueError: GPU 0 is occupied; select an idle GPU

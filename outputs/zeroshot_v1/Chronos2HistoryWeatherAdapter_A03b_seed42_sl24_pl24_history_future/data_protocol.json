@@ -1,0 +1,145 @@
+{
+  "version": "zeroshot_v1",
+  "protocol_origin": "project_fixed_v1",
+  "previous_name": null,
+  "window_pipeline": "fixed_v1",
+  "split_version": "chronological_target_split_v1",
+  "scaler_version": "train_sites_and_time_only_fit_v1",
+  "nwp_channels": 15,
+  "nwp_interpolation": "per_grid_bidirectional",
+  "sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "train_sites": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "validation_sites": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "test_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "input_len": 24,
+  "output_len": 24,
+  "target_time_ranges": {
+    "train": [
+      "2021-01-02 00:00:00",
+      "2021-11-19 00:00:00"
+    ],
+    "validation": [
+      "2021-11-19 00:00:00",
+      "2022-03-06 00:00:00"
+    ],
+    "test": [
+      "2022-03-06 00:00:00",
+      "2022-06-21 00:00:00"
+    ]
+  },
+  "windows": {
+    "train": 76570,
+    "validation": 25450,
+    "test": 25450
+  },
+  "scaler_fit": {
+    "nwp": {
+      "feature_names": [
+        "Clear-sky direct solar radiation at surface",
+        "Direct solar radiation",
+        "Downward UV radiation at the surface",
+        "Surface solar radiation downwards",
+        "Surface net solar radiation",
+        "Surface pressure",
+        "Sunshine duration",
+        "Low cloud cover",
+        "Total cloud cover",
+        "2 metre temperature",
+        "2 metre dewpoint temperature",
+        "Skin temperature",
+        "Total precipitation",
+        "100 metre U wind component",
+        "100 metre V wind component"
+      ],
+      "fit_range": "2021-01-02 00:00:00..2021-11-18 23:00:00",
+      "fit_coordinates": [
+        [
+          15.0,
+          17.4
+        ],
+        [
+          15.1,
+          15.7
+        ],
+        [
+          15.1,
+          17.4
+        ],
+        [
+          15.1,
+          17.7
+        ],
+        [
+          15.2,
+          15.6
+        ],
+        [
+          15.2,
+          16.2
+        ],
+        [
+          15.2,
+          16.8
+        ],
+        [
+          15.2,
+          17.4
+        ]
+      ]
+    }
+  },
+  "data_interface": "tslib_four_sequences_plus_covariates_v1",
+  "label_len": 12,
+  "modalities": "power_nwp",
+  "calendar_features": [
+    "hour",
+    "dayofweek",
+    "day",
+    "dayofyear"
+  ],
+  "future_nwp_availability": "assumed available; issue time absent from CSV"
+}

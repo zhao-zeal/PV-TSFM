@@ -1,0 +1,22 @@
+{
+  "removed_baseline": "Time-LLM",
+  "removed_directories": [
+    {
+      "path": "/home/zhaopp/workspace/PV-TSFM/pretrained/llama-7b",
+      "file_bytes": 12254
+    },
+    {
+      "path": "/home/zhaopp/.cache/huggingface/hub/models--huggyllama--llama-7b",
+      "file_bytes": 40
+    },
+    {
+      "path": "/home/zhaopp/workspace/PV-TSFM/layers/timellm",
+      "file_bytes": 34528
+    },
+    {
+      "path": "/home/zhaopp/workspace/PV-TSFM/scripts/official_reference/TimeLLM",
+      "file_bytes": 0
+    }
+  ],
+  "other_pretrained_weights_unchanged": true
+}

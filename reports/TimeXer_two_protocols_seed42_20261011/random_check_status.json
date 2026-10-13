@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-11T04:07:12+08:00",
+  "checker_pid": 3314572,
+  "next_check_seconds": 1163,
+  "runs": [
+    {
+      "run": "PVTSFM_TimeXer_in_domain_seed42",
+      "pid": 3313923,
+      "alive": false,
+      "test_complete": true,
+      "latest_validation": [
+        7,
+        0.061032070323122266,
+        0.11250748888745407
+      ],
+      "issues": []
+    },
+    {
+      "run": "PVTSFM_TimeXer_zeroshot_seed42",
+      "pid": 3313957,
+      "alive": false,
+      "test_complete": true,
+      "latest_validation": [
+        7,
+        0.05753031110116543,
+        0.10874468121029858
+      ],
+      "issues": []
+    }
+  ]
+}

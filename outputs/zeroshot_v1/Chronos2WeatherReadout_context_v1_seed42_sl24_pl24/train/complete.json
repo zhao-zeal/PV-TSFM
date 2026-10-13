@@ -1,0 +1,18 @@
+{
+  "identity": {
+    "protocol": "zeroshot_v1",
+    "windows": 76570,
+    "context_shape": [
+      76570,
+      2,
+      768
+    ],
+    "feature_manifest_sha256": "0e17d6f5a8c1c565eea6702e6c21caf7d515937a432c48894e7a89cce5562fcc",
+    "input_manifest_sha256": "449d34098d2c61c2ae3e69a475c1748370bb25fed80499b87b82a9a45c468dcc",
+    "model_path": "/home/zhaopp/workspace/PV-TSFM/pretrained/chronos-2",
+    "method": "Same A01 encode with two forecast patches; power context positions only; REG excluded; contextual states include known future NWP"
+  },
+  "all_windows_inputs_targets_sites_times_and_past_boundary_checked": true,
+  "max_forecast_embed_difference": 0.0,
+  "max_A01_prediction_difference": 0.0
+}
