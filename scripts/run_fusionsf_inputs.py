@@ -167,6 +167,8 @@ def accept(run, gpu):
     from utils.metrics import metric
     from utils.tools import load_model_checkpoint
     out, ckpt = Path(run['output_dir']), Path(run['checkpoint_dir'])
+    from utils.acceptance import accept_and_record
+    accept_and_record(out)
     config = json.loads((out / 'config.json').read_text())
     assert config == json.loads((ckpt / 'config.json').read_text())
     assert config['fusion_input'] == run['variant'] and config['seed'] == 42
@@ -255,12 +257,7 @@ def accept(run, gpu):
         replay = experiment._forward_batch(next(iter(loader)))[0]['prediction'].cpu().numpy()
     difference = float(np.max(np.abs(replay - pred[:len(replay)])))
     assert difference < 1e-5, difference
-    registered = [row for row in index_rows if row['result_dir'] != str(out.resolve())]
-    registered.append({**saved, 'result_dir': str(out.resolve())})
-    with index_path.open('w', newline='') as handle:
-        writer = csv.DictWriter(handle, fieldnames=index_fields)
-        writer.writeheader()
-        writer.writerows(registered)
+    experiment._record_result(out, saved, specific_checks={'source': __file__, 'replay_max_abs': difference})
     baseline = json.loads((reference / 'metrics.json').read_text())
     return dict(status='passed_full_artifact_acceptance', checked_at=now(), metrics=saved,
                 completed_epochs=last_epoch, newly_completed_epochs=len(epochs),

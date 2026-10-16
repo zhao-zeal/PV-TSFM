@@ -1,6 +1,5 @@
 """One train/validation/test path for all migrated MMSP forecasting models."""
 
-import csv
 from contextlib import nullcontext
 import json
 import logging
@@ -18,9 +17,35 @@ from utils.fusionsf_scheduler import CosineWarmupScheduler
 from utils.losses import forecasting_loss
 from utils.metrics import metric
 from utils.tools import EarlyStopping, load_model_checkpoint
+from utils.acceptance import accept_and_record, append_validation
+from utils.run_artifacts import reserve_run
 
 
 class Exp_Long_Term_Forecast(Exp_Basic):
+    def _prepare_run(self, setting, stage):
+        if setting != self.args.model_id:
+            raise ValueError('setting must equal model_id')
+        if getattr(self, f'_{stage}_started', False):
+            raise FileExistsError(f'{stage} already started for this experiment; create a new run')
+        prepared = getattr(self, '_run_prepared', None)
+        if prepared is None:
+            reserve_run(self.args, setting)
+            self._run_prepared = setting
+        elif prepared != setting:
+            raise ValueError('One experiment instance can only write one run')
+        setattr(self, f'_{stage}_started', True)
+        log = (Path(self.args.output_dir) / self.args.protocol / setting / 'run.log').resolve()
+        if not any(isinstance(handler, logging.FileHandler) and Path(handler.baseFilename) == log
+                   for handler in logging.getLogger().handlers):
+            for old in list(logging.getLogger().handlers):
+                if getattr(old, '_pvtsfm_run_log', False):
+                    logging.getLogger().removeHandler(old)
+                    old.close()
+            handler = logging.FileHandler(log)
+            handler._pvtsfm_run_log = True
+            handler.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
+            logging.getLogger().addHandler(handler)
+
     def _get_data(self, flag):
         return data_provider(self.args, flag)
 
@@ -80,7 +105,7 @@ class Exp_Long_Term_Forecast(Exp_Basic):
             return torch.optim.lr_scheduler.LambdaLR(
                 optimizer, lambda step: max(0., 1. - step / self.args.max_steps))
         return torch.optim.lr_scheduler.ReduceLROnPlateau(
-            optimizer, mode='min', factor=0.5, patience=10)
+            optimizer, mode='min', factor=0.5, patience=getattr(self.args, 'lr_patience', 10))
 
     def _save_config(self, directory, dataset):
         directory.mkdir(parents=True, exist_ok=True)
@@ -91,6 +116,15 @@ class Exp_Long_Term_Forecast(Exp_Basic):
     def vali(self, loader):
         self.model.eval()
         total_abs = total_square = count = 0
+        if self.args.model == 'ChronosX' and self.args.monitor != 'token_ce':
+            # Same sampling stream at every epoch; validation must not consume training RNG.
+            devices = [self.device] if self.device.type == 'cuda' else []
+            with torch.random.fork_rng(devices=devices):
+                torch.random.default_generator.manual_seed(self.args.seed)
+                if devices:
+                    with torch.cuda.device(self.device):
+                        torch.cuda.manual_seed(self.args.seed)
+                return self._vali_chronosx_forecasts(loader)
         if self.args.model == 'ChronosX':
             total_loss = samples = 0
             for batch in loader:
@@ -103,6 +137,8 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         for batch in loader:
             result, targets, _ = self._forward_batch(batch)
             prediction = result['prediction'] if isinstance(result, dict) else result
+            if prediction.shape != targets.shape or not torch.isfinite(prediction).all() or not torch.isfinite(targets).all():
+                raise ValueError('Invalid validation prediction/target shape or nonfinite values')
             error = (prediction - targets).double()
             total_abs += error.abs().sum().item()
             total_square += error.square().sum().item()
@@ -110,7 +146,27 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         return {'mae': total_abs / count, 'rmse': (total_square / count) ** 0.5,
                 'mse': total_square / count}
 
+    def _vali_chronosx_forecasts(self, loader):
+        total_abs = total_square = total_loss = count = samples = 0
+        for batch in loader:
+            x, x_mark, decoder, y_mark, cov, target = self._prepare_batch(batch)
+            with self._autocast():
+                loss = self.model.token_loss(x, target, cov)
+                pred = self.model(x, x_mark, decoder, y_mark, covariates=cov)
+            if (pred.shape != target.shape or not torch.isfinite(pred).all()
+                    or not torch.isfinite(target).all() or not torch.isfinite(loss)):
+                raise ValueError('Invalid ChronosX validation forecasts or token loss')
+            error = (pred - target).double()
+            total_abs += error.abs().sum().item()
+            total_square += error.square().sum().item()
+            total_loss += loss.item() * len(x)
+            count += target.numel()
+            samples += len(x)
+        return dict(mae=total_abs / count, mse=total_square / count,
+                    rmse=(total_square / count) ** 0.5, token_ce=total_loss / samples)
+
     def train(self, setting):
+        self._prepare_run(setting, 'train')
         train_data, train_loader = self._get_data('train')
         _, val_loader = self._get_data('val')
         directory = Path(self.args.checkpoints) / self.args.protocol / setting
@@ -146,6 +202,7 @@ class Exp_Long_Term_Forecast(Exp_Basic):
             first_epoch = checkpoint['epoch'] + 1
             checkpoint['config'] = vars(self.args)
             torch.save(checkpoint, best_path)
+            append_validation(directory, checkpoint['epoch'], checkpoint['validation_metrics'])
             logging.info('Resume from epoch %d: best_validation_%s=%s lr=%s; total_max_epochs=%d patience=%d',
                          first_epoch - 1, self.args.monitor, stopping.best,
                          optimizer.param_groups[0]['lr'], self.args.train_epochs, self.args.patience)
@@ -158,16 +215,19 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                 result, targets, _ = self._forward_batch(batch)
                 with self._autocast():
                     loss = forecasting_loss(result, targets, self.args.model)
+                if not torch.isfinite(loss):
+                    raise FloatingPointError(f'Nonfinite training loss at epoch {epoch}')
                 scaler.scale(loss).backward()
                 scaler.step(optimizer)
                 scaler.update()
                 total_loss += loss.detach() * len(targets)
                 total_samples += len(targets)
             validation = self.vali(val_loader)
+            append_validation(directory, epoch, validation, (total_loss / total_samples).item())
             score = validation[self.args.monitor]
             improved, stopped = stopping.update(score)
             if isinstance(scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
-                scheduler.step(validation['rmse'])
+                scheduler.step(score)
             else:
                 scheduler.step()
             logging.info('Epoch %d train_loss=%s validation=%s lr=%s', epoch,
@@ -200,6 +260,8 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                 batch_x, _, _, _, covariates, targets = self._prepare_batch(batch)
                 with self._autocast():
                     loss = self.model.token_loss(batch_x, targets, covariates, augment=True)
+                if not torch.isfinite(loss):
+                    raise FloatingPointError(f'Nonfinite ChronosX loss at epoch {epoch}')
                 group_size = min(accumulation, len(train_loader) - (index // accumulation) * accumulation)
                 scaler.scale(loss / group_size).backward()
                 total_loss += loss.detach() * len(targets)
@@ -217,7 +279,8 @@ class Exp_Long_Term_Forecast(Exp_Basic):
             validation_start = time.perf_counter()
             validation = self.vali(val_loader)
             validation_seconds = time.perf_counter() - validation_start
-            improved, stopped = stopping.update(validation['token_ce'])
+            append_validation(best_path.parent, epoch, validation, train_loss)
+            improved, stopped = stopping.update(validation[self.args.monitor])
             logging.info('Epoch %d train_loss=%s validation=%s lr=%s step=%d train_seconds=%.3f validation_seconds=%.3f windows_per_second=%.3f', epoch,
                          train_loss, validation, optimizer.param_groups[0]['lr'], step,
                          train_seconds, validation_seconds, total_samples / train_seconds)
@@ -232,6 +295,7 @@ class Exp_Long_Term_Forecast(Exp_Basic):
 
     @torch.no_grad()
     def test(self, setting, test=0):
+        self._prepare_run(setting, 'test')
         if test and self.args.checkpoint:
             load_model_checkpoint(self.model, self.args.checkpoint, self.device)
         data, loader = self._get_data('test')
@@ -266,19 +330,6 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         logging.info('Complete test metrics: %s', metrics)
         return metrics
 
-    def _record_result(self, directory, metrics):
-        if self.args.model == 'FusionSF' and self.args.baseline_config == 'fusion_input_variant':
-            logging.info('FusionSF input artifacts saved; formal registration awaits full artifact acceptance')
-            return
-        table = Path(__file__).resolve().parents[1] / 'reports' / self.args.protocol / 'results.csv'
-        table.parent.mkdir(parents=True, exist_ok=True)
-        fields = ['data_protocol', 'model', 'baseline_config', 'llm_model', 'seed', 'input_len', 'output_len', 'train_sites',
-                  'validation_sites', 'test_sites', 'split_version', 'scaler_version',
-                  'test_windows', 'mae', 'rmse', 'r2', 'result_dir']
-        rows = list(csv.DictReader(table.open())) if table.exists() else []
-        rows = [row for row in rows if row['result_dir'] != str(directory.resolve())]
-        rows.append({**metrics, 'result_dir': str(directory.resolve())})
-        with table.open('w', newline='') as handle:
-            writer = csv.DictWriter(handle, fieldnames=fields)
-            writer.writeheader()
-            writer.writerows(rows)
+    def _record_result(self, directory, metrics, *, specific_checks=None):
+        receipt = accept_and_record(directory, specific_checks=specific_checks)
+        logging.info('Artifact acceptance: %s (%s)', receipt['status'], directory)

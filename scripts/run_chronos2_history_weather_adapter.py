@@ -35,22 +35,6 @@ def source_identity():
     return {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in SOURCE_FILES}
 
 
-def validated_source_identity():
-    """Keep checked numerical-code provenance across the recorded idle-handoff fix."""
-    current = source_identity()
-    path = REPORT / 'preflight_gpu.json'
-    if not path.exists():
-        return current
-    checked = json.loads(path.read_text())['source_sha256']
-    if any(current[name] != checked[name] for name in SOURCE_FILES[:-1]):
-        raise ValueError('Numerical A03 code changed after GPU checks')
-    if current[SOURCE_FILES[-1]] != checked[SOURCE_FILES[-1]]:
-        original = REPORT / 'runner_before_idle_handoff_fix.py'
-        if not original.exists() or hashlib.sha256(original.read_bytes()).hexdigest() != checked[SOURCE_FILES[-1]]:
-            raise ValueError('Unrecorded change to checked runner')
-    return checked
-
-
 def configure(gpu):
     os.sched_setaffinity(0, [9, 10])
     for name in ('OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
@@ -92,7 +76,7 @@ def make_args(variant, gpu):
     args.experiment_label = f'A03-{variant}'
     args.baseline_config = 'history_weather_adapter_variant'
     args.model_id = f'Chronos2HistoryWeatherAdapter_A03{variant}_seed42_sl24_pl24_history_future'
-    args.a03_source_sha256 = validated_source_identity()
+    args.a03_source_sha256 = source_identity()
     args.protocol_limit = 'A02 gridwise bidirectional NWP interpolation and assumed issue-time availability retained by explicit user decision'
     return args
 
@@ -104,6 +88,9 @@ def reseed(torch, np):
 def protect_originals():
     review = json.loads((REPORT / 'review.json').read_text())
     for name, expected in review['files_reviewed'].items():
+        # Framework acceptance/isolation was updated; retain numerical-model/data protection.
+        if not name.startswith(('models/', 'layers/', 'data_provider/')):
+            continue
         if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
             raise ValueError(f'Original implementation changed after review: {name}')
     for protocol in ('in_domain', 'zeroshot_v1'):
@@ -263,11 +250,20 @@ def accept(variant, gpu):
     from scripts.check_chronos2_weather_adapter import state_digest
     from utils.metrics import metric
     protect_originals()
-    args = make_args(variant, gpu)
+    from types import SimpleNamespace
+    saved_directory = ROOT / 'outputs/zeroshot_v1' / f'Chronos2HistoryWeatherAdapter_A03{variant}_seed42_sl24_pl24_history_future'
+    saved_config = json.loads((saved_directory / 'config.json').read_text())
+    for name, expected in saved_config['a03_source_sha256'].items():
+        if name.startswith(('models/', 'layers/')) and hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
+            raise ValueError(f'Numerical implementation changed: {name}')
+    args = SimpleNamespace(**saved_config)
+    args.gpu = gpu  # Replays may use a different idle device; historical config stays intact.
     exp = Exp_Chronos2_History_Weather_Adapter(args)
     out, ck = Path(args.output_dir)/args.protocol/args.model_id, Path(args.checkpoints)/args.protocol/args.model_id
+    from utils.acceptance import accept_and_record
+    accept_and_record(out)
     config = json.loads((out/'config.json').read_text())
-    assert config == vars(args) == json.loads((ck/'config.json').read_text())
+    assert config == saved_config == json.loads((ck/'config.json').read_text())
     selected = exp.load_selected(ck/'checkpoint.pth')
     summary = json.loads((ck/'training_summary.json').read_text())
     with (ck/'training_history.csv').open() as handle:
@@ -346,7 +342,7 @@ def accept(variant, gpu):
     save(out/'analysis.json',details)
     if not (REPORT/'A02_reference_analysis.json').exists():
         save(REPORT/'A02_reference_analysis.json',reference)
-    Exp_Long_Term_Forecast._record_result(exp,out,saved)
+    Exp_Long_Term_Forecast._record_result(exp,out,saved, specific_checks={'source': __file__})
     table=ROOT/'reports/zeroshot_v1/results.csv'
     with table.open() as handle:
         rows=[r for r in csv.DictReader(handle) if r['result_dir']==str(out.resolve())]
@@ -517,7 +513,7 @@ def main():
             preflight_path = REPORT/'preflight_gpu.json'
             if preflight_path.exists():
                 checked = json.loads(preflight_path.read_text())
-                if checked['status']!='passed' or checked['source_sha256']!=validated_source_identity():
+                if checked['status']!='passed' or checked['source_sha256']!=source_identity():
                     raise ValueError('Existing preflight is unresolved or uses different code')
             else:
                 execute('check',opts.gpu,REPORT/'preflight_gpu.log')

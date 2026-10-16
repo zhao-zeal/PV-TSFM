@@ -17,6 +17,7 @@ import torch
 from run import parse_args, configure_resources
 from exp.exp_long_term_forecasting import Exp_Long_Term_Forecast
 from utils.metrics import metric
+from utils.acceptance import accept_and_record
 from utils.tools import load_model_checkpoint
 
 parser = argparse.ArgumentParser(description=__doc__)
@@ -25,12 +26,11 @@ parser.add_argument('--report', type=Path, default=ROOT / 'reports/TimeVLM_two_p
 options = parser.parse_args()
 report = options.report
 record = json.loads(report.read_text())
-if record.get('acceptance', {}).get('status') == 'passed_full_artifact_acceptance':
-    raise SystemExit(0)
 raw = pd.read_csv(ROOT / 'datasets/MMSP/data/solar_power/solar_power.csv', parse_dates=['datetime'])
 accepted = []
 for run in record['runs']:
     out, ckpt = Path(run['output_dir']), Path(run['checkpoint_dir'])
+    accept_and_record(out)
     saved = json.loads((out / 'metrics.json').read_text())
     config = json.loads((out / 'config.json').read_text())
     assert config == json.loads((ckpt / 'config.json').read_text())
@@ -80,17 +80,12 @@ for run in record['runs']:
     checkpoint = torch.load(ckpt / 'checkpoint.pth', map_location='cpu', weights_only=True)
     assert checkpoint['config'] == config
     assert all(torch.isfinite(v).all() for v in checkpoint['model_state_dict'].values())
-    best = min(epochs, key=lambda item: item[1]['mse'])
+    best = min(epochs, key=lambda item: item[1][config['monitor']])
     assert checkpoint['epoch'] == best[0] and checkpoint['validation_metrics'] == best[1]
     assert epochs[-1][0] == config['train_epochs'] or epochs[-1][0] - best[0] == config['patience']
     state = checkpoint['model_state_dict']
     assert state['patch_memory_bank.patches'].shape == (100, 128)
     assert 0 <= int(state['patch_memory_bank._pointer']) <= 100
-    rows = list(csv.DictReader((ROOT / 'reports' / run['protocol'] / 'results.csv').open()))
-    matched = [row for row in rows if row['result_dir'] == str(out.resolve())]
-    assert len(matched) == 1
-    for key in ['mae', 'rmse', 'r2']:
-        assert float(matched[0][key]) == saved[key]
     del checkpoint, state
     args = parse_args(run['argv'] + ['--train_epochs', str(config['train_epochs']), '--patience', str(config['patience'])] +
                       (['--gpu', str(options.gpu)] if options.gpu is not None else []))
@@ -113,6 +108,12 @@ for run in record['runs']:
     replay = np.concatenate(replay)
     difference = float(np.max(np.abs(replay - pred[:len(replay)])))
     assert difference <= 1e-5, difference
+    accept_and_record(out, specific_checks={'source': __file__, 'replay_max_abs': difference})
+    rows = list(csv.DictReader((ROOT / 'reports' / run['protocol'] / 'results.csv').open()))
+    matched = [row for row in rows if row['result_dir'] == str(out.resolve())]
+    assert len(matched) == 1
+    for key in ['mae', 'rmse', 'r2']:
+        assert float(matched[0][key]) == saved[key]
     del experiment, loader, replay
     torch.cuda.empty_cache()
     baseline = json.loads((reference / 'metrics.json').read_text())
@@ -128,6 +129,9 @@ for run in record['runs']:
             for key in ['mae', 'rmse', 'r2']}
         accepted[-1]['continued_epochs'] = len(epochs) - run['resume_epoch']
         accepted[-1]['resume_epoch'] = run['resume_epoch']
+    accepted[-1]['selection'] = f'minimum validation {config["monitor"]}; checkpoint includes memory state'
+    accepted[-1]['checks'] = [check.replace('minimum validation MSE', f'minimum validation {config["monitor"]}')
+                             for check in accepted[-1]['checks']]
     run.update(state='completed_artifact_acceptance_passed', current_test_metrics=saved)
     print(run['protocol'], saved, flush=True)
 record.update(state='completed_artifact_acceptance_passed', completed_at=datetime.now().astimezone().isoformat(), acceptance={'status': 'passed_full_artifact_acceptance', 'checked_at': datetime.now().astimezone().isoformat(), 'runs': accepted, 'new_training': True, 'acceptance_full_reinference': False, 'acceptance_replay': 'first64 chronological samples per protocol only; preserves stateful memory; metrics from original full formal test'})
@@ -151,6 +155,14 @@ doc = ROOT / 'docs/EXPERIMENT_STATUS.md'
 text = doc.read_text()
 text = text.replace('## Time-VLM复现（当前任务）', '## Time-VLM复现（已完成）')
 text = re.sub(r'^\| Time-VLM \|.*$', markdown_row, text, flags=re.MULTILINE)
+if record.get('baseline_config') == 'unified_prediction':
+    details = ['Time-VLM两协议100/10、验证RMSE选模的新实验已通过正式测试与专项验收，主表已更新；旧实验产物保留。']
+    for item in accepted:
+        m = item['metrics']
+        details.append(f'{item["protocol"]}完成{item["completed_epochs"]}轮，最佳第{item["best_epoch"]}轮；测试MAE/RMSE/R²={m["mae"]:.6f}/{m["rmse"]:.6f}/{m["r2"]:.6f}。')
+    details.append(f'证据：`{report.relative_to(ROOT)}`；保留原输入、官方验证及测试期间顺序更新记忆库的行为，不声称纯架构对照。')
+    doc.write_text(text + '\n\n' + '\n\n'.join(details) + '\n')
+    raise SystemExit(0)
 if record.get('resume_training'):
     lines = ['TimeVLM续训两协议已完成正式测试及完整产物验收；总表更新为200轮/patience20预算版本，原10轮结果及产物完整保留。']
     for item in accepted:

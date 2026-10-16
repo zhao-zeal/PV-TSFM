@@ -1,6 +1,7 @@
 """TSLib-style forecasting entry; configuration inspection never starts a run."""
 
 import argparse
+from datetime import datetime, timezone
 import json
 import logging
 import os
@@ -18,17 +19,22 @@ def build_parser():
     parser.add_argument('--task_name', default='long_term_forecast', choices=['long_term_forecast'])
     parser.add_argument('--is_training', type=int, choices=[0, 1], help='1: train then test; 0: test only')
     parser.add_argument('--model', required=True, choices=[
-        'DLinear', 'PatchTST', 'FusionSF', 'CrossUnet', 'Cross-Unet', 'TimeXer',
-        'Chronos2', 'Chronos-2', 'Chronos2Adapter', 'Chronos2WeatherAdapter', 'TimesFM3', 'ChronosX',
+        'DLinear', 'PatchTST', 'FusionSF', 'CrossUnet', 'Cross-Unet', 'TimeXer', 'STAEformer',
+        'Chronos2', 'Chronos-2', 'Chronos2Adapter', 'Chronos2WeatherAdapter', 'Chronos2MCDecoder', 'TimesFM3', 'ChronosX',
         'TimeVLM', 'Time-VLM', 'Dlinear', 'Ours'])
-    parser.add_argument('--baseline_config', choices=['official', 'legacy_fusionsf', 'migrated_adapter', 'fusion_input_variant', 'extended_budget', 'weather_adapter_variant'], default='official')
+    parser.add_argument('--baseline_config', choices=['official', 'legacy_fusionsf', 'migrated_adapter', 'fusion_input_variant', 'extended_budget', 'weather_adapter_variant', 'a05_mc_decoder', 'unified_prediction'], default='official')
     parser.add_argument('--adapter_version', choices=['b131_linear_v1', 'b131_mlp63_v1'], default='b131_linear_v1')
     parser.add_argument('--cache_batch_size', type=int, default=64)
     parser.add_argument('--adapter_base_checkpoint', help='Accepted same-protocol b131_linear_v1 checkpoint for Weather Adapter')
+    parser.add_argument('--a05_variant', choices=['a', 'b', 'c'], default='a')
+    parser.add_argument('--a05_width', type=int, default=128)
+    parser.add_argument('--a05_heads', type=int, default=4)
+    parser.add_argument('--a05_ff', type=int, default=256)
+    parser.add_argument('--a05_cache_id', default='Chronos2MCDecoder_native_cache_v1_seed42_sl24_pl24')
     parser.add_argument('--model_id', help='Explicit run name; choose a new name for a separate run')
     parser.add_argument('--data', default='MMSP', choices=['MMSP'])
     parser.add_argument('--root_path', default=str(ROOT / 'datasets/MMSP/data'))
-    parser.add_argument('--protocol', required=True, choices=['site1_v1', 'in_domain', 'zeroshot_v1'])
+    parser.add_argument('--protocol', required=True, choices=['site0_v1', 'site1_v1', 'in_domain', 'zeroshot_v1'])
     parser.add_argument('--modalities', choices=['power', 'power_nwp', 'satellite', 'all'])
     parser.add_argument('--seq_len', type=int, default=24)
     parser.add_argument('--label_len', type=int, default=12)
@@ -38,6 +44,8 @@ def build_parser():
     parser.add_argument('--eval_batch_size', type=int)
     parser.add_argument('--train_epochs', type=int)
     parser.add_argument('--patience', type=int)
+    parser.add_argument('--monitor', choices=['mse', 'rmse', 'mae', 'token_ce'])
+    parser.add_argument('--lr_patience', type=int, default=10)
     parser.add_argument('--learning_rate', type=float)
     parser.add_argument('--num_workers', type=int, default=0)
     parser.add_argument('--checkpoints', default=str(ROOT / 'checkpoints'))
@@ -152,6 +160,26 @@ def parse_args(argv=None):
         args.adapter_base_checkpoint = args.adapter_base_checkpoint or str(
             ROOT / 'checkpoints' / args.protocol /
             'Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future' / 'checkpoint.pth')
+    if args.model == 'Chronos2MCDecoder':
+        if args.protocol not in ('in_domain', 'zeroshot_v1') or (args.seq_len, args.pred_len) != (24, 24):
+            parser.error('A05 is restricted to in_domain/zeroshot_v1, 24 -> 24')
+        if args.seed not in (None, 42):
+            parser.error('A05 currently fixes seed42')
+        if args.a05_width % args.a05_heads:
+            parser.error('A05 width must be divisible by its attention heads')
+        defaults.update(seed=42, batch_size=128, eval_batch_size=256,
+                        train_epochs=100, patience=10, learning_rate=0.0001,
+                        monitor='rmse', precision='fp32', drop_last=False,
+                        optimizer='adamw_adapter', lradj='none')
+        args.optimizer_betas = [0.9, 0.999]
+        args.weight_decay, args.loss = 0.05, 'MSE'
+        args.baseline_config, args.nwp_mode = 'a05_mc_decoder', 'history_future'
+        args.adapter_version = f'A05{args.a05_variant}_v1'
+        args.experiment_label = f'A05-{args.a05_variant}'
+        args.base_experiment_label = 'A01'
+        args.adapter_base_checkpoint = args.adapter_base_checkpoint or str(
+            ROOT / 'checkpoints' / args.protocol /
+            'Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future' / 'checkpoint.pth')
     if args.baseline_config == 'legacy_fusionsf':
         if args.model not in LEGACY:
             parser.error('legacy_fusionsf is only for archived DLinear/PatchTST runs')
@@ -164,7 +192,7 @@ def parse_args(argv=None):
             setattr(args, name, default)
     if args.model == 'TimeVLM' and args.baseline_config == 'official' and (args.train_epochs, args.patience) != (10, 5):
         args.baseline_config = 'extended_budget'
-    if args.model == 'ChronosX':
+    if args.model == 'ChronosX' and args.baseline_config == 'official':
         args.baseline_config = 'extended_budget'
     args.enc_in = args.dec_in = args.c_out = 1
     args.vlm_path = args.vlm_path or str(ROOT / 'pretrained/clip-vit-base-patch32')
@@ -191,7 +219,7 @@ def parse_args(argv=None):
             required_modalities = 'all' if args.fusion_input == 'power_satellite_history_future_nwp' else 'power_nwp'
         else:
             required_modalities = 'all' if args.fusion_modalities == 3 else 'satellite'
-    elif args.model in ('CrossUnet', 'TimeXer', 'ChronosX', 'Chronos2Adapter', 'Chronos2WeatherAdapter') or (args.model == 'Chronos2' and args.nwp_mode != 'none'):
+    elif args.model in ('CrossUnet', 'TimeXer', 'ChronosX', 'Chronos2Adapter', 'Chronos2WeatherAdapter', 'Chronos2MCDecoder') or (args.model == 'Chronos2' and args.nwp_mode != 'none'):
         required_modalities = 'power_nwp'
     args.modalities = args.modalities or required_modalities
     if (required_modalities == 'all' and args.modalities != 'all') or (
@@ -210,8 +238,11 @@ def parse_args(argv=None):
         variant = f'_{args.covariate_injection}'
     elif args.model in ('Chronos2Adapter', 'Chronos2WeatherAdapter'):
         variant = f'_{args.adapter_version}'
-    args.model_id = args.model_id or f'{args.model}_{args.baseline_config}{variant}_seed{args.seed}_sl{args.seq_len}_pl{args.pred_len}_{args.modalities}_{args.nwp_mode}'
-    if Path(args.model_id).name != args.model_id:
+    elif args.model == 'Chronos2MCDecoder':
+        variant = f'_A05{args.a05_variant}_w{args.a05_width}'
+    args.model_id = args.model_id or (f'{args.model}_{args.baseline_config}{variant}_seed{args.seed}_sl{args.seq_len}_pl{args.pred_len}_{args.modalities}_{args.nwp_mode}'
+                                    f'_{datetime.now(timezone.utc):%Y%m%dT%H%M%S%fZ}')
+    if args.model_id in ('.', '..') or Path(args.model_id).name != args.model_id:
         parser.error('model_id must be a directory name, without path separators')
     if not args.print_config:
         if args.is_training is None:
@@ -238,7 +269,7 @@ def configure_resources(args):
     if args.use_gpu:
         from utils.resources import require_idle_gpus
         require_idle_gpus(str(args.gpu))
-    if args.model in ('Chronos2Adapter', 'Chronos2WeatherAdapter'):
+    if args.model in ('Chronos2Adapter', 'Chronos2WeatherAdapter', 'Chronos2MCDecoder'):
         os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
     import torch
     torch.set_num_threads(len(cores))
@@ -247,7 +278,7 @@ def configure_resources(args):
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
     torch.backends.cudnn.benchmark = bool(args.use_gpu)
-    if args.model in ('Chronos2Adapter', 'Chronos2WeatherAdapter'):
+    if args.model in ('Chronos2Adapter', 'Chronos2WeatherAdapter', 'Chronos2MCDecoder'):
         torch.use_deterministic_algorithms(True)
         torch.backends.cudnn.benchmark = False
         torch.backends.cudnn.deterministic = True
@@ -258,6 +289,8 @@ def main(argv=None):
     if args.print_config:
         print(json.dumps(vars(args), indent=2))
         return
+    from utils.run_artifacts import reserve_run
+    reserve_run(args, args.model_id)
     configure_resources(args)
     import numpy as np
     import torch
@@ -268,15 +301,17 @@ def main(argv=None):
     elif args.model == 'Chronos2WeatherAdapter':
         from exp.exp_chronos2_weather_adapter import Exp_Chronos2_Weather_Adapter
         Exp_Long_Term_Forecast = Exp_Chronos2_Weather_Adapter
+    elif args.model == 'Chronos2MCDecoder':
+        from exp.exp_chronos2_mc_decoder import Exp_Chronos2_MC_Decoder
+        Exp_Long_Term_Forecast = Exp_Chronos2_MC_Decoder
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
-    directory = Path(args.output_dir) / args.protocol / args.model_id
-    directory.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(level=logging.INFO, handlers=[
-        logging.StreamHandler(), logging.FileHandler(directory / 'run.log')],
+        logging.StreamHandler()],
         format='%(asctime)s %(message)s')
     experiment = Exp_Long_Term_Forecast(args)
+    experiment._run_prepared = args.model_id
     if args.is_training:
         experiment.train(args.model_id)
     experiment.test(args.model_id, test=not args.is_training)

@@ -25,6 +25,8 @@ def accept(report, protocol, gpu):
     record = json.loads(report.read_text())
     run = next(row for row in record['runs'] if row['protocol'] == protocol)
     out, checkpoint_dir = Path(run['output_dir']), Path(run['checkpoint_dir'])
+    from utils.acceptance import accept_and_record
+    accept_and_record(out)
     config = json.loads((out / 'config.json').read_text())
     assert config == json.loads((checkpoint_dir / 'config.json').read_text())
     expected = parse_args(run['argv'])
@@ -121,7 +123,7 @@ def accept(report, protocol, gpu):
     difference = float(np.max(np.abs(replay - prediction[indices])))
     assert difference <= 2e-6, difference
     # The model saves artifacts first; only a fully checked run enters the formal index.
-    Exp_Long_Term_Forecast._record_result(experiment, out, saved)
+    Exp_Long_Term_Forecast._record_result(experiment, out, saved, specific_checks={'source': __file__})
     with (ROOT / 'reports' / protocol / 'results.csv').open() as handle:
         registered = [row for row in csv.DictReader(handle) if row['result_dir'] == str(out.resolve())]
     assert len(registered) == 1

@@ -24,6 +24,11 @@
     "source_commit": "76011909357972bd55a27adba2e1be994d81b327",
     "reference_recipe": "scripts/forecast_exogenous/ETTh1/TimeXer.sh"
   },
+  "STAEformer": {
+    "repository": "https://github.com/XDZhelheim/STAEformer",
+    "source_commit": "fc49d39b2f1a8e3cf37b6289d7240680e1690f3f",
+    "reference_recipe": "model/STAEformer.py + model/STAEformer.yaml; MMSP single-node adaptation"
+  },
   "ChronosX": {
     "repository": "https://github.com/amazon-science/chronos-forecasting/tree/chronosx",
     "source_commit": "2b52bfc500e3ebab1ce846f0a2a60ee5ef2a14a7",

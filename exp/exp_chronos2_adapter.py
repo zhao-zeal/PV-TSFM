@@ -20,10 +20,11 @@ class Exp_Chronos2_Adapter(Exp_Long_Term_Forecast):
     def __init__(self, args):
         super().__init__(args)
         self.cached_loaders = {}
+        subset = f'_{args.nwp_subset_id}' if getattr(args, 'nwp_subset_id', None) else ''
         self.cache_dir = Path(args.output_dir) / args.protocol / (
-            f'Chronos2Adapter_features_v1_seed{args.seed}_sl24_pl24_history_future')
+            f'Chronos2Adapter_features_v1_seed{args.seed}_sl24_pl24_history_future{subset}')
         self.base_dir = Path(args.checkpoints) / args.protocol / (
-            f'Chronos2Adapter_B131_v1_seed{args.seed}_sl24_pl24_history_future')
+            f'Chronos2Adapter_B131_v1_seed{args.seed}_sl24_pl24_history_future{subset}')
 
     def _get_data(self, flag):
         if flag in self.cached_loaders:
@@ -61,7 +62,9 @@ class Exp_Chronos2_Adapter(Exp_Long_Term_Forecast):
                 value.flush()
             manifest.write_text(json.dumps({
                 'windows': cursor, 'protocol': self.args.protocol, 'model_path': self.args.model_path,
-                'input': 'power + train-standardized historical/future NWP in Dataset_MMSP order',
+                'input': 'power + selected train-standardized historical/future NWP in Dataset_MMSP order',
+                'nwp_indices': getattr(self.args, 'nwp_indices', None),
+                'nwp_feature_names': getattr(self.args, 'nwp_feature_names', None),
                 'chronos_version': '2.2.2', 'feature_shape': [2, 768],
             }, indent=2) + '\n')
         tensors = [torch.from_numpy(np.load(cache / f'{name}.npy')) for name in names]
@@ -136,6 +139,7 @@ class Exp_Chronos2_Adapter(Exp_Long_Term_Forecast):
         }, indent=2) + '\n')
 
     def train(self, setting):
+        self._prepare_run(setting, 'train')
         train_data, train_loader = self._get_data('train')
         _, val_loader = self._get_data('val')
         self.model.stage = 'base'
@@ -144,10 +148,17 @@ class Exp_Chronos2_Adapter(Exp_Long_Term_Forecast):
         self.model.readout.requires_grad_(False)
         base_path = self.base_dir / 'checkpoint.pth'
         if base_path.exists():
+            if not (self.base_dir / 'training_summary.json').exists():
+                raise ValueError('Shared B131 training is incomplete; cannot reuse its interim checkpoint')
             checkpoint = torch.load(base_path, map_location=self.device, weights_only=True)
+            for key in ('protocol', 'seed', 'seq_len', 'pred_len', 'modalities', 'nwp_mode',
+                        'model_path', 'train_epochs', 'patience', 'batch_size', 'effective_precision'):
+                if checkpoint['config'].get(key) != getattr(self.args, key, None):
+                    raise ValueError(f'Shared B131 training configuration differs: {key}')
             self.model.adapter.load_state_dict(checkpoint['adapter_state_dict'], strict=True)
             logging.info('Reuse current-protocol B131 checkpoint: %s', base_path)
         else:
+            self.base_dir.mkdir(parents=True)  # Never overwrite an incomplete/concurrent base run.
             self._save_config(self.base_dir, train_data)
             self._train_stage(self.model.adapter, train_loader, val_loader,
                               self.base_dir, 0.0016, 'base')

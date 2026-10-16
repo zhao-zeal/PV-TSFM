@@ -28,12 +28,17 @@ class Model(nn.Module):
 
     @torch.no_grad()
     def encode_inputs(self, power, history, future):
+        indices = getattr(self.config, 'nwp_indices', None)
+        if indices is not None:
+            if not indices or len(indices) != len(set(indices)) or min(indices) < 0 or max(indices) >= history.shape[-1]:
+                raise ValueError('nwp_indices must be unique, nonempty and within the shared NWP channel order')
+            history, future = history[..., indices], future[..., indices]
         batch_size, context_length = power.shape
         group_size = 1 + history.shape[-1]
         context = torch.cat([power.unsqueeze(1), history.transpose(1, 2)], dim=1)
         unknown_target = torch.full_like(future[:, :, :1].transpose(1, 2), torch.nan)
         future = torch.cat([unknown_target, future.transpose(1, 2)], dim=1)
-        indices = torch.arange(batch_size, device=power.device) * group_size
+        target_indices = torch.arange(batch_size, device=power.device) * group_size
         patch_count = 2
         encoded, (loc, scale), _, _ = self.backbone.encode(
             context=context.reshape(batch_size * group_size, context_length),
@@ -41,7 +46,7 @@ class Model(nn.Module):
             group_ids=torch.arange(batch_size, device=power.device).repeat_interleave(group_size),
             num_output_patches=patch_count,
         )
-        return encoded[0][indices, -patch_count:], loc[indices], scale[indices]
+        return encoded[0][target_indices, -patch_count:], loc[target_indices], scale[target_indices]
 
     def median_forecast(self, embeds, loc, scale):
         batch_size, patches, _ = embeds.shape

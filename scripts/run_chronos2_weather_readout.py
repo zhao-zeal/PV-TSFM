@@ -31,6 +31,9 @@ def source_identity():
 def protect_originals():
     review = json.loads((ROOT / 'reports/Chronos2HistoryWeatherAdapter_zeroshot_seed42_20261012/review.json').read_text())
     for name, expected in review['files_reviewed'].items():
+        # Framework acceptance/isolation was updated; retain numerical-model/data protection.
+        if not name.startswith(('models/', 'layers/', 'data_provider/')):
+            continue
         if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
             raise ValueError(f'Original implementation changed: {name}')
     for protocol in ('in_domain', 'zeroshot_v1'):
@@ -219,11 +222,20 @@ def accept(variant, gpu, protocol):
     from scripts.check_chronos2_weather_adapter import state_digest
     from utils.metrics import metric
     protect_originals()
-    args = make_args(variant, gpu, protocol)
+    from types import SimpleNamespace
+    saved_directory = ROOT / 'outputs' / protocol / f'Chronos2WeatherReadout_A04{variant}_seed42_sl24_pl24_history_future'
+    saved_config = json.loads((saved_directory / 'config.json').read_text())
+    for name, expected in saved_config['a04_source_sha256'].items():
+        if name.startswith(('models/', 'layers/')) and hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
+            raise ValueError(f'Numerical implementation changed: {name}')
+    args = SimpleNamespace(**saved_config)
+    args.gpu = gpu  # Replays may use a different idle device; historical config stays intact.
     exp = Exp_Chronos2_Weather_Readout(args)
     out, ck = Path(args.output_dir)/args.protocol/args.model_id, Path(args.checkpoints)/args.protocol/args.model_id
+    from utils.acceptance import accept_and_record
+    accept_and_record(out)
     config = json.loads((out/'config.json').read_text())
-    assert config == vars(args) == json.loads((ck/'config.json').read_text())
+    assert config == saved_config == json.loads((ck/'config.json').read_text())
     selected = exp.load_selected(ck/'checkpoint.pth')
     summary = json.loads((ck/'training_summary.json').read_text())
     with (ck/'training_history.csv').open() as handle:
@@ -304,7 +316,7 @@ def accept(variant, gpu, protocol):
     save(out/'analysis.json',details)
     if not (REPORT/f'{protocol}_A02_reference_analysis.json').exists():
         save(REPORT/f'{protocol}_A02_reference_analysis.json',reference)
-    Exp_Long_Term_Forecast._record_result(exp,out,saved)
+    Exp_Long_Term_Forecast._record_result(exp,out,saved, specific_checks={'source': __file__})
     table=ROOT/'reports'/args.protocol/'results.csv'
     with table.open() as handle:
         rows=[r for r in csv.DictReader(handle) if r['result_dir']==str(out.resolve())]

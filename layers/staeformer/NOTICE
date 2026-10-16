@@ -1,0 +1,14 @@
+STAEformer architecture provenance
+
+This directory implements the architecture described by Liu et al.,
+"Spatio-Temporal Adaptive Embedding Makes Vanilla Transformer SOTA for Traffic
+Forecasting" (CIKM 2023), using the authors' public implementation as the
+structural reference:
+
+  https://github.com/XDZhelheim/STAEformer
+  commit fc49d39b2f1a8e3cf37b6289d7240680e1690f3f
+  model/STAEformer.py and model/STAEformer.yaml
+
+The upstream repository did not contain a license file at the recorded commit.
+This project implementation was written for the local model interface and keeps
+the source and adaptation boundaries explicit.

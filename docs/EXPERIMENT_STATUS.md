@@ -11,13 +11,16 @@ MMSP，seed42，24→24；收录本框架已验收的正式测试Metric、用户
 | DLinear | 历史功率+经纬度 | 0.077541 | 0.123925 | 0.748166 | 0.078117 | 0.124453 | 0.746018 |
 | PatchTST | 历史功率+经纬度 | 0.063885 | 0.115592 | 0.780897 | 0.064574 | 0.115093 | 0.782784 |
 | FusionSF | 历史功率+历史卫星+未来NWP+坐标/时间编码 | 0.040876 | 0.091265 | 0.863416 | 0.041598 | 0.089822 | 0.867700 |
-| Cross-Unet | 历史功率+历史/未来NWP+相关历史功率块 | 0.043377 | 0.084374 | 0.883262 | 0.044612 | 0.084163 | 0.883846 |
+| Cross-Unet | 历史功率+历史/未来NWP+相关历史功率块 | 0.042289 | 0.083879 | 0.884629 | 0.044612 | 0.084163 | 0.883846 |
 | Chronos-2 | 历史功率+历史/未来NWP | 0.060910 | 0.117771 | 0.772558 | 0.061052 | 0.117897 | 0.772070 |
-| ChronosX | 历史功率+历史/未来NWP | 0.048576 | 0.109596 | 0.803038 | 0.047360 | 0.106572 | 0.813759 |
-| TimeXer | 历史功率+历史NWP | 0.072542 | 0.120198 | 0.763086 | 0.071451 | 0.118304 | 0.770496 |
-| Time-VLM | 历史功率+衍生图像/固定文本 | 0.071056 | 0.122202 | 0.755121 | 0.069875 | 0.121659 | 0.757294 |
+| ChronosX | 历史功率+历史/未来NWP | 0.047528 | 0.108813 | 0.805843 | 0.048782 | 0.107841 | 0.809296 |
+| TimeXer | 历史功率+历史NWP | 0.070145 | 0.117773 | 0.772551 | 0.072329 | 0.120635 | 0.761361 |
+| Time-VLM | 历史功率+衍生图像/固定文本 | 0.068934 | 0.119808 | 0.764624 | 0.068747 | 0.119382 | 0.766292 |
+| STAEformer | 历史功率+小时/星期 | — | — | — | — | — | — |
 
 **DLinear/PatchTST的zeroshot三列为历史登记成绩，原Checkpoint、日志和预测等产物缺失，未完成当前完整验收；CSV同样适用此说明。** 来源：[历史登记](history_audit_20261010/experiment_registry.csv)的R0004/R0005；原始精度与来源记录保存在`reports/DLinear_PatchTST_migration_seed42_20261011/runs.json`，不登记到分协议正式测试索引。
+
+**2026-10-16调参验收：本表TimeXer in_domain使用宽度128/128，Cross-Unet in_domain使用lr0.0002，均按验证RMSE预选；zeroshot保持原配置。完整来源见文末“有限调参最优配置正式测试”。**
 
 [下载总表CSV](../reports/experiment_summary.csv)。指标来源：新运行的`outputs/{protocol}/{model_id}/metrics.json`或下方已验收历史证据路径，验收依据为各实验`runs.json`的acceptance字段；原分协议`reports/{protocol}/results.csv`继续作为正式测试索引。完成验收后同步更新此表，验证指标、历史探索与未验收测试默认不填入；上述两组历史登记成绩为用户明确授权的展示例外，不等同完整产物验收。Chronos-2固定采用history_future，是已验收历史推理结果复用，不是本轮重新推理；证据路径见下方记录。DLinear/PatchTST的in_domain已完成完整产物验收，zeroshot按用户授权从历史登记填入并明确标注产物缺失。
 
@@ -35,6 +38,10 @@ MMSP，seed42，24→24；冻结权重、中位数预测、cross_learning=False�
 [下载四种输入CSV](../reports/chronos2_input_metrics.csv)。唯一迁移验收与原始配置/日志/预测/指标路径：`reports/Chronos2_two_protocols_seed42_20261011/runs.json`；原始指标保留完整精度。
 
 ## 当前授权
+
+- 2026-10-14最新任务：baseline统一实验完整验收后，在MMSP Site #0验证A01协变量负贡献。固定A01 Chronos-2+B131+Linear、seed42、24→24、原100/10/L1/AdamW/batch配置和60/20/20时间划分；每个NWP子集均从头训练B131及Linear，同时删除对应历史/未来NWP通道。阶段1为Full和15个leave-one-variable-out；按验证RMSE相对Full的严格改善识别负贡献变量。阶段2联合删除这些变量并重新训练，仍只按验证RMSE决定是否选择。选择决定写盘后才正式测试Full及联合删除组合；其他LOO不运行测试。阶段3使用验证预测按Site #0、24个horizon及各被删变量的训练集未来窗口均值三分位天气状态分析，不使用测试反馈。单站点任务的站点分组只有Site #0，不能推断跨站条件依赖。入口`scripts/run_site0_a01_covariate_ablation.py`，记录`reports/A01_site0_covariate_ablation_seed42_20261014/runs.json`；当前协调器只等待baseline验收，不提前启动消融。
+
+- 2026-10-14：用户要求检查Time-VLM/TimeXer收敛、统一预测指标选模、明确输入差异，四个baseline的最大轮数/patience统一100/10。本轮采用验证RMSE；Cross-Unet复用已验收100/10的验证MSE最优结果（与RMSE等价），其余三模型两个协议从头训练，沿用seed42、24→24、原结构/输入/batch/精度及初始学习率。Time-VLM/TimeXer改用验证RMSE停滞3轮后学习率减半，ChronosX保留CE训练并以20次采样中位数的全量验证RMSE选模。无新种子、超参搜索或同输入对照自动扩展；最多两张空闲GPU、合计四CPU核。任务记录：`reports/Baseline_alignment_100_10_seed42_20261014/runs.json`。
 
 - 2026-10-12 A04：用户批准实现并运行A04-a/b，随后补充in_domain也要做；两个协议seed42、A02预算，单GPU串行四组，验收后停止。证据为reports/Chronos2WeatherReadout_two_protocols_seed42_20261012/runs.json。
 
@@ -82,7 +89,7 @@ Time-VLM只消费历史功率及衍生图像/固定文本，TimeXer还消费历�
 
 统一入口：`run.py --model Chronos2Adapter --adapter_version {b131_linear_v1,b131_mlp63_v1}`；`scripts/run_chronos2_adapters.py`仅在一个协议内串行运行已批准的两个版本。记录：`reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json`及分协议runs.json/日志；权重、缓存和正式预测分别在checkpoints/outputs对应协议的Chronos2Adapter目录。旧Checkpoint的小批缓存forward核对最大差4.77e-7，这是代码迁移检查，不是当前协议完整复现。
 
-当前：四组完整训练、正式测试及产物验收均完成，训练进程已退出。以下是当前统一标准化NWP输入下的正式测试Metric，保留六位小数。研究版本独立登记，不覆盖主表的官方Chronos-2或未确定的Ours。
+当前：四组完整训练、正式测试及产物验收均完成，训练进程已退出。以下默认是当前统一标准化NWP输入下的正式测试Metric，保留六位小数；门控行已按2026-10-16授权替换为正式测试成绩。研究版本独立登记，不覆盖主表的官方Chronos-2或未确定的Ours。
 
 | models | input | MMSP in_domain MAE | MMSP in_domain RMSE | MMSP in_domain R^2 | MMSP zeroshot MAE | MMSP zeroshot RMSE | MMSP zeroshot R^2 |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -94,6 +101,14 @@ Time-VLM只消费历史功率及衍生图像/固定文本，TimeXer还消费历�
 | A03-c (History-Aware Weather Adapter) | 历史功率+历史/未来NWP（学习型历史关系） | — | — | — | 0.043590 | 0.093110 | 0.857836 |
 | A04-a (Weather-Conditioned Chronos Readout) | 历史功率+历史/未来NWP（天气Query读取预测Token） | 0.043910 | 0.095813 | 0.849462 | 0.043794 | 0.093361 | 0.857069 |
 | A04-b (Weather-Conditioned Chronos Readout) | 历史功率+历史/未来NWP（天气Query读取历史上下文及预测Token） | 0.043962 | 0.096162 | 0.848364 | 0.043710 | 0.093440 | 0.856828 |
+| T3 (Native Token Adapter) | 历史功率+历史/未来NWP（全变量Token+Cross-Unet风格Adapter） | 0.043781 | 0.095936 | 0.849077 | 0.043994 | 0.094272 | 0.854268 |
+| T2 (Native Token Adapter) | 历史功率+历史/未来NWP（全变量Token+MLP） | 0.043913 | 0.096004 | 0.848863 | 0.043847 | 0.094418 | 0.853814 |
+| T1 (Native Token Adapter) | 历史功率+历史/未来NWP（PV未来Token+MLP） | 0.043741 | 0.095720 | 0.849755 | 0.043653 | 0.092837 | 0.858670 |
+| 固定门控（正式测试） | 历史功率+历史/未来NWP（全局固定软门控） | 0.043534 | 0.095902 | 0.849182 | 0.043327 | 0.094323 | 0.854109 |
+| 动态门控（正式测试） | 历史功率+历史/未来NWP（逐样本逐小时动态软门控） | 0.044847 | 0.100817 | 0.833328 | 0.044264 | 0.095437 | 0.850642 |
+
+
+门控行已按2026-10-16授权登记正式测试成绩；验证成绩保留在原validation_review.json，不能与测试成绩混用。测试证据为reports/A01_gate_two_protocols_seed42_20261015/{in_domain,zeroshot_v1}/{fixed,dynamic}/test_acceptance.json（仅已完成版本）。
 
 [下载Adapter指标CSV](../reports/chronos2_adapter_metrics.csv)。原始精度与完整验收在`reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json`的acceptance字段；分协议`reports/{protocol}/results.csv`按model_id区分版本，不能仅按通用model=Chronos2Adapter合并。权重/训练记录在`checkpoints/{protocol}/Chronos2Adapter_{版本}_seed42_sl24_pl24_history_future/`，日志/预测/标签/索引/正式Metric在对应`outputs/`目录；冻结特征是可复现计算证据，保留在outputs对应协议下的Chronos2Adapter_features_v1目录。没有生成新图表或重复报告。
 
@@ -255,13 +270,13 @@ ChronosX固定Chronos-T5-small及IIB+OIB，冻结主干，训练2127616个注入
 
 <!-- CHRONOSX_STATUS -->
 
-ChronosX两协议已完成200/20预算下的正式训练、测试和产物验收，主表已同步。
+ChronosX两协议已完成100/10预算下的正式训练、测试和产物验收，主表已同步。
 
-in_domain完成22轮，最低验证CE第2轮；MAE/RMSE/R²=0.048576/0.109596/0.803038。
+in_domain完成16轮，选模依据minimum validation rmse，最佳第6轮；MAE/RMSE/R²=0.047528/0.108813/0.805843。
 
-zeroshot_v1完成24轮，最低验证CE第4轮；MAE/RMSE/R²=0.047360/0.106572/0.813759。
+zeroshot_v1完成16轮，选模依据minimum validation rmse，最佳第6轮；MAE/RMSE/R²=0.048782/0.107841/0.809296。
 
-唯一整体验收证据：`reports/ChronosX_two_protocols_seed42_20261011/runs.json`；20次采样中位数、仅seed42，未验证多种子稳定性。此队列完成后停止，无后续实验。
+唯一整体验收证据：`reports/Baseline_alignment_100_10_seed42_20261014/ChronosX/runs.json`；20次采样中位数、仅seed42，未验证多种子稳定性。此队列完成后停止，无后续实验。
 
 <!-- /CHRONOSX_STATUS -->
 
@@ -354,3 +369,259 @@ A04内部域内三项最佳均为a（MAE/RMSE/R²=0.043910/0.095813/0.849462）�
 注意力归一化熵0.8602–0.9116，权重存在小时及样本差异，未退化为严格均匀分配；这不证明注意力有效。跨站a置均匀后RMSE反而从0.093361降到0.093150，而MAE从0.043794升到0.044199；b零天气Query时RMSE也略降、MAE变差，域内同批Query置换的两版MAE/RMSE反而略改善。这里保留Memory及直接天气支路，仅干预Query，零Query仍有位置编码；置换局限同批样本，不能作为完整天气消融或因果证明。a只能混合两个预测patch Token；b的历史位置Token已包含已知未来NWP，不能称纯历史编码。
 
 四组无缺失正式指标，A02与A04参数量及读出预算匹配；但单seed尚未验证稳定性，未来NWP发布时间/双向插值限制仍在。完整日志、权重、预测和attention.npy/analysis.json路径见原runs.json各run，未新增图表。结论：本轮没有支持A04替代A02的稳定结果；下一步最小行动是用户验收当前证据，保持本阶段停止，不自动增种子或调参。
+
+## 2026-10-13 统一验收与运行隔离
+
+用户明确批准修改公共框架。`run.py` 默认使用带时间的独立运行名，所有训练入口及共同测试入口拒绝复用已有目录；续训、独立评估须另开目录。`utils/acceptance.py` 统一核对原CSV标签、完整站点/时间窗口、有限且非退化预测、重算MAE/RMSE/R²、配置/协议/scaler与验证最优checkpoint。普通模型共同验收通过后登记；FusionSF输入变体、TimeVLM、ChronosX及A02–A04还须通过既有专项检查。登记带锁并原子更新，失败或重新等待专项验收时移除该运行的索引行，验收不继承旧通过标记。
+
+共同训练循环新增逐轮CSV，旧产物只读原日志；A03/A04重放使用保存配置，允许更换空闲GPU，保留原数值模型、数据处理及权重身份核对。新配置/协议/日志不再被旧重复文件的通配忽略规则误排除。说明与检查命令见README“记录与验收”，回归用例为`tests/test_experiment_artifacts.py`。
+
+验证：15项合成产物/入口/并发回归检查全部通过；11组现有完整产物共同规则只读复核通过：Cross-Unet双协议，FusionSF域内power_future_nwp修复版与跨站power_history_future_nwp修复版，域内A01/A02/TimeVLM正式版/ChronosX，跨站A03-b/A04-b与域内A04-a。A03/A04历史数值代码、数据处理与checkpoint保护检查通过。另核对的TimeVLM 200轮续训目录无完整测试配置，与原runs.json中的用户停止状态一致，不算正式结果或验收通过。此次未改历史指标/权重/预测/结果索引，未启动训练或GPU重放；代码及保存产物检查不等同于新模型完整实验。
+
+用户随后要求构思Frozen Chronos-2 + Adapter方向，当前仅讨论。建议优先保留所有PV/NWP变量的历史与未来位置表示，再连接轻量Cross-Unet风格的时序/通道Adapter；FusionSF式输入对齐与增加历史长度作为独立候选。当前原生patch尺寸16，24→24对应两个历史及两个未来patch，`[B,2,768]`来自仅保留PV未来位置；完整非REG表示可组织为`[B,16,4,768]`。A04-b已经使用PV历史+未来四个位置，本建议新增的是NWP变量表示与结构化混合，不能宣称“首次增加历史token”。未来patch数增加代表更长预测范围，不会自动提高24小时内的时间分辨率。Cross-Unet使用MSE、FusionSF使用L1+VQ，指标差异不能直接归因于encoder；新结构收益尚未验证，未修改或启动这些模型。
+
+## 2026-10-13 全变量 Token Adapter 实验
+
+用户审查方案后明确“基于上述实验方案，推进实验”。先执行第一阶段T1/T2/T3×in_domain/zeroshot_v1六组，seed42、24→24。冻结同协议A01；T1只读PV未来两个原生Token，T2读16变量×4位置原生Token，均使用逐Token残差MLP；T3以两尺度时间注意力、同一24小时PV/NWP相关矩阵的可学习通道混合替换MLP。共享投影64、天气/小时Query和零初始化小时残差读出；不使用Cross-Unet额外PV历史块，不改变patch尺寸/数据/scaler。T1/T2为178315参数，T3为178369参数，MLP宽906由参数量匹配确定，无性能搜索。T3是Cross-Unet启发的组合模块，不是官方encoder直接复现。
+
+沿用A02的FP32、AdamW lr0.000016/wd0.05、batch512/eval1024、L1、max100/patience10，验证MAE选权重含epoch0。单空闲GPU串行、CPU9,10两线程、workers0。新运行独立目录；原生全变量缓存逐窗口核对已有A01预测表示、标签、站点、时间、scaler；训练前核对零残差、冻结权重、梯度、padding/mask；正式测试后从共享原始Dataset重放全部测试窗口，通过统一及专项验收后登记既有Adapter表。入口`scripts/run_chronos2_token_adapter.py`，唯一进度/路径/指标记录`reports/Chronos2TokenAdapter_stage1_seed42_20261013/runs.json`。
+
+后续F1/F2输入位置实验与L1/L2长历史实验遵循审查方案的验证门槛：相应对照在两个协议的验证RMSE均改善至少1%，每个协议验证MAE退化不超过0.5%。不以新测试成绩决定后续结构。第一阶段完成后核对门槛再推进；不满足则保留负结果并停止。单种子探索不代表显著性，NWP发布时间缺失与双向插值限制仍在。
+
+启动核对：15项公共验收回归通过。首个启动入口漏传use_gpu=1，实际CPU原生表示与历史GPU缓存不一致，在任何训练epoch/权重写出前被拦截；原输入及冻结权重一致，失败日志与CPU检查保留于同目录`failed_20261013T215400_*`，登记在runs.json.failed_attempts，不作为GPU检查证据。修正后显式使用cuda:0，两个协议×三变体共六项真实GPU检查通过，历史A01 Token最大差异1.90735e-6，零残差、冻结权重、梯度及padding核对通过，证据为preflight.json。有效批次20261013T215919在GPU0串行完成，最后一组于2026-10-13 22:43通过验收；状态为`stage1_accepted`，后续阶段门槛未通过，已停止。
+
+### 2026-10-14 结果核对与阶段结论
+
+六组保存的metrics.json、acceptance.json、training_summary.json与runs.json一致，必要日志、权重、预测均存在，独立指标CSV与分协议索引已登记。沿用昨夜完成的统一验收和每组25,450个测试窗口原始Dataset全量权重重放证据，最大预测差异2.384186e-7；本次未重复训练、推理或完整验收，只核对保存记录、指标登记和门槛算术。MMSP两协议、seed42、24→24及配置保持不变。
+
+同协议A02测试基线MAE/RMSE/R²：域内0.043908633/0.095870190/0.849283622，跨站0.043621510/0.092941636/0.858350874。下表Δ为当前−A02，负误差变化表示改善；完整测试三指标见上方既有Adapter表。
+
+| 协议 / 版本 | 最佳轮 / 完成轮 | Δ测试MAE（相对变化） | Δ测试RMSE（相对变化） |
+| --- | --- | --- | --- |
+| in_domain / T1 | 38 / 48 | -0.000167283（-0.3810%） | -0.000150078（-0.1565%） |
+| in_domain / T2 | 9 / 19 | +0.000004098（+0.0093%） | +0.000133649（+0.1394%） |
+| in_domain / T3 | 12 / 22 | -0.000127910（-0.2913%） | +0.000065702（+0.0685%） |
+| zeroshot_v1 / T1 | 13 / 23 | +0.000031704（+0.0727%） | -0.000104912（-0.1129%） |
+| zeroshot_v1 / T2 | 6 / 16 | +0.000225179（+0.5162%） | +0.001476621（+1.5888%） |
+| zeroshot_v1 / T3 | 17 / 27 | +0.000372764（+0.8545%） | +0.001329914（+1.4309%） |
+
+T1是本轮T1/T2/T3中两个协议三项测试指标均最佳的版本：域内MAE/RMSE/R²=0.043741/0.095720/0.849755，跨站=0.043653/0.092837/0.858670。该描述不用于后续结构选择；相对A02，T1跨站MAE仍略差，且参数量178,315高于A02的29,249，不能归因为结构收益。
+
+后续门槛仅使用各自验证MAE最优checkpoint的验证指标：两协议RMSE均改善至少1%，且各自MAE退化不超过0.5%。
+
+| 验证对照 | 域内RMSE改善 | 跨站RMSE改善 | 域内MAE退化 | 跨站MAE退化 | 门槛 |
+| --- | --- | --- | --- | --- | --- |
+| T2相对T1 | -0.4123% | -2.1851% | +0.3549% | +0.9972% | 未通过 |
+| T3相对T2 | -0.0628% | +0.7987% | -0.0451% | -0.6269% | 未通过 |
+
+因此不进入F1/F2或L1/L2。当前全变量Token与组合Adapter未达到预定推进标准；单seed不能证明机制普遍无效，NWP发布时间缺失与双向插值限制保留。六组正式结果无缺失，启动失败记录保留。
+
+证据及日志、模型、输出目录均由[原runs.json](../reports/Chronos2TokenAdapter_stage1_seed42_20261013/runs.json)索引；模型在`checkpoints/{protocol}/Chronos2TokenAdapter_T{1,2,3}_seed42_sl24_pl24_20261013T215919/`，预测、Metric及逐站/逐小时分析在对应`outputs/`目录。结果表为[chronos2_adapter_metrics.csv](../reports/chronos2_adapter_metrics.csv)，未新增图表或独立报告。下一步最小行动是用户验收本阶段负结果，实验保持停止。
+
+## 2026-10-14 Baseline收敛检查与100/10统一
+
+原正式日志显示：Time-VLM两个协议均最佳epoch9、终止epoch10（轮数上限），最佳验证RMSE分别0.116523/0.110671；末轮分别0.116537/0.110719，只有1轮未改善，不能认定已经收敛。此前200/20续训中途被用户停止，未替代主表。TimeXer两个协议均最佳epoch4、终止epoch7（patience3），最佳验证RMSE分别0.111718/0.108074；末轮0.112507/0.108745，训练损失继续下降、验证RMSE不再改善，表现为当前配置下的验证平台或退化，而非撞到10轮上限。上述均为验证指标，不能代替测试结果。
+
+两者原type1学习率逐轮减半，单纯增加最大轮数不能排除学习率过早衰减的影响。本轮保留初始lr（Time-VLM 0.001、TimeXer 0.0001），改为ReduceLROnPlateau factor0.5、scheduler patience2（连续3轮未达到调度器改善条件时减半；沿用PyTorch默认相对threshold=1e-4），early-stopping patience10、最大100轮。新实验从seed42重新初始化，保留旧结果；预算和调度同时改变，因此新旧差异不视为单纯轮数因果对照。
+
+Cross-Unet原本100/10且按验证MSE选模，与验证RMSE选模数学等价，已有完整验收结果复用，不重复训练或改写旧配置。ChronosX保留冻结Chronos-T5-small、IIB+OIB、CE训练、batch1024/eval64、BF16及lr0.01线性调度；100轮使总调度步数变为7500。每轮在全量验证集计算与测试相同的20采样中位数预测的MAE/MSE/RMSE，按RMSE选权重，CE仅作诊断；验证固定seed42并隔离、恢复CPU及当前GPU随机数，避免验证采样改变训练随机序列。不会在验证时使用未来真实功率生成预测。
+
+| 模型 | 本轮输入信息 | 处理 |
+| --- | --- | --- |
+| Cross-Unet | 24小时功率、历史/未来15维NWP、额外相关历史功率块（通常为再往前24小时，边界回退） | 复用已验收100/10结果 |
+| Time-VLM | 历史功率+衍生图像/固定文本 | 0.068934 | 0.119808 | 0.764624 | 0.068747 | 0.119382 | 0.766292 |
+| ChronosX | 历史功率+历史/未来NWP | 0.047528 | 0.108813 | 0.805843 | 0.048782 | 0.107841 | 0.809296 |
+| TimeXer | 历史功率+历史NWP | 0.072885 | 0.120689 | 0.761150 | 0.072329 | 0.120635 | 0.761361 |
+
+这些是各模型原输入下的baseline比较，不能将结果差异归因为架构本身；本轮不增加同输入模型改造。Time-VLM保留原验证/测试期间按forward顺序更新记忆库的行为，未借此次预算调整改变结构或状态处理。两协议各一条串行任务，顺序Time-VLM→TimeXer→ChronosX；两个协议合计最多两GPU、CPU9/10与0/7各两线程、workers0。每个模型通过共同验收和既有专项验收后才更新原主表并进入下一模型，失败停止。仅当前三模型六组，结束即停。
+
+原四条收敛曲线的逐轮数值与日志来源保存在`reports/Baseline_alignment_100_10_seed42_20261014/convergence_before.json`；每个模型的`runs.json`保存独立运行名、参数、旧结果路径及新日志/权重/预测路径。准备阶段18项回归检查通过；真实ChronosX GPU预测验证检查另存`preflight_chronosx.json`。当前新实验结果以运行记录为准，准备检查不代表已经完成训练；新结果验收前主表仍展示旧结果，未新增图表。
+
+运行核对更正：沙箱进程命名空间中的`ps`未显示宿主PID，一度误判Time-VLM退出；宿主`ps`及GPU进程表确认原协调器和两条训练始终存活，日志持续写入。未重启、未续训、未重复实验。由该误判生成的`reports/Baseline_alignment_100_10_seed42_20261014_retry1/`仅含未启动配置，状态统一标记`cancelled_duplicate_not_started`，没有checkpoint/output或正式结果。
+
+Site #0协议`site0_v1`沿用相同目标时间边界、训练期NWP scaler与评价口径，窗口7657/2545/2545。A01消融准备阶段20项回归检查通过；三条真实GPU训练窗口验证Full与删除首变量均产生[3,2,768]目标Token但编码不同，Linear梯度有限且B131冻结检查通过，证据`reports/A01_site0_covariate_ablation_seed42_20261014/preflight_gpu.json`。这不是正式训练或性能结果，未访问验证/测试指标。
+
+
+Time-VLM两协议100/10、验证RMSE选模的新实验已通过正式测试与专项验收，主表已更新；旧实验产物保留。
+
+in_domain完成51轮，最佳第41轮；测试MAE/RMSE/R²=0.068934/0.119808/0.764624。
+
+zeroshot_v1完成51轮，最佳第41轮；测试MAE/RMSE/R²=0.068747/0.119382/0.766292。
+
+证据：`reports/Baseline_alignment_100_10_seed42_20261014/TimeVLM/runs.json`；保留原输入、官方验证及测试期间顺序更新记忆库的行为，不声称纯架构对照。
+
+
+### A01 Site #0 静态筛选可靠性检查（2026-10-14）
+
+此前Full、15个LOO、联合删除及条件分析均于17:42完成；变量选择在正式测试前冻结。当前固定删除6/7/8/9/10/13/14，不依据本次测试检查更改组合。MMSP site0_v1、seed42、24→24，A01 Chronos-2+B131+Linear，训练100/10；本次只读取已有预测，未重新训练。
+
+使用2545个连续小时预测起点的配对循环时间块bootstrap，保留每个起点的全部24个horizon，两模型共用采样索引。重采样10000次，随机种子20261014（区别于训练seed42），预先指定7天块为主，1天/3天作敏感性检查。报告percentile 95%区间；判据为主分析和敏感性分析的RMSE差值区间上界均小于0。
+
+Full测试RMSE 0.0870160704，联合删除0.0863224567，差值−0.0006936138（−0.7971%）。7天块95%区间[−0.0079168906, +0.0085849704]；1天[−0.0074868379, +0.0078570482]、3天[−0.0075330512, +0.0079832783]也包含0，故主指标收益可靠性尚未确认，不能解读为证明无收益。Full/联合删除MAE为0.0384787080/0.0371585524，差值−0.0013201556（−3.4309%），7天区间[−0.0026116844, −0.0001532616]；这是次要指标证据，不能事后替代RMSE判据。
+
+该检验仅描述固定模型在当前测试时段的采样不确定性，依赖近似平稳及时间块假设，不覆盖训练随机性或跨站泛化；原NWP发布时间缺失及双向插值限制仍保留。动态选择机制的设计前提尚未满足，本次未启动设计或训练。下一步最小建议为讨论固定组合的多种子复核，需单独确定范围，不继续按测试成绩筛选变量。
+
+复现脚本：`scripts/check_a01_static_reliability.py`；完整结果及原预测路径：`reports/A01_site0_covariate_ablation_seed42_20261014/static_reliability.json`。训练日志、checkpoint和原结果见同目录`runs.json`与`summary.json`；本次无新增模型和图表。
+
+
+### A01固定静态组合多种子复核（2026-10-14 21:04启动）
+
+用户明确授权启动多种子复核。复用seed42，新增2026/2027；各自仅训练Full和固定删除6/7/8/9/10/13/14，共四组新增训练及正式测试。MMSP site0_v1、A01 Chronos-2+B131+Linear、24→24、原100/10预算及MAE选checkpoint不变；比较主指标为测试RMSE，不重新筛选变量。每个种子及变量组合有独立B131/Linear训练路径。单空闲GPU串行，CPU9,10两线程，num_workers0；每组前重查空闲卡，无空闲卡等待，失败停止。入口scripts/run_a01_static_multiseed.py；tmux会话pvtsfm-a01-multiseed；状态与日志/权重路径索引reports/A01_site0_static_multiseed_20261014/runs.json（当前任务详情在seed2026或seed2027/runs.json）。完成后汇总同测试集的配对种子差异，再结合时间块不确定性判断；动态机制设计仍以可靠性确认为前提。
+
+
+### A01多种子复核验收与动态设计判断（2026-10-14）
+
+新增四组于21:08:26完成，均正常退出并通过产物验收；本次复核六组预测/标签/时间/站点对齐、有限值及RMSE重算一致。固定组合在seed42/2026/2027的测试RMSE相对变化分别为−0.7971%、−6.1633%、−1.6112%。三种子的RMSE算术均值从0.0864446243降至0.0839436895，绝对变化−0.0025009348（−2.8931%）；这不是集成预测成绩。最低单次RMSE为联合删除seed2027的0.0823763132，不据此选种子。
+
+对六组预测使用相同时间块索引（7天主分析，1/3天敏感性，10000次，bootstrap seed20261014），计算每次重采样的三个种子RMSE差值均值。7天95%区间[−0.0076619786,+0.0030192677]；1天[−0.0073415435,+0.0027648661]，3天[−0.0074320808,+0.0028012589]均跨0。seed2026单独区间不跨0，但不能事后只选此种子替代整体证据。多种子支持收益方向的一致性，未解决测试时段不确定性；区间条件于这三个已训练模型，并不覆盖全部训练随机性，也不能把三个种子当作三个独立测试期。
+
+结论：依据此前约定的可靠性前提，暂不进入动态选择机制设计；不认定无效，但不宣称稳定显著获益。下一步仅建议讨论固定方案的独立时段验证，尚未启动扩展实验。证据reports/A01_site0_static_multiseed_20261014/summary.json及reliability_review.json；模型、日志、预测路径见runs.json及各seed的test_result.json；无失败及新增图表。
+
+
+### A01动态软门控开发（2026-10-14最新授权）
+
+用户在明确知晓静态筛选可靠性尚未确认后，要求进入动态设计并启动。首版仅MMSP site0_v1/seed42/24→24，训练与验证开发，不访问旧测试集、不新划分所谓独立测试期；独立最终评估时段尚未确定。新增models/Chronos2DynamicGate.py与scripts/run_a01_dynamic_gate.py，不修改原A01结构或已验收结果。
+
+选择器为64→32→15的MLP（2575参数），输入历史功率均值/标准差/末值、历史15维NWP均值/标准差/末值、逐预测小时未来NWP和归一化horizon，sigmoid输出[B,24,15]，初值0.95。历史NWP使用未来24小时门控均值。门控乘在原生instance_norm之后、patch embedding之前的数值段；时间编码、有效性mask及功率通道保持原值，避免归一化抵消。门控为0不等同于删除变量token，是软数值加权，不能按精确子集选择解释。
+
+Chronos-2冻结但保留输入反向传播。阶段1从头训练selector+B131，lr分别0.000016/0.0016；阶段2冻结selector+B131，训练Linear lr0.000016。两阶段均100/10、L1、AdamW wd0.05、验证MAE选checkpoint，比较报告RMSE，沿用A01阶段定义。有效训练batch512，第一阶段microbatch8累积（末组按实际样本数归一）；FP32、单空闲GPU/CPU9,10两线程/workers0。仅选择器冻结后允许缓存编码特征，不复用旧固定编码训练门控。
+
+CPU真实训练样本32/56检查通过：全开门控与原生编码最大误差0，零门控表征差3.279443，选择器梯度L1为0.0063389，冻结主干无梯度。属于必要实现检查，不是完整训练或独立性能验收。启动后重做GPU真实批检查，空闲卡出现才开始，失败停止、不自动扩展种子或搜索。报告reports/A01_site0_dynamic_gate_seed42_20261014，tmux会话pvtsfm-a01-dynamic-gate；state=completed_validation_only仅表示开发完成。相对原A01增加了可训练参数，单一比较尚不能隔离动态性贡献。
+
+
+2026-10-14收工：用户要求今天结束并推送GitHub，已停止pvtsfm-a01-dynamic-gate等待会话，确认PID2773005已退出，动态门控尚未训练，runs.json标为paused_before_training。手动恢复命令见README的“手动运行A01动态软门控”；仅恢复未开始训练的队列，不支持将已有训练当作新运行覆盖。CPU必要检查已通过，完整GPU训练与独立测试未完成。数据、预训练权重、checkpoint二进制与预测数组继续只保存在本机。
+
+### A01动态软门控验证审阅（2026-10-15）
+
+最新授权与对照定义：用户要求继续固定门控对照以区分动态性贡献。固定版保留相同2575参数MLP、0.95初始化和门控lr0.00016，但输入固定为7657个训练窗口全部horizon的64维输入均值（仅训练集计算），每变量输出一个全局可学习权重，不随样本或horizon改变。该均值保存在config.json的fixed_gate_input中；其余Site #0/seed42/24→24、B131/Linear学习率、FP32、batch512/microbatch8、两阶段100/10、验证MAE选模均保持一致。独立运行reports/A01_site0_fixed_gate_lr10_seed42_20261015，入口新增--gate-mode fixed；单空闲GPU、CPU9/10两线程。必要检查在非零末层权重下核对门控对输入及horizon不变。仅此一组训练/验证对照，完成后审阅，不访问测试集或扩展种子。相同参数量不等于相同函数容量或优化几何，结论限定于此配对设计。
+
+后续授权：用户要求按分析继续推进至阶段性成果并发邮件。本轮先仅提高门控学习率10倍至0.00016，保持Site #0、seed42、24→24、初始化、B131/Linear学习率、有效batch512/microbatch8、FP32及100/10不变，从头训练一个对照。原实验不覆盖，测试集不访问；对照完成后审阅指标、门控变化并发送完整阶段总结。入口scripts/run_a01_dynamic_gate.py新增独立运行目录及selector学习率参数；记录reports/A01_site0_dynamic_gate_lr10_seed42_20261015/runs.json，后台会话pvtsfm-a01-gate-lr10，CPU9/10两线程、单空闲GPU。
+
+执行结果：10倍门控学习率对照于2026-10-15约02:04完成，GPU0已释放。第一阶段36轮/最佳26轮，第二阶段53轮/最佳43轮。验证MAE/RMSE/R²为0.033988587/0.081479230/0.849074836；相对原门控MAE减少0.000556287（1.6103%）、RMSE减少0.001453804（1.7530%）；相对原A01 Full分别减少0.000261751（0.7642%）和0.000799104（0.9712%）。门控范围扩大到0.366399–0.990394，相对初值平均绝对变化0.040987，跨样本标准差均值0.019211；支持原学习率限制更新幅度，但未隔离动态性贡献。固定联合删除仍有更低验证RMSE0.076951。本次2545个窗口对齐与指标重算通过，两阶段冻结权重一致，最终权重两验证窗口CPU重放最大预测误差1.49e-7。完整阶段总结及邮件正文为reports/A01_site0_dynamic_gate_lr10_seed42_20261015/stage_summary.md，结果表validation_comparison.csv、审阅validation_review.json和重放checkpoint_replay.json在同目录。仅单种子验证证据，无测试集访问或显著性结论；该轮阶段目标完成；固定门控对照随后完成，验收见下文。
+
+用户授权恢复后，在空闲GPU0、CPU9/10两线程运行；GPU真实批前后向检查通过。selector+B131训练36轮，验证MAE最佳第26轮；Linear训练15轮，按既定验证MAE选第5轮。约01:23完成，状态completed_validation_only，未访问测试集。Site #0、seed42、24→24及两阶段100/10保持不变。
+
+已读取保存预测重算指标：2545个验证窗口，预测/标签/门控均有限；与原A01 Full和固定联合删除的标签、站点、时间逐元素一致，指标重算误差为0。动态门控验证MAE/RMSE/R²为0.034544874/0.082933034/0.843640984；原Full为0.034250338/0.082278335/0.846099934。动态门控MAE增加0.000294536（0.8600%），RMSE增加0.000654699（0.7957%）。固定删除6/7/8/9/10/13/14的验证RMSE为0.076950676，动态门控比其增加0.005982358（7.7743%）；固定删除组合本身由该验证集筛选，不能将此比较解释为独立泛化证据。
+
+门控范围0.947723–0.952584，均值0.950143，距初值0.95的平均绝对变化仅0.000705；跨样本标准差均值0.000258，跨horizon标准差均值0.000118。门控有变化但幅度很小，当前没有形成明显的动态抑制。第一阶段最佳轮后训练MAE继续下降而验证变差；第二阶段按MAE选第5轮，最低RMSE实际在第1轮（0.082776728），仍差于原Full，不更改预定选模准则。尚不能归因于学习率、初始化或动态机制本身，未进行新消融或重训。
+
+结论：首版完成训练/验证，但未优于原A01；下一步最小行动是定位门控更新幅度小的原因，再决定是否修改配置。证据reports/A01_site0_dynamic_gate_seed42_20261014/validation_review.json；日志run.log、GPU检查preflight_gpu.json与产物索引runs.json在同目录。权重位于checkpoints/site0_v1/Chronos2DynamicGate_A01_site0_seed42_20261014，预测、门控及训练历史位于outputs/site0_v1/Chronos2DynamicGate_A01_site0_seed42_20261014；无新增图表，独立最终评估尚未完成。
+
+
+### A01固定门控对照验收（2026-10-15）
+
+固定门控已完成训练/验证：selector+B131完成36轮、验证MAE最佳第26轮；Linear完成16轮、最佳第6轮，均按patience10结束。2545个验证窗口的预测/标签/门控均有限，与动态lr10的标签、站点及时间逐元素对齐，MAE/RMSE/R²重算一致。两阶段selector与B131权重完全一致，固定门控在全部样本及horizon上不变，范围0.873536–0.976254；最终checkpoint在验证窗口32/56的CPU重放最大预测误差2.682209e-7，门控误差1.192093e-7。沿用已有真实GPU前后向检查，不重复训练或全量推理。验收为验证开发产物验收，不是独立测试验收；通用Metric字段test_windows在本运行实际表示验证窗口数。
+
+| 配对版本（Site #0、seed42、门控lr0.00016） | 验证MAE | 验证RMSE | 验证R² |
+| --- | --- | --- | --- |
+
+动态版相对固定版MAE减少0.000399621（1.1621%），RMSE减少0.001210109（1.4634%）。该配对支持输入条件化门控在当前验证集上优于全局固定权重；同参数量不等于同函数容量或优化几何，单种子验证不足以证明动态机制稳定泛化或显著收益。独立最终评估时段仍未确定，未访问测试集、未更新正式主表、未启动新实验。
+
+唯一运行索引reports/A01_site0_fixed_gate_lr10_seed42_20261015/runs.json已登记acceptance，核验细节在同目录validation_review.json；原run.log、preflight_gpu.json、两阶段checkpoint、配置、协议、scaler、预测及训练历史完整保留。当前执行环境无法访问GPU驱动，进程退出不依赖沙箱ps推断；完成状态由完整两阶段记录及最终产物交叉确认。
+
+
+### A01门控迁移至两协议：准备验收（2026-10-15）
+
+用户批准先做in_domain/zeroshot_v1迁移核对与必要检查；本阶段未授权启动完整训练。仅将scripts/run_a01_dynamic_gate.py的协议及产物目录参数化，保留Site #0默认行为，非Site0要求显式独立run-id/report-dir；未改模型数学结构、公共Dataset或协议。
+
+两协议均为76,570训练窗口、25,450验证窗口。与已验收A01逐项核对保存的协议JSON（坐标tuple按JSON列表规范化）及scaler数组完全一致；100/10、FP32、有效batch512、AdamW/wd0.05、B131 lr0.0016、Linear lr0.000016、L1及验证MAE选模一致，已有A01可复用为原版对照。A01采用冻结编码缓存，门控需microbatch8输入反传与累积，训练随机顺序和浮点轨迹不宣称完全相同；固定/动态门控之间沿用相同训练流程。
+
+两协议×固定/动态共四项CPU及四项GPU3真实训练样本前后向检查通过：采样首末站点0/9或10/19，全开门控与原生编码最大误差0，零门控改变表征，selector梯度有限且非零，骨干冻结；固定门控在非零末层权重下对样本/horizon不变，动态版对输入变化有响应。固定输入均值仅由各自全部训练窗口计算，不复用Site #0均值。检查不是完整训练或正式性能复现。
+
+拟运行四组：每协议固定与动态门控，seed42、24→24、门控lr0.00016、两阶段100/10、有效batch512/microbatch8、FP32，单空闲GPU串行、CPU9/10两线程、workers0；每组前重新检查空闲GPU。仅训练/验证开发，验证MAE选权重，主要比较验证RMSE，同时报告MAE/R²，不增加结构或种子。zeroshot_v1验证使用源站点#10–#19，不能据此宣称目标站点#0–#9泛化获益；既有目标测试已在此前实验中被观察，不称全新独立留出集。本阶段未生成测试预测或访问测试数组，正式测试边界在后续运行批准时明确。
+
+唯一准备索引reports/A01_gate_two_protocols_seed42_20261015/runs.json，协议复用核对migration_review.json及各协议/门控目录下preflight_cpu.json、preflight_gpu.json。准备阶段状态为preparation_checks_passed_awaiting_training_approval；后续启动授权见下文。临时核查脚本已清理，证据保留，无新增Markdown报告。
+
+
+2026-10-15后续授权：用户明确批准启动上述四组训练/验证。唯一串行入口scripts/run_a01_gate_two_protocols.py，顺序in_domain固定→动态→zeroshot_v1固定→动态，已有A01原版不重训。各组由原门控入口等待空闲GPU并在启动前重查，CPU9/10两线程、workers0；训练退出后核对全量验证标签/站点/时间、有限值、Metric重算、MAE选模、第二阶段冻结权重及两个窗口CPU权重重放，验收通过才进入下一组，失败停止、不自动重跑。每组验收后在此登记验证指标；主表不改，不执行测试。后台tmux会话pvtsfm-a01-gate-two-protocols，队列索引仍为reports/A01_gate_two_protocols_seed42_20261015/runs.json。
+
+
+2026-10-15双GPU授权覆盖前述单GPU串行：用户明确批准两个协议并行，各协议内部固定→动态串行并逐组验收。in_domain原PID3595457在GPU4/CPU9,10继续，未停止或重启；zeroshot_v1固定版PID3636705在GPU7/CPU0,7启动，两进程各两线程、workers0，总计两GPU/四CPU核。新tmux会话pvtsfm-a01-gate-parallel；唯一入口仍scripts/run_a01_gate_two_protocols.py，父索引runs.json汇总，各协议queue.json负责实时状态。后续组仅在指定GPU空闲时开始，配置、预算及测试禁用边界不变。
+
+旧协调器PID3595448仅暂停调度，保留为原训练父进程；in_domain接管worker等待原训练退出后回收旧协调器，不再由旧队列启动任何任务。串行接管前记录serial_handoff.json保留。首次接管因SIGSTOP状态尚未同步而未写就绪记录，新协调器在启动worker之前退出；修正后启动成功，无训练重跑，原失败日志parallel_coordinator_pre_handoff_failure.log保留。任一协议失败设置STOP，阻止另一协议启动下一组，已运行训练可完成并保存验收证据，不擅自中断。
+
+
+### 三模型有限调参（2026-10-15授权）
+
+用户要求仅TimeXer、Cross-Unet、ChronosX，资源有限、有限次数，可先in_domain或Site #1。本轮选择in_domain，复用已有同协议seed42/24→24基线验证成绩；预先固定每模型2组、共6组，不根据新测试成绩扩展搜索。TimeXer从512/512分别改d_model/d_ff=128/128，或单独dropout从0.1改0.2；Cross-Unet保持官方type3，仅学习率从0.0001分别改0.00005/0.0002；ChronosX保持冻结主干、IIB+OIB、batch1024/BF16/20采样及线性调度，仅lr从0.01分别改0.003/0.001。各候选均相对原基线独立修改，不累积改动。TimeXer较小宽度是超参变体，不声称原默认配置；各模型原输入不变。
+
+顺序TimeXer两组→Cross-Unet两组→ChronosX两组，seed42、24→24、max100/patience10不变。统一按全量验证RMSE选checkpoint及候选（Cross-Unet原MSE与RMSE选模等价），原已验收基线也参与候选，若均不优则保留原版。ChronosX验证仍固定seed42、20次采样中位数，不用CE选最终候选，调度上限仍75步/轮×100轮。保留全部候选配置/权重/逐轮日志/验证指标，不写入正式测试索引或主表，不自动测试、跨协议推广或多种子。
+
+入口scripts/run_baseline_limited_tuning.py只调用既有train/vali，不调用run.main或test，不修改公共框架。六组参数解析及与已有基线的差异检查通过；ChronosX max_steps/eval_steps是训练阶段派生字段，仍由原训练方法设置。各组开始前进行真实训练样本GPU有限前后向/梯度检查，再重新初始化并从头训练；失败停止不自动重跑。训练结束核对最佳epoch、全量验证权重重放与选模指标一致后才进入下一组。属于验证调参验收，不称正式测试复现。
+
+当前门控双GPU任务保持不动。本队列等待门控总状态completed_validation_acceptance后才申请一张空闲GPU，CPU9/10两线程、workers0、单组串行；门控失败则停止等待并报错，不擅自接续。唯一索引reports/Baseline_limited_tuning_in_domain_seed42_20261015/runs.json，日志及preflight/result在同目录，tmux会话pvtsfm-baseline-limited-tuning。模型权重与配置沿用checkpoints/in_domain，验证产物沿用outputs/in_domain独立limited_tuning目录。准备检查不代表GPU检查或完整训练已完成。
+
+两协议门控队列：zeroshot_v1/fixed完成验证产物验收，验证MAE/RMSE/R²=0.039073/0.092607/0.780281；证据reports/A01_gate_two_protocols_seed42_20261015/zeroshot_v1/fixed/validation_review.json。未访问测试集。
+
+
+### 门控in_domain CPU重放异常定位（2026-10-15夜间）
+
+用户仅批准定位重放差异，未授权恢复队列或修复模型。固定门控两协议训练均已完成；in_domain在两个验证窗口[32,25449]的CPU重放失败，zeroshot已通过原验收。两条动态门控及六组baseline调参均未启动，失败日志和STOP保留。
+
+根因为Chronos-2原生chronos.chronos_bolt.InstanceNorm.forward中的FP32归约及scale==0分支：完全恒定的历史NWP在CPU求均值后有微小舍入残差，标准差为2.980232e-8或5.960464e-8，因非零未替换为eps；GPU同样输入的标准差为0，替换为1e-5。除以极小标准差并arcsinh后，恒定通道的归一化值相差0.8813736。失败窗口涉及NWP index12总降水、index7低云量，非权重加载失败或普通输出末位误差。
+
+原两个窗口CPU预测最大差异0.014773458；另一张同型号空闲GPU6上重放仅1.043081e-7。共26个不同验证窗口的小批检查中，按原batch8及末尾batch2组织的GPU重放与保存预测逐位一致；CPU按原批次仍不一致，排除仅由验收重组批次引起。进一步只在诊断进程内交换归一化设备：CPU网络+GPU归一化误差1.192093e-7，GPU网络+CPU归一化误差0.014773458，差异跟随归一化路径。原阈值1e-5未改，模型、权重、协议均未改，未完整重跑验证或访问测试集。
+
+证据为reports/A01_gate_two_protocols_seed42_20261015/in_domain/fixed/normalization_diagnosis.json及replay_diagnosis_cpu.json、replay_diagnosis_cuda_6.json，原runs.json仅增加诊断引用，不标记验收通过。建议后续按原GPU推理精度/批次核验权重身份，保留现有阈值；若要修改原生归一化则属于不同数学实现，不能当作此次验收脚本修正。当前仅完成定位，所有队列继续停止。临时诊断脚本及中间张量已清理，最终诊断证据保留。
+
+
+### 固定门控GPU路径验收完成（2026-10-15夜间）
+
+用户批准按原GPU计算路径完成验收，仅本阶段，不恢复队列。scripts/run_a01_gate_two_protocols.py的accept增加显式device参数，并保持原验证批次边界；此次使用与原GPU4同型号的空闲GPU6、FP32、matmul highest/TF32 false、原默认cudnn.allow_tf32 true，不改模型数学结构、权重、协议或阈值。全量25,450验证窗口标签/站点/时间、有限值和Metric重算通过；两阶段最优MAE权重选择及selector/B131冻结一致性通过。失败窗口所在原批次[32..39]和[25448,25449]共10个窗口GPU重放，预测与门控最大误差均0，保持原预测1e-5、门控1e-6阈值。不是全量GPU推理重跑或正式测试验收。
+
+in_domain固定门控验证MAE/RMSE/R²=0.039912/0.094079/0.797180；第一阶段19轮/最佳9轮，Linear50轮/最佳40轮。证据reports/A01_gate_two_protocols_seed42_20261015/in_domain/fixed/validation_review.json，运行索引及两个协议queue.json已同步为固定版验收通过、停止等待恢复。zeroshot已有验收不重复。原CPU失败、归一化诊断、STOP及baseline等待失败日志保留；两组动态门控、baseline六组仍未启动，本次无训练、测试或队列恢复。
+
+
+### 2026-10-16正式测试与剩余队列恢复授权
+
+用户明确同意：固定门控两协议先用各自最佳验证MAE权重做一次全量正式测试、验收并替换Adapter CSV中的验证行；随后恢复动态门控两协议，同样先验证选模、再正式测试验收。六组baseline调参仍只用验证集选参，待门控全部正式验收后单GPU串行执行。不得按本次测试成绩更换配置或权重。
+
+新增scripts/evaluate_a01_gate.py，沿用原GPU FP32/batch8路径，不改模型、归一化、协议或训练预算。正式测试输出使用原run_id加_formal_test_20261016的独立目录，保存预测/标签/站点/时间、config、protocol、scaler、Metric、验收及权重哈希；复用公共原始CSV样本与scaler检查，另核对原两阶段JSON历史选模/冻结权重，并重载checkpoint按原GPU批次重放。该门控训练未使用公共CSV历史接口，使用其原始JSON历史作专项选模验收，不伪造历史训练记录。
+
+首次in_domain入口在推理前因内存tuple与保存JSON列表比较退出，保存协议核对完全相同，已将比较统一为JSON语义。未生成预测或训练；失败日志及仅含协议/scaler的目录保留。正式推理仍为每协议首次。原CPU验收失败及归一化诊断保留。恢复仅跳过已正式验收的固定版，不重训；后续GPU重放保持原阈值。
+
+固定门控两协议正式测试及产物验收完成，已同步Adapter表；原验证成绩仍保留在各validation_review.json。证据reports/A01_gate_two_protocols_seed42_20261015/{in_domain,zeroshot_v1}/fixed/test_acceptance.json。
+
+固定门控两协议正式测试已验收并填表，现按用户授权恢复剩余动态门控；in_domain使用GPU6/CPU9,10，zeroshot等待除GPU6外任一空闲GPU、CPU0,7，最多两GPU/四CPU核。动态训练→原GPU路径验证验收→正式测试验收逐阶段串行，失败停止。两个协议全部正式验收后，baseline六组单GPU验证调参才启动。STOP旧标记改名留存，旧错误/日志保留，固定版不重训不重测。
+
+动态门控两协议正式测试及产物验收完成，已同步Adapter表；原验证成绩仍保留在各validation_review.json。证据reports/A01_gate_two_protocols_seed42_20261015/{in_domain,zeroshot_v1}/dynamic/test_acceptance.json。
+
+有限baseline调参六组完成，验证选参及验收见reports/Baseline_limited_tuning_in_domain_seed42_20261015/runs.json；未做测试，正式主表不改。
+
+### 2026-10-16有限调参最优配置正式测试
+
+用户明确批准对验证集选出的TimeXer width128（d_model/d_ff=128/128，最佳epoch14）和Cross-Unet lr0.0002（最佳epoch28）执行in_domain正式测试及验收。固定seed42、24→24、原输入、精度和评估batch；从现有权重测试，不重训、不按测试成绩重新选参。ChronosX保留原版。记录复用reports/Baseline_limited_tuning_in_domain_seed42_20261015/runs.json的formal_tests；独立输出目录后缀formal_test_20261016。
+
+正式测试结果：两组均覆盖25,450×24个预测值，原始标签/站点/时间、协议/scaler、有限非退化预测、Metric重算和验证最优权重检查通过；按原评估batch重载权重重放首尾批，最大误差均0。GPU6串行、CPU9/10两线程、workers0；未重训，无失败。
+
+| 模型/配置 | 原测试MAE | 当前MAE | 原测试RMSE | 当前RMSE | RMSE绝对变化 | RMSE相对变化 | 当前R² |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| TimeXer/width128 | 0.072885 | 0.070145 | 0.120689 | 0.117773 | -0.002916 | -2.4158% | 0.772551 |
+| CrossUnet/lr2e4 | 0.043377 | 0.042289 | 0.084374 | 0.083879 | -0.000495 | -0.5872% | 0.884629 |
+
+总表in_domain已替换为验证集预先选定的新配置；zeroshot保持原配置，未将本轮调参跨协议推广。TimeXer in_domain宽度128/128、Cross-Unet in_domain lr0.0002；两协议配置差异须保留说明。ChronosX两候选验证均未优于原版，保留已有结果。
+
+证据：reports/Baseline_limited_tuning_in_domain_seed42_20261015/runs.json的formal_tests包含完整Metric、基线变化、权重及输出路径；同目录TimeXer_formal_test_20261016.log、CrossUnet_formal_test_20261016.log为本次日志。原训练权重位于checkpoints/in_domain/*limited_tuning*，测试预测/标签/配置/scaler/Metric/acceptance位于outputs/in_domain/*limited_tuning*_formal_test_20261016。无新增图表。
+
+结论：两组验证选优配置均改善in_domain测试，Cross-Unet本轮RMSE最低0.083879；单种子且测试时段曾在旧实验中观察，未来NWP发布时间可用性仍为协议假设。当前任务完成后停止，下一步最小行动为审阅并接受本轮正式结果，不自动扩展实验。
+
+### Cross-Unet追加两组学习率（2026-10-16）
+
+用户明确要求继续调参、正式测试并验收。本轮预先固定lr0.0003/0.0004两组，仅in_domain、seed42、24→24；其余沿用已验收lr0.0002的batch128/eval128、FP32、type3、max100/patience10、验证RMSE选模及原输入。复用已有三组验证结果，所有候选按验证RMSE选优，选定写盘后仅对新胜出配置做一次正式测试及验收；若原lr0.0002仍最佳，复用其完整测试结果。不得按测试表现改选或扩展搜索。
+
+入口scripts/run_crossunet_lr_extension.py；索引reports/CrossUnet_lr_extension_in_domain_seed42_20261016/runs.json。启动时八卡均忙，单GPU等待空闲后逐组串行，每组前重查；CPU9/10两线程、workers0。训练复用既有必要GPU梯度检查及全量验证权重重放；测试复用公共产物验收并追加原GPU批次首尾重放。成功后更新现有总表与本文档，失败保留证据并停止。本轮测试已在此前被观察，仅作持续开发基准，不称全新独立留出集。
+
+### STAEformer baseline接入（2026-10-16）
+
+用户要求将STAEformer加入baseline。本阶段完成官方结构、来源、默认配置和统一入口接入；随后已授权把完整实验加入GPU等待队列。官方模型以多传感器为节点；当前Dataset_MMSP按单站点窗口取样，因此固定num_nodes=1，输入历史功率、小时和星期，保留时间/空间注意力、自适应嵌入和mixed projection，但空间注意力在单节点下退化，不称交通多节点等价复现。MMSP配置为seed42、24→24、batch16、Adam lr0.001、FP32、max100/patience10、验证RMSE，结构dim152/FF256、3层/4头、dropout0.1；待Cross-Unet追加调参进入终态且GPU空闲后，串行运行两个协议并正式测试验收。
+
+真实in_domain首末训练窗口CPU前后向通过：76,570窗口中抽取2个，预测/目标shape均为2×24×1，参数1,121,520，loss0.357405424，梯度有限非零，小时/星期索引范围有效。该结果仅为接入检查，不是训练或Metric。代码位于models/STAEformer.py与layers/staeformer，来源commit及配置见models/baseline_sources.json、models/official_presets.py；总表新增空行，待正式测试验收后填数。
+
+### 当前待办队列（2026-10-16）
+
+1. Cross-Unet追加学习率调参：lr0.0003、0.0004，in_domain验证RMSE选优后正式测试验收；现有队列reports/CrossUnet_lr_extension_in_domain_seed42_20261016/runs.json等待空闲GPU。
+2. STAEformer：待Cross-Unet队列进入完成或失败终态后，串行运行in_domain、zeroshot_v1，seed42、24→24、batch16、max100/patience10、验证RMSE选模，逐协议正式测试及验收；入口scripts/run_staeformer.py，记录reports/STAEformer_two_protocols_seed42_20261016/runs.json。
+
+两项均使用单张空闲GPU、两个CPU核、workers0；STAEformer失败即停止且不自动重跑。全部完成后停止，不扩展种子、超参数或模型。
+
+Cross-Unet本轮补充调参及测试验收完成。验证RMSE：lr3e4=0.091199995；lr4e4=0.092468228；已有lr0.0002=0.089116154。验证选定lr2e4，测试MAE/RMSE/R²=0.042288504/0.083878796/0.884628735。相对上一轮测试RMSE变化+0.000000000（+0.0000%）。主表按验证选优结果更新，不按测试反馈改选。若沿用原版则复用已验收测试，没有重复推理。完整日志、配置、权重、选模、预测与验收路径见reports/CrossUnet_lr_extension_in_domain_seed42_20261016/runs.json；无新增图表。单种子、测试已被观察及未来NWP可用性假设的限制保留。当前两组完成后停止，不扩展其他参数或协议。

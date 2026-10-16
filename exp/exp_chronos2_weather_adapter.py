@@ -122,6 +122,7 @@ class Exp_Chronos2_Weather_Adapter(Exp_Long_Term_Forecast):
         return checkpoint
 
     def train(self, setting):
+        self._prepare_run(setting, 'train')
         if self.args.precision != 'fp32' or self.args.num_workers != 0:
             raise ValueError('Weather Adapter training currently supports FP32 and num_workers=0 only')
         if self.args.train_epochs < 1 or self.args.patience < 1:
@@ -205,6 +206,3 @@ class Exp_Chronos2_Weather_Adapter(Exp_Long_Term_Forecast):
         if test:
             self._load_weather(self.args.checkpoint)
         return super().test(setting, test=0)
-
-    def _record_result(self, directory, metrics):
-        logging.info('Weather Adapter test artifacts saved at %s; registration awaits full artifact acceptance', directory)

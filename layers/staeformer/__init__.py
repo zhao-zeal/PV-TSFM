@@ -1,0 +1,1 @@
+"""STAEformer architecture components."""

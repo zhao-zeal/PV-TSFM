@@ -121,13 +121,16 @@ class Exp_Chronos2_History_Weather_Adapter(Exp_Long_Term_Forecast):
 
     def load_selected(self, path):
         checkpoint = torch.load(path, map_location=self.device, weights_only=True)
-        if checkpoint['config'] != vars(self.args) or checkpoint['base_provenance'] != self.model.base_provenance:
+        saved_config = {key: value for key, value in checkpoint['config'].items() if key != 'gpu'}
+        current_config = {key: value for key, value in vars(self.args).items() if key != 'gpu'}
+        if saved_config != current_config or checkpoint['base_provenance'] != self.model.base_provenance:
             raise ValueError('A03 checkpoint/config/frozen base identity differs')
         self.model.weather_adapter.load_state_dict(checkpoint['weather_state_dict'], strict=True)
         self.model.history_relation.load_state_dict(checkpoint['relation_state_dict'], strict=True)
         return checkpoint
 
     def train(self, setting):
+        self._prepare_run(setting, 'train')
         check = json.loads((REPORT / 'preflight_gpu.json').read_text())
         item = next(row for row in check['variants'] if row['variant'] == self.args.history_variant)
         if check['status'] != 'passed' or item['base_provenance'] != self.model.base_provenance:
@@ -196,6 +199,3 @@ class Exp_Chronos2_History_Weather_Adapter(Exp_Long_Term_Forecast):
             initialization='A02 Weather Adapter reinitialized seed42; frozen accepted A01 reused; no fitted A02 warm start')
         (directory / 'training_summary.json').write_text(json.dumps(summary, indent=2) + '\n')
         return self.model
-
-    def _record_result(self, directory, metrics):
-        logging.info('A03 test artifacts saved at %s; registration awaits artifact acceptance', directory)

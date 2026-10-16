@@ -35,6 +35,7 @@ MMSP小时数据，历史24步预测未来24步，单功率目标；按站内时
 | FusionSF当前2模态入口 | 功率+卫星；不能替代历史功率+NWP对照 |
 | Cross-Unet | 历史功率、历史/未来NWP及相关历史块 |
 | TimeXer | 历史功率+历史NWP，当前forward不使用未来NWP |
+| STAEformer | 历史功率+小时/星期；当前统一Dataset按单站点窗口取样，节点数为1，空间注意力退化 |
 | Chronos-2 | none/history/future/history_future四种NWP模式分别登记；当前NWP先做训练集标准化 |
 | ChronosX | 功率、历史/未来NWP及作者缺失标记/注入处理；不等于Chronos-2 |
 | Time-VLM | 历史功率衍生图像和文本，不等于MMSP卫星观测 |
