@@ -125,4 +125,12 @@ GitHub保存代码、实验指标、必要配置和训练日志、验收记录�
 
 GitHub：[zhao-zeal/PV-TSFM](https://github.com/zhao-zeal/PV-TSFM)。旧代码快照分支：`basicts-snapshot-20261010`。
 
+STAEformer（AutoDL）：安装依赖并上传 `datasets/MMSP/data/` 后，在项目目录运行：
+
+```bash
+python -u scripts/run_staeformer.py --gpu 0
+```
+
+按 in_domain → zeroshot_v1 串行训练、正式测试与验收；seed42、24→24、batch16、100轮/patience10、验证RMSE选模。等待指定GPU空闲，自动绑定两个允许的CPU核心。无需预训练权重或Cross-Unet运行记录。数据可用 `--root-path /实际数据目录` 指定；每次创建独立带时间戳的报告目录，日志和运行索引保存在其中。`--prepare` 仅生成运行配置，不启动训练；此脚本不支持中断续训。
+
 Chronos-2 Adapter研究版本：统一入口`run.py --model Chronos2Adapter --adapter_version b131_linear_v1`（历史E11）或`b131_mlp63_v1`（历史E12）。两阶段结构/原训练设置保留，统一标准化NWP输入下重新训练；这两个是研究变体，不属于官方Chronos-2基线或已定Ours。版本与验收见[实验状态](docs/EXPERIMENT_STATUS.md)，两协议指标见[Adapter指标CSV](reports/chronos2_adapter_metrics.csv)；当前seed42四组已完成训练、正式测试和完整产物验收。

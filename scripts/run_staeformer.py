@@ -1,4 +1,4 @@
-"""Run the approved STAEformer baseline after the active Cross-Unet tuning task."""
+"""Run STAEformer training, formal testing and acceptance on both MMSP protocols."""
 
 import argparse
 import csv
@@ -16,7 +16,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 REPORT = ROOT / 'reports/STAEformer_two_protocols_seed42_20261016'
 INDEX = REPORT / 'runs.json'
-CROSSUNET = ROOT / 'reports/CrossUnet_lr_extension_in_domain_seed42_20261016/runs.json'
 
 
 def save(path, value):
@@ -38,24 +37,24 @@ def prepare():
             output_dir=str(ROOT / 'outputs' / protocol / model_id),
         ))
     save(INDEX, dict(
-        state='prepared_waiting_for_crossunet_then_gpu',
+        state='prepared',
         authorization='User: 将调参任务和STAEformer加入待办列表，等有GPU了开始运行',
         scope='STAEformer in_domain and zeroshot_v1; seed42; 24->24; train, formal test, acceptance',
         config=dict(batch_size=16, eval_batch_size=16, train_epochs=100, patience=10,
                     monitor='rmse', learning_rate=.001, precision='fp32', num_workers=0,
                     input='historical power + hour + weekday', num_nodes=1),
         architecture='Published temporal/spatial attention and adaptive embedding; single-node spatial attention degenerates',
-        order='Wait for Cross-Unet LR extension terminal state, then run protocols serially',
-        resources='One idle GPU; CPU0,7; two threads; workers0',
+        order='in_domain then zeroshot_v1; Cross-Unet already accepted',
+        resources='One idle GPU; first two allowed CPU cores; two threads; workers0',
         failure_policy='Stop STAEformer queue on first failure; no automatic retry',
         runs=runs,
     ))
 
 
-def idle_gpu():
+def idle_gpu(selected_gpu):
     from utils.resources import require_idle_gpus
     while True:
-        for gpu in range(8):
+        for gpu in (selected_gpu,):
             try:
                 require_idle_gpus(str(gpu))
                 return gpu
@@ -64,7 +63,7 @@ def idle_gpu():
         time.sleep(60)
 
 
-def preflight(gpu, protocol):
+def preflight(gpu, protocol, root_path):
     import numpy as np
     import torch
     from torch.utils.data import default_collate
@@ -73,7 +72,8 @@ def preflight(gpu, protocol):
     from utils.losses import forecasting_loss
 
     args = parse_args(['--model', 'STAEformer', '--protocol', protocol, '--is_training', '1',
-                       '--seed', '42', '--use_gpu', '1', '--gpu', str(gpu), '--num_workers', '0'])
+                       '--seed', '42', '--use_gpu', '1', '--gpu', str(gpu), '--num_workers', '0',
+                       '--root_path', str(root_path)])
     configure_resources(args)
     torch.manual_seed(42); np.random.seed(42)
     experiment = Exp_Long_Term_Forecast(args)
@@ -100,7 +100,11 @@ def sync_summary(status):
     table = ROOT / 'reports/experiment_summary.csv'
     with table.open(encoding='utf-8-sig', newline='') as handle:
         reader = csv.DictReader(handle); fields, rows = reader.fieldnames, list(reader)
-    row = next(item for item in rows if item['models'] == 'STAEformer')
+    row = next((item for item in rows if item['models'] == 'STAEformer'), None)
+    if row is None:
+        row = dict.fromkeys(fields, '')
+        row.update(models='STAEformer', input='历史功率+小时/星期')
+        rows.append(row)
     for run in status['runs']:
         prefix = 'MMSP in_domain' if run['protocol'] == 'in_domain' else 'MMSP zeroshot'
         for label, metric in (('MAE', 'mae'), ('RMSE', 'rmse'), ('R^2', 'r2')):
@@ -112,35 +116,35 @@ def sync_summary(status):
     old = next(line for line in text.splitlines() if line.startswith('| STAEformer |'))
     text = text.replace(old, '| ' + ' | '.join(row[field] or '—' for field in fields) + ' |', 1)
     text += ('\nSTAEformer两个协议完整训练、正式测试及产物验收完成；原始配置、日志、权重、预测和指标见'
-             'reports/STAEformer_two_protocols_seed42_20261016/runs.json记录的路径。单节点空间注意力退化限制保留。\n')
+             f'{INDEX.relative_to(ROOT) if INDEX.is_relative_to(ROOT) else INDEX}记录的路径。单节点空间注意力退化限制保留。\n')
     document.write_text(text)
 
 
-def coordinate():
+def coordinate(selected_gpu, root_path):
     status = json.loads(INDEX.read_text())
-    if status['state'] != 'prepared_waiting_for_crossunet_then_gpu':
+    if status['state'] != 'prepared':
         raise ValueError(f'Unexpected state: {status["state"]}')
     try:
-        while True:
-            crossunet = json.loads(CROSSUNET.read_text())
-            if crossunet['state'] in ('completed_formal_test_acceptance', 'failed_stopped'):
-                break
-            time.sleep(60)
-        status['crossunet_terminal_state'] = crossunet['state']
+        status['order'] = 'in_domain then zeroshot_v1; Cross-Unet already accepted'
         for run in status['runs']:
             status.update(state='waiting_for_idle_gpu', active_protocol=run['protocol'])
             save(INDEX, status)
-            gpu = idle_gpu()
+            gpu = idle_gpu(selected_gpu)
             run.update(state='preflight', gpu=gpu)
             save(INDEX, status)
-            run['preflight'] = preflight(gpu, run['protocol'])
+            subprocess.run([sys.executable, str(Path(__file__).resolve()),
+                            '--check-protocol', run['protocol'], '--gpu', str(gpu),
+                            '--root-path', str(root_path), '--report-dir', str(REPORT)],
+                           cwd=ROOT, check=True)
+            run['preflight'] = json.loads((REPORT / f'{run["protocol"]}_preflight.json').read_text())
             command = [sys.executable, '-u', str(ROOT / 'run.py'),
                        '--model', 'STAEformer', '--protocol', run['protocol'], '--is_training', '1',
                        '--seed', '42', '--seq_len', '24', '--pred_len', '24', '--batch_size', '16',
                        '--eval_batch_size', '16', '--train_epochs', '100', '--patience', '10',
                        '--monitor', 'rmse', '--learning_rate', '0.001', '--lradj', 'plateau',
                        '--precision', 'fp32', '--use_gpu', '1', '--gpu', str(gpu), '--num_workers', '0',
-                       '--model_id', run['model_id']]
+                       '--model_id', run['model_id'], '--root_path', str(root_path)]
+            run['command'] = command
             run['state'] = 'running'; run['started_at'] = datetime.now().isoformat()
             save(INDEX, status)
             with Path(run['log']).open('x') as log:
@@ -165,8 +169,21 @@ if __name__ == '__main__':
     os.chdir(ROOT)
     parser = argparse.ArgumentParser()
     parser.add_argument('--prepare', action='store_true')
+    parser.add_argument('--gpu', type=int, default=0, help='Idle GPU index visible to nvidia-smi')
+    parser.add_argument('--root-path', type=Path, default=ROOT / 'datasets/MMSP/data')
+    parser.add_argument('--report-dir', type=Path,
+                        default=ROOT / ('reports/STAEformer_two_protocols_seed42_' + datetime.now().strftime('%Y%m%dT%H%M%S')))
+    parser.add_argument('--check-protocol', choices=['in_domain', 'zeroshot_v1'], help=argparse.SUPPRESS)
     args = parser.parse_args()
-    os.sched_setaffinity(0, [0, 7])
+    REPORT = args.report_dir.resolve()
+    INDEX = REPORT / 'runs.json'
+    os.sched_setaffinity(0, sorted(os.sched_getaffinity(0))[:2])
     for name in ('OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'NUMEXPR_NUM_THREADS'):
         os.environ[name] = '2'
-    prepare() if args.prepare else coordinate()
+    if args.check_protocol:
+        save(REPORT / f'{args.check_protocol}_preflight.json',
+             preflight(args.gpu, args.check_protocol, args.root_path.resolve()))
+    else:
+        prepare()
+        if not args.prepare:
+            coordinate(args.gpu, args.root_path.resolve())
