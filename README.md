@@ -133,4 +133,17 @@ python -u scripts/run_staeformer.py --gpu 0
 
 按 in_domain → zeroshot_v1 串行训练、正式测试与验收；seed42、24→24、batch16、100轮/patience10、验证RMSE选模。等待指定GPU空闲，自动绑定两个允许的CPU核心。无需预训练权重或Cross-Unet运行记录。数据可用 `--root-path /实际数据目录` 指定；每次创建独立带时间戳的报告目录，日志和运行索引保存在其中。`--prepare` 仅生成运行配置，不启动训练；此脚本不支持中断续训。
 
+A05（AutoDL）：先生成命令和资源缺失清单，再显式运行所选变体：
+
+```bash
+python scripts/run_a05.py --variants a
+python -u scripts/run_a05.py --variants a --gpu 0 --run
+```
+
+默认仅A05-a，两个协议串行；可显式指定 `--variants a b c` 或 `--protocols in_domain`。固定seed42、24→24、FP32、batch128/eval256、AdamW lr0.0001/wd0.05、MSE、100轮/patience10，包含epoch0的验证RMSE选模。a为解码残差，b加入P-Corr，c再加入多尺度记忆。
+
+必须上传 `datasets/MMSP/data/`、`pretrained/chronos-2/`，以及两个协议各自的 `checkpoints/{protocol}/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/checkpoint.pth` 和 `outputs/{protocol}/Chronos2Adapter_b131_linear_v1_seed42_sl24_pl24_history_future/` 中的 `pred.npy`、`true.npy`、`site_ids.npy`、`forecast_timestamps.npy`；A01验收索引为 `reports/Chronos2Adapter_two_protocols_seed42_20261011/runs.json`。资源检查会列出缺失路径。数据与骨干目录可用 `--root-path`、`--model-path` 指定；迁移A01时保留项目内相对目录。
+
+脚本使用一张空闲GPU、两个允许的CPU核心，首次构建原生token缓存（两协议约48GiB），同次队列的变体共享缓存。每组训练后正式测试、全量原始输入重放并验收，通过才继续；失败停止。报告位于 `reports/A05_seed42_时间戳/`，权重和预测沿用 `checkpoints/`、`outputs/`；无隐式续训。准备及合成张量检查不代表完整实验通过。
+
 Chronos-2 Adapter研究版本：统一入口`run.py --model Chronos2Adapter --adapter_version b131_linear_v1`（历史E11）或`b131_mlp63_v1`（历史E12）。两阶段结构/原训练设置保留，统一标准化NWP输入下重新训练；这两个是研究变体，不属于官方Chronos-2基线或已定Ours。版本与验收见[实验状态](docs/EXPERIMENT_STATUS.md)，两协议指标见[Adapter指标CSV](reports/chronos2_adapter_metrics.csv)；当前seed42四组已完成训练、正式测试和完整产物验收。

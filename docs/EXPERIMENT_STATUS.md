@@ -617,6 +617,14 @@ in_domain固定门控验证MAE/RMSE/R²=0.039912/0.094079/0.797180；第一阶�
 
 真实in_domain首末训练窗口CPU前后向通过：76,570窗口中抽取2个，预测/目标shape均为2×24×1，参数1,121,520，loss0.357405424，梯度有限非零，小时/星期索引范围有效。该结果仅为接入检查，不是训练或Metric。代码位于models/STAEformer.py与layers/staeformer，来源commit及配置见models/baseline_sources.json、models/official_presets.py；总表新增空行，待正式测试验收后填数。
 
+### A05实现核对与AutoDL脚本准备
+
+用户要求核对A05并补足运行脚本。当前有Chronos2MCDecoder的a/b/c三个残差变体：a为四层解码器，b增加P-Corr，c增加4→2→1多尺度记忆；冻结同协议已验收A01，仅训练新增head。固定seed42、24→24、width128/heads4/FF256、dropout0.05、FP32、batch128/eval256、AdamW lr0.0001/wd0.05、MSE、100轮/patience10；验证RMSE包含epoch0选模，正式测试后全量原始输入重放并比较A01。
+
+新增scripts/run_a05.py，默认只准备A05-a两协议命令及资源检查；--run才执行，可显式选择变体/协议。单GPU、两CPU核心、workers0，每组验收通过才继续。A05专用允许A01的原机器绝对路径按项目checkpoints/pretrained相对路径迁移，A02路径规则保持原样。必要资源和命令见README；原生token缓存两协议约48GiB，不依赖已删除的TokenAdapter缓存。
+
+六组参数解析与合成张量的零残差、shape及三步梯度检查通过；未启动真实GPU编码、完整训练或正式测试，尚无A05正式Metric。脚本不自动扩展实验或选定Ours。
+
 ### 当前待办队列（2026-10-16）
 
 1. Cross-Unet追加学习率调参：lr0.0003、0.0004，in_domain验证RMSE选优后正式测试验收；现有队列reports/CrossUnet_lr_extension_in_domain_seed42_20261016/runs.json等待空闲GPU。

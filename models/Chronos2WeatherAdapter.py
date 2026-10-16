@@ -15,6 +15,17 @@ from models.Chronos2Adapter import Model as LinearAdapterModel
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def relocated_path_matches(saved, current, anchor):
+    """A05 may relocate project resources while keeping their project-relative path."""
+    original, actual = Path(saved), Path(current).resolve()
+    if original.resolve() == actual:
+        return True
+    if anchor not in original.parts:
+        return False
+    suffix = Path(*original.parts[original.parts.index(anchor):])
+    return (ROOT / suffix).resolve() == actual
+
+
 class Model(nn.Module):
     def __init__(self, configs):
         super().__init__()
@@ -28,7 +39,9 @@ class Model(nn.Module):
                           and row['adapter_version'] == 'b131_linear_v1'), None)
         if reference is None or reference['status'] != 'passed_full_training_test_artifact_acceptance':
             raise ValueError('The same-protocol Linear Adapter must have passed artifact acceptance')
-        if checkpoint_path != Path(reference['checkpoint_path']).resolve():
+        relocated = configs.model == 'Chronos2MCDecoder'
+        if not (relocated_path_matches(reference['checkpoint_path'], checkpoint_path, 'checkpoints')
+                if relocated else checkpoint_path == Path(reference['checkpoint_path']).resolve()):
             raise ValueError('Base checkpoint must be the accepted same-protocol Linear Adapter')
         checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=True)
         saved = checkpoint['config']
@@ -37,7 +50,8 @@ class Model(nn.Module):
                 raise ValueError(f'Base checkpoint configuration differs: {key}')
         if checkpoint['stage'] != 'b131_linear_v1':
             raise ValueError('Expected the accepted Linear readout checkpoint')
-        if Path(saved['model_path']).resolve() != Path(configs.model_path).resolve():
+        if not (relocated_path_matches(saved['model_path'], configs.model_path, 'pretrained')
+                if relocated else Path(saved['model_path']).resolve() == Path(configs.model_path).resolve()):
             raise ValueError('Pretrained model path differs from the accepted base')
         self.base.adapter.load_state_dict(checkpoint['adapter_state_dict'], strict=True)
         self.base.readout.load_state_dict(checkpoint['readout_state_dict'], strict=True)
