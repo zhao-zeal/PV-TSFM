@@ -1,0 +1,10 @@
+{
+  "status": "passed_real_gpu_train_batch",
+  "loss": 1.0414187908172607,
+  "gpu": 4,
+  "sample_indices": [
+    32,
+    76569
+  ],
+  "test_accessed": false
+}

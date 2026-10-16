@@ -1,0 +1,18 @@
+{
+  "state": "accepted_validation_only",
+  "model": "CrossUnet",
+  "candidate": "lr5e5",
+  "metrics": {
+    "mae": 0.045717347660495365,
+    "rmse": 0.09069519729788546,
+    "mse": 0.00822561881290237
+  },
+  "best_epoch": 32,
+  "completed_epochs": 42,
+  "validation_windows": 25450,
+  "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/CrossUnet_limited_tuning_lr5e5_seed42_sl24_pl24_20261015/checkpoint.pth",
+  "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/CrossUnet_limited_tuning_lr5e5_seed42_sl24_pl24_20261015",
+  "test_accessed": false,
+  "acceptance": "Best-checkpoint full validation replay agrees with selected epoch; real GPU gradients finite",
+  "limitation": "Validation tuning result only, not formal test acceptance"
+}

@@ -1,0 +1,51 @@
+{
+  "test_windows": 25450,
+  "mae": 0.04228850395489761,
+  "rmse": 0.08387879640752226,
+  "r2": 0.8846287351870499,
+  "model": "CrossUnet",
+  "seed": 42,
+  "data_protocol": "in_domain",
+  "baseline_config": "unified_prediction",
+  "llm_model": "",
+  "input_len": 24,
+  "output_len": 24,
+  "train_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "validation_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "test_sites": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "split_version": "chronological_target_split_v1",
+  "scaler_version": "train_sites_and_time_only_fit_v1"
+}

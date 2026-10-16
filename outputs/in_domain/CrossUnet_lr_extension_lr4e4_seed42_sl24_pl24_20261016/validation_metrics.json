@@ -1,0 +1,18 @@
+{
+  "state": "accepted_validation_only",
+  "model": "CrossUnet",
+  "candidate": "lr4e4",
+  "metrics": {
+    "mae": 0.04839479453933837,
+    "rmse": 0.09246822753165351,
+    "mse": 0.008550373102845645
+  },
+  "best_epoch": 15,
+  "completed_epochs": 25,
+  "validation_windows": 25450,
+  "checkpoint": "/home/zhaopp/workspace/PV-TSFM/checkpoints/in_domain/CrossUnet_lr_extension_lr4e4_seed42_sl24_pl24_20261016/checkpoint.pth",
+  "output_dir": "/home/zhaopp/workspace/PV-TSFM/outputs/in_domain/CrossUnet_lr_extension_lr4e4_seed42_sl24_pl24_20261016",
+  "test_accessed": false,
+  "acceptance": "Best-checkpoint full validation replay agrees with selected epoch; real GPU gradients finite",
+  "limitation": "Validation tuning result only, not formal test acceptance"
+}
